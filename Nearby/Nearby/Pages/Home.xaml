@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+             xmlns:local="clr-namespace:Nearby.Pages"
+             x:Class="Nearby.Pages.Home"
+             Title="Home">
+
+  <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+      <maps:Map x:Name="placesMap" MapType="Street" />
+      <Button x:Name="btnSearchPlaces" VerticalOptions="End" Text="Search for places"></Button>
+  </StackLayout>
+  
+</ContentPage>
