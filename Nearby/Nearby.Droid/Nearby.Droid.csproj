@@ -162,6 +162,7 @@
     <Compile Include="DependencyService\LocationManager.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="MainApplication.cs" />
+    <Compile Include="Renderers\NearbyButonRenderer.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

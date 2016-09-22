@@ -32,6 +32,8 @@ namespace Nearby.Pages
         
         async Task GetMyCurrentLocation()
         {
+
+
             var locator = CrossGeolocator.Current;
             locator.DesiredAccuracy = 50;
 
@@ -40,7 +42,7 @@ namespace Nearby.Pages
 
                 var pin = new Pin
                 {
-                    Type = PinType.Place,
+                    Type = PinType.SearchResult,
                     Position = newposition,
                     Label = "Me",
                     Address = "My current updated location"
@@ -48,7 +50,7 @@ namespace Nearby.Pages
 
                 placesMap.Pins.Add(pin);
                 placesMap.MoveToRegion(MapSpan.FromCenterAndRadius(pin.Position, Distance.FromMiles(5.0)));
-                
+
                 Debug.WriteLine("Updated Position Latitude: {0}", newposition.Latitude);
                 Debug.WriteLine("Updated Position Longitude: {0}", newposition.Longitude);
             };
@@ -70,6 +72,8 @@ namespace Nearby.Pages
             Debug.WriteLine("Position Status: {0}", position.Timestamp);
             Debug.WriteLine("Position Latitude: {0}", position.Latitude);
             Debug.WriteLine("Position Longitude: {0}", position.Longitude);
+
+            DisplayAlert("Location", position.Longitude + "---" + position.Latitude, "Ok");
         }
 
         public class Locations
