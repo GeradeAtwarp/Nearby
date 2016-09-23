@@ -10,8 +10,11 @@ namespace Nearby
 {
     public partial class App : Application
     {
+        public static App current;
+
         public App()
         {
+            current = this;
             InitializeComponent();
 
             MainPage = new NavigationPage
