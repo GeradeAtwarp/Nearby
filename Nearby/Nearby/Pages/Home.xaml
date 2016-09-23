@@ -10,7 +10,7 @@
   <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
       <maps:Map x:Name="placesMap" MapType="Street" />
     
-      <Button x:Name="btnSearchPlaces" Opacity=".7" BackgroundColor="#3F51B5" TextColor="White" VerticalOptions="End" Text="Search for places"></Button>
+      <Button x:Name="btnSearchPlaces" Opacity=".7" BackgroundColor="#3F51B5" TextColor="White" VerticalOptions="End" Text="Search for places nearby"></Button>
     
   </StackLayout>
   

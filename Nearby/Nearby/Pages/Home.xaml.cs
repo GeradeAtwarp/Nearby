@@ -1,4 +1,5 @@
 ﻿using Nearby.DependencyServices;
+using Nearby.viewModel;
 using Plugin.Geolocator;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,8 @@ namespace Nearby.Pages
 {
     public partial class Home : ContentPage
     {
+        HomeViewModel vm;
+
         IMyLocation loc;
         public double longitude;
         public double latitude;
@@ -21,14 +24,26 @@ namespace Nearby.Pages
         {
             InitializeComponent();
 
-            GetMyCurrentLocation();
+            BindingContext = vm = new HomeViewModel(Navigation);
+
+            btnSearchPlaces.Clicked += (sender, ea) => SearchForPlacesNearby();
         }
 
         protected override void OnAppearing()
         {
-            GetMyCurrentLocation();
+            
         }
 
+        async Task SearchForPlacesNearby()
+        {
+            vm.SearchPlacesNearby.Execute("");
+
+            foreach (var p in vm.Pins)
+            {
+                placesMap.Pins.Add(p);
+                placesMap.MoveToRegion(MapSpan.FromCenterAndRadius(p.Position, Distance.FromMiles(5.0)));
+            }
+        }
         
         async Task GetMyCurrentLocation()
         {
