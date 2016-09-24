@@ -1,10 +1,12 @@
 ﻿using Nearby.DependencyServices;
 using Nearby.viewModel;
+using Newtonsoft.Json;
 using Plugin.Geolocator;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -27,24 +29,59 @@ namespace Nearby.Pages
             BindingContext = vm = new HomeViewModel(Navigation);
 
             btnSearchPlaces.Clicked += (sender, ea) => SearchForPlacesNearby();
+
         }
 
         protected override void OnAppearing()
         {
-            
+            base.OnAppearing();
         }
 
         async Task SearchForPlacesNearby()
         {
-            vm.SearchPlacesNearby.Execute("");
-
-            foreach (var p in vm.Pins)
+            try
             {
-                placesMap.Pins.Add(p);
-                placesMap.MoveToRegion(MapSpan.FromCenterAndRadius(p.Position, Distance.FromMiles(5.0)));
+                if (IsBusy)
+                    return;
+                
+                await btnSearchPlaces.ScaleTo(1.2, 100);
+                await btnSearchPlaces.ScaleTo(1, 100);
+
+                var httpClient = new HttpClient();
+
+                //Get all the places neaby
+                var placesResult = await httpClient.GetStringAsync(new UriBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyDU4ZSeEmjTiTgT2CJgj7bZegShjj_rV7M&location=-25.766468999999997,28.2998734&radius=500&type=restaurant").Uri.ToString());
+
+                var placesNearby = JsonConvert.DeserializeObject<PlaceNearby>(placesResult);
+                List<Pin> ps = new List<Pin>();
+
+                foreach (var pn in placesNearby.results.ToList())
+                {
+                    var newposition = new Xamarin.Forms.Maps.Position(pn.geometry.location.lat, pn.geometry.location.lng);
+
+                    var pin = new Pin
+                    {
+                        Type = PinType.Place,
+                        Position = newposition,
+                        Label = pn.name,
+                        Address = pn.vicinity
+                    };
+
+                    placesMap.Pins.Add(pin);
+                    placesMap.MoveToRegion(MapSpan.FromCenterAndRadius(pin.Position, Distance.FromKilometers(1.0)));
+                }
+            }
+            catch (Exception ex)
+            {
+
             }
         }
-        
+
+        async Task PopSearchButton()
+        {
+            
+        }
+
         async Task GetMyCurrentLocation()
         {
 

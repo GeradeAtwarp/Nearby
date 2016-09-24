@@ -26,6 +26,7 @@ namespace Nearby.iOS
             global::Xamarin.Forms.Forms.Init();
             FormsMaps.Init();
 
+            UIApplication.SharedApplication.StatusBarStyle = UIStatusBarStyle.LightContent;
 
             LoadApplication(new App());
 
