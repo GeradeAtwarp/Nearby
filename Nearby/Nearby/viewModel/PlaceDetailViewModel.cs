@@ -9,13 +9,11 @@ using Xamarin.Forms.Maps;
 
 namespace Nearby.viewModel
 {
-    public class NearbyBaseViewModel : BaseViewModel
+    public class PlaceDetailViewModel : NearbyBaseViewModel
     {
-        protected INavigation Navigation { get; }
-
-        public NearbyBaseViewModel(INavigation navigation = null)
+        public PlaceDetailViewModel(INavigation navigation, Pin place) :base(navigation)
         {
-            Navigation = navigation;
+            Title = place.Label;
         }
     }
 }

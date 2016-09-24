@@ -11,13 +11,13 @@ using System.Windows.Input;
 using System.Net.Http;
 using Newtonsoft.Json;
 using Xamarin.Forms.Maps;
+using Nearby.Pages;
 
 namespace Nearby.viewModel
 {
     public class HomeViewModel : NearbyBaseViewModel
     {
-        public ObservableRangeCollection<List<PlaceNearby>> PlacesNearby { get; } = new ObservableRangeCollection<List<PlaceNearby>>();
-        public ObservableRangeCollection<Pin> Pins { get; } = new ObservableRangeCollection<Pin>();
+        public ObservableRangeCollection<Pin> PlacesNearby { get; } = new ObservableRangeCollection<Pin>();
 
         public HomeViewModel(INavigation navigation) : base(navigation)
         {
@@ -27,7 +27,7 @@ namespace Nearby.viewModel
         ICommand searchPlacesNearby;
         public ICommand SearchPlacesNearby => searchPlacesNearby ?? (searchPlacesNearby = new Command<string>(async (param) => await SearchNearby(param)));
 
-        async Task SearchNearby(string searctTerm)
+        public async Task SearchNearby(string searctTerm)
         {
             try
             {
@@ -40,7 +40,6 @@ namespace Nearby.viewModel
                 var placesResult = await httpClient.GetStringAsync(new UriBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyDU4ZSeEmjTiTgT2CJgj7bZegShjj_rV7M&location=-25.766468999999997,28.2998734&radius=500&type=restaurant").Uri.ToString());
 
                 var placesNearby = JsonConvert.DeserializeObject<PlaceNearby>(placesResult);
-                List<Pin> ps = new List<Pin>();
 
                 foreach (var pn in placesNearby.results.ToList())
                 {
@@ -49,10 +48,8 @@ namespace Nearby.viewModel
                     p.Label = pn.name;
                     p.Address = pn.vicinity;
 
-                    ps.Add(p);
+                    PlacesNearby.Add(p);
                 }
-
-                Pins.AddRange(ps);
             }
             catch (Exception ex)
             {

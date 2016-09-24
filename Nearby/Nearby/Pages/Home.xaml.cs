@@ -1,4 +1,5 @@
 ﻿using Nearby.DependencyServices;
+using Nearby.Helpers;
 using Nearby.viewModel;
 using Newtonsoft.Json;
 using Plugin.Geolocator;
@@ -39,32 +40,32 @@ namespace Nearby.Pages
 
         async Task SearchForPlacesNearby()
         {
+            await vm.SearchNearby("");
+
             try
             {
-                if (IsBusy)
-                    return;
-                
                 await btnSearchPlaces.ScaleTo(1.2, 100);
                 await btnSearchPlaces.ScaleTo(1, 100);
 
-                var httpClient = new HttpClient();
-
-                //Get all the places neaby
-                var placesResult = await httpClient.GetStringAsync(new UriBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyDU4ZSeEmjTiTgT2CJgj7bZegShjj_rV7M&location=-25.766468999999997,28.2998734&radius=500&type=restaurant").Uri.ToString());
-
-                var placesNearby = JsonConvert.DeserializeObject<PlaceNearby>(placesResult);
-                List<Pin> ps = new List<Pin>();
-
-                foreach (var pn in placesNearby.results.ToList())
+                foreach (var pn in vm.PlacesNearby)
                 {
-                    var newposition = new Xamarin.Forms.Maps.Position(pn.geometry.location.lat, pn.geometry.location.lng);
+                    var newposition = new Xamarin.Forms.Maps.Position(pn.Position.Latitude, pn.Position.Longitude);
 
                     var pin = new Pin
                     {
                         Type = PinType.Place,
                         Position = newposition,
-                        Label = pn.name,
-                        Address = pn.vicinity
+                        Label = pn.Label,
+                        Address = pn.Address
+                    };
+
+                    pin.Clicked += async (sender, e) =>
+                    {
+                        var nav = Application.Current?.MainPage?.Navigation;
+                        if (nav == null)
+                            return;
+
+                        await NavigationService.PushModalAsync(nav, new NavigationPage(new PlaceDetailView(pn)));
                     };
 
                     placesMap.Pins.Add(pin);
