@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nearby.Droid", "Nearby\Near
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nearby", "Nearby\Nearby\Nearby.csproj", "{C31E053B-9DBA-40DF-A06A-C97EDEB34FB9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nearby.iOS", "Nearby\Nearby.iOS\Nearby.iOS.csproj", "{BF33EF21-7C0D-4C98-8018-1EDF30DD320A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Ad-Hoc|Any CPU = Ad-Hoc|Any CPU
