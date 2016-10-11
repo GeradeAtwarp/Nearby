@@ -34,10 +34,14 @@ namespace Nearby.viewModel
                 if (IsBusy)
                     return;
 
+                //Get the users current location
+                var locator = CrossGeolocator.Current;
+                var position = await locator.GetPositionAsync(10000);
+
                 var httpClient = new HttpClient();
 
                 //Get all the places neaby
-                var placesResult = await httpClient.GetStringAsync(new UriBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyDU4ZSeEmjTiTgT2CJgj7bZegShjj_rV7M&location=-25.766468999999997,28.2998734&radius=500&type=restaurant").Uri.ToString());
+                var placesResult = await httpClient.GetStringAsync(new UriBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyDU4ZSeEmjTiTgT2CJgj7bZegShjj_rV7M&location=" + position.Latitude + "," + position.Longitude + "&radius=500&type=restaurant").Uri.ToString());
 
                 var placesNearby = JsonConvert.DeserializeObject<PlaceNearby>(placesResult);
 

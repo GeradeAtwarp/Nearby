@@ -83,7 +83,7 @@ namespace Nearby.Pages
                     };
 
                     placesMap.Pins.Add(pin);
-                    placesMap.MoveToRegion(MapSpan.FromCenterAndRadius(pin.Position, Distance.FromKilometers(1.0)));
+                    placesMap.MoveToRegion(MapSpan.FromCenterAndRadius(pin.Position, Distance.FromKilometers(0.5)));
                 }
             }
             catch (Exception ex)
