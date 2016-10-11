@@ -44,9 +44,6 @@ namespace Nearby.Pages
 
             try
             {
-                await btnSearchPlaces.ScaleTo(1.2, 100);
-                await btnSearchPlaces.ScaleTo(1, 100);
-
                 foreach (var pn in vm.PlacesNearby)
                 {
                     var newposition = new Xamarin.Forms.Maps.Position(pn.Position.Latitude, pn.Position.Longitude);

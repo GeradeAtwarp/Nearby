@@ -5,6 +5,7 @@ using System.Linq;
 using Foundation;
 using UIKit;
 using Xamarin;
+using HockeyApp.iOS;
 
 namespace Nearby.iOS
 {
@@ -27,6 +28,12 @@ namespace Nearby.iOS
             FormsMaps.Init();
 
             UIApplication.SharedApplication.StatusBarStyle = UIStatusBarStyle.LightContent;
+
+            var manager = BITHockeyManager.SharedHockeyManager;
+            manager.Configure("bc0b686325a74f8fa50134a03ce5efc9");
+            manager.StartManager();
+
+            manager.Authenticator.AuthenticateInstallation();
 
             LoadApplication(new App());
 
