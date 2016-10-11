@@ -31,11 +31,28 @@ namespace Nearby.Pages
 
             btnSearchPlaces.Clicked += (sender, ea) => SearchForPlacesNearby();
 
+            MoveToCurrentLocation();
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
+        }
+
+        async Task MoveToCurrentLocation()
+        {
+            var locator = CrossGeolocator.Current;
+            var position = await locator.GetPositionAsync(10000);
+
+            var pin = new Pin
+            {
+                Type = PinType.Place,
+                Label = "This is you!",
+                Position = new Position (position.Latitude, position.Longitude )
+            };
+
+            placesMap.Pins.Add(pin);
+            placesMap.MoveToRegion(MapSpan.FromCenterAndRadius(pin.Position, Distance.FromMiles(1)));
         }
 
         async Task SearchForPlacesNearby()
