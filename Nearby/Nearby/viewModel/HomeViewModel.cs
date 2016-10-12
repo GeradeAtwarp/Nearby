@@ -34,9 +34,17 @@ namespace Nearby.viewModel
                 if (IsBusy)
                     return;
 
+                IsBusy = true;
+
                 //Get the users current location
                 var locator = CrossGeolocator.Current;
                 var position = await locator.GetPositionAsync(10000);
+
+                HockeyApp.MetricsManager.TrackEvent(
+                  "Refresh Nearby Places",
+                  new Dictionary<string, string> { { "CurrentLocation", position.Latitude + " - " + position.Longitude } },
+                  new Dictionary<string, double> { { "time", 1.0 } }
+                );
 
                 var httpClient = new HttpClient();
 
@@ -44,6 +52,12 @@ namespace Nearby.viewModel
                 var placesResult = await httpClient.GetStringAsync(new UriBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyDU4ZSeEmjTiTgT2CJgj7bZegShjj_rV7M&location=" + position.Latitude + "," + position.Longitude + "&radius=500&type=restaurant").Uri.ToString());
 
                 var placesNearby = JsonConvert.DeserializeObject<PlaceNearby>(placesResult);
+
+                HockeyApp.MetricsManager.TrackEvent(
+                 "Returned Nearby Places",
+                 new Dictionary<string, string> { { "NearbyPlaces", placesNearby.results.Count().ToString() } },
+                 new Dictionary<string, double> { { "time", 1.0 } }
+                );
 
                 foreach (var pn in placesNearby.results.ToList())
                 {
@@ -57,7 +71,11 @@ namespace Nearby.viewModel
             }
             catch (Exception ex)
             {
-
+                IsBusy = false;
+            }
+            finally
+            {
+                IsBusy = false;
             }
         }
     }
