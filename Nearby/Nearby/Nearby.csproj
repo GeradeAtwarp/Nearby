@@ -50,6 +50,7 @@
     <Compile Include="Controls\NonScrollableListView.cs" />
     <Compile Include="DependencyServices\ILocationManager.cs" />
     <Compile Include="Helpers\NavigationService.cs" />
+    <Compile Include="Helpers\Settings.cs" />
     <Compile Include="Pages\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
@@ -65,7 +66,6 @@
     <Compile Include="Utils\Entities\Database.cs" />
     <Compile Include="Utils\Entities\IBaseEntity.cs" />
     <Compile Include="Utils\Entities\UserPreferences.cs" />
-    <Compile Include="Utils\Settings.cs" />
     <Compile Include="viewModel\HomeViewModel.cs" />
     <Compile Include="viewModel\MainMenuViewModel.cs" />
     <Compile Include="viewModel\NearbyBaseViewModel.cs" />
