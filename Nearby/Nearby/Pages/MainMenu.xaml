@@ -13,9 +13,9 @@
 
     <StackLayout BackgroundColor="{DynamicResource WindowBackgroundTable}" Padding="0,16,0,0">
 
-      <!--<control:LabelSection Text="Manual location"/>
-      <control:HeaderDivider/>-->
-
+      <control:LabelSection Text="Manual location"/>
+      <control:HeaderDivider/>
+        
       <Grid ColumnSpacing="16">
         <Grid.ColumnDefinitions>
           <ColumnDefinition Width="Auto"/>
