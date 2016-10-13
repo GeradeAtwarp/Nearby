@@ -29,6 +29,20 @@ namespace Nearby.Pages
 
             BindingContext = vm = new HomeViewModel(Navigation);
 
+            //Navigate to options page
+            tbItemNavigateOptions.Command = new Command(async () =>
+            {
+                var nav = Application.Current?.MainPage?.Navigation;
+                if (nav == null)
+                    return;
+
+                if (vm.IsBusy)
+                    return;
+
+                //await NavigationService.PushModalAsync(nav, new NavigationPage(new MainMenu()));
+                await Application.Current?.MainPage?.Navigation.PushAsync(new NavigationPage(new MainMenu()));
+            });
+
             btnSearchPlaces.Clicked += (sender, ea) => SearchForPlacesNearby();
 
             MoveToCurrentLocation();
@@ -79,7 +93,7 @@ namespace Nearby.Pages
                         if (nav == null)
                             return;
 
-                        await NavigationService.PushModalAsync(nav, new NavigationPage(new PlaceDetailView(pn)));
+                        await NavigationService.PushModalAsync(nav, new NavigationPage(new PlaceDetailView()));
                     };
 
                     placesMap.Pins.Add(pin);

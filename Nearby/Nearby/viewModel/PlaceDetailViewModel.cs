@@ -11,9 +11,9 @@ namespace Nearby.viewModel
 {
     public class PlaceDetailViewModel : NearbyBaseViewModel
     {
-        public PlaceDetailViewModel(INavigation navigation, Pin place) :base(navigation)
+        public PlaceDetailViewModel(INavigation navigation) :base(navigation)
         {
-            Title = place.Label;
+            
         }
     }
 }

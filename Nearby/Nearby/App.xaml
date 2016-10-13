@@ -4,7 +4,21 @@
              x:Class="Nearby.App">
   <Application.Resources>
 
-    <!-- Application resource dictionary -->
+    <ResourceDictionary>
+      <!-- Application resource dictionary -->
 
+      <OnPlatform x:TypeArguments="Color" Android="#F5F5F5" iOS="#EFEFF4" WinPhone="#EFEFF4" x:Key="WindowBackgroundTable"/>
+
+      <OnPlatform x:TypeArguments="Thickness" Android="8,16" iOS="0,0,0,16" WinPhone="0,0,0,16" x:Key="CardPadding"/>
+      <OnPlatform x:TypeArguments="x:Double" Android="16" iOS="0" WinPhone="0" x:Key="CardSpacing"/>
+
+
+      <!-- Cardview scetion Label -->-->
+      <OnPlatform x:TypeArguments="Thickness" Android="16,16,16,4" iOS="16,24,16,4" WinPhone="16,16,16,4" x:Key="SectionLabelPadding"/>
+
+      <OnPlatform x:TypeArguments="Color" Android="#ECECEC" iOS="#C8C7CC" WinPhone="#C8C7CC" x:Key="Divider"/>
+      
+
+    </ResourceDictionary>
   </Application.Resources>
 </Application>

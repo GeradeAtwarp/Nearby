@@ -6,19 +6,16 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
-using Xamarin.Forms.Maps;
 
 namespace Nearby.Pages
 {
-    public partial class PlaceDetailView : ContentPage
+    public partial class MainMenu : ContentPage
     {
-        PlaceDetailViewModel vm;
-
-        public PlaceDetailView()
+        public MainMenu()
         {
             InitializeComponent();
 
-            BindingContext = vm = new PlaceDetailViewModel(Navigation);
+            //BindingContext = new MainMenuViewModel(Navigation);
         }
     }
 }

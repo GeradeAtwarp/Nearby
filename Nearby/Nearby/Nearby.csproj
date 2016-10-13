@@ -38,10 +38,18 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\AlwaysScrollView.cs" />
+    <Compile Include="Controls\CardView.cs" />
+    <Compile Include="Controls\HeaderDivider.xaml.cs" />
+    <Compile Include="Controls\LabelSection.xaml.cs" />
+    <Compile Include="Controls\NonScrollableListView.cs" />
     <Compile Include="DependencyServices\ILocationManager.cs" />
     <Compile Include="Helpers\NavigationService.cs" />
     <Compile Include="Pages\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MainMenu.xaml.cs">
+      <DependentUpon>MainMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\PlaceDetailView.xaml.cs">
       <DependentUpon>PlaceDetailView.xaml</DependentUpon>
@@ -49,10 +57,19 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Renderers\NearbyButton.cs" />
     <Compile Include="viewModel\HomeViewModel.cs" />
+    <Compile Include="viewModel\MainMenuViewModel.cs" />
     <Compile Include="viewModel\NearbyBaseViewModel.cs" />
     <Compile Include="viewModel\PlaceDetailViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Controls\HeaderDivider.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\LabelSection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Include="Pages\Home.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
@@ -114,6 +131,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Pages\PlaceDetailView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\MainMenu.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

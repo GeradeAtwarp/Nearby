@@ -2,19 +2,20 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+             xmlns:control="clr-namespace:Nearby.Controls"
              xmlns:local="clr-namespace:Nearby.Pages"
              xmlns:renderers="clr-namespace:Nearby.Renderers"
              x:Class="Nearby.Pages.Home"
              Title="Home">
 
   <ContentPage.ToolbarItems>
-    <ToolbarItem Icon="ic_more_vert_white" />
+    <ToolbarItem x:Name="tbItemNavigateOptions" Icon="ic_more_vert_white" />
   </ContentPage.ToolbarItems>
   
   <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
       <maps:Map x:Name="placesMap" MapType="Street" />
     
-      <Button BorderRadius="0" x:Name="btnSearchPlaces" BackgroundColor="#3F51B5" TextColor="White" VerticalOptions="End" Text="Search for places nearby"></Button>
+      <Button BorderRadius="0" x:Name="btnSearchPlaces" BackgroundColor="#3F51B5" TextColor="White" VerticalOptions="End" Text="{Binding SearchButtonText}"></Button>
     
   </StackLayout>
   

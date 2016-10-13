@@ -12,11 +12,23 @@ using System.Net.Http;
 using Newtonsoft.Json;
 using Xamarin.Forms.Maps;
 using Nearby.Pages;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using Nearby.Helpers;
 
 namespace Nearby.viewModel
 {
     public class HomeViewModel : NearbyBaseViewModel
     {
+        string searcBurronText = "Search for places nearby";
+        public string SearchButtonText
+        {
+            get { return searcBurronText; }
+            set {
+                SetProperty(ref searcBurronText, value);
+            }
+        }
+
         public ObservableRangeCollection<Pin> PlacesNearby { get; } = new ObservableRangeCollection<Pin>();
 
         public HomeViewModel(INavigation navigation) : base(navigation)
@@ -34,6 +46,7 @@ namespace Nearby.viewModel
                 if (IsBusy)
                     return;
 
+                SearchButtonText = "Please wait...";
                 IsBusy = true;
 
                 //Get the users current location
@@ -76,8 +89,10 @@ namespace Nearby.viewModel
             finally
             {
                 IsBusy = false;
+                SearchButtonText = "Search for places nearby";
             }
         }
+        
     }
 
 
