@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Nearby.Pages.MainMenu"
              xmlns:control="clr-namespace:Nearby.Controls"
-             Title="{Binding Title}">
+             Title="{Binding Title}"
+             BackgroundColor="{DynamicResource WindowBackgroundTable}">
 
   <ContentPage.ToolbarItems>
     <ToolbarItem x:Name="tbItemNavigateMap" Text="Done" />
@@ -11,26 +12,37 @@
   
   <control:AlwaysScrollView>
 
-    <StackLayout BackgroundColor="{DynamicResource WindowBackgroundTable}" Padding="0,16,0,0">
+    <StackLayout>
 
       <control:LabelSection Text="Manual location"/>
       <control:HeaderDivider/>
         
-      <Grid ColumnSpacing="16">
+      <Grid Padding="{DynamicResource CardPadding}" ColumnSpacing="16">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="Auto"/>
           <ColumnDefinition Width="*"/>
+          <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-
-        <Label Grid.Column="1"
+        
+        <Label
                Text="{Binding ChangeLocationText}"
                VerticalTextAlignment="Center"
                HorizontalOptions="StartAndExpand"
-                       />
+               Style="{DynamicResource NearbyListItemDetailTextStyle}" />
 
-        <Switch Grid.Column="2"
+        <Switch Grid.Column="1"
                 VerticalOptions="Center"
                 IsToggled="{Binding ChangeLocationIsEnabled}"/>
+
+        <StackLayout IsVisible="{Binding ChangeLocationIsEnabled}" Grid.Row="1" Grid.ColumnSpan="2" HorizontalOptions="FillAndExpand" Orientation="Vertical" Spacing="{StaticResource SmallSpacing}">
+          <Entry Placeholder="Latitude" Text="{Binding CustomLatitude}" HeightRequest="45" HorizontalOptions="FillAndExpand"></Entry>
+
+          <Entry Placeholder="Longitude" Text="{Binding CustomLongitude}" HeightRequest="45" HorizontalOptions="FillAndExpand"></Entry>
+        </StackLayout>
+
       </Grid>
       
     </StackLayout>

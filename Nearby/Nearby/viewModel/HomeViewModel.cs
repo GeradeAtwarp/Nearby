@@ -49,9 +49,21 @@ namespace Nearby.viewModel
                 SearchButtonText = "Please wait...";
                 IsBusy = true;
 
-                //Get the users current location
-                var locator = CrossGeolocator.Current;
-                var position = await locator.GetPositionAsync(10000);
+                Plugin.Geolocator.Abstractions.Position position;
+
+                if (!Settings.CustomLocationEnabled)
+                {
+                    //Get the users current location
+                    var locator = CrossGeolocator.Current;
+                    position = await locator.GetPositionAsync(10000);
+                }
+                else
+                {
+                    position = new Plugin.Geolocator.Abstractions.Position{
+                        Latitude = Convert.ToDouble(Settings.CustomLatitude),
+                        Longitude = Convert.ToDouble(Settings.CustomLongitude)
+                    };
+                }                                
 
                 HockeyApp.MetricsManager.TrackEvent(
                   "Refresh Nearby Places",

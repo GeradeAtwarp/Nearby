@@ -1,6 +1,7 @@
 ﻿using Nearby.Controls;
 using Nearby.DependencyServices;
 using Nearby.Helpers;
+using Nearby.Utils;
 using Nearby.viewModel;
 using Newtonsoft.Json;
 using Plugin.Geolocator;
@@ -57,8 +58,22 @@ namespace Nearby.Pages
 
         async Task MoveToCurrentLocation()
         {
-            var locator = CrossGeolocator.Current;
-            var position = await locator.GetPositionAsync(10000);
+            Plugin.Geolocator.Abstractions.Position position;
+
+            if (!Settings.Current.CustomLocationEnabled)
+            {
+                //Get the users current location
+                var locator = CrossGeolocator.Current;
+                position = await locator.GetPositionAsync(10000);
+            }
+            else
+            {
+                position = new Plugin.Geolocator.Abstractions.Position
+                {
+                    Latitude = Convert.ToDouble(Settings.Current.CustomLatitude),
+                    Longitude = Convert.ToDouble(Settings.Current.CustomLongitude)
+                };
+            }
 
             var pin = new Pin
             {
@@ -68,7 +83,7 @@ namespace Nearby.Pages
             };
 
             placesMap.Pins.Add(pin);
-            placesMap.MoveToRegion(MapSpan.FromCenterAndRadius(pin.Position, Distance.FromMiles(1)));
+            placesMap.MoveToRegion(MapSpan.FromCenterAndRadius(pin.Position, Distance.FromMiles(0.5)));
         }
 
         async Task SearchForPlacesNearby()

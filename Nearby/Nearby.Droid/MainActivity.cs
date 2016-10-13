@@ -6,6 +6,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using Nearby.Utils.Entities;
 
 namespace Nearby.Droid
 {
@@ -16,6 +17,9 @@ namespace Nearby.Droid
         {
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
+
+            //Set DB path
+            Database.root = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
 
             base.OnCreate(bundle);
 

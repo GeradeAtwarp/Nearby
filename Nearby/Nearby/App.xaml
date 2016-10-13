@@ -7,6 +7,16 @@
     <ResourceDictionary>
       <!-- Application resource dictionary -->
 
+      <Thickness x:Key="SmallPadding">4</Thickness>
+      <Thickness x:Key="MediumPadding">8</Thickness>
+      <Thickness x:Key="StandardPadding">16</Thickness>
+
+      <x:Double x:Key="SmallSpacing">4</x:Double>
+      <x:Double x:Key="MediumSpacing">8</x:Double>
+      <x:Double x:Key="StandardSpacing">16</x:Double>
+      
+      <Color x:Key="DetailTextColor">#979797</Color>
+
       <OnPlatform x:TypeArguments="Color" Android="#F5F5F5" iOS="#EFEFF4" WinPhone="#EFEFF4" x:Key="WindowBackgroundTable"/>
 
       <OnPlatform x:TypeArguments="Thickness" Android="8,16" iOS="0,0,0,16" WinPhone="0,0,0,16" x:Key="CardPadding"/>
@@ -15,9 +25,20 @@
 
       <!-- Cardview scetion Label -->-->
       <OnPlatform x:TypeArguments="Thickness" Android="16,16,16,4" iOS="16,24,16,4" WinPhone="16,16,16,4" x:Key="SectionLabelPadding"/>
-
       <OnPlatform x:TypeArguments="Color" Android="#ECECEC" iOS="#C8C7CC" WinPhone="#C8C7CC" x:Key="Divider"/>
 
+      <OnPlatform x:TypeArguments="x:Double" Android="16" iOS="16" WinPhone="13" x:Key="NearbyListItemTextStyleSize" />
+      <OnPlatform x:TypeArguments="x:Double" Android="13" iOS="13" WinPhone="13" x:Key="NearbyListItemDetailTextStyleSize" />
+
+      <Style x:Key="NearbyListItemTextStyle" TargetType="Label" BaseResourceKey="ListItemTextStyle">
+        <Setter Property="FontSize" Value="{DynamicResource NearbyListItemTextStyleSize}" />
+      </Style>
+      
+      <Style x:Key="NearbyListItemDetailTextStyle" TargetType="Label" BaseResourceKey="ListItemDetailTextStyle">
+        <Setter Property="FontSize" Value="{DynamicResource NearbyListItemDetailTextStyleSize}" />
+        <Setter Property="TextColor" Value="{DynamicResource DetailTextColor}"/>
+      </Style>
+      
       <Style x:Key="SectionLabelTextStyle" TargetType="Label" BaseResourceKey="ListItemDetailTextStyle">
         <Setter Property="FontSize" Value="{DynamicResource LabelSectionFontSize}" />
         <Setter Property="TextColor" Value="{DynamicResource LabelSectionText}"/>
