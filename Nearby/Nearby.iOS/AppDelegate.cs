@@ -6,6 +6,7 @@ using Foundation;
 using UIKit;
 using Xamarin;
 using HockeyApp.iOS;
+using Nearby.Utils.Entities;
 
 namespace Nearby.iOS
 {
@@ -34,6 +35,9 @@ namespace Nearby.iOS
             manager.StartManager();
 
             manager.Authenticator.AuthenticateInstallation();
+
+            //Set DB path
+            Database.root = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
 
             LoadApplication(new App());
 
