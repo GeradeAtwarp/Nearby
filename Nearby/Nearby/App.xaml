@@ -17,7 +17,12 @@
       <OnPlatform x:TypeArguments="Thickness" Android="16,16,16,4" iOS="16,24,16,4" WinPhone="16,16,16,4" x:Key="SectionLabelPadding"/>
 
       <OnPlatform x:TypeArguments="Color" Android="#ECECEC" iOS="#C8C7CC" WinPhone="#C8C7CC" x:Key="Divider"/>
-      
+
+      <Style x:Key="SectionLabelTextStyle" TargetType="Label" BaseResourceKey="ListItemDetailTextStyle">
+        <Setter Property="FontSize" Value="{DynamicResource LabelSectionFontSize}" />
+        <Setter Property="TextColor" Value="{DynamicResource LabelSectionText}"/>
+        <Setter Property="FontFamily" Value="{DynamicResource SectionLabelFontFamily}"/>
+      </Style>
 
     </ResourceDictionary>
   </Application.Resources>

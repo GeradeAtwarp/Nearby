@@ -1,4 +1,5 @@
-﻿using Nearby.DependencyServices;
+﻿using Nearby.Controls;
+using Nearby.DependencyServices;
 using Nearby.Helpers;
 using Nearby.viewModel;
 using Newtonsoft.Json;
@@ -39,8 +40,9 @@ namespace Nearby.Pages
                 if (vm.IsBusy)
                     return;
 
-                //await NavigationService.PushModalAsync(nav, new NavigationPage(new MainMenu()));
-                await Application.Current?.MainPage?.Navigation.PushAsync(new NavigationPage(new MainMenu()));
+                Content = null;
+                
+                await NavigationService.PushModalAsync(nav, new NearbyNavigationPage(new MainMenu()));
             });
 
             btnSearchPlaces.Clicked += (sender, ea) => SearchForPlacesNearby();

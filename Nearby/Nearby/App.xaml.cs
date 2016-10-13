@@ -5,6 +5,7 @@ using System.Text;
 using Nearby.Pages;
 using Xamarin.Forms;
 using Nearby.DependencyServices;
+using Nearby.Controls;
 
 namespace Nearby
 {
@@ -17,7 +18,7 @@ namespace Nearby
             current = this;
             InitializeComponent();
 
-            MainPage = new NavigationPage
+            MainPage = new NearbyNavigationPage
             (
                 new Home()
             );

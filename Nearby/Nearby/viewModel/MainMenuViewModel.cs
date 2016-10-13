@@ -11,7 +11,9 @@ namespace Nearby.viewModel
     public class MainMenuViewModel : NearbyBaseViewModel
     {
         public MainMenuViewModel(INavigation navigation) : base(navigation)
-        { }
+        {
+            Title = "Options";
+        }
 
 
         string changelocationtext = "Change Location";

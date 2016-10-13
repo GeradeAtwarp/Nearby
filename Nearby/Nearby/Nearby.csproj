@@ -40,8 +40,13 @@
     </Compile>
     <Compile Include="Controls\AlwaysScrollView.cs" />
     <Compile Include="Controls\CardView.cs" />
-    <Compile Include="Controls\HeaderDivider.xaml.cs" />
-    <Compile Include="Controls\LabelSection.xaml.cs" />
+    <Compile Include="Controls\HeaderDivider.xaml.cs" >
+		<DependentUpon>HeaderDivider.xaml</DependentUpon>
+	</Compile>	
+    <Compile Include="Controls\LabelSection.xaml.cs" >
+		<DependentUpon>LabelSection.xaml</DependentUpon>
+	</Compile>	
+    <Compile Include="Controls\NearbyNavigationPage.cs" />
     <Compile Include="Controls\NonScrollableListView.cs" />
     <Compile Include="DependencyServices\ILocationManager.cs" />
     <Compile Include="Helpers\NavigationService.cs" />

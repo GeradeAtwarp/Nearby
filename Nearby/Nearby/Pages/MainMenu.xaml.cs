@@ -1,4 +1,6 @@
-﻿using Nearby.viewModel;
+﻿using Nearby.Controls;
+using Nearby.Helpers;
+using Nearby.viewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +17,16 @@ namespace Nearby.Pages
         {
             InitializeComponent();
 
-            //BindingContext = new MainMenuViewModel(Navigation);
+            BindingContext = new MainMenuViewModel(Navigation);
+
+            tbItemNavigateMap.Command = new Command(async () =>
+            {
+                var nav = Application.Current?.MainPage?.Navigation;
+                if (nav == null)
+                    return;
+
+                await NavigationService.PushModalAsync(nav, new NearbyNavigationPage(new Home()));
+            });
         }
     }
 }

@@ -8,6 +8,7 @@
   </ContentView.Padding>
   <ContentView.Content>
     <Label
+       Style="{DynamicResource SectionLabelTextStyle}"
        x:Name="Section">
     </Label>
   </ContentView.Content>
