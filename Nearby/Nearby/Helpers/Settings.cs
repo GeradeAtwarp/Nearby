@@ -74,6 +74,22 @@ namespace Nearby.Helpers
 
         #endregion
 
+        #region Custom location
+
+        const string CustomLocationkey = "custom_location";
+        static readonly string CustomLocationDefault = "";
+        public string CustomLocation
+        {
+            get { return AppSettings.GetValueOrDefault<string>(CustomLocationkey, CustomLocationDefault); }
+            set
+            {
+                if (AppSettings.AddOrUpdateValue<string>(CustomLocationkey, value))
+                    OnPropertyChanged();
+            }
+        }
+
+        #endregion
+
 
 
 

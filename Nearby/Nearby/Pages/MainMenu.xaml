@@ -12,40 +12,53 @@
   
   <control:AlwaysScrollView>
 
-    <StackLayout>
+    <TableView Intent="Settings" HasUnevenRows="true">
+      <TableSection Title="Manual location" x:Name="TableSectionFilters">
+        <ViewCell>
+          <ViewCell.View>
+            <Grid Padding="{DynamicResource CardPadding}" ColumnSpacing="16">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="Auto" />
+              <RowDefinition Height="Auto" />
+              <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="*"/>
+              <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Label
+                   Text="{Binding ChangeLocationText}"
+                   VerticalTextAlignment="Center"
+                   HorizontalOptions="StartAndExpand"
+                   Style="{DynamicResource NearbyListItemDetailTextStyle}" />
+
+            <Switch Grid.Column="1"
+                    VerticalOptions="Center"
+                    IsToggled="{Binding ChangeLocationIsEnabled}"/>
+
+            <StackLayout IsVisible="{Binding ChangeLocationIsEnabled}" Grid.Row="1" Grid.ColumnSpan="2" HorizontalOptions="FillAndExpand" Orientation="Vertical" Spacing="{StaticResource SmallSpacing}">
+              <Entry Placeholder="Latitude" Text="{Binding CustomLatitude}" HeightRequest="45" HorizontalOptions="FillAndExpand"></Entry>
+
+              <Entry Placeholder="Longitude" Text="{Binding CustomLongitude}" HeightRequest="45" HorizontalOptions="FillAndExpand"></Entry>
+            </StackLayout>
+
+            <Entry Placeholder="Search location" Text="{Binding CustomLocation}" HeightRequest="45" HorizontalOptions="FillAndExpand"></Entry>
+
+          </Grid>
+        </ViewCell.View>
+        </ViewCell>
+      </TableSection>
+    </TableView>
+
+      <!--<StackLayout>
 
       <control:LabelSection Text="Manual location"/>
       <control:HeaderDivider/>
         
-      <Grid Padding="{DynamicResource CardPadding}" ColumnSpacing="16">
-        <Grid.RowDefinitions>
-          <RowDefinition Height="Auto" />
-          <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="*"/>
-          <ColumnDefinition Width="Auto"/>
-        </Grid.ColumnDefinitions>
-        
-        <Label
-               Text="{Binding ChangeLocationText}"
-               VerticalTextAlignment="Center"
-               HorizontalOptions="StartAndExpand"
-               Style="{DynamicResource NearbyListItemDetailTextStyle}" />
-
-        <Switch Grid.Column="1"
-                VerticalOptions="Center"
-                IsToggled="{Binding ChangeLocationIsEnabled}"/>
-
-        <StackLayout IsVisible="{Binding ChangeLocationIsEnabled}" Grid.Row="1" Grid.ColumnSpan="2" HorizontalOptions="FillAndExpand" Orientation="Vertical" Spacing="{StaticResource SmallSpacing}">
-          <Entry Placeholder="Latitude" Text="{Binding CustomLatitude}" HeightRequest="45" HorizontalOptions="FillAndExpand"></Entry>
-
-          <Entry Placeholder="Longitude" Text="{Binding CustomLongitude}" HeightRequest="45" HorizontalOptions="FillAndExpand"></Entry>
-        </StackLayout>
-
-      </Grid>
       
-    </StackLayout>
+      
+    </StackLayout>-->
     
   </control:AlwaysScrollView>
   

@@ -65,5 +65,17 @@ namespace Nearby.viewModel
                 Settings.CustomLongitude = value;
             }
         }
+
+
+        string customLocation = "";
+        public string CustomLocation
+        {
+            get { return customLocation; }
+            set
+            {
+                SetProperty(ref customLocation, value);
+                Settings.CustomLongitude = value;
+            }
+        }
     }
 }
