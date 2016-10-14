@@ -59,11 +59,12 @@ namespace Nearby.viewModel
                 }
                 else
                 {
-                    position = new Plugin.Geolocator.Abstractions.Position{
+                    position = new Plugin.Geolocator.Abstractions.Position
+                    {
                         Latitude = Convert.ToDouble(Settings.CustomLatitude),
                         Longitude = Convert.ToDouble(Settings.CustomLongitude)
                     };
-                }                                
+                }
 
                 HockeyApp.MetricsManager.TrackEvent(
                   "Refresh Nearby Places",
@@ -79,7 +80,7 @@ namespace Nearby.viewModel
                 var placesNearby = JsonConvert.DeserializeObject<PlaceNearby>(placesResult);
 
                 HockeyApp.MetricsManager.TrackEvent(
-                 "Returned Nearby Places",
+                 "Returned Nearby Places" + placesNearby.results.Count().ToString(),
                  new Dictionary<string, string> { { "NearbyPlaces", placesNearby.results.Count().ToString() } },
                  new Dictionary<string, double> { { "time", 1.0 } }
                 );
@@ -97,6 +98,7 @@ namespace Nearby.viewModel
             catch (Exception ex)
             {
                 IsBusy = false;
+                HockeyApp.MetricsManager.TrackEvent("An error Ocured getting places: " + ex.Message);
             }
             finally
             {
