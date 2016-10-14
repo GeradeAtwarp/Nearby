@@ -9,8 +9,6 @@
   <ContentPage.ToolbarItems>
     <ToolbarItem x:Name="tbItemNavigateMap" Text="Done" />
   </ContentPage.ToolbarItems>
-  
-  <control:AlwaysScrollView>
 
     <TableView Intent="Settings" HasUnevenRows="true">
       <TableSection Title="Manual location" x:Name="TableSectionFilters">
@@ -59,7 +57,5 @@
       
       
     </StackLayout>-->
-    
-  </control:AlwaysScrollView>
   
 </ContentPage>
