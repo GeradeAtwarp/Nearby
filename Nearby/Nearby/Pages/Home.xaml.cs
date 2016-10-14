@@ -110,7 +110,7 @@ namespace Nearby.Pages
                         if (nav == null)
                             return;
 
-                        await NavigationService.PushModalAsync(nav, new NavigationPage(new PlaceDetailView()));
+                        await NavigationService.PushAsync(nav, new NavigationPage(new PlaceDetailView(pin)));
                     };
 
                     placesMap.Pins.Add(pin);

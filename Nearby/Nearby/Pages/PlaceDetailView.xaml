@@ -1,9 +1,71 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Nearby.Pages.PlaceDetailView">
-  
+             x:Class="Nearby.Pages.PlaceDetailView"
+             xmlns:control="clr-namespace:Nearby.Controls"
+             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+             Title="{Binding Title}">
+
+
+    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="300">
+      <maps:Map x:Name="placeDetailMap" MapType="Street" />
+    </StackLayout>
+
+    <StackLayout Grid.Row="1" HorizontalOptions="FillAndExpand" Spacing="{DynamicResource CardSpacing}" Padding="{DynamicResource CardPadding}">
+
+      <control:CardView>
+        <StackLayout Spacing="0">
+          <control:LabelSection Text="{Binding Title}"/>
+          <control:HeaderDivider/>
+
+            <StackLayout IsVisible="{Binding IsNotBusy}">
+
+              <control:NonScrollableListView
+                   ItemsSource="{Binding PlaceDetails}"
+                   VerticalOptions="Start"
+                   x:Name="ListPlaceDetails"
+                   StyleId="SponsorDetailLinks"
+                   RowHeight="44">
+                <control:NonScrollableListView.ItemTemplate>
+                  <DataTemplate>
+                    <ViewCell StyleId="disclosure">
+                      <Grid ColumnSpacing="{StaticResource StandardSpacing}">
+                        <Grid.Padding>
+                          <OnPlatform x:TypeArguments="Thickness" iOS="0,12" Android="16,8"/>
+                        </Grid.Padding>
+                        <Grid.ColumnDefinitions>
+                          <ColumnDefinition Width="Auto"/>
+                          <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label VerticalOptions="Center"  Style="{DynamicResource NearbyListItemTextStyle}" Text="{Binding PlaceDetailLabel}"/>
+                        <Label Grid.Column="2"
+                               VerticalOptions="Center"
+                               Style="{DynamicResource NearbyListItemTextStyle}"
+                               TextColor="{DynamicResource DetailTextColor}"
+                               Text="{Binding PlaceDetailValue}">
+                        </Label>
+
+                      </Grid>
+                    </ViewCell>
+                  </DataTemplate>
+                </control:NonScrollableListView.ItemTemplate>
+                
+              </control:NonScrollableListView>
+            </StackLayout>
+
+            <StackLayout IsVisible="{Binding IsBusy}" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="White" Padding="{StaticResource StandardPadding}">
+              <ActivityIndicator IsRunning="{Binding IsBusy}">
+              </ActivityIndicator>
+              <Label Text="Loading Place Details..."
+                     HorizontalOptions="Center"
+                     Style="{DynamicResource NearbyListItemTextStyle}"/>
+            </StackLayout>
+            
+        </StackLayout>
+      </control:CardView>
+      
+    </StackLayout>
     
-  
-  
+    
 </ContentPage>

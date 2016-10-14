@@ -6,6 +6,7 @@ using Nearby.Pages;
 using Xamarin.Forms;
 using Nearby.DependencyServices;
 using Nearby.Controls;
+using Nearby.viewModel;
 
 namespace Nearby
 {
@@ -17,6 +18,8 @@ namespace Nearby
         {
             current = this;
             InitializeComponent();
+
+            NearbyBaseViewModel.Init();
 
             MainPage = new NearbyNavigationPage
             (

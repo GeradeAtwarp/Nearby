@@ -11,9 +11,29 @@ namespace Nearby.viewModel
 {
     public class PlaceDetailViewModel : NearbyBaseViewModel
     {
-        public PlaceDetailViewModel(INavigation navigation) :base(navigation)
+        public ObservableRangeCollection<PlceDetailItem> PlaceDetails { get; } = new ObservableRangeCollection<PlceDetailItem>();
+
+        public PlaceDetailViewModel(INavigation navigation, Pin place) :base(navigation)
         {
-            
+            Title = place.Label;
+
+            PlaceDetails.Add(new PlceDetailItem { PlaceDetailLabel = "Latitude", PlaceDetailValue = place.Position.Latitude.ToString() });
+            PlaceDetails.Add(new PlceDetailItem { PlaceDetailLabel = "Longitude", PlaceDetailValue = place.Position.Longitude.ToString() });
         }
+
+
+
+
+
+
+        #region Internal classes
+
+        public class PlceDetailItem
+        {
+            public String PlaceDetailLabel { get; set; }
+            public String PlaceDetailValue { get; set; }
+        }
+
+        #endregion
     }
 }

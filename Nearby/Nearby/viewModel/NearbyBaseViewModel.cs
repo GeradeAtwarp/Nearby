@@ -23,6 +23,10 @@ namespace Nearby.viewModel
             NearbyDataContext = new Database();
         }
 
+        public static void Init(bool mock = true)
+        {
+        }
+
         public Settings Settings
         {
             get { return Settings.Current; }

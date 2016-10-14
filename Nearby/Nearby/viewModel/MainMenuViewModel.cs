@@ -23,6 +23,8 @@ namespace Nearby.viewModel
                 CustomLatitude = Settings.CustomLatitude;
                 CustomLongitude = Settings.CustomLongitude;
             }
+
+            CustomLocation = Settings.CustomLocation;
         }
 
         string changelocationtext = "Change Location";
@@ -74,7 +76,7 @@ namespace Nearby.viewModel
             set
             {
                 SetProperty(ref customLocation, value);
-                Settings.CustomLongitude = value;
+                Settings.CustomLocation = value;
             }
         }
     }
