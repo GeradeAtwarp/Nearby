@@ -74,8 +74,12 @@ namespace Nearby.viewModel
 
                 var httpClient = new HttpClient();
 
+                var placesResult = "";
                 //Get all the places neaby
-                var placesResult = await httpClient.GetStringAsync(new UriBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyDU4ZSeEmjTiTgT2CJgj7bZegShjj_rV7M&location=" + position.Latitude + "," + position.Longitude + "&radius=500&type=restaurant").Uri.ToString());
+                if (Device.OS == TargetPlatform.Android)
+                    placesResult = await httpClient.GetStringAsync(new UriBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyDU4ZSeEmjTiTgT2CJgj7bZegShjj_rV7M&location=" + position.Latitude + "," + position.Longitude + "&radius=500&type=restaurant").Uri.ToString());
+                else
+                    placesResult = await httpClient.GetStringAsync(new UriBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyAg-d-wLhMl65Fo_sfyj_U9tFOoW41UcDQ&location=" + position.Latitude + "," + position.Longitude + "&radius=500&type=restaurant").Uri.ToString());
 
                 var placesNearby = JsonConvert.DeserializeObject<PlaceNearby>(placesResult);
 

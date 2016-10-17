@@ -14,7 +14,7 @@
       <TableSection Title="Manual location" x:Name="TableSectionFilters">
         <ViewCell>
           <ViewCell.View>
-            <Grid Padding="{DynamicResource CardPadding}" ColumnSpacing="16">
+            <Grid Padding="16,6,16,6" ColumnSpacing="16">
             <Grid.RowDefinitions>
               <RowDefinition Height="Auto" />
               <RowDefinition Height="Auto" />
@@ -41,13 +41,27 @@
               <Entry Placeholder="Longitude" Text="{Binding CustomLongitude}" HeightRequest="45" HorizontalOptions="FillAndExpand"></Entry>
             </StackLayout>
 
-            <Entry Grid.Row="2" Grid.ColumnSpan="2" Placeholder="Search location" Text="{Binding CustomLocation}" HeightRequest="45" HorizontalOptions="FillAndExpand"></Entry>
+            
 
           </Grid>
         </ViewCell.View>
         </ViewCell>
       </TableSection>
     </TableView>
+
+    <control:CardView Padding="0,32,0,0">
+      <StackLayout Spacing="0">
+        <control:HeaderDivider/>
+        <Grid Padding="16,0" BackgroundColor="White">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+          </Grid.ColumnDefinitions>
+
+          <Entry Grid.Row="2" Grid.ColumnSpan="2" Placeholder="Search location" Text="{Binding CustomLocation}" HeightRequest="45" HorizontalOptions="FillAndExpand"></Entry>
+          
+        </Grid>
+      </StackLayout>
+    </control:CardView>
 
       <!--<StackLayout>
 
