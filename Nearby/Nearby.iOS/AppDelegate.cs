@@ -32,7 +32,6 @@ namespace Nearby.iOS
 
             var manager = BITHockeyManager.SharedHockeyManager;
             manager.Configure("bc0b686325a74f8fa50134a03ce5efc9");
-            manager.CrashManager.CrashManagerStatus = BITCrashManagerStatus.AutoSend;
             manager.StartManager();
 
             manager.Authenticator.AuthenticateInstallation();
