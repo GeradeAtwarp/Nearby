@@ -29,7 +29,7 @@ namespace Nearby.viewModel
             }
         }
 
-        public ObservableRangeCollection<Pin> PlacesNearby { get; } = new ObservableRangeCollection<Pin>();
+        public ObservableRangeCollection<Places> PlacesNearby { get; } = new ObservableRangeCollection<Places>();
 
         public HomeViewModel(INavigation navigation) : base(navigation)
         {
@@ -81,23 +81,24 @@ namespace Nearby.viewModel
                 //else
                 placesResult = await httpClient.GetStringAsync(new UriBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyAg-d-wLhMl65Fo_sfyj_U9tFOoW41UcDQ&location=" + position.Latitude + "," + position.Longitude + "&radius=500&type=restaurant").Uri.ToString());
 
-                var placesNearby = JsonConvert.DeserializeObject<PlaceNearby>(placesResult);
+                PlacesNearby.Clear();
+                PlacesNearby.AddRange(JsonConvert.DeserializeObject<PlaceNearby>(placesResult).results);
 
-                HockeyApp.MetricsManager.TrackEvent(
-                 "Returned Nearby Places: " + placesNearby.status + " -- " + DateTime.Now,
-                 new Dictionary<string, string> { { "NearbyPlaces", placesNearby.results.Count().ToString() } },
-                 new Dictionary<string, double> { { "time", 1.0 } }
-                );
+                //HockeyApp.MetricsManager.TrackEvent(
+                // "Returned Nearby Places: " + placesNearby.status + " -- " + DateTime.Now,
+                // new Dictionary<string, string> { { "NearbyPlaces", placesNearby.results.Count().ToString() } },
+                // new Dictionary<string, double> { { "time", 1.0 } }
+                //);
 
-                foreach (var pn in placesNearby.results.ToList())
-                {
-                    Pin p = new Pin();
-                    p.Position = new Position(pn.geometry.location.lat, pn.geometry.location.lng);
-                    p.Label = pn.name;
-                    p.Address = pn.vicinity;
+                //foreach (var pn in placesNearby.results.ToList())
+                //{
+                //    Pin p = new Pin();
+                //    p.Position = new Position(pn.geometry.location.lat, pn.geometry.location.lng);
+                //    p.Label = pn.name;
+                //    p.Address = pn.vicinity;
 
-                    PlacesNearby.Add(p);
-                }
+                //    PlacesNearby.Add(p);
+                //}
             }
             catch (Exception ex)
             {

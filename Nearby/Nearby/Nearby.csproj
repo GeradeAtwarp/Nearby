@@ -51,6 +51,9 @@
     <Compile Include="DependencyServices\ILocationManager.cs" />
     <Compile Include="Helpers\NavigationService.cs" />
     <Compile Include="Helpers\Settings.cs" />
+    <Compile Include="Pages\Favourites.xaml.cs">
+      <DependentUpon>Favourites.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
@@ -169,6 +172,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Controls\HeaderDivider.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\Favourites.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

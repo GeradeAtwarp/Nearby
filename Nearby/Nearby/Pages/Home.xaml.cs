@@ -41,9 +41,7 @@ namespace Nearby.Pages
                 if (vm.IsBusy)
                     return;
 
-                Content = null;
-                
-                await NavigationService.PushModalAsync(nav, new NearbyNavigationPage(new MainMenu()));
+                await Navigation.PushModalAsync(new MainMenu());
             });
 
             btnSearchPlaces.Clicked += (sender, ea) => SearchForPlacesNearby();
@@ -75,6 +73,9 @@ namespace Nearby.Pages
                 };
             }
 
+            if (Device.OS == TargetPlatform.iOS)
+                Application.Current?.MainPage?.DisplayAlert("Location", position.Latitude.ToString() + " - " + position.Longitude.ToString(), "Ok");
+
             var pin = new Pin
             {
                 Type = PinType.Place,
@@ -94,23 +95,19 @@ namespace Nearby.Pages
             {
                 foreach (var pn in vm.PlacesNearby)
                 {
-                    var newposition = new Xamarin.Forms.Maps.Position(pn.Position.Latitude, pn.Position.Longitude);
+                    var newposition = new Xamarin.Forms.Maps.Position(pn.geometry.location.lat, pn.geometry.location.lng);
 
                     var pin = new Pin
                     {
                         Type = PinType.Place,
                         Position = newposition,
-                        Label = pn.Label,
-                        Address = pn.Address
+                        Label = pn.name,
+                        Address = pn.vicinity
                     };
 
                     pin.Clicked += async (sender, e) =>
                     {
-                        var nav = Application.Current?.MainPage?.Navigation;
-                        if (nav == null)
-                            return;
-
-                        await NavigationService.PushAsync(nav, new NavigationPage(new PlaceDetailView(pin)));
+                        await Navigation.PushAsync(new PlaceDetailView(pn));
                     };
 
                     placesMap.Pins.Add(pin);

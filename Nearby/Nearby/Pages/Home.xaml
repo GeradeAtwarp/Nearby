@@ -9,6 +9,7 @@
              Title="Home">
 
   <ContentPage.ToolbarItems>
+    <ToolbarItem x:Name="tbItemNavigateFav" Icon="calendar" />
     <ToolbarItem x:Name="tbItemNavigateOptions" Icon="ic_more_vert_white" />
   </ContentPage.ToolbarItems>
   

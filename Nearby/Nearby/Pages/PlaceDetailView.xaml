@@ -6,22 +6,45 @@
              xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
              Title="{Binding Title}">
 
+  <control:AlwaysScrollView>
+    <StackLayout Spacing="0">
 
-    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="300">
-      <maps:Map x:Name="placeDetailMap" MapType="Street" />
-    </StackLayout>
+      <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal" HeightRequest="150">
+        <maps:Map x:Name="placeDetailMap" HasScrollEnabled="False" HasZoomEnabled="False" MapType="Street" />
+      </StackLayout>
 
-    <StackLayout Grid.Row="1" HorizontalOptions="FillAndExpand" Spacing="{DynamicResource CardSpacing}" Padding="{DynamicResource CardPadding}">
+      <StackLayout HorizontalOptions="FillAndExpand" Padding="{DynamicResource MediumPadding}">
+        <Grid ColumnSpacing="{StaticResource StandardSpacing}">
+          <Grid.Padding>
+            <OnPlatform x:TypeArguments="Thickness" iOS="0,12" Android="16,8"/>
+          </Grid.Padding>
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+          </Grid.ColumnDefinitions>
 
-      <control:CardView>
-        <StackLayout Spacing="0">
-          <control:LabelSection Text="{Binding Title}"/>
-          <control:HeaderDivider/>
+          <StackLayout Grid.Column="0" Orientation="Horizontal" HorizontalOptions="Center">
+            <Image Source="pin"> </Image>
+          </StackLayout>
+
+          <StackLayout Grid.Column="1" Orientation="Horizontal" HorizontalOptions="Center">
+            <Image Source="sharethis"></Image>
+          </StackLayout>
+
+        </Grid>
+      </StackLayout>
+      
+      <StackLayout HorizontalOptions="FillAndExpand" Spacing="{DynamicResource CardSpacing}" Padding="{DynamicResource CardPadding}">
+
+        <control:CardView>
+          <StackLayout Spacing="0">
+            <control:LabelSection Text="Operating hours"/>
+            <control:HeaderDivider/>
 
             <StackLayout IsVisible="{Binding IsNotBusy}">
 
               <control:NonScrollableListView
-                   ItemsSource="{Binding PlaceDetails}"
+                   ItemsSource="{Binding PlaceOperatingHours}"
                    VerticalOptions="Start"
                    x:Name="ListPlaceDetails"
                    StyleId="SponsorDetailLinks"
@@ -34,8 +57,8 @@
                           <OnPlatform x:TypeArguments="Thickness" iOS="0,12" Android="16,8"/>
                         </Grid.Padding>
                         <Grid.ColumnDefinitions>
-                          <ColumnDefinition Width="Auto"/>
                           <ColumnDefinition Width="*"/>
+                          <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
 
                         <Label VerticalOptions="Center"  Style="{DynamicResource NearbyListItemTextStyle}" Text="{Binding PlaceDetailLabel}"/>
@@ -50,7 +73,7 @@
                     </ViewCell>
                   </DataTemplate>
                 </control:NonScrollableListView.ItemTemplate>
-                
+
               </control:NonScrollableListView>
             </StackLayout>
 
@@ -61,11 +84,62 @@
                      HorizontalOptions="Center"
                      Style="{DynamicResource NearbyListItemTextStyle}"/>
             </StackLayout>
-            
-        </StackLayout>
-      </control:CardView>
-      
+
+          </StackLayout>
+        </control:CardView>
+
+        <control:CardView>
+            <StackLayout Spacing="0">
+              <control:LabelSection Text="Contact Details"/>
+              <control:HeaderDivider/>
+
+              <control:NonScrollableListView
+                   ItemsSource="{Binding PlaceContactDetails}"
+                   VerticalOptions="Start"
+                   x:Name="ListPlaceContactDetails"
+                   StyleId="SponsorDetailLinks"
+                   RowHeight="44">
+                <control:NonScrollableListView.ItemTemplate>
+                  <DataTemplate>
+                    <ViewCell StyleId="disclosure">
+                      <Grid ColumnSpacing="{StaticResource StandardSpacing}">
+                        <Grid.Padding>
+                          <OnPlatform x:TypeArguments="Thickness" iOS="0,12" Android="16,8"/>
+                        </Grid.Padding>
+                        <Grid.ColumnDefinitions>
+                          <ColumnDefinition Width="*"/>
+                          <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label VerticalOptions="Center"  Style="{DynamicResource NearbyListItemTextStyle}" Text="{Binding PlaceDetailLabel}"/>
+                        <Label Grid.Column="2"
+                               VerticalOptions="Center"
+                               Style="{DynamicResource NearbyListItemTextStyle}"
+                               TextColor="{DynamicResource DetailTextColor}"
+                               Text="{Binding PlaceDetailValue}">
+                        </Label>
+
+                      </Grid>
+                    </ViewCell>
+                  </DataTemplate>
+                </control:NonScrollableListView.ItemTemplate>
+
+              </control:NonScrollableListView>
+
+              <StackLayout IsVisible="{Binding IsBusy}" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="White" Padding="{StaticResource StandardPadding}">
+                <ActivityIndicator IsRunning="{Binding IsBusy}">
+                </ActivityIndicator>
+                <Label Text="Loading Place Details..."
+                       HorizontalOptions="Center"
+                       Style="{DynamicResource NearbyListItemTextStyle}"/>
+              </StackLayout>
+              
+            </StackLayout>
+          </control:CardView>
+        
+      </StackLayout>
+
     </StackLayout>
-    
+  </control:AlwaysScrollView>
     
 </ContentPage>

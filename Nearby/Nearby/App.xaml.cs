@@ -21,7 +21,7 @@ namespace Nearby
 
             NearbyBaseViewModel.Init();
 
-            MainPage = new NearbyNavigationPage
+            MainPage = new NavigationPage
             (
                 new Home()
             );

@@ -15,22 +15,39 @@ namespace Nearby.Pages
         PlaceDetailViewModel ViewModel => vm ?? (vm = BindingContext as PlaceDetailViewModel);
         PlaceDetailViewModel vm;
 
-        public PlaceDetailView(Pin place)
+        public PlaceDetailView(Places place)
         {
             InitializeComponent();
 
             BindingContext = vm = new PlaceDetailViewModel(Navigation, place);
 
-            placeDetailMap.Pins.Add(place);
-            placeDetailMap.MoveToRegion(MapSpan.FromCenterAndRadius(place.Position, Distance.FromMiles(0.5)));
+            if (place != null)
+            {
+                var newposition = new Xamarin.Forms.Maps.Position(place.geometry.location.lat, place.geometry.location.lng);
+
+                var pin = new Pin
+                {
+                    Type = PinType.Place,
+                    Position = newposition,
+                    Label = place.name,
+                    Address = place.vicinity
+                };
+
+                placeDetailMap.Pins.Add(pin);
+                placeDetailMap.MoveToRegion(MapSpan.FromCenterAndRadius(pin.Position, Distance.FromMeters(500)));
+            }
         }
 
         protected override void OnBindingContextChanged()
         {
             base.OnBindingContextChanged();
             vm = null;
-            var adjust = Device.OS != TargetPlatform.Android ? 1 : -ViewModel.PlaceDetails.Count + 1;
-            ListPlaceDetails.HeightRequest = (ViewModel.PlaceDetails.Count * ListPlaceDetails.RowHeight) - adjust;
+
+            var adjust = Device.OS != TargetPlatform.Android ? 1 : -ViewModel.PlaceOperatingHours.Count + 1;
+            ListPlaceDetails.HeightRequest = (ViewModel.PlaceOperatingHours.Count * ListPlaceDetails.RowHeight) - adjust;
+
+            adjust = Device.OS != TargetPlatform.Android ? 1 : -ViewModel.PlaceContactDetails.Count + 1;
+            ListPlaceContactDetails.HeightRequest = (ViewModel.PlaceContactDetails.Count * ListPlaceContactDetails.RowHeight) - adjust;
         }
     }
 }

@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Nearby.Pages.Favourites">
+
+
+
+  <Button BorderRadius="0" x:Name="btnAddPlacesToFav" BackgroundColor="#3F51B5" TextColor="White" VerticalOptions="End" Text="Add new places"></Button>
+  
+</ContentPage>
