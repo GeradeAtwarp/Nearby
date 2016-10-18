@@ -19,5 +19,7 @@ namespace Nearby.Controls
                 BackgroundColor = Color.Transparent;
             }
         }
+
+
     }
 }

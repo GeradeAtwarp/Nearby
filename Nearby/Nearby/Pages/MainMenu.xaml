@@ -10,46 +10,67 @@
     <ToolbarItem x:Name="tbItemNavigateMap" Text="Done" />
   </ContentPage.ToolbarItems>
 
-    <TableView Intent="Settings" HasUnevenRows="true">
-      <TableSection Title="Manual location" x:Name="TableSectionFilters">
-        <ViewCell>
-          <ViewCell.View>
+  <control:AlwaysScrollView>
+    <StackLayout Spacing="0">
+
+      <StackLayout BackgroundColor="{DynamicResource WindowBackgroundTable}" Spacing="{DynamicResource CardSpacing}" Padding="{DynamicResource CardPadding}">
+          <control:CardView>
+          <StackLayout Spacing="0">
+            <control:LabelSection Text="Manual location"/>
+            <control:HeaderDivider/>
             <Grid Padding="16,6,16,6" ColumnSpacing="16">
-            <Grid.RowDefinitions>
-              <RowDefinition Height="Auto" />
-              <RowDefinition Height="Auto" />
-              <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-              <ColumnDefinition Width="*"/>
-              <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
+              <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+              </Grid.RowDefinitions>
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+              </Grid.ColumnDefinitions>
 
-            <Label
-                   Text="{Binding ChangeLocationText}"
-                   VerticalTextAlignment="Center"
-                   HorizontalOptions="StartAndExpand"
-                   Style="{DynamicResource NearbyListItemTextStyle}" />
+              <Label
+                     Text="{Binding ChangeLocationText}"
+                     VerticalTextAlignment="Center"
+                     HorizontalOptions="StartAndExpand"
+                     Style="{DynamicResource NearbyListItemTextStyle}" />
 
-            <Switch Grid.Column="1"
-                    VerticalOptions="Center"
-                    IsToggled="{Binding ChangeLocationIsEnabled}"/>
+              <Switch Grid.Column="1"
+                      VerticalOptions="Center"
+                      IsToggled="{Binding ChangeLocationIsEnabled}"/>
 
-            <StackLayout IsVisible="{Binding ChangeLocationIsEnabled}" Grid.Row="1" Grid.ColumnSpan="2" HorizontalOptions="FillAndExpand" Orientation="Vertical" Spacing="{StaticResource SmallSpacing}">
-              <Entry Placeholder="Latitude" Text="{Binding CustomLatitude}" HeightRequest="45" HorizontalOptions="FillAndExpand"></Entry>
+              <StackLayout Grid.Row="1" Grid.ColumnSpan="2" Spacing="0" IsVisible="{Binding ChangeLocationIsEnabled}" Padding="0,32,0,0">
+                <Grid Padding="16,0" BackgroundColor="White">
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                  </Grid.ColumnDefinitions>
+                </Grid>
 
-              <Entry Placeholder="Longitude" Text="{Binding CustomLongitude}" HeightRequest="45" HorizontalOptions="FillAndExpand"></Entry>
-            </StackLayout>
+                <Entry Placeholder="Latitude" Text="{Binding CustomLatitude}" HeightRequest="45" HorizontalOptions="FillAndExpand"></Entry>
 
-            <Entry Grid.Row="2" Grid.ColumnSpan="2" Placeholder="Search location" Text="{Binding CustomLocation}" HeightRequest="45" HorizontalOptions="FillAndExpand"></Entry>
+                <Entry Placeholder="Longitude" Text="{Binding CustomLongitude}" HeightRequest="45" HorizontalOptions="FillAndExpand"></Entry>
 
-          </Grid>
-        </ViewCell.View>
-        </ViewCell>
-      </TableSection>
-    </TableView>
+              </StackLayout>
+              
+            </Grid>
+          </StackLayout>
+        </control:CardView>
+      </StackLayout>
 
-      <!--<StackLayout>
+     
+
+    </StackLayout>
+      
+      
+  </control:AlwaysScrollView>
+  
+  <!--<StackLayout IsVisible="{Binding ChangeLocationIsEnabled}" HorizontalOptions="FillAndExpand" Spacing="{StaticResource SmallSpacing}">
+    
+  </StackLayout>-->
+
+  
+
+
+  <!--<StackLayout>
 
       <control:LabelSection Text="Manual location"/>
       <control:HeaderDivider/>

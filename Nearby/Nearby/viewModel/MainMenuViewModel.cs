@@ -12,6 +12,8 @@ namespace Nearby.viewModel
 {
     public class MainMenuViewModel : NearbyBaseViewModel
     {
+        public ObservableRangeCollection<MenuItem> ManualItems { get; } = new ObservableRangeCollection<MenuItem>();
+
         public MainMenuViewModel(INavigation navigation) : base(navigation)
         {
             Title = "Options";
@@ -25,6 +27,8 @@ namespace Nearby.viewModel
             }
 
             CustomLocation = Settings.CustomLocation;
+
+
         }
 
         string changelocationtext = "Change Location";
@@ -78,6 +82,13 @@ namespace Nearby.viewModel
                 SetProperty(ref customLocation, value);
                 Settings.CustomLocation = value;
             }
+        }
+
+
+        public class MenuItem
+        {
+            public String DetailLabel { get; set; }
+            public String DetailValue { get; set; }
         }
     }
 }
