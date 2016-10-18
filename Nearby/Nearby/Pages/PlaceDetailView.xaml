@@ -19,8 +19,8 @@
             <OnPlatform x:TypeArguments="Thickness" iOS="0,12" Android="16,8"/>
           </Grid.Padding>
           <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
           </Grid.ColumnDefinitions>
 
           <StackLayout Grid.Column="0" Orientation="Horizontal" HorizontalOptions="Center">
@@ -34,6 +34,14 @@
         </Grid>
       </StackLayout>
       
+      <control:HeaderDivider/>
+        
+      <StackLayout HorizontalOptions="FillAndExpand" Padding="{DynamicResource MediumPadding}">
+          <Label VerticalOptions="Center" HorizontalOptions="Center" TextColor="#00cc00"  Style="{DynamicResource NearbyListItemTextStyle}" Text="Open"/>
+      </StackLayout>
+      
+      <control:HeaderDivider/>
+        
       <StackLayout HorizontalOptions="FillAndExpand" Spacing="{DynamicResource CardSpacing}" Padding="{DynamicResource CardPadding}">
 
         <control:CardView>

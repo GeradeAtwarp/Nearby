@@ -73,9 +73,6 @@ namespace Nearby.Pages
                 };
             }
 
-            if (Device.OS == TargetPlatform.iOS)
-                Application.Current?.MainPage?.DisplayAlert("Location", position.Latitude.ToString() + " - " + position.Longitude.ToString(), "Ok");
-
             var pin = new Pin
             {
                 Type = PinType.Place,
