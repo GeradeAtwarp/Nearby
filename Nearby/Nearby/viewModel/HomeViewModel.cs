@@ -84,7 +84,7 @@ namespace Nearby.viewModel
                 var placesNearby = JsonConvert.DeserializeObject<PlaceNearby>(placesResult);
 
                 HockeyApp.MetricsManager.TrackEvent(
-                 "Returned Nearby Places: " + placesNearby.status,
+                 "Returned Nearby Places: " + placesNearby.status + " -- " + DateTime.Now,
                  new Dictionary<string, string> { { "NearbyPlaces", placesNearby.results.Count().ToString() } },
                  new Dictionary<string, double> { { "time", 1.0 } }
                 );
