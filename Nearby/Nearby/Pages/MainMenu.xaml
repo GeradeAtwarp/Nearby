@@ -10,7 +10,6 @@
     <ToolbarItem x:Name="tbItemNavigateMap" Text="Done" />
   </ContentPage.ToolbarItems>
 
-  <control:AlwaysScrollView>
     <StackLayout Spacing="0">
 
       <StackLayout BackgroundColor="{DynamicResource WindowBackgroundTable}" Spacing="{DynamicResource CardSpacing}" Padding="{DynamicResource CardPadding}">
@@ -56,12 +55,7 @@
         </control:CardView>
       </StackLayout>
 
-     
-
     </StackLayout>
-      
-      
-  </control:AlwaysScrollView>
   
   <!--<StackLayout IsVisible="{Binding ChangeLocationIsEnabled}" HorizontalOptions="FillAndExpand" Spacing="{StaticResource SmallSpacing}">
     

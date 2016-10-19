@@ -4,8 +4,17 @@
              x:Class="Nearby.Pages.PlaceDetailView"
              xmlns:control="clr-namespace:Nearby.Controls"
              xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+             xmlns:converters="clr-namespace:Nearby.Helpers.Converters"
              Title="{Binding Title}">
 
+  <ContentPage.Resources>
+    <ResourceDictionary>
+      
+       <converters:OpenCloseColorConverter x:Key="OpenCloseColor" ></converters:OpenCloseColorConverter>  
+       <converters:OpenCloseTextConverter x:Key="OpenCloseText" ></converters:OpenCloseTextConverter>  
+    </ResourceDictionary>
+  </ContentPage.Resources>
+    
   <control:AlwaysScrollView>
     <StackLayout Spacing="0">
 
@@ -21,6 +30,7 @@
           <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
           </Grid.ColumnDefinitions>
 
           <StackLayout Grid.Column="0" Orientation="Horizontal" HorizontalOptions="Center">
@@ -31,16 +41,27 @@
             <Image Source="sharethis"></Image>
           </StackLayout>
 
+          <StackLayout Grid.Column="2" Orientation="Horizontal" HorizontalOptions="Center">
+            <Image Source="heart_filled">
+              <!--<Image.Source>
+                <OnPlatform  x:TypeArguments="ImageSource">
+                  <OnPlatform.iOS>heart_filled.png</OnPlatform.iOS>
+                  <OnPlatform.Android>favorite-black.png</OnPlatform.Android>
+                </OnPlatform>
+              </Image.Source>-->
+            </Image>
+          </StackLayout>
+
         </Grid>
       </StackLayout>
       
-      <control:HeaderDivider/>
-        
-      <StackLayout HorizontalOptions="FillAndExpand" Padding="{DynamicResource MediumPadding}">
-          <Label VerticalOptions="Center" HorizontalOptions="Center" TextColor="#00cc00"  Style="{DynamicResource NearbyListItemTextStyle}" Text="Open"/>
-      </StackLayout>
+      <!--<StackLayout HorizontalOptions="FillAndExpand" Spacing="{DynamicResource CardSpacing}" Padding="{DynamicResource CardPadding}">
+        <control:TransparentConatiner>
+          
+        </control:TransparentConatiner>
+      </StackLayout>-->
       
-      <control:HeaderDivider/>
+      <Label VerticalOptions="Center" HorizontalOptions="Center" TextColor="{Binding IsOpen, Converter={StaticResource OpenCloseColor}}"  Style="{DynamicResource NearbyListItemTextStyle}" Text="{Binding IsOpen, Converter={StaticResource OpenCloseText}}"/>
         
       <StackLayout HorizontalOptions="FillAndExpand" Spacing="{DynamicResource CardSpacing}" Padding="{DynamicResource CardPadding}">
 
@@ -61,6 +82,9 @@
                   <DataTemplate>
                     <ViewCell StyleId="disclosure">
                       <Grid ColumnSpacing="{StaticResource StandardSpacing}">
+                        <Grid.Padding>
+                          <OnPlatform x:TypeArguments="Thickness" iOS="0,12" Android="16,8"/>
+                        </Grid.Padding>
                         <Grid.ColumnDefinitions>
                           <ColumnDefinition Width="*"/>
                           <ColumnDefinition Width="Auto"/>
@@ -85,7 +109,7 @@
             <StackLayout IsVisible="{Binding IsBusy}" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="White" Padding="{StaticResource StandardPadding}">
               <ActivityIndicator IsRunning="{Binding IsBusy}">
               </ActivityIndicator>
-              <Label Text="Loading Place Details..."
+              <Label Text="Loading Operating Hours..."
                      HorizontalOptions="Center"
                      Style="{DynamicResource NearbyListItemTextStyle}"/>
             </StackLayout>
@@ -108,6 +132,9 @@
                   <DataTemplate>
                     <ViewCell StyleId="disclosure">
                       <Grid ColumnSpacing="{StaticResource StandardSpacing}">
+                         <Grid.Padding>
+                          <OnPlatform x:TypeArguments="Thickness" iOS="0,12" Android="16,8"/>
+                        </Grid.Padding>
                         <Grid.ColumnDefinitions>
                           <ColumnDefinition Width="*"/>
                           <ColumnDefinition Width="Auto"/>
@@ -131,7 +158,7 @@
               <StackLayout IsVisible="{Binding IsBusy}" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="White" Padding="{StaticResource StandardPadding}">
                 <ActivityIndicator IsRunning="{Binding IsBusy}">
                 </ActivityIndicator>
-                <Label Text="Loading Place Details..."
+                <Label Text="Contact Details..."
                        HorizontalOptions="Center"
                        Style="{DynamicResource NearbyListItemTextStyle}"/>
               </StackLayout>

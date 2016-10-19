@@ -39,9 +39,21 @@ namespace Nearby.Pages
                     return;
 
                 if (vm.IsBusy)
+                        return;
+
+                await NavigationService.PushModalAsync(nav,new MainMenu());
+            });
+
+            tbItemNavigateFav.Command = new Command(async () =>
+            {
+                var nav = Application.Current?.MainPage?.Navigation;
+                if (nav == null)
                     return;
 
-                await Navigation.PushModalAsync(new MainMenu());
+                if (vm.IsBusy)
+                    return;
+
+                await NavigationService.PushAsync(nav, new Favourites());
             });
 
             btnSearchPlaces.Clicked += (sender, ea) => SearchForPlacesNearby();

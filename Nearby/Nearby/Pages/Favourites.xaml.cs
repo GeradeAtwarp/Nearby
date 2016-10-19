@@ -1,5 +1,6 @@
 ﻿using Nearby.Controls;
 using Nearby.Helpers;
+using Nearby.viewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,16 +13,30 @@ namespace Nearby.Pages
 {
     public partial class Favourites : ContentPage
     {
+        FavoritesViewModel ViewModel => vm ?? (vm = BindingContext as FavoritesViewModel);
+        FavoritesViewModel vm;
+
         public Favourites()
         {
             InitializeComponent();
 
             Title = "Favourites";
 
-            btnAddPlacesToFav.Clicked += async (sender, e) =>
-            {
-                await Navigation.PushAsync(new Home());
-            };
+            BindingContext = vm = new FavoritesViewModel(Navigation);
+
+            //tbBackToMap.Command = new Command(async () =>
+            //{
+            //    await Navigation.PopModalAsync();
+            //});
+        }
+
+        protected override void OnBindingContextChanged()
+        {
+            base.OnBindingContextChanged();
+            vm = null;
+
+            var adjust = Device.OS != TargetPlatform.Android ? 1 : -ViewModel.FavPlaces.Count + 1;
+            lstFavorites.HeightRequest = (ViewModel.FavPlaces.Count * lstFavorites.RowHeight) - adjust;
         }
     }
 }

@@ -22,6 +22,7 @@ namespace Nearby.Utils.Entities
 
             //Create tables
             _connection.CreateTable<UserPreferences>();
+            _connection.CreateTable<FavoritePlaces>();
         }
 
         public T GetItem<T>(int? id) where T : IBaseEntity, new()

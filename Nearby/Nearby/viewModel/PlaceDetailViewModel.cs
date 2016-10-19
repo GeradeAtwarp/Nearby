@@ -18,6 +18,13 @@ namespace Nearby.viewModel
         public ObservableRangeCollection<PlceDetailItem> PlaceContactDetails { get; } = new ObservableRangeCollection<PlceDetailItem>();
         public ObservableRangeCollection<PlceDetailItem> PlaceOperatingHours { get; } = new ObservableRangeCollection<PlceDetailItem>();
 
+        public bool isOpen = false;
+        public bool IsOpen
+        {
+            get { return isOpen; }
+            set { isOpen = value; }
+        }
+        
         public PlaceDetailViewModel(INavigation navigation, Places place) : base(navigation)
         {
             Place = place;
@@ -26,8 +33,7 @@ namespace Nearby.viewModel
             
             GetDetails();
         }
-
-
+        
         public async Task GetDetails()
         {
             try
@@ -49,6 +55,8 @@ namespace Nearby.viewModel
 
                 if (!string.IsNullOrEmpty(info.result.website))
                     PlaceContactDetails.Add(new PlceDetailItem { PlaceDetailLabel = "Website", PlaceDetailValue = info.result.website });
+
+                IsOpen = info.result.opening_hours.open_now;
 
 
                 #region Get operation hours

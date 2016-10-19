@@ -21,11 +21,7 @@ namespace Nearby.Pages
 
             tbItemNavigateMap.Command = new Command(async () =>
             {
-                var nav = Application.Current?.MainPage?.Navigation;
-                if (nav == null)
-                    return;
-
-                await NavigationService.PushModalAsync(nav, new NearbyNavigationPage(new Home()));
+                await Navigation.PopModalAsync();
             });
         }
     }
