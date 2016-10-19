@@ -61,9 +61,6 @@
                   <DataTemplate>
                     <ViewCell StyleId="disclosure">
                       <Grid ColumnSpacing="{StaticResource StandardSpacing}">
-                        <Grid.Padding>
-                          <OnPlatform x:TypeArguments="Thickness" iOS="0,12" Android="16,8"/>
-                        </Grid.Padding>
                         <Grid.ColumnDefinitions>
                           <ColumnDefinition Width="*"/>
                           <ColumnDefinition Width="Auto"/>
@@ -111,9 +108,6 @@
                   <DataTemplate>
                     <ViewCell StyleId="disclosure">
                       <Grid ColumnSpacing="{StaticResource StandardSpacing}">
-                        <Grid.Padding>
-                          <OnPlatform x:TypeArguments="Thickness" iOS="0,12" Android="16,8"/>
-                        </Grid.Padding>
                         <Grid.ColumnDefinitions>
                           <ColumnDefinition Width="*"/>
                           <ColumnDefinition Width="Auto"/>
