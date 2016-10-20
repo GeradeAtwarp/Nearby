@@ -24,10 +24,10 @@ namespace Nearby.Pages
 
             BindingContext = vm = new FavoritesViewModel(Navigation);
 
-            tbBackToMap.Command = new Command(async () =>
-            {
-                await Navigation.PopModalAsync();
-            });
+            //tbBackToMap.Command = new Command(async () =>
+            //{
+            //    await Navigation.PopModalAsync();
+            //});
         }
 
         protected override void OnBindingContextChanged()

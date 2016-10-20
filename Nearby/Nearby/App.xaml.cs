@@ -21,10 +21,10 @@ namespace Nearby
 
             NearbyBaseViewModel.Init();
 
-            MainPage = new NavigationPage
-            (
-                new Home()
-            );
+            var navPage = new NavigationPage(new Home());
+
+            // set the MainPage of the app to the navPage
+            MainPage = navPage;
         }
 
         protected override void OnStart()

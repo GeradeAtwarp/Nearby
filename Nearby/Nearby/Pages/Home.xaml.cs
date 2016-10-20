@@ -41,7 +41,7 @@ namespace Nearby.Pages
                 if (vm.IsBusy)
                         return;
 
-                await Navigation.PushModalAsync(new MainMenu());
+                await Navigation.PushAsync(new MainMenu());
             });
 
             tbItemNavigateFav.Command = new Command(async () =>
@@ -53,7 +53,7 @@ namespace Nearby.Pages
                 if (vm.IsBusy)
                     return;
 
-                await Navigation.PushModalAsync(new Favourites());
+                await Navigation.PushAsync(new Favourites());
             });
 
             btnSearchPlaces.Clicked += (sender, ea) => SearchForPlacesNearby();

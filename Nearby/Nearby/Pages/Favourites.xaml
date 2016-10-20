@@ -4,9 +4,9 @@
              x:Class="Nearby.Pages.Favourites"
              BackgroundColor="{DynamicResource WindowBackgroundTable}">
 
-  <ContentPage.ToolbarItems>
+  <!--<ContentPage.ToolbarItems>
     <ToolbarItem x:Name="tbBackToMap" Text="Done" />
-  </ContentPage.ToolbarItems>
+  </ContentPage.ToolbarItems>-->
 
 
   <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
