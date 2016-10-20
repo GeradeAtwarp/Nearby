@@ -1,4 +1,5 @@
 ﻿using MvvmHelpers;
+using Nearby.Utils.Entities;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -6,6 +7,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 
@@ -14,6 +16,7 @@ namespace Nearby.viewModel
     public class PlaceDetailViewModel : NearbyBaseViewModel
     {
         private Places Place;
+        PlaceInfo Details;
 
         public ObservableRangeCollection<PlceDetailItem> PlaceContactDetails { get; } = new ObservableRangeCollection<PlceDetailItem>();
         public ObservableRangeCollection<PlceDetailItem> PlaceOperatingHours { get; } = new ObservableRangeCollection<PlceDetailItem>();
@@ -39,6 +42,13 @@ namespace Nearby.viewModel
             set { SetProperty(ref hasContacts, value); }
         }
 
+        public ImageSource favImage = ImageSource.FromFile("heart_empty.png");
+        public ImageSource FavImage
+        {
+            get { return favImage; }
+            set { SetProperty(ref favImage, value); }
+        }
+
         public PlaceDetailViewModel(INavigation navigation, Places place) : base(navigation)
         {
             Place = place;
@@ -62,25 +72,25 @@ namespace Nearby.viewModel
                 var placesResult = "";
                 placesResult = await httpClient.GetStringAsync(new UriBuilder("https://maps.googleapis.com/maps/api/place/details/json?placeid=" + Place.place_id + "&key=AIzaSyAg-d-wLhMl65Fo_sfyj_U9tFOoW41UcDQ").Uri.ToString());
 
-                var info = JsonConvert.DeserializeObject<PlaceInfo>(placesResult);
+                Details = JsonConvert.DeserializeObject<PlaceInfo>(placesResult);
 
-                if (!string.IsNullOrEmpty(info.result.formatted_phone_number))
-                    PlaceContactDetails.Add(new PlceDetailItem { PlaceDetailLabel = "Tel", PlaceDetailValue = info.result.formatted_phone_number });
+                if (!string.IsNullOrEmpty(Details.result.formatted_phone_number))
+                    PlaceContactDetails.Add(new PlceDetailItem { PlaceDetailLabel = "Tel", PlaceDetailValue = Details.result.formatted_phone_number });
 
-                if (!string.IsNullOrEmpty(info.result.website))
-                    PlaceContactDetails.Add(new PlceDetailItem { PlaceDetailLabel = "Website", PlaceDetailValue = info.result.website });
+                if (!string.IsNullOrEmpty(Details.result.website))
+                    PlaceContactDetails.Add(new PlceDetailItem { PlaceDetailLabel = "Website", PlaceDetailValue = Details.result.website });
 
-                if (info.result.opening_hours != null)
+                if (Details.result.opening_hours != null)
                 {
-                    IsOpen = (info.result.opening_hours.open_now ? true : false);
-                    HasNoOperatingHours = (info.result.opening_hours.periods.Count() > 0 ? false : true);
+                    IsOpen = (Details.result.opening_hours.open_now ? true : false);
+                    HasNoOperatingHours = (Details.result.opening_hours.periods.Count() > 0 ? false : true);
                 }
 
-                hasContacts = (!string.IsNullOrEmpty(info.result.formatted_phone_number) ? true : (!string.IsNullOrEmpty(info.result.website) ? true : false));
+                hasContacts = (!string.IsNullOrEmpty(Details.result.formatted_phone_number) ? true : (!string.IsNullOrEmpty(Details.result.website) ? true : false));
 
                 #region Get operation hours
 
-                foreach (Period p in info.result.opening_hours.periods)
+                foreach (Period p in Details.result.opening_hours.periods)
                 {
                     switch (p.open.day)
                     {
@@ -119,7 +129,11 @@ namespace Nearby.viewModel
 
                 #endregion
 
-                
+                var fav = NearbyDataContext.GetItems<FavoritePlaces>().Where(x => x.PlaceId == Place.place_id).FirstOrDefault();
+                if(fav != null)
+                {
+                    FavImage = ImageSource.FromFile("heart_filled.png");
+                }
             }
             catch (Exception ex)
             {
@@ -131,9 +145,28 @@ namespace Nearby.viewModel
             }
         }
 
+        ICommand savefavourite;
+        public ICommand SaveFavourite => savefavourite ?? (savefavourite = new Command(async () => await AddToFavourites()));
 
+        async Task AddToFavourites()
+        {
+            try
+            {
+                var fav = NearbyDataContext.GetItems<FavoritePlaces>().Where(x => x.PlaceId == Place.place_id).FirstOrDefault();
+                if (fav == null)
+                {
+                    NearbyDataContext.SaveItem<FavoritePlaces>(new FavoritePlaces { Created = DateTime.Now, PlaceId = Place.place_id, PlaceName = Details.result.name });
+                    FavImage = ImageSource.FromFile("heart_filled.png");
+                    Application.Current?.MainPage?.DisplayAlert("Favourite", Details.result.name + " was successfully added to you favourites.", "Ok");
+                }
+                else
+                    Application.Current?.MainPage?.DisplayAlert("Info", "You have already saved " + Details.result.name, "Ok");
+            }
+            catch (Exception ex)
+            {
 
-
+            }
+        }
 
         #region Internal classes
 

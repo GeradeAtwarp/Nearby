@@ -6,9 +6,9 @@
              Title="{Binding Title}"
              BackgroundColor="{DynamicResource WindowBackgroundTable}">
 
-  <ContentPage.ToolbarItems>
+  <!--<ContentPage.ToolbarItems>
     <ToolbarItem x:Name="tbItemNavigateMap" Text="Done" />
-  </ContentPage.ToolbarItems>
+  </ContentPage.ToolbarItems>-->
 
     <StackLayout Spacing="0">
 

@@ -19,10 +19,10 @@ namespace Nearby.Pages
 
             BindingContext = new MainMenuViewModel(Navigation);
 
-            tbItemNavigateMap.Command = new Command(async () =>
-            {
-                await Navigation.PopModalAsync();
-            });
+            //tbItemNavigateMap.Command = new Command(async () =>
+            //{
+            //    await Navigation.PopModalAsync();
+            //});
         }
     }
 }

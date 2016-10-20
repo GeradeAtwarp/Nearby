@@ -43,7 +43,10 @@
           </StackLayout>
 
           <StackLayout Grid.Column="2" Orientation="Horizontal" HorizontalOptions="Center">
-            <Image Source="heart_filled">
+            <Image Source="{Binding FavImage}">
+              <Image.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding SaveFavourite}"/>
+              </Image.GestureRecognizers>
               <!--<Image.Source>
                 <OnPlatform  x:TypeArguments="ImageSource">
                   <OnPlatform.iOS>heart_filled.png</OnPlatform.iOS>
