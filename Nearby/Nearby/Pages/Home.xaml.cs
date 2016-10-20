@@ -41,7 +41,7 @@ namespace Nearby.Pages
                 if (vm.IsBusy)
                         return;
 
-                await NavigationService.PushModalAsync(nav, new NearbyNavigationPage(new MainMenu()));
+                await Navigation.PushModalAsync(new MainMenu());
             });
 
             tbItemNavigateFav.Command = new Command(async () =>
@@ -53,7 +53,7 @@ namespace Nearby.Pages
                 if (vm.IsBusy)
                     return;
 
-                await NavigationService.PushModalAsync(nav, new NearbyNavigationPage(new Favourites()));
+                await Navigation.PushModalAsync(new Favourites());
             });
 
             btnSearchPlaces.Clicked += (sender, ea) => SearchForPlacesNearby();
@@ -102,6 +102,8 @@ namespace Nearby.Pages
 
             try
             {
+                placesMap.Pins.Clear();
+
                 foreach (var pn in vm.PlacesNearby)
                 {
                     var newposition = new Xamarin.Forms.Maps.Position(pn.geometry.location.lat, pn.geometry.location.lng);
@@ -120,8 +122,9 @@ namespace Nearby.Pages
                     };
 
                     placesMap.Pins.Add(pin);
-                    placesMap.MoveToRegion(MapSpan.FromCenterAndRadius(pin.Position, Distance.FromKilometers(0.5)));
                 }
+
+                MoveToCurrentLocation();
             }
             catch (Exception ex)
             {

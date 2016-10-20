@@ -25,8 +25,8 @@ namespace Nearby.viewModel
             set { SetProperty(ref isOpen, value); }
         }
 
-        public bool hasOperatingHours = false;
-        public bool HasOperatingHours
+        public bool hasOperatingHours = true;
+        public bool HasNoOperatingHours
         {
             get { return hasOperatingHours; }
             set { SetProperty(ref hasOperatingHours, value); }
@@ -70,9 +70,12 @@ namespace Nearby.viewModel
                 if (!string.IsNullOrEmpty(info.result.website))
                     PlaceContactDetails.Add(new PlceDetailItem { PlaceDetailLabel = "Website", PlaceDetailValue = info.result.website });
 
-                IsOpen = info.result.opening_hours.open_now;
+                if (info.result.opening_hours != null)
+                {
+                    IsOpen = (info.result.opening_hours.open_now ? true : false);
+                    HasNoOperatingHours = (info.result.opening_hours.periods.Count() > 0 ? false : true);
+                }
 
-                HasOperatingHours = (info.result.opening_hours.periods.Count() > 0 ? false : true);
                 hasContacts = (!string.IsNullOrEmpty(info.result.formatted_phone_number) ? true : (!string.IsNullOrEmpty(info.result.website) ? true : false));
 
                 #region Get operation hours

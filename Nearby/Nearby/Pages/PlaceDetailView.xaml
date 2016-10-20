@@ -5,7 +5,8 @@
              xmlns:control="clr-namespace:Nearby.Controls"
              xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
              xmlns:converters="clr-namespace:Nearby.Helpers.Converters"
-             Title="{Binding Title}">
+             Title="{Binding Title}"
+             BackgroundColor="{DynamicResource WindowBackgroundTable}">
 
   <ContentPage.Resources>
     <ResourceDictionary>
@@ -63,7 +64,7 @@
       
       <Label VerticalOptions="Center" HorizontalOptions="Center" TextColor="{Binding IsOpen, Converter={StaticResource OpenCloseColor}}"  Style="{DynamicResource NearbyListItemTextStyle}" Text="{Binding IsOpen, Converter={StaticResource OpenCloseText}}"/>
         
-      <StackLayout HorizontalOptions="FillAndExpand" Spacing="{DynamicResource CardSpacing}" Padding="{DynamicResource CardPadding}">
+      <StackLayout BackgroundColor="{DynamicResource WindowBackgroundTable}" Spacing="{DynamicResource CardSpacing}" Padding="{DynamicResource CardPadding}">
 
         <control:CardView>
           <StackLayout Spacing="0">
@@ -113,7 +114,7 @@
                      Style="{DynamicResource NearbyListItemTextStyle}"/>
             </StackLayout>
               
-              <StackLayout IsVisible="{Binding HasOperatingHours}" HorizontalOptions="FillAndExpand" Padding="{DynamicResource MediumPadding}">
+              <StackLayout IsVisible="{Binding HasNoOperatingHours}" HorizontalOptions="FillAndExpand" Padding="{DynamicResource MediumPadding}">
                   <Label Text="Operating hours not available" HorizontalOptions="Center"/>
               </StackLayout>  
         
