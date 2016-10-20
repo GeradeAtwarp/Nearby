@@ -3,9 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Nearby.Pages.Favourites">
 
-  <!--<ContentPage.ToolbarItems>
-    <ToolbarItem x:Name="tbBackToMap" Text="Back" />
-  </ContentPage.ToolbarItems>-->
+  <ContentPage.ToolbarItems>
+    <ToolbarItem x:Name="tbBackToMap" Text="Done" />
+  </ContentPage.ToolbarItems>
 
 
   <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">

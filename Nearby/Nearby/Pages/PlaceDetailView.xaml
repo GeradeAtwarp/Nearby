@@ -70,14 +70,13 @@
             <control:LabelSection Text="Operating hours"/>
             <control:HeaderDivider/>
 
-            <StackLayout IsVisible="{Binding IsNotBusy}">
-
               <control:NonScrollableListView
                    ItemsSource="{Binding PlaceOperatingHours}"
                    VerticalOptions="Start"
                    x:Name="ListPlaceDetails"
                    StyleId="SponsorDetailLinks"
-                   RowHeight="44">
+                   RowHeight="44"
+                   IsVisible="{Binding IsNotBusy}">
                 <control:NonScrollableListView.ItemTemplate>
                   <DataTemplate>
                     <ViewCell StyleId="disclosure">
@@ -93,6 +92,7 @@
                         <Label VerticalOptions="Center"  Style="{DynamicResource NearbyListItemTextStyle}" Text="{Binding PlaceDetailLabel}"/>
                         <Label Grid.Column="2"
                                VerticalOptions="Center"
+                               HorizontalOptions="Center"
                                Style="{DynamicResource NearbyListItemTextStyle}"
                                TextColor="{DynamicResource DetailTextColor}"
                                Text="{Binding PlaceDetailValue}">
@@ -104,16 +104,19 @@
                 </control:NonScrollableListView.ItemTemplate>
 
               </control:NonScrollableListView>
-            </StackLayout>
-
-            <StackLayout IsVisible="{Binding IsBusy}" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="White" Padding="{StaticResource StandardPadding}">
+           
+              <StackLayout IsVisible="{Binding IsBusy}" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="White" Padding="{StaticResource StandardPadding}">
               <ActivityIndicator IsRunning="{Binding IsBusy}">
               </ActivityIndicator>
               <Label Text="Loading Operating Hours..."
                      HorizontalOptions="Center"
                      Style="{DynamicResource NearbyListItemTextStyle}"/>
             </StackLayout>
-
+              
+              <StackLayout IsVisible="{Binding HasOperatingHours}" HorizontalOptions="FillAndExpand" Padding="{DynamicResource MediumPadding}">
+                  <Label Text="Operating hours not available" HorizontalOptions="Center"/>
+              </StackLayout>  
+        
           </StackLayout>
         </control:CardView>
 
@@ -127,7 +130,8 @@
                    VerticalOptions="Start"
                    x:Name="ListPlaceContactDetails"
                    StyleId="SponsorDetailLinks"
-                   RowHeight="44">
+                   RowHeight="44"
+                   IsVisible="{Binding IsBusy}">
                 <control:NonScrollableListView.ItemTemplate>
                   <DataTemplate>
                     <ViewCell StyleId="disclosure">
@@ -158,11 +162,15 @@
               <StackLayout IsVisible="{Binding IsBusy}" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="White" Padding="{StaticResource StandardPadding}">
                 <ActivityIndicator IsRunning="{Binding IsBusy}">
                 </ActivityIndicator>
-                <Label Text="Contact Details..."
+                <Label Text="Loading Contact Details..."
                        HorizontalOptions="Center"
                        Style="{DynamicResource NearbyListItemTextStyle}"/>
               </StackLayout>
               
+              <StackLayout IsVisible="{Binding hasContacts}" HorizontalOptions="FillAndExpand" Padding="{DynamicResource MediumPadding}">
+                  <Label Text="No contact details" HorizontalOptions="Center"/>
+              </StackLayout>
+            
             </StackLayout>
           </control:CardView>
         
