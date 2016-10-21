@@ -49,6 +49,13 @@ namespace Nearby.viewModel
             set { SetProperty(ref favImage, value); }
         }
 
+        public int placeRating = 0;
+        public int PlaceRating
+        {
+            get { return placeRating; }
+            set { SetProperty(ref placeRating, value); }
+        }
+
         public PlaceDetailViewModel(INavigation navigation, Places place) : base(navigation)
         {
             Place = place;
@@ -134,6 +141,8 @@ namespace Nearby.viewModel
                 {
                     FavImage = ImageSource.FromFile("heart_filled.png");
                 }
+
+                PlaceRating = Details.result.reviews[0].aspects[0].rating;
             }
             catch (Exception ex)
             {
