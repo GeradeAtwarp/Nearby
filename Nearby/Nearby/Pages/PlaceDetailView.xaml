@@ -131,7 +131,6 @@
 
               <control:NonScrollableListView
                    ItemsSource="{Binding PlaceContactDetails}"
-                   VerticalOptions="Start"
                    x:Name="ListPlaceContactDetails"
                    StyleId="SponsorDetailLinks"
                    RowHeight="44"
@@ -139,24 +138,23 @@
                 <control:NonScrollableListView.ItemTemplate>
                   <DataTemplate>
                     <ViewCell StyleId="disclosure">
-                      <Grid ColumnSpacing="{StaticResource StandardSpacing}">
-                         <Grid.Padding>
-                          <OnPlatform x:TypeArguments="Thickness" iOS="0,12" Android="16,8"/>
-                        </Grid.Padding>
-                        <Grid.ColumnDefinitions>
-                          <ColumnDefinition Width="*"/>
-                          <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
+                      <StackLayout Padding="{DynamicResource CardPadding}">
+                        <Grid ColumnSpacing="{StaticResource MediumSpacing}" RowSpacing="{StaticResource MediumSpacing}">
+                          <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                          </Grid.ColumnDefinitions>
 
-                        <Label VerticalOptions="Center"  Style="{DynamicResource NearbyListItemTextStyle}" Text="{Binding PlaceDetailLabel}"/>
-                        <Label Grid.Column="2"
-                               VerticalOptions="Center"
-                               Style="{DynamicResource NearbyListItemTextStyle}"
-                               TextColor="{DynamicResource DetailTextColor}"
-                               Text="{Binding PlaceDetailValue}">
-                        </Label>
+                          <Label VerticalOptions="Center"  Style="{DynamicResource NearbyListItemTextStyle}" Text="{Binding PlaceDetailLabel}"/>
+                          <Label Grid.Column="2"
+                                 VerticalOptions="Center"
+                                 Style="{DynamicResource NearbyListItemTextStyle}"
+                                 TextColor="{DynamicResource DetailTextColor}"
+                                 Text="{Binding PlaceDetailValue}">
+                          </Label>
 
-                      </Grid>
+                        </Grid>
+                      </StackLayout>
                     </ViewCell>
                   </DataTemplate>
                 </control:NonScrollableListView.ItemTemplate>
