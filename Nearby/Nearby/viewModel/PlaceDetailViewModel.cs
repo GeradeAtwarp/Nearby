@@ -134,7 +134,10 @@ namespace Nearby.viewModel
                     }
                 }
 
-                #endregion
+                if (PlaceOperatingHours.Count() == 0)
+                    HasNoOperatingHours = true;
+
+                    #endregion
 
                 var fav = NearbyDataContext.GetItems<FavoritePlaces>().Where(x => x.PlaceId == Place.place_id).FirstOrDefault();
                 if(fav != null)

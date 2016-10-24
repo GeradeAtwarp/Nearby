@@ -15,44 +15,44 @@ namespace Nearby.Helpers.Converters
             if ((string)parameter == "1")
             {
                 if ((int)value >= 1)
-                    return ImageSource.FromFile("star-filled.png");
+                    return ImageSource.FromFile("star_filled.png");
                 else
-                    return ImageSource.FromFile("star-empty.png");
+                    return ImageSource.FromFile("star_empty.png");
             }
 
             if ((string)parameter == "2")
             {
                 if ((int)value >= 2)
-                    return ImageSource.FromFile("star-filled.png");
+                    return ImageSource.FromFile("star_filled.png");
                 else
-                    return ImageSource.FromFile("star-empty.png");
+                    return ImageSource.FromFile("star_empty.png");
             }
 
             if ((string)parameter == "3")
             {
                 if ((int)value >= 3)
-                    return ImageSource.FromFile("star-filled.png");
+                    return ImageSource.FromFile("star_filled.png");
                 else
-                    return ImageSource.FromFile("star-empty.png");
+                    return ImageSource.FromFile("star_empty.png");
             }
 
             if ((string)parameter == "4")
             {
                 if ((int)value >= 4)
-                    return ImageSource.FromFile("star-filled.png");
+                    return ImageSource.FromFile("star_filled.png");
                 else
-                    return ImageSource.FromFile("star-empty.png");
+                    return ImageSource.FromFile("star_empty.png");
             }
 
             if ((string)parameter == "5")
             {
                 if ((int)value >= 5)
-                    return ImageSource.FromFile("star-filled.png");
+                    return ImageSource.FromFile("star_filled.png");
                 else
-                    return ImageSource.FromFile("star-empty.png");
+                    return ImageSource.FromFile("star_empty.png");
             }
 
-            return ImageSource.FromFile("star-empty.png");
+            return ImageSource.FromFile("star_empty.png");
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

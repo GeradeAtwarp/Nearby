@@ -7,6 +7,7 @@ using UIKit;
 using Xamarin;
 using HockeyApp.iOS;
 using Nearby.Utils.Entities;
+using ImageCircle.Forms.Plugin.iOS;
 
 namespace Nearby.iOS
 {
@@ -38,6 +39,8 @@ namespace Nearby.iOS
 
             //Set DB path
             Database.root = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
+
+            ImageCircleRenderer.Init();
 
             LoadApplication(new App());
 

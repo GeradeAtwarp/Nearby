@@ -310,16 +310,16 @@
     <AndroidResource Include="Resources\drawable-xxhdpi\heart_filled.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\favorite-black.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\favorite_black.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\favorite-black.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\favorite_black.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\favorite-black.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\favorite_black.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\favorite-black.png" />
+    <AndroidResource Include="Resources\drawable\favorite_black.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\drawable\heart_empty.png" />
@@ -328,52 +328,52 @@
     <EmbeddedResource Include="Resources\drawable\heart_filled.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\circle-green.png" />
+    <AndroidResource Include="Resources\drawable\circle_green.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\circle-red.png" />
+    <AndroidResource Include="Resources\drawable\circle_red.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\circle-green.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\circle_green.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\circle-red.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\circle_red.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\star-empty.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\star_empty.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\star-filled.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\star_filled.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\circle-green.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\circle_green.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\circle-red.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\circle_red.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\star-empty.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\star_empty.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\star-filled.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\star_filled.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\circle-green.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\circle_green.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\circle-red.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\circle_red.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\star-empty.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\star_empty.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\star-filled.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\star_filled.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\star-empty.png" />
+    <EmbeddedResource Include="Resources\drawable\star_empty.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\star-filled.png" />
+    <EmbeddedResource Include="Resources\drawable\star_filled.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets" Condition="Exists('..\..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets')" />
