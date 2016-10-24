@@ -1,10 +1,15 @@
-﻿using MvvmHelpers;
+﻿using FormsToolkit;
+using MvvmHelpers;
+using Nearby.Helpers;
+using Nearby.Pages;
 using Nearby.Utils.Entities;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace Nearby.viewModel
@@ -35,20 +40,26 @@ namespace Nearby.viewModel
             {
                 IsBusy = true;
 
-                await Task.Delay(3000);
-
+                FavPlaces.Clear();
                 FavPlaces.AddRange((from fp in NearbyDataContext.GetItems<FavoritePlaces>()
                                     select new FavPlaceItem
                                     {
+                                        ID = fp.Id,
                                         Name = fp.PlaceName,
                                         PlaceID = fp.PlaceId,
-                                        SavedOn = "Saved on " + fp.Created.ToString("yyyy/MM/dd")
+                                        SavedOn = "Saved on " + fp.Created.ToString("yyyy/MM/dd"),
+                                        ViewDetailsCommand = GoToDetailsCommand,
+                                        RemoveCommand = DeleteFavCommand,
+                                        Latitude = fp.Latitude,
+                                        Longitude = fp.Longitude,
+                                        Vicinity = fp.Vicinity
                                     }).ToList());
+
 
                 if (FavPlaces.Count() == 0)
                     HasFavorites = true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 IsBusy = false;
             }
@@ -57,14 +68,80 @@ namespace Nearby.viewModel
                 IsBusy = false;
             }
         }
+
+
+
+
+        ICommand goToDetailsCommand;
+        public ICommand GoToDetailsCommand =>
+            goToDetailsCommand ?? (goToDetailsCommand = new Command<FavPlaceItem>(async (place) => await ViewPlaceDetails(place)));
+
+        async Task ViewPlaceDetails(FavPlaceItem place)
+        {
+            Places favPlave = new Places();
+
+            favPlave.name = place.Name;
+            favPlave.place_id = place.PlaceID;
+            favPlave.geometry.location.lat = place.Latitude;
+            favPlave.geometry.location.lng = place.Longitude;
+            favPlave.vicinity = place.Vicinity;
+
+            await Navigation.PushAsync(new PlaceDetailView(favPlave));
+        }
+
+
+
+        ICommand deleteFavCommand;
+        public ICommand DeleteFavCommand =>
+            deleteFavCommand ?? (deleteFavCommand = new Command<FavPlaceItem>(async (place) => await RemoveFavorite(place)));
+
+        async Task RemoveFavorite(FavPlaceItem place)
+        {
+            try
+            {
+                FavoritePlaces favToRemove = NearbyDataContext.GetItems<FavoritePlaces>().Where(x => x.Id == place.ID).FirstOrDefault();
+
+                if (favToRemove != null)
+                {
+                    NearbyDataContext.RemoveItem<FavoritePlaces>(favToRemove);
+
+                    FavPlaces.Clear();
+                    FavPlaces.AddRange((from fp in NearbyDataContext.GetItems<FavoritePlaces>()
+                                        select new FavPlaceItem
+                                        {
+                                            ID = fp.Id,
+                                            Name = fp.PlaceName,
+                                            PlaceID = fp.PlaceId,
+                                            SavedOn = "Saved on " + fp.Created.ToString("yyyy/MM/dd"),
+                                            ViewDetailsCommand = GoToDetailsCommand,
+                                            RemoveCommand = DeleteFavCommand,
+                                            Latitude = fp.Latitude,
+                                            Longitude = fp.Longitude,
+                                            Vicinity = fp.Vicinity
+                                        }).ToList());
+
+
+                    if (FavPlaces.Count() == 0)
+                        HasFavorites = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("An error occured trying to remove fav: " + ex.Message);
+            }
+        }
+
+        public class FavPlaceItem
+        {
+            public int ID { get; set; }
+            public string Name { get; set; }
+            public string PlaceID { get; set; }
+            public string SavedOn { get; set; }
+            public ICommand ViewDetailsCommand { get; set; }
+            public ICommand RemoveCommand { get; set; }
+            public double Latitude { get; set; }
+            public double Longitude { get; set; }
+            public string Vicinity { get; set; }
+        }
     }
-
-    public class FavPlaceItem
-    {
-        public string Name { get; set; }
-        public string PlaceID { get; set; }
-        public string SavedOn { get; set; }
-    }
-
-
 }

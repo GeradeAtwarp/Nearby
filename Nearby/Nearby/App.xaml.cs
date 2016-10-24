@@ -7,6 +7,8 @@ using Xamarin.Forms;
 using Nearby.DependencyServices;
 using Nearby.Controls;
 using Nearby.viewModel;
+using FormsToolkit;
+using Nearby.Helpers;
 
 namespace Nearby
 {
@@ -48,18 +50,15 @@ namespace Nearby
 
         protected override void OnResume()
         {
-            //if(loc == null)
-            //    loc = DependencyService.Get<IMyLocation>();
 
-            //// Handle when your app starts
-            //loc.locationObtained += (object sender,
-            //    ILocationEventArgs e) => {
-            //        var lat = e.lat;
-            //        var lng = e.lng;
-            //        latitude = lat;
-            //        longitude = lng;
-            //    };
-            //loc.ObtainMyLocation();
+            MessagingService.Current.Subscribe<MessagingServiceQuestion>(MessageKeys.Question, async (m, q) =>
+            {
+                var task = Application.Current?.MainPage?.DisplayAlert(q.Title, q.Question, q.Positive, q.Negative);
+                if (task == null)
+                    return;
+                var result = await task;
+                q?.OnCompleted?.Invoke(result);
+            });
         }
     }
 }

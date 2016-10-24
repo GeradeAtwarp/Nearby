@@ -167,7 +167,7 @@ namespace Nearby.viewModel
                 var fav = NearbyDataContext.GetItems<FavoritePlaces>().Where(x => x.PlaceId == Place.place_id).FirstOrDefault();
                 if (fav == null)
                 {
-                    NearbyDataContext.SaveItem<FavoritePlaces>(new FavoritePlaces { Created = DateTime.Now, PlaceId = Place.place_id, PlaceName = Details.result.name });
+                    NearbyDataContext.SaveItem<FavoritePlaces>(new FavoritePlaces { Created = DateTime.Now, PlaceId = Place.place_id, PlaceName = Details.result.name , Latitude = Place.geometry.location.lat, Longitude = Place.geometry.location.lng, Vicinity = Place.vicinity});
                     FavImage = ImageSource.FromFile("heart_filled.png");
                     Application.Current?.MainPage?.DisplayAlert("Favourite", Details.result.name + " was successfully added to you favourites.", "Ok");
                 }

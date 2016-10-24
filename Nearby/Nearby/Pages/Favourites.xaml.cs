@@ -28,6 +28,11 @@ namespace Nearby.Pages
             //{
             //    await Navigation.PopModalAsync();
             //});
+
+            lstFavorites.ItemSelected += async (sender, e) =>
+            {
+                lstFavorites.SelectedItem = null;
+            };
         }
 
         protected override void OnBindingContextChanged()

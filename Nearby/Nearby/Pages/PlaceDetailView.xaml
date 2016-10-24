@@ -60,10 +60,6 @@
         </Grid>
       </StackLayout>
 
-      <StackLayout HorizontalOptions="FillAndExpand" Padding="{DynamicResource SmallPadding}">
-        <control:HeaderDivider/>
-      </StackLayout>
-
       <StackLayout HorizontalOptions="FillAndExpand" Spacing="{DynamicResource CardSpacing}" Padding="{DynamicResource SmallPadding}">
         <Grid>
           <Grid.ColumnDefinitions>
@@ -79,10 +75,6 @@
                 <Label VerticalOptions="Center" HorizontalOptions="Center" TextColor="{Binding IsOpen, Converter={StaticResource OpenCloseColor}}"  Style="{DynamicResource NearbyListItemTextStyle}" Text="{Binding IsOpen, Converter={StaticResource OpenCloseText}}"/>
               </StackLayout>
         </Grid>
-      </StackLayout>
-
-      <StackLayout HorizontalOptions="FillAndExpand" Padding="{DynamicResource SmallPadding}">
-        <control:HeaderDivider/>
       </StackLayout>
 
       <StackLayout HorizontalOptions="FillAndExpand" Spacing="{DynamicResource CardSpacing}" Padding="{DynamicResource SmallPadding}">

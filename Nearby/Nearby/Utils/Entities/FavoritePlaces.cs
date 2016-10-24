@@ -11,6 +11,9 @@ namespace Nearby.Utils.Entities
         public DateTime Created { get; set; }
         public string PlaceName { get; set; }
         public string PlaceId { get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
+        public string Vicinity { get; set; }
 
         public FavoritePlaces()
         { }

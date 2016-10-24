@@ -143,6 +143,11 @@ namespace Nearby.viewModel
     {
         public Location location { get; set; }
         public Viewport viewport { get; set; }
+
+        public Geometry()
+        {
+            location = new Location();
+        }
     }
 
     public class OpeningHours
@@ -173,6 +178,11 @@ namespace Nearby.viewModel
         public List<string> types { get; set; }
         public string vicinity { get; set; }
         public int? price_level { get; set; }
+
+        public Places()
+        {
+            geometry = new Geometry();
+        }
     }
 
     public class PlaceNearby

@@ -55,6 +55,27 @@
         </control:CardView>
       </StackLayout>
 
+
+      <StackLayout BackgroundColor="{DynamicResource WindowBackgroundTable}" Spacing="{DynamicResource CardSpacing}" Padding="{DynamicResource CardPadding}">
+        <control:CardView>
+          <StackLayout Spacing="0">
+            <control:LabelSection Text="Manual location"/>
+            <control:HeaderDivider/>
+
+            <TableView Intent="Settings" HasUnevenRows="true">
+              <TableSection Title="Filters" x:Name="TableSectionFilters">
+                <!-- <local:CategoryCell x:Name="ShowPastSwitch"/>
+            <local:CategoryCell x:Name="ShowFavoritesOnlySwitch"/>-->
+              </TableSection>
+              <TableSection Title="Categories" x:Name="TableSectionCategories">
+                <!--These are dynamically added-->
+              </TableSection>
+            </TableView>
+            
+          </StackLayout>
+        </control:CardView>
+      </StackLayout>
+      
     </StackLayout>
   
   <!--<StackLayout IsVisible="{Binding ChangeLocationIsEnabled}" HorizontalOptions="FillAndExpand" Spacing="{StaticResource SmallSpacing}">
