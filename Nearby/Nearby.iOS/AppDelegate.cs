@@ -8,6 +8,7 @@ using Xamarin;
 using HockeyApp.iOS;
 using Nearby.Utils.Entities;
 using ImageCircle.Forms.Plugin.iOS;
+using Nearby.iOS.Renderers;
 
 namespace Nearby.iOS
 {
@@ -41,6 +42,7 @@ namespace Nearby.iOS
             Database.root = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
 
             ImageCircleRenderer.Init();
+            NonScrollableListViewRenderer.Initialize();
 
             LoadApplication(new App());
 
