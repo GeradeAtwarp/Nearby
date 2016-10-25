@@ -17,8 +17,16 @@
           <StackLayout Spacing="0">
             <control:LabelSection Text="Manual location"/>
             <control:HeaderDivider/>
+            <StackLayout Padding="{StaticResource StandardPadding}">
+              <Label Text="Going on vacation? Visiting family members accross the country? Want to know what places are awaiting you? No problem, just search for you destination below, then select a place to set as you custom location. :-)"
+                     HorizontalOptions="StartAndExpand"
+                     Style="{DynamicResource NearbyListItemDetailTextStyle}"/>
+
+            </StackLayout>
+            
             <Grid Padding="16,6,16,6" ColumnSpacing="16">
               <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
               </Grid.RowDefinitions>
@@ -37,17 +45,28 @@
                       VerticalOptions="Center"
                       IsToggled="{Binding ChangeLocationIsEnabled}"/>
 
-              <StackLayout Grid.Row="1" Grid.ColumnSpan="2" Spacing="0" IsVisible="{Binding ChangeLocationIsEnabled}" Padding="0,32,0,0">
+              <StackLayout Grid.Row="1" Grid.ColumnSpan="2" Spacing="0" IsVisible="{Binding ChangeLocationIsEnabled}" Padding="0,16,0,0">
                 <Grid Padding="16,0" BackgroundColor="White">
+                  <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                  </Grid.RowDefinitions>
+
+                  <Button BorderRadius="0" x:Name="btnAddCustomLocation" BackgroundColor="#3F51B5" TextColor="White" Text="Search"></Button>
+                </Grid>
+                
+              </StackLayout>
+
+              <StackLayout Grid.Row="2" Grid.ColumnSpan="2" Spacing="0" IsVisible="{Binding ChangeLocationIsEnabled}" Padding="0,16,0,0" >
+                <Grid BackgroundColor="White">
                   <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
                   </Grid.ColumnDefinitions>
+                  <StackLayout VerticalOptions="Center">
+                    <Label Text="Current custom location:" Style="{DynamicResource NearbyListItemTextStyle}"/>
+                    <Label Text="{Binding CustomLocation}" Style="{DynamicResource NearbyListItemDetailTextStyle}" />
+                  </StackLayout>
                 </Grid>
-
-                <Entry Placeholder="Latitude" Text="{Binding CustomLatitude}" HeightRequest="45" HorizontalOptions="FillAndExpand"></Entry>
-
-                <Entry Placeholder="Longitude" Text="{Binding CustomLongitude}" HeightRequest="45" HorizontalOptions="FillAndExpand"></Entry>
-
               </StackLayout>
               
             </Grid>

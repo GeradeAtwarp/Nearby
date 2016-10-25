@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Nearby.Pages.SearchCustomPlaces"
+             Title="Seacrh for place">
+
+  <ContentPage.Content>
+
+    <Grid RowSpacing="0">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="*"/>
+      </Grid.RowDefinitions>
+
+      <StackLayout>
+        <StackLayout.Padding>
+          <OnPlatform x:TypeArguments="Thickness" Android="0,8,8,8" iOS="0" WinPhone="0"/>
+        </StackLayout.Padding>
+        <StackLayout.BackgroundColor>
+          <OnPlatform x:TypeArguments="Color" Android="{StaticResource Primary}"/>
+        </StackLayout.BackgroundColor>
+        <SearchBar  Text="{Binding Filter}" FontSize="Small" x:Name="placeSeach" Placeholder="Search for location" SearchCommand="{Binding SearchPlacesCommand}">
+          <SearchBar.PlaceholderColor>
+            <OnPlatform x:TypeArguments="Color" Android="White"></OnPlatform>
+          </SearchBar.PlaceholderColor>
+          <SearchBar.TextColor>
+            <OnPlatform x:TypeArguments="Color" Android="White"></OnPlatform>
+          </SearchBar.TextColor>
+          <SearchBar.CancelButtonColor>
+            <OnPlatform x:TypeArguments="Color" Android="White"></OnPlatform>
+          </SearchBar.CancelButtonColor>
+        </SearchBar>
+      </StackLayout>
+
+      <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="StartAndExpand" BackgroundColor="White" Padding="{StaticResource MediumPadding}">
+        <Label VerticalOptions="Center" Style="{DynamicResource NearbyListItemDetailTextStyle}" Text="Please enter and search for the location you wish to set as your current location"/>
+      </StackLayout>
+      
+      <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="2">
+
+        <ListView
+          x:Name="lstSearch"
+          ItemsSource="{Binding SearchResults}"
+          HasUnevenRows="True"
+          BackgroundColor="White"
+          IsVisible="{Binding IsNotBusy}"
+          AbsoluteLayout.LayoutFlags="All"
+          AbsoluteLayout.LayoutBounds="0,0,1,1">
+          <ListView.SeparatorColor>
+            <OnPlatform x:TypeArguments="Color" Android="{StaticResource WindowBackgroundTable}" iOS="{StaticResource WindowBackgroundTable}"/>
+          </ListView.SeparatorColor>
+          <ListView.ItemTemplate>
+            <DataTemplate>
+              <TextCell Text="{Binding name}" Detail="{Binding formatted_address}"></TextCell>
+            </DataTemplate>
+          </ListView.ItemTemplate>
+        </ListView>
+
+        <StackLayout IsVisible="{Binding IsBusy}"  AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1">
+          <StackLayout.Orientation>
+            <OnPlatform x:TypeArguments="StackOrientation" iOS="Horizontal"/>
+          </StackLayout.Orientation>
+          <ActivityIndicator IsRunning="{Binding IsBusy}">
+
+          </ActivityIndicator>
+          <Label Text="Loading results..."
+                 HorizontalOptions="Center"
+                 Style="{DynamicResource NearbyListItemTextStyle}"/>
+        </StackLayout>
+
+        <StackLayout IsVisible="{Binding HasNoResults}" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1">
+          <Label Text="No results found"
+                 HorizontalOptions="Center"/>
+        </StackLayout>
+
+
+      </AbsoluteLayout>
+
+    </Grid>
+  </ContentPage.Content>
+
+</ContentPage>

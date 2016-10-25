@@ -7,6 +7,8 @@
     <ResourceDictionary>
       <!-- Application resource dictionary -->
 
+      <Color x:Key="Primary">#3F51B5</Color>
+
       <Thickness x:Key="SmallPadding">4</Thickness>
       <Thickness x:Key="MediumPadding">8</Thickness>
       <Thickness x:Key="StandardPadding">16</Thickness>

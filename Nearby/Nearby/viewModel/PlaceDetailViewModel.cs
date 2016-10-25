@@ -56,6 +56,13 @@ namespace Nearby.viewModel
             set { SetProperty(ref placeRating, value); }
         }
 
+        public string reviews = "";
+        public string Reviews
+        {
+            get { return reviews; }
+            set { SetProperty(ref reviews, value); }
+        }
+
         public PlaceDetailViewModel(INavigation navigation, Places place) : base(navigation)
         {
             Place = place;
@@ -146,6 +153,8 @@ namespace Nearby.viewModel
                 }
 
                 PlaceRating = Details.result.reviews[0].aspects[0].rating;
+
+                Reviews = "Based on " + Details.result.reviews.Count() + " reviews.";
             }
             catch (Exception ex)
             {
