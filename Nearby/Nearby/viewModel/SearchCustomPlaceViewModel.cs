@@ -53,7 +53,7 @@ namespace Nearby.viewModel
                     var httpClient = new HttpClient();
 
                     var placesResult = "";
-                    placesResult = await httpClient.GetStringAsync(new UriBuilder("https://maps.googleapis.com/maps/api/place/textsearch/json?query=" + Filter + "&key=AIzaSyDU4ZSeEmjTiTgT2CJgj7bZegShjj_rV7M").Uri.ToString());
+                    placesResult = await httpClient.GetStringAsync(new UriBuilder("https://maps.googleapis.com/maps/api/place/textsearch/json?query=" + Filter + "&key=AIzaSyAg-d-wLhMl65Fo_sfyj_U9tFOoW41UcDQ").Uri.ToString());
 
                     SearchPlaces places = JsonConvert.DeserializeObject<SearchPlaces>(placesResult);
 

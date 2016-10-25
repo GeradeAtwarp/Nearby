@@ -84,7 +84,7 @@
         <StackLayout.IsVisible>
           <OnPlatform x:TypeArguments="x:Boolean" Android="false" iOS="true"></OnPlatform>
         </StackLayout.IsVisible>
-        <control:CardView Padding="0,32,0,0">
+        <control:CardView Padding="0,16,0,0">
           <StackLayout Spacing="0">
             <control:HeaderDivider/>
             <Grid Padding="16,0" BackgroundColor="White">
@@ -115,7 +115,9 @@
         </control:CardView>
         
       </StackLayout>
-
+      
+          
+            
         <!--<StackLayout BackgroundColor="{DynamicResource WindowBackgroundTable}" Spacing="{DynamicResource CardSpacing}" Padding="{DynamicResource CardPadding}">
         <control:CardView>
           <StackLayout Spacing="0">
