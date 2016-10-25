@@ -1,4 +1,5 @@
 ﻿using MvvmHelpers;
+using Nearby.Pages;
 using Nearby.Utils;
 using Nearby.Utils.Entities;
 using System;
@@ -99,6 +100,10 @@ namespace Nearby.viewModel
             var vals = e as ToggledEventArgs;
             ChangeLocationIsEnabled = vals.Value;
         }
+
+
+        ICommand navigateToSearch;
+        public ICommand NavigateToSearch => navigateToSearch ?? (navigateToSearch = new Command(async () => await Navigation.PushAsync(new SearchCustomPlaces())));
 
 
 

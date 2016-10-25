@@ -57,7 +57,7 @@
                     <RowDefinition Height="Auto"/>
                   </Grid.RowDefinitions>
 
-                  <Button BorderRadius="0" x:Name="btnAddCustomLocation" BackgroundColor="#3F51B5" TextColor="White" Text="Search"></Button>
+                  <Button BorderRadius="0" x:Name="btnAddCustomLocation" BackgroundColor="#3F51B5" Command="{Binding NavigateToSearch}" TextColor="White" Text="Search"></Button>
                 </Grid>
                 
               </StackLayout>
@@ -92,12 +92,19 @@
                 <ColumnDefinition Width="*"/>
               </Grid.ColumnDefinitions>
 
-              <Button x:Name="btnIOSsetCustomLocation" Text="{Binding CustomLocation}" FontAttributes="Bold"
+              <Button x:Name="btnIOSsetCustomLocation" Text="Set a custom location" FontAttributes="Bold"
                   FontSize="{DynamicResource NearbyListItemTextStyleSize}"
                   HorizontalOptions="StartAndExpand"
                   TextColor="{DynamicResource Primary}"
+                  Command="{Binding NavigateToSearch}"
                   IsEnabled="{Binding ChangeLocationIsEnabled}"
                   BackgroundColor="White"/>
+
+              <Grid.GestureRecognizers>
+                <TapGestureRecognizer
+                Command="{Binding NavigateToSearch}"/>
+              </Grid.GestureRecognizers>
+              
             </Grid>
            
             <StackLayout Padding="16,8,16,0">
