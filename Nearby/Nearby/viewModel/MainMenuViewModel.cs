@@ -6,19 +6,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace Nearby.viewModel
 {
     public class MainMenuViewModel : NearbyBaseViewModel
     {
-        public ObservableRangeCollection<MenuItem> ManualItems { get; } = new ObservableRangeCollection<MenuItem>();
+        public List<MenuItem> ManualItems { get; } = new List<MenuItem>();
 
         public MainMenuViewModel(INavigation navigation) : base(navigation)
         {
             Title = "Options";
 
             ChangeLocationIsEnabled = Settings.CustomLocationEnabled;
+
+            ManualItems.Add(new MenuItem
+            {
+                DetailLabel = "Manual location",
+                DetailValue = ChangeLocationIsEnabled,
+                MenuItemCommand = ToggleCustomLocation
+            });
 
             if (Settings.CustomLocationEnabled)
             {
@@ -27,8 +35,6 @@ namespace Nearby.viewModel
             }
 
             CustomLocation = Settings.CustomLocation;
-
-
         }
 
         string changelocationtext = "Change Location";
@@ -85,10 +91,31 @@ namespace Nearby.viewModel
         }
 
 
+        ICommand toggleCustomLocation;
+        public ICommand ToggleCustomLocation => toggleCustomLocation ?? (toggleCustomLocation = new Command<object>(async (e) => await UpdateCustomLocation(e)));
+
+        async Task UpdateCustomLocation(object e)
+        {
+            var vals = e as ToggledEventArgs;
+            ChangeLocationIsEnabled = vals.Value;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
         public class MenuItem
         {
             public String DetailLabel { get; set; }
-            public String DetailValue { get; set; }
+            public object DetailValue { get; set; }
+            public ICommand MenuItemCommand { get; set; }
         }
     }
 }

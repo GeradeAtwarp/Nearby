@@ -25,6 +25,8 @@ namespace Nearby.Pages
             //});
 
             btnAddCustomLocation.Clicked += BtnAddCustomLocation_Clicked;
+
+            btnIOSsetCustomLocation.Clicked += BtnAddCustomLocation_Clicked;
         }
 
         private void BtnAddCustomLocation_Clicked(object sender, EventArgs e)

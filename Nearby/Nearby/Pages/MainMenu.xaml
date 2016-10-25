@@ -23,10 +23,26 @@
                      Style="{DynamicResource NearbyListItemDetailTextStyle}"/>
 
             </StackLayout>
+
+            <control:NonScrollableListView
+                     x:Name="ListViewFeeds"
+                     ItemsSource="{Binding ManualItems}"
+                     RowHeight="44">
+                <control:NonScrollableListView.ItemTemplate>
+                <DataTemplate>
+                  <control:SwitchCellCust1 Text="{Binding DetailLabel}"
+                                           On="{Binding DetailValue}"
+                                           Command="{Binding MenuItemCommand}"/>
+                </DataTemplate>
+              </control:NonScrollableListView.ItemTemplate>
+            </control:NonScrollableListView>
+            
             
             <Grid Padding="16,6,16,6" ColumnSpacing="16">
+              <Grid.IsVisible>
+                <OnPlatform x:TypeArguments="x:Boolean" Android="true" iOS="false"></OnPlatform>
+              </Grid.IsVisible>
               <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
               </Grid.RowDefinitions>
@@ -34,18 +50,8 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
               </Grid.ColumnDefinitions>
-
-              <Label
-                     Text="{Binding ChangeLocationText}"
-                     VerticalTextAlignment="Center"
-                     HorizontalOptions="StartAndExpand"
-                     Style="{DynamicResource NearbyListItemTextStyle}" />
-
-              <Switch Grid.Column="1"
-                      VerticalOptions="Center"
-                      IsToggled="{Binding ChangeLocationIsEnabled}"/>
-
-              <StackLayout Grid.Row="1" Grid.ColumnSpan="2" Spacing="0" IsVisible="{Binding ChangeLocationIsEnabled}" Padding="0,16,0,0">
+              
+              <StackLayout Grid.ColumnSpan="2" Spacing="0" IsVisible="{Binding ChangeLocationIsEnabled}" Padding="0,16,0,0">
                 <Grid Padding="16,0" BackgroundColor="White">
                   <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -56,7 +62,7 @@
                 
               </StackLayout>
 
-              <StackLayout Grid.Row="2" Grid.ColumnSpan="2" Spacing="0" IsVisible="{Binding ChangeLocationIsEnabled}" Padding="0,16,0,0" >
+              <StackLayout Grid.Row="1" Grid.ColumnSpan="2" Spacing="0" IsVisible="{Binding ChangeLocationIsEnabled}" Padding="0,16,0,0" >
                 <Grid BackgroundColor="White">
                   <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -74,8 +80,36 @@
         </control:CardView>
       </StackLayout>
 
+      <StackLayout BackgroundColor="{DynamicResource WindowBackgroundTable}" Spacing="{DynamicResource CardSpacing}">
+        <StackLayout.IsVisible>
+          <OnPlatform x:TypeArguments="x:Boolean" Android="false" iOS="true"></OnPlatform>
+        </StackLayout.IsVisible>
+        <control:CardView Padding="0,32,0,0">
+          <StackLayout Spacing="0">
+            <control:HeaderDivider/>
+            <Grid Padding="16,0" BackgroundColor="White">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+              </Grid.ColumnDefinitions>
 
-      <StackLayout BackgroundColor="{DynamicResource WindowBackgroundTable}" Spacing="{DynamicResource CardSpacing}" Padding="{DynamicResource CardPadding}">
+              <Button x:Name="btnIOSsetCustomLocation" Text="{Binding CustomLocation}" FontAttributes="Bold"
+                  FontSize="{DynamicResource NearbyListItemTextStyleSize}"
+                  HorizontalOptions="StartAndExpand"
+                  TextColor="{DynamicResource Primary}"
+                  IsEnabled="{Binding ChangeLocationIsEnabled}"
+                  BackgroundColor="White"/>
+            </Grid>
+           
+            <StackLayout Padding="16,8,16,0">
+              <Label Text="{Binding CustomLocation}"
+                     Style="{DynamicResource NearbyListItemDetailTextStyle}"/>
+            </StackLayout>
+          </StackLayout>
+        </control:CardView>
+        
+      </StackLayout>
+
+        <!--<StackLayout BackgroundColor="{DynamicResource WindowBackgroundTable}" Spacing="{DynamicResource CardSpacing}" Padding="{DynamicResource CardPadding}">
         <control:CardView>
           <StackLayout Spacing="0">
             <control:LabelSection Text="Manual location"/>
@@ -83,17 +117,17 @@
 
             <TableView Intent="Settings" HasUnevenRows="true">
               <TableSection Title="Filters" x:Name="TableSectionFilters">
-                <!-- <local:CategoryCell x:Name="ShowPastSwitch"/>
-            <local:CategoryCell x:Name="ShowFavoritesOnlySwitch"/>-->
+                --><!-- <local:CategoryCell x:Name="ShowPastSwitch"/>
+            <local:CategoryCell x:Name="ShowFavoritesOnlySwitch"/>--><!--
               </TableSection>
               <TableSection Title="Categories" x:Name="TableSectionCategories">
-                <!--These are dynamically added-->
+                --><!--These are dynamically added--><!--
               </TableSection>
             </TableView>
             
           </StackLayout>
         </control:CardView>
-      </StackLayout>
+      </StackLayout>-->
       
     </StackLayout>
   
