@@ -19,7 +19,7 @@
       IsVisible="{Binding IsNotBusy}"
       AbsoluteLayout.LayoutFlags="All"
       AbsoluteLayout.LayoutBounds="0,0,1,1"
-      RowHeight="90">
+      RowHeight="120">
       <ListView.SeparatorColor>
         <OnPlatform x:TypeArguments="Color" iOS="{StaticResource ListSeparator}" WinPhone="{StaticResource ListSeparator}"/>
       </ListView.SeparatorColor>

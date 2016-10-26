@@ -36,11 +36,19 @@
           </Grid.ColumnDefinitions>
 
           <StackLayout Grid.Column="0" Orientation="Horizontal" HorizontalOptions="Center">
-            <Image Source="pin"> </Image>
+            <Image Source="pin">
+              <Image.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding OpenNavigation}"></TapGestureRecognizer>
+              </Image.GestureRecognizers>
+            </Image>
           </StackLayout>
 
           <StackLayout Grid.Column="1" Orientation="Horizontal" HorizontalOptions="Center">
-            <Image Source="sharethis"></Image>
+            <Image Source="sharethis">
+              <Image.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding OpenShare}"></TapGestureRecognizer>
+              </Image.GestureRecognizers>
+            </Image>
           </StackLayout>
 
           <StackLayout Grid.Column="2" Orientation="Horizontal" HorizontalOptions="Center">

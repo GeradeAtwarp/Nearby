@@ -1,4 +1,5 @@
 ﻿using MvvmHelpers;
+using Nearby.Interfaces;
 using Nearby.Utils.Entities;
 using Newtonsoft.Json;
 using System;
@@ -212,6 +213,67 @@ namespace Nearby.viewModel
 
             }
         }
+
+
+
+
+
+        ICommand openNavigation;
+        public ICommand OpenNavigation => openNavigation ?? (openNavigation = new Command(async () => await OpenNavigationToPlace()));
+
+        async Task OpenNavigationToPlace()
+        {
+            try
+            {
+                if (Device.OS == TargetPlatform.Android)
+                    Device.OpenUri(new Uri("http://maps.google.com/?daddr="+ Place.geometry.location.lat + "," + Place.geometry.location.lng));
+                else
+                    Device.OpenUri(new Uri("http://maps.apple.com/?daddr=" + Place.geometry.location.lat + "," + Place.geometry.location.lng));                  
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+
+        ICommand openShare;
+        public ICommand OpenShare => openShare ?? (openShare = new Command(async () => await DisplayShareOptions()));
+
+        async Task DisplayShareOptions()
+        {
+            try
+            {
+                if (Device.OS == TargetPlatform.Android)
+                    Device.OpenUri(new Uri("twitter://post?message=Guess what i am doing at " + Place.name + "? Come join me."));
+                else
+                {
+                    var service = DependencyService.Get<IAppLauncher>();
+                    service.SendTweet("Guess what i am doing at " + Place.name + "? Come join me.");
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         #region Internal classes
 

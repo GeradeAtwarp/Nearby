@@ -57,6 +57,7 @@
     <Compile Include="Helpers\Converters\RatingStarCalculator.cs" />
     <Compile Include="Helpers\NavigationService.cs" />
     <Compile Include="Helpers\Settings.cs" />
+    <Compile Include="Interfaces\IAppLauncher.cs" />
     <Compile Include="Pages\Favourites.xaml.cs">
       <DependentUpon>Favourites.xaml</DependentUpon>
     </Compile>
