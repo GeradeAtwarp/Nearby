@@ -13,16 +13,20 @@ namespace Nearby.Pages
 {
     public partial class MainMenu : ContentPage
     {
+        MainMenuViewModel ViewModel => vm ?? (vm = BindingContext as MainMenuViewModel);
+        MainMenuViewModel vm;
+
         public MainMenu()
         {
             InitializeComponent();
 
             BindingContext = new MainMenuViewModel(Navigation);
+        }
 
-            //tbItemNavigateMap.Command = new Command(async () =>
-            //{
-            //    await Navigation.PopModalAsync();
-            //});
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            ViewModel.UpdateItems();
         }
     }
 }

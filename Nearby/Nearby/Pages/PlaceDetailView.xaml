@@ -60,7 +60,7 @@
         </Grid>
       </StackLayout>
 
-      <StackLayout HorizontalOptions="FillAndExpand" Spacing="{DynamicResource CardSpacing}" Padding="{DynamicResource SmallPadding}">
+      <!--<StackLayout HorizontalOptions="FillAndExpand" Spacing="{DynamicResource CardSpacing}" Padding="{DynamicResource SmallPadding}">
         <Grid>
           <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
@@ -75,7 +75,7 @@
                 <Label VerticalOptions="Center" HorizontalOptions="Center" TextColor="{Binding IsOpen, Converter={StaticResource OpenCloseColor}}"  Style="{DynamicResource NearbyListItemTextStyle}" Text="{Binding IsOpen, Converter={StaticResource OpenCloseText}}"/>
               </StackLayout>
         </Grid>
-      </StackLayout>
+      </StackLayout>-->
 
       <StackLayout BackgroundColor="{DynamicResource WindowBackgroundTable}" Spacing="{DynamicResource CardSpacing}" Padding="{DynamicResource CardPadding}">
         <control:CardView>
@@ -186,11 +186,16 @@
                    ItemsSource="{Binding PlaceContactDetails}"
                    x:Name="ListPlaceContactDetails"
                    StyleId="SponsorDetailLinks"
-                   RowHeight="44">
+                   RowHeight="44"
+                   IsVisible="{Binding HasContacts}">
                 <control:NonScrollableListView.ItemTemplate>
                   <DataTemplate>
                     <ViewCell StyleId="disclosure">
-                        <Grid Padding="{DynamicResource StandardPadding}" ColumnSpacing="{StaticResource StandardSpacing}"> ColumnSpacing="{StaticResource MediumSpacing}" RowSpacing="{StaticResource MediumSpacing}">
+                      <ViewCell.View>
+                        <Grid Padding="{DynamicResource StandardPadding}" ColumnSpacing="{StaticResource StandardSpacing}">
+                          <Grid.Padding>
+                            <OnPlatform x:TypeArguments="Thickness" iOS="0,12" Android="16,8"/>
+                          </Grid.Padding>
                           <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
@@ -205,6 +210,7 @@
                           </Label>
 
                         </Grid>
+                       </ViewCell.View>
                     </ViewCell>
                   </DataTemplate>
                 </control:NonScrollableListView.ItemTemplate>
@@ -219,7 +225,7 @@
                        Style="{DynamicResource NearbyListItemTextStyle}"/>
               </StackLayout>
               
-              <StackLayout IsVisible="{Binding IsBusy}" HorizontalOptions="FillAndExpand" Padding="{DynamicResource MediumPadding}">
+              <StackLayout IsVisible="{Binding HasNoContacts}" HorizontalOptions="FillAndExpand" Padding="{DynamicResource MediumPadding}">
                   <Label Text="No contact details" HorizontalOptions="Center"/>
               </StackLayout>
             

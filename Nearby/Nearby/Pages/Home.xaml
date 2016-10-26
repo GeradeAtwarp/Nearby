@@ -13,11 +13,18 @@
     <ToolbarItem x:Name="tbItemNavigateOptions" Icon="ic_more_vert_white" />
   </ContentPage.ToolbarItems>
   
-  <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-      <maps:Map x:Name="placesMap" MapType="Street" />
+    <Grid RowSpacing="0">
+
+      <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+        <Label x:Name="lblNotifyFilter" IsVisible="{Binding IsFilterEnabled}" VerticalOptions="Center" XAlign="Center" Style="{DynamicResource NearbyListItemDetailTextStyle}" Text="{Binding EnabledFilter}" />
+        
+        <maps:Map x:Name="placesMap" MapType="Street" />
+        
+        <Button BorderRadius="0" x:Name="btnSearchPlaces" BackgroundColor="#3F51B5" TextColor="White" VerticalOptions="End" Text="{Binding SearchButtonText}"></Button>
     
-      <Button BorderRadius="0" x:Name="btnSearchPlaces" BackgroundColor="#3F51B5" TextColor="White" VerticalOptions="End" Text="{Binding SearchButtonText}"></Button>
-    
-  </StackLayout>
+      </StackLayout>
+      
+    </Grid>
   
 </ContentPage>

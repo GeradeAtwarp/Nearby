@@ -18,6 +18,7 @@ namespace Nearby.viewModel
         private Places Place;
         PlaceInfo Details;
 
+
         public ObservableRangeCollection<PlceDetailItem> PlaceContactDetails { get; } = new ObservableRangeCollection<PlceDetailItem>();
         public ObservableRangeCollection<PlceDetailItem> PlaceOperatingHours { get; } = new ObservableRangeCollection<PlceDetailItem>();
 
@@ -33,6 +34,13 @@ namespace Nearby.viewModel
         {
             get { return hasOperatingHours; }
             set { SetProperty(ref hasOperatingHours, value); }
+        }
+
+        public bool hasNoContacts = false;
+        public bool HasNoContacts
+        {
+            get { return hasNoContacts; }
+            set { SetProperty(ref hasNoContacts, value); }
         }
 
         public bool hasContacts = false;
@@ -81,6 +89,7 @@ namespace Nearby.viewModel
 
                 HasContacts = false;
                 HasNoOperatingHours = false;
+                HasNoContacts = false;
 
                 IsBusy = true;
 
@@ -107,7 +116,15 @@ namespace Nearby.viewModel
                 }
 
                 if (!string.IsNullOrEmpty(Details.result.formatted_phone_number) || !string.IsNullOrEmpty(Details.result.website))
+                {
                     HasContacts = true;
+                    HasNoContacts = false;
+                }
+                else
+                {
+                    HasContacts = false;
+                    HasNoContacts = true;
+                }
 
                 #region Get operation hours
 

@@ -29,11 +29,34 @@ namespace Nearby.viewModel
             }
         }
 
+        bool isFilterEnabled = false;
+        public bool IsFilterEnabled
+        {
+            get { return isFilterEnabled; }
+            set
+            {
+                SetProperty(ref isFilterEnabled, value);
+            }
+        }
+
+        string enabledFilter = "";
+        public string EnabledFilter
+        {
+            get { return enabledFilter; }
+            set
+            {
+                SetProperty(ref enabledFilter, value);
+            }
+        }
+
         public ObservableRangeCollection<Places> PlacesNearby { get; } = new ObservableRangeCollection<Places>();
 
         public HomeViewModel(INavigation navigation) : base(navigation)
         {
+            IsFilterEnabled = Settings.IsSearchFilterEnabled;
 
+            if (Settings.IsSearchFilterEnabled)
+                EnabledFilter = $"You are curerently filtering for only {Settings.SearchFilters}s";
         }
 
         ICommand searchPlacesNearby;
@@ -66,39 +89,26 @@ namespace Nearby.viewModel
                     };
                 }
 
-                HockeyApp.MetricsManager.TrackEvent(
-                  "Refresh Nearby Places",
-                  new Dictionary<string, string> { { "CurrentLocation", position.Latitude + " - " + position.Longitude } },
-                  new Dictionary<string, double> { { "time", 1.0 } }
-                );
+                string filter = "";
+
+                if (Settings.SearchFilters.Contains("Accomodation"))
+                    filter = "lodging";
+                else
+                    filter = Settings.SearchFilters.ToLower().Replace(' ', '_');
 
                 var httpClient = new HttpClient();
 
                 var placesResult = "";
                 //Get all the places neaby
                 if (Device.OS == TargetPlatform.Android)
-                    placesResult = await httpClient.GetStringAsync(new UriBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyDU4ZSeEmjTiTgT2CJgj7bZegShjj_rV7M&location=" + position.Latitude.ToString().Replace(',', '.') + "," + position.Longitude.ToString().Replace(',', '.') + "&radius=1500&type=restaurant").Uri.ToString());
+                    placesResult = await httpClient.GetStringAsync(new UriBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyDU4ZSeEmjTiTgT2CJgj7bZegShjj_rV7M&location=" + position.Latitude.ToString().Replace(',', '.') + "," + position.Longitude.ToString().Replace(',', '.') + "&radius=1500&type=" + filter).Uri.ToString());
                 else
-                    placesResult = await httpClient.GetStringAsync(new UriBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyAg-d-wLhMl65Fo_sfyj_U9tFOoW41UcDQ&location=" + position.Latitude.ToString().Replace(',', '.') + "," + position.Longitude.ToString().Replace(',', '.') + "&radius=1500&type=restaurant").Uri.ToString());
+                    placesResult = await httpClient.GetStringAsync(new UriBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyAg-d-wLhMl65Fo_sfyj_U9tFOoW41UcDQ&location=" + position.Latitude.ToString().Replace(',', '.') + "," + position.Longitude.ToString().Replace(',', '.') + "&radius=1500&type=" + filter).Uri.ToString());
 
                 PlacesNearby.Clear();
                 PlacesNearby.AddRange(JsonConvert.DeserializeObject<PlaceNearby>(placesResult).results);
 
-                //HockeyApp.MetricsManager.TrackEvent(
-                // "Returned Nearby Places: " + placesNearby.status + " -- " + DateTime.Now,
-                // new Dictionary<string, string> { { "NearbyPlaces", placesNearby.results.Count().ToString() } },
-                // new Dictionary<string, double> { { "time", 1.0 } }
-                //);
-
-                //foreach (var pn in placesNearby.results.ToList())
-                //{
-                //    Pin p = new Pin();
-                //    p.Position = new Position(pn.geometry.location.lat, pn.geometry.location.lng);
-                //    p.Label = pn.name;
-                //    p.Address = pn.vicinity;
-
-                //    PlacesNearby.Add(p);
-                //}
+                
             }
             catch (Exception ex)
             {
@@ -111,7 +121,14 @@ namespace Nearby.viewModel
                 SearchButtonText = "Search for places nearby";
             }
         }
-        
+
+        public void UpdateItems()
+        {
+            IsFilterEnabled = Settings.IsSearchFilterEnabled;
+
+            if (Settings.IsSearchFilterEnabled)
+                EnabledFilter = $"You are currently filtering for only {Settings.SearchFilters}s";
+        }
     }
 
 

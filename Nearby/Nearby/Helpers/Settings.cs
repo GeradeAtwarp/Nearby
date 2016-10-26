@@ -90,9 +90,37 @@ namespace Nearby.Helpers
 
         #endregion
 
+        #region Search Filters
 
+        const string SearchFilterskey = "search_filters";
+        static readonly string SearchFiltersDefault = "";
+        public string SearchFilters
+        {
+            get { return AppSettings.GetValueOrDefault<string>(SearchFilterskey, SearchFiltersDefault); }
+            set
+            {
+                if (AppSettings.AddOrUpdateValue<string>(SearchFilterskey, value))
+                    OnPropertyChanged();
+            }
+        }
 
+        #endregion
 
+        #region Swearch filters enabled
+
+        const string IsSearchFilterEnabledkey = "search_filters_enabled";
+        static readonly bool IsSearchFilterEnabledDefault = false;
+        public bool IsSearchFilterEnabled
+        {
+            get { return AppSettings.GetValueOrDefault<bool>(IsSearchFilterEnabledkey, IsSearchFilterEnabledDefault); }
+            set
+            {
+                if (AppSettings.AddOrUpdateValue<bool>(IsSearchFilterEnabledkey, value))
+                    OnPropertyChanged();
+            }
+        }
+
+        #endregion
 
 
 

@@ -31,16 +31,6 @@ namespace Nearby
 
         protected override void OnStart()
         {
-            //// Handle when your app starts
-            //loc = DependencyService.Get<IMyLocation>();
-            //loc.locationObtained += (object sender,
-            //    ILocationEventArgs e) => {
-            //        var lat = e.lat;
-            //        var lng = e.lng;
-            //        latitude = lat;
-            //        longitude = lng;
-            //    };
-            //loc.ObtainMyLocation();
         }
 
         protected override void OnSleep()

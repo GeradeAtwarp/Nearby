@@ -64,6 +64,10 @@ namespace Nearby.Pages
         protected override void OnAppearing()
         {
             base.OnAppearing();
+
+            vm.UpdateItems();
+
+            MoveToCurrentLocation();
         }
 
         async Task MoveToCurrentLocation()
