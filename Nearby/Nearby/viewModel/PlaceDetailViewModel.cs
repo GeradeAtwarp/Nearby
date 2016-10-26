@@ -71,13 +71,16 @@ namespace Nearby.viewModel
             
             GetDetails();
         }
-        
+
         public async Task GetDetails()
         {
             try
             {
                 if (IsBusy)
                     return;
+
+                HasContacts = false;
+                HasNoOperatingHours = false;
 
                 IsBusy = true;
 
@@ -87,12 +90,15 @@ namespace Nearby.viewModel
                 placesResult = await httpClient.GetStringAsync(new UriBuilder("https://maps.googleapis.com/maps/api/place/details/json?placeid=" + Place.place_id + "&key=AIzaSyAg-d-wLhMl65Fo_sfyj_U9tFOoW41UcDQ").Uri.ToString());
 
                 Details = JsonConvert.DeserializeObject<PlaceInfo>(placesResult);
+                List<PlceDetailItem> contacts = new List<PlceDetailItem>();
 
                 if (!string.IsNullOrEmpty(Details.result.formatted_phone_number))
-                    PlaceContactDetails.Add(new PlceDetailItem { PlaceDetailLabel = "Tel", PlaceDetailValue = Details.result.formatted_phone_number });
+                    contacts.Add(new PlceDetailItem { PlaceDetailLabel = "Tel", PlaceDetailValue = Details.result.formatted_phone_number });
 
                 if (!string.IsNullOrEmpty(Details.result.website))
-                    PlaceContactDetails.Add(new PlceDetailItem { PlaceDetailLabel = "Website", PlaceDetailValue = Details.result.website });
+                    contacts.Add(new PlceDetailItem { PlaceDetailLabel = "Website", PlaceDetailValue = Details.result.website });
+
+                PlaceContactDetails.AddRange(contacts);
 
                 if (Details.result.opening_hours != null)
                 {
@@ -100,7 +106,8 @@ namespace Nearby.viewModel
                     HasNoOperatingHours = (Details.result.opening_hours.periods.Count() > 0 ? false : true);
                 }
 
-                hasContacts = (!string.IsNullOrEmpty(Details.result.formatted_phone_number) ? true : (!string.IsNullOrEmpty(Details.result.website) ? true : false));
+                if (!string.IsNullOrEmpty(Details.result.formatted_phone_number) || !string.IsNullOrEmpty(Details.result.website))
+                    HasContacts = true;
 
                 #region Get operation hours
 
@@ -144,10 +151,10 @@ namespace Nearby.viewModel
                 if (PlaceOperatingHours.Count() == 0)
                     HasNoOperatingHours = true;
 
-                    #endregion
+                #endregion
 
                 var fav = NearbyDataContext.GetItems<FavoritePlaces>().Where(x => x.PlaceId == Place.place_id).FirstOrDefault();
-                if(fav != null)
+                if (fav != null)
                 {
                     FavImage = ImageSource.FromFile("heart_filled.png");
                 }

@@ -6,10 +6,6 @@
              Title="{Binding Title}"
              BackgroundColor="{DynamicResource WindowBackgroundTable}">
 
-  <!--<ContentPage.ToolbarItems>
-    <ToolbarItem x:Name="tbItemNavigateMap" Text="Done" />
-  </ContentPage.ToolbarItems>-->
-
     <StackLayout Spacing="0">
 
       <StackLayout BackgroundColor="{DynamicResource WindowBackgroundTable}" Spacing="{DynamicResource CardSpacing}" Padding="{DynamicResource CardPadding}">

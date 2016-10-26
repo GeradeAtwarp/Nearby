@@ -83,6 +83,7 @@ namespace Nearby.viewModel
                 Settings.CustomLocation = place.name;
 
                 Application.Current?.MainPage?.DisplayAlert("Info", "Custom location was successfully set to " + place.name, "Ok");
+                    
             }
             catch (Exception ex)
             { }

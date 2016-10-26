@@ -18,7 +18,8 @@
       <x:Double x:Key="StandardSpacing">16</x:Double>
       
       <Color x:Key="DetailTextColor">#979797</Color>
-
+      <Color x:Key="ListSeparator">#C8C7CC</Color>
+      
       <OnPlatform x:TypeArguments="Color" Android="#F5F5F5" iOS="#EFEFF4" WinPhone="#EFEFF4" x:Key="WindowBackgroundTable"/>
 
       <OnPlatform x:TypeArguments="Thickness" Android="8,16" iOS="0,0,0,16" WinPhone="0,0,0,16" x:Key="CardPadding"/>

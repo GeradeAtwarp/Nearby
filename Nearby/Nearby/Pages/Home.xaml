@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Nearby.Pages"
              xmlns:renderers="clr-namespace:Nearby.Renderers"
              x:Class="Nearby.Pages.Home"
-             Title="Home">
+             Title="Nearby">
 
   <ContentPage.ToolbarItems>
     <ToolbarItem x:Name="tbItemNavigateFav" Icon="favorite" />

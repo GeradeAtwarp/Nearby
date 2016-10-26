@@ -5,7 +5,7 @@
              Title="Seacrh for place">
 
   <ContentPage.Content>
-
+  
     <Grid RowSpacing="0">
       <Grid.RowDefinitions>
         <RowDefinition Height="Auto"/>
@@ -48,7 +48,7 @@
           AbsoluteLayout.LayoutFlags="All"
           AbsoluteLayout.LayoutBounds="0,0,1,1">
           <ListView.SeparatorColor>
-            <OnPlatform x:TypeArguments="Color" Android="{StaticResource WindowBackgroundTable}" iOS="{StaticResource WindowBackgroundTable}"/>
+            <OnPlatform x:TypeArguments="Color" iOS="{StaticResource ListSeparator}" WinPhone="{StaticResource ListSeparator}"/>
           </ListView.SeparatorColor>
           <ListView.ItemTemplate>
             <DataTemplate>
