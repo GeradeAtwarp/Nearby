@@ -25,6 +25,8 @@ namespace Nearby
 
             var navPage = new NavigationPage(new Home());
 
+            MainPage.SetValue(NavigationPage.BarBackgroundColorProperty, Color.FromHex("#3F51B5"));
+
             // set the MainPage of the app to the navPage
             MainPage = navPage;
         }
