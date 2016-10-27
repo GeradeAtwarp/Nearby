@@ -37,6 +37,7 @@ namespace Nearby
 
         protected override void OnStart()
         {
+            OnResume();
         }
 
         protected override void OnSleep()
@@ -46,7 +47,20 @@ namespace Nearby
 
         protected override void OnResume()
         {
+            
+            //Start messaging service to display alert
+            MessagingService.Current.Subscribe<MessagingServiceAlert>(MessageKeys.Message, async (m, info) =>
+            {
+                var task = Application.Current?.MainPage?.DisplayAlert(info.Title, info.Message, info.Cancel);
 
+                if (task == null)
+                    return;
+
+                await task;
+                info?.OnCompleted?.Invoke();
+            });
+
+            //Confirm alert messaging service
             MessagingService.Current.Subscribe<MessagingServiceQuestion>(MessageKeys.Question, async (m, q) =>
             {
                 var task = Application.Current?.MainPage?.DisplayAlert(q.Title, q.Question, q.Positive, q.Negative);
