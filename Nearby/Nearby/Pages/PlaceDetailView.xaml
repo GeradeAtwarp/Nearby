@@ -86,6 +86,7 @@
       </StackLayout>-->
 
       <StackLayout BackgroundColor="{DynamicResource WindowBackgroundTable}" Spacing="{DynamicResource CardSpacing}" Padding="{DynamicResource CardPadding}">
+        
         <control:CardView>
           <StackLayout Spacing="0">
             <control:LabelSection Text="Reviews"/>
@@ -126,10 +127,7 @@
             </Grid>
           </StackLayout>
         </control:CardView>
-       </StackLayout>
-        
-      <StackLayout BackgroundColor="{DynamicResource WindowBackgroundTable}" Spacing="{DynamicResource CardSpacing}" Padding="{DynamicResource CardPadding}">
-
+       
         <control:CardView>
           <StackLayout Spacing="0">
             <control:LabelSection Text="Operating hours"/>
@@ -147,7 +145,7 @@
                     <ViewCell StyleId="disclosure">
                       <Grid ColumnSpacing="{StaticResource StandardSpacing}">
                         <Grid.Padding>
-                          <OnPlatform x:TypeArguments="Thickness" iOS="0,12" Android="16,8"/>
+                          <OnPlatform x:TypeArguments="Thickness" iOS="16,8" Android="16,8"/>
                         </Grid.Padding>
                         <Grid.ColumnDefinitions>
                           <ColumnDefinition Width="*"/>
@@ -202,7 +200,7 @@
                       <ViewCell.View>
                         <Grid ColumnSpacing="{StaticResource StandardSpacing}">
                           <Grid.Padding>
-                            <OnPlatform x:TypeArguments="Thickness" iOS="0,12" Android="16,8"/>
+                            <OnPlatform x:TypeArguments="Thickness" iOS="16,8" Android="16,8"/>
                           </Grid.Padding>
                           <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
