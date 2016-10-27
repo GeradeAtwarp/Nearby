@@ -25,10 +25,14 @@ namespace Nearby
 
             var navPage = new NavigationPage(new Home());
 
-            MainPage.SetValue(NavigationPage.BarBackgroundColorProperty, Color.FromHex("#3F51B5"));
-
             // set the MainPage of the app to the navPage
             MainPage = navPage;
+
+            if (Device.OS == TargetPlatform.iOS)
+            {
+                MainPage.SetValue(NavigationPage.BarBackgroundColorProperty, Color.FromHex("#3F51B5"));
+                MainPage.SetValue(NavigationPage.BarTextColorProperty, Color.White);
+            }
         }
 
         protected override void OnStart()
