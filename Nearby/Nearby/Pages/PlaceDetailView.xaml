@@ -145,7 +145,7 @@
                 <control:NonScrollableListView.ItemTemplate>
                   <DataTemplate>
                     <ViewCell StyleId="disclosure">
-                      <Grid Padding="{DynamicResource StandardPadding}" ColumnSpacing="{StaticResource StandardSpacing}">
+                      <Grid ColumnSpacing="{StaticResource StandardSpacing}">
                         <Grid.Padding>
                           <OnPlatform x:TypeArguments="Thickness" iOS="0,12" Android="16,8"/>
                         </Grid.Padding>
@@ -200,7 +200,7 @@
                   <DataTemplate>
                     <ViewCell StyleId="disclosure">
                       <ViewCell.View>
-                        <Grid Padding="{DynamicResource StandardPadding}" ColumnSpacing="{StaticResource StandardSpacing}">
+                        <Grid ColumnSpacing="{StaticResource StandardSpacing}">
                           <Grid.Padding>
                             <OnPlatform x:TypeArguments="Thickness" iOS="0,12" Android="16,8"/>
                           </Grid.Padding>
