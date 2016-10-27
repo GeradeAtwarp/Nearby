@@ -21,12 +21,27 @@ namespace Nearby.Pages
             InitializeComponent();
 
             BindingContext = new MainMenuViewModel(Navigation);
+
+            ListAccountProviderss.ItemSelected += (s, e) =>
+            {
+                ListAccountProviderss.SelectedItem = null;
+
+            };
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
             ViewModel.UpdateItems();
+        }
+
+        protected override void OnBindingContextChanged()
+        {
+            base.OnBindingContextChanged();
+            vm = null;
+
+            var adjust = Device.OS != TargetPlatform.Android ? 1 : -ViewModel.AccountItems.Count + 1;
+            ListAccountProviderss.HeightRequest = (ViewModel.AccountItems.Count * ListAccountProviderss.RowHeight) - adjust;
         }
     }
 }

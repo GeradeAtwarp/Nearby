@@ -99,31 +99,44 @@ namespace Nearby.viewModel
         {
             try
             {
-                FavoritePlaces favToRemove = NearbyDataContext.GetItems<FavoritePlaces>().Where(x => x.Id == place.ID).FirstOrDefault();
-
-                if (favToRemove != null)
+                MessagingService.Current.SendMessage<MessagingServiceQuestion>(MessageKeys.Question, new MessagingServiceQuestion
                 {
-                    NearbyDataContext.RemoveItem<FavoritePlaces>(favToRemove);
+                    Negative = "No",
+                    Positive = "Continue",
+                    Question = "Are uou sure you want remove this favourite?",
+                    Title = "Remove Favourite",
+                    OnCompleted = (async (result) =>
+                    {
+                        if (!result)
+                            return;
 
-                    FavPlaces.Clear();
-                    FavPlaces.AddRange((from fp in NearbyDataContext.GetItems<FavoritePlaces>()
-                                        select new FavPlaceItem
-                                        {
-                                            ID = fp.Id,
-                                            Name = fp.PlaceName,
-                                            PlaceID = fp.PlaceId,
-                                            SavedOn = "Saved on " + fp.Created.ToString("yyyy/MM/dd"),
-                                            ViewDetailsCommand = GoToDetailsCommand,
-                                            RemoveCommand = DeleteFavCommand,
-                                            Latitude = fp.Latitude,
-                                            Longitude = fp.Longitude,
-                                            Vicinity = fp.Vicinity
-                                        }).ToList());
+                        FavoritePlaces favToRemove = NearbyDataContext.GetItems<FavoritePlaces>().Where(x => x.Id == place.ID).FirstOrDefault();
+
+                        if (favToRemove != null)
+                        {
+                            NearbyDataContext.RemoveItem<FavoritePlaces>(favToRemove);
+
+                            FavPlaces.Clear();
+                            FavPlaces.AddRange((from fp in NearbyDataContext.GetItems<FavoritePlaces>()
+                                                select new FavPlaceItem
+                                                {
+                                                    ID = fp.Id,
+                                                    Name = fp.PlaceName,
+                                                    PlaceID = fp.PlaceId,
+                                                    SavedOn = "Saved on " + fp.Created.ToString("yyyy/MM/dd"),
+                                                    ViewDetailsCommand = GoToDetailsCommand,
+                                                    RemoveCommand = DeleteFavCommand,
+                                                    Latitude = fp.Latitude,
+                                                    Longitude = fp.Longitude,
+                                                    Vicinity = fp.Vicinity
+                                                }).ToList());
 
 
-                    if (FavPlaces.Count() == 0)
-                        HasFavorites = true;
-                }
+                            if (FavPlaces.Count() == 0)
+                                HasFavorites = true;
+                        }
+                    })
+                });
             }
             catch (Exception ex)
             {

@@ -10,6 +10,7 @@
     <StackLayout Spacing="0">
 
       <StackLayout BackgroundColor="{DynamicResource WindowBackgroundTable}" Spacing="{DynamicResource CardSpacing}" Padding="{DynamicResource CardPadding}">
+        
         <control:CardView>
           <StackLayout Spacing="0">
             <control:LabelSection Text="Manual location"/>
@@ -75,9 +76,9 @@
             </Grid>
           </StackLayout>
         </control:CardView>
-      </StackLayout>
+    
 
-      <StackLayout BackgroundColor="{DynamicResource WindowBackgroundTable}" Spacing="{DynamicResource CardSpacing}">
+        <StackLayout BackgroundColor="{DynamicResource WindowBackgroundTable}" Spacing="{DynamicResource CardSpacing}">
         <StackLayout.IsVisible>
           <OnPlatform x:TypeArguments="x:Boolean" Android="false" iOS="true"></OnPlatform>
         </StackLayout.IsVisible>
@@ -113,8 +114,7 @@
 
       </StackLayout>
 
-      <StackLayout BackgroundColor="{DynamicResource WindowBackgroundTable}" Spacing="{DynamicResource CardSpacing}">
-
+      
         <control:CardView>
           <StackLayout Spacing="0">
             <control:LabelSection Text="Filters"/>
@@ -128,6 +128,24 @@
                   <control:SwitchCellCust1 Text="{Binding DetailLabel}"
                                            On="{Binding DetailValue}"
                                            Command="{Binding MenuItemCommand}"/>
+                </DataTemplate>
+              </control:NonScrollableListView.ItemTemplate>
+            </control:NonScrollableListView>
+
+          </StackLayout>
+        </control:CardView>
+
+        <control:CardView>
+          <StackLayout Spacing="0">
+            <control:LabelSection Text="Accounts"/>
+            <control:HeaderDivider/>
+            <control:NonScrollableListView
+                     x:Name="ListAccountProviderss"
+                     ItemsSource="{Binding AccountItems}"
+                     RowHeight="44">
+              <control:NonScrollableListView.ItemTemplate>
+                <DataTemplate>
+                  <TextCell Text="{Binding ProviderLabel}"/>
                 </DataTemplate>
               </control:NonScrollableListView.ItemTemplate>
             </control:NonScrollableListView>

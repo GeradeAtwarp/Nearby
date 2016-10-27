@@ -196,8 +196,11 @@
                    IsVisible="{Binding HasContacts}">
                 <control:NonScrollableListView.ItemTemplate>
                   <DataTemplate>
-                    <ViewCell StyleId="disclosure">
-                      <ViewCell.View>
+                    <TextCell Detail="{Binding PlaceDetailValue}">
+                    </TextCell>
+                     <!--<ViewCell StyleId="disclosure">
+
+                     <ViewCell.View>
                         <Grid ColumnSpacing="{StaticResource StandardSpacing}">
                           <Grid.Padding>
                             <OnPlatform x:TypeArguments="Thickness" iOS="16,8" Android="16,8"/>
@@ -217,7 +220,7 @@
 
                         </Grid>
                        </ViewCell.View>
-                    </ViewCell>
+                    </ViewCell>-->
                   </DataTemplate>
                 </control:NonScrollableListView.ItemTemplate>
 

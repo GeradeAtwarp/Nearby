@@ -1,4 +1,6 @@
-﻿using MvvmHelpers;
+﻿using FormsToolkit;
+using MvvmHelpers;
+using Nearby.Helpers;
 using Nearby.Interfaces;
 using Nearby.Utils.Entities;
 using Newtonsoft.Json;
@@ -103,7 +105,7 @@ namespace Nearby.viewModel
                 List<PlceDetailItem> contacts = new List<PlceDetailItem>();
 
                 if (!string.IsNullOrEmpty(Details.result.formatted_phone_number))
-                    contacts.Add(new PlceDetailItem { PlaceDetailLabel = "Tel", PlaceDetailValue = Details.result.formatted_phone_number });
+                    contacts.Add(new PlceDetailItem { PlaceDetailLabel = "Telephone", PlaceDetailValue = Details.result.formatted_phone_number });
 
                 if (!string.IsNullOrEmpty(Details.result.website))
                     contacts.Add(new PlceDetailItem { PlaceDetailLabel = "Website", PlaceDetailValue = Details.result.website });
@@ -206,7 +208,25 @@ namespace Nearby.viewModel
                     Application.Current?.MainPage?.DisplayAlert("Favourite", Details.result.name + " was successfully added to you favourites.", "Ok");
                 }
                 else
-                    Application.Current?.MainPage?.DisplayAlert("Info", "You have already saved " + Details.result.name, "Ok");
+                {
+                    MessagingService.Current.SendMessage<MessagingServiceQuestion>(MessageKeys.Question, new MessagingServiceQuestion
+                    {
+                        Negative = "No",
+                        Positive = "Continue",
+                        Question = "You have already saved " + Details.result.name + " as a favourite. Would you like to remove it?",
+                        Title = "Edit Favourite",
+                        OnCompleted = (async (result) =>
+                        {
+                            if (!result)
+                                return;
+                            
+                            if (fav != null)
+                            {
+                                NearbyDataContext.RemoveItem<FavoritePlaces>(fav);
+                            }
+                        })
+                    });
+                }
             }
             catch (Exception ex)
             {

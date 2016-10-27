@@ -16,6 +16,7 @@ namespace Nearby.viewModel
     {
         public List<MenuItem> ManualItems { get; } = new List<MenuItem>();
         public ObservableRangeCollection<MenuItem> FilterItems { get; } = new ObservableRangeCollection<MenuItem>();
+        public ObservableRangeCollection<AccountMenuItem> AccountItems { get; } = new ObservableRangeCollection<AccountMenuItem>();
 
         public MainMenuViewModel(INavigation navigation) : base(navigation)
         {
@@ -50,6 +51,12 @@ namespace Nearby.viewModel
                     new MenuItem { DetailLabel = "Night club",DetailValue = Settings.SearchFilters.Contains("Night club"), MenuItemCommand = ToggleFiltern, MenuItemCommandProperty = "Night_club"   },
                     new MenuItem { DetailLabel = "Movie Theater",DetailValue = Settings.SearchFilters.Contains("Movie Theater"), MenuItemCommand = ToggleFiltern, MenuItemCommandProperty = "Movie"   },
                     new MenuItem { DetailLabel = "Liquor store",DetailValue = Settings.SearchFilters.Contains("Liquor store"), MenuItemCommand = ToggleFiltern, MenuItemCommandProperty = "Liquor"   }
+            });
+
+            AccountItems.Add(new AccountMenuItem
+            {
+                ProviderLabel = "Google",
+                ProviderValue = "google",
             });
         }
 
@@ -197,6 +204,14 @@ namespace Nearby.viewModel
             public bool DetailValue { get; set; }
             public ICommand MenuItemCommand { get; set; }
             public String MenuItemCommandProperty { get; set; }
+        }
+
+        public class AccountMenuItem
+        {
+            public String ProviderLabel { get; set; }
+            public String ProviderValue { get; set; }
+            public ICommand ProviderCommand { get; set; }
+            public String ProviderCommandProperty { get; set; }
         }
     }
 }
