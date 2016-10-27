@@ -36,6 +36,16 @@ namespace Nearby.Pages
                 placeDetailMap.Pins.Add(pin);
                 placeDetailMap.MoveToRegion(MapSpan.FromCenterAndRadius(pin.Position, Distance.FromMeters(500)));
             }
+
+            ListPlaceDetails.ItemSelected += async (sender, e) =>
+            {
+                ListPlaceDetails.SelectedItem = null;
+            };
+
+            ListPlaceContactDetails.ItemSelected += async (sender, e) =>
+            {
+                ListPlaceContactDetails.SelectedItem = null;
+            };
         }
 
         protected override void OnBindingContextChanged()

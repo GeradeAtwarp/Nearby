@@ -226,9 +226,9 @@ namespace Nearby.viewModel
             try
             {
                 if (Device.OS == TargetPlatform.Android)
-                    Device.OpenUri(new Uri("http://maps.google.com/?daddr="+ Place.geometry.location.lat + "," + Place.geometry.location.lng));
+                    Device.OpenUri(new Uri("http://maps.google.com/?daddr=" + Place.geometry.location.lat + "," + Place.geometry.location.lng));
                 else
-                    Device.OpenUri(new Uri("http://maps.apple.com/?daddr=" + Place.geometry.location.lat + "," + Place.geometry.location.lng));                  
+                    Device.OpenUri(new Uri("http://maps.apple.com/?daddr=" + Place.geometry.location.lat.ToString().Replace(",", ".") + "," + Place.geometry.location.lng.ToString().Replace(",", ".")));
             }
             catch (Exception ex)
             {
