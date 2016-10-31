@@ -129,12 +129,19 @@ namespace Nearby.viewModel
                     HasNoContacts = true;
                 }
 
+                PlaceOperatingHours.Clear();
+
                 #region Get operation hours
 
                 foreach (Period p in Details.result.opening_hours.periods)
                 {
                     switch (p.open.day)
                     {
+                        case 0:
+                            {
+                                PlaceOperatingHours.Add(new PlceDetailItem { PlaceDetailLabel = "Sunday", PlaceDetailValue = p.open.time + " - " + p.close.time });
+                            }
+                            break;
                         case 1:
                             {
                                 PlaceOperatingHours.Add(new PlceDetailItem { PlaceDetailLabel = "Monday", PlaceDetailValue = p.open.time + " - " + p.close.time });
@@ -147,7 +154,7 @@ namespace Nearby.viewModel
                             break;
                         case 3:
                             {
-                                PlaceOperatingHours.Add(new PlceDetailItem { PlaceDetailLabel = "Wednestdau", PlaceDetailValue = p.open.time + " - " + p.close.time });
+                                PlaceOperatingHours.Add(new PlceDetailItem { PlaceDetailLabel = "Wednesday", PlaceDetailValue = p.open.time + " - " + p.close.time });
                             }
                             break;
                         case 4:
