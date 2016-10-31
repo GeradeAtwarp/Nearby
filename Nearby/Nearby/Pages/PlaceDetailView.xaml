@@ -33,7 +33,7 @@
             <ColumnDefinition Width="1*"/>
           </Grid.ColumnDefinitions>
 
-          <Button Grid.Column="0" BorderWidth="1" Command="{Binding OpenNavigation}" BorderColor="#939393" BackgroundColor="Transparent" TextColor="#939393" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Text="Navighate">
+          <Button Grid.Column="0" BorderWidth="1" Command="{Binding OpenNavigation}" BorderColor="#939393" BackgroundColor="Transparent" TextColor="#939393" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Text="Navigate">
             <Button.BorderRadius Android="0" iOS="5"></Button.BorderRadius>
           </Button>
 
