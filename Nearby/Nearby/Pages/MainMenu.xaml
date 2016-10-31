@@ -13,7 +13,7 @@
         
         <control:CardView>
           <StackLayout Spacing="0">
-            <control:LabelSection Text="Manual location"/>
+            <control:LabelSection Text="Custom Location"/>
             <control:HeaderDivider/>
             <StackLayout Padding="{StaticResource StandardPadding}">
               <Label Text="Going on vacation? Visiting family members accross the country? Want to know what places are awaiting you? No problem, just search for you destination below, then select a place to set as you custom location. :-)"

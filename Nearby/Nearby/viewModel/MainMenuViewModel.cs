@@ -20,13 +20,13 @@ namespace Nearby.viewModel
 
         public MainMenuViewModel(INavigation navigation) : base(navigation)
         {
-            Title = "Options";
+            Title = "Settings";
 
             ChangeLocationIsEnabled = Settings.CustomLocationEnabled;
 
             ManualItems.Add(new MenuItem
             {
-                DetailLabel = "Manual location",
+                DetailLabel = "Use custom location?",
                 DetailValue = ChangeLocationIsEnabled,
                 MenuItemCommand = ToggleCustomLocation
             });

@@ -39,27 +39,21 @@
                     <ColumnDefinition Width="30"/>
                   </Grid.ColumnDefinitions>
 
-                  <Label
-                    Text="{Binding Name}"
-                    Style="{DynamicResource NearbyListItemTextStyle}"/>
+                  <Label Text="{Binding Name}" Style="{DynamicResource NearbyListItemTextStyle}"/>
 
-                  <Label Grid.Row="1" Grid.Column="0"
-                   Text="{Binding Vicinity}"
-                   Style="{DynamicResource NearbyListItemDetailTextStyle}"/>
+                  <Label Grid.Row="1" Grid.Column="0" Text="{Binding Vicinity}"  Style="{DynamicResource NearbyListItemDetailTextStyle}"/>
 
-                  <Label Grid.Row="2" Grid.Column="0"
-                  Text="{Binding SavedOn}"
-                  Style="{DynamicResource NearbyListItemDetailTextStyle}"/>
+                  <Label Grid.Row="2" Grid.Column="0" Text="{Binding SavedOn}" Style="{DynamicResource NearbyListItemDetailTextStyle}"/>
 
-                  <Image Grid.Row="0" Grid.Column="1" Aspect="AspectFit" Source="heart_filled">
+                  <!--<Image Grid.Row="0" Grid.Column="1" Aspect="AspectFit" Source="heart_filled">
                     <Image.GestureRecognizers>
                       <TapGestureRecognizer Command="{Binding RemoveCommand}" CommandParameter="{Binding .}"/>
                     </Image.GestureRecognizers>
                   </Image>
 
-                  <!--<Image Grid.Row="1" Grid.Column="1" Aspect="AspectFit" Source="sharethis"> </Image>-->
+                  --><!--<Image Grid.Row="1" Grid.Column="1" Aspect="AspectFit" Source="sharethis"> </Image>--><!--
 
-                  <Image Grid.Row="2" Grid.Column="1" Aspect="AspectFit" Source="pin"> </Image>
+                  <Image Grid.Row="2" Grid.Column="1" Aspect="AspectFit" Source="pin"> </Image>-->
 
                 </Grid>
               </StackLayout>

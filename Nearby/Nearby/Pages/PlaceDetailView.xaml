@@ -163,12 +163,12 @@
                             <OnPlatform x:TypeArguments="Thickness" iOS="16,8" Android="16,8"/>
                           </Grid.Padding>
                           <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="30"/>
                             <ColumnDefinition Width="Auto"/>
                           </Grid.ColumnDefinitions>
 
-                          <Label VerticalOptions="Center"  Style="{DynamicResource NearbyListItemTextStyle}" Text="{Binding PlaceDetailLabel}"/>
-                          <Label Grid.Column="2"
+                          <Image Source="{Binding Icon}"></Image>
+                          <Label Grid.Column="1"
                                  VerticalOptions="Center"
                                  Style="{DynamicResource NearbyListItemTextStyle}"
                                  TextColor="{DynamicResource DetailTextColor}"

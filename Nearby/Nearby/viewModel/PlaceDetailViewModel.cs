@@ -105,10 +105,10 @@ namespace Nearby.viewModel
                 List<PlceDetailItem> contacts = new List<PlceDetailItem>();
 
                 if (!string.IsNullOrEmpty(Details.result.formatted_phone_number))
-                    contacts.Add(new PlceDetailItem { PlaceDetailLabel = "Telephone", PlaceDetailValue = Details.result.formatted_phone_number });
+                    contacts.Add(new PlceDetailItem { PlaceDetailLabel = "Telephone", PlaceDetailValue = Details.result.formatted_phone_number, Icon = ImageSource.FromFile("phone.png") });
 
                 if (!string.IsNullOrEmpty(Details.result.website))
-                    contacts.Add(new PlceDetailItem { PlaceDetailLabel = "Website", PlaceDetailValue = Details.result.website });
+                    contacts.Add(new PlceDetailItem { PlaceDetailLabel = "Website", PlaceDetailValue = Details.result.website, Icon = ImageSource.FromFile("globe.png") });
 
                 PlaceContactDetails.AddRange(contacts);
 
@@ -301,6 +301,7 @@ namespace Nearby.viewModel
         {
             public String PlaceDetailLabel { get; set; }
             public String PlaceDetailValue { get; set; }
+            public ImageSource Icon { get; set; }
         }
 
         public class AddressComponent
