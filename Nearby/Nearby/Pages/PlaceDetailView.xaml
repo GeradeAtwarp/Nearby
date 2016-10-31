@@ -27,21 +27,24 @@
       <StackLayout BackgroundColor="{DynamicResource WindowBackgroundTable}" Spacing="{DynamicResource CardSpacing}" Padding="{DynamicResource CardPadding}">
        
         <Grid ColumnSpacing="{StaticResource StandardSpacing}">
+          <Grid.Padding>
+            <OnPlatform x:TypeArguments="Thickness" iOS="16,8" Android="16,8"/>
+          </Grid.Padding>
           <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
           </Grid.ColumnDefinitions>
 
-          <Button Grid.Column="0" BorderWidth="1" Command="{Binding OpenNavigation}" BorderColor="#939393" BackgroundColor="Transparent" TextColor="#939393" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Text="Navigate">
+          <Button Grid.Column="0" BorderWidth="1" Command="{Binding OpenNavigation}" BorderColor="#939393" BackgroundColor="Transparent" TextColor="#939393" Font="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Text="Navigate">
             <Button.BorderRadius Android="0" iOS="5"></Button.BorderRadius>
           </Button>
 
-          <Button Grid.Column="1" BorderRadius="0" BorderWidth="1" Command="{Binding OpenShare}" BorderColor="#939393" BackgroundColor="Transparent" TextColor="#939393" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Text="Share">
+          <Button Grid.Column="1" BorderWidth="1" Command="{Binding OpenShare}" BorderColor="#939393" BackgroundColor="Transparent" TextColor="#939393" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Text="Share">
             <Button.BorderRadius Android="0" iOS="5"></Button.BorderRadius>
           </Button>
 
-          <Button Grid.Column="2" BorderRadius="0" BorderWidth="1" Command="{Binding SaveFavourite}" BorderColor="#939393" BackgroundColor="Transparent" TextColor="#939393" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Text="Favourite">
+          <Button Grid.Column="2" BorderWidth="1" Command="{Binding SaveFavourite}" BorderColor="#939393" BackgroundColor="Transparent" TextColor="#939393" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Text="Favourite">
             <Button.BorderRadius Android="0" iOS="5"></Button.BorderRadius>
           </Button>
           
