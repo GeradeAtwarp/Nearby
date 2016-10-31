@@ -24,7 +24,8 @@
         <maps:Map x:Name="placeDetailMap" HasScrollEnabled="False" HasZoomEnabled="False" MapType="Street" />
       </StackLayout>
 
-      <StackLayout HorizontalOptions="FillAndExpand" Padding="{DynamicResource SmallPadding}">
+      <StackLayout BackgroundColor="{DynamicResource WindowBackgroundTable}" Spacing="{DynamicResource CardSpacing}" Padding="{DynamicResource CardPadding}">
+       
         <Grid ColumnSpacing="{StaticResource StandardSpacing}">
           <Grid.Padding>
             <OnPlatform x:TypeArguments="Thickness" iOS="0,12" Android="16,8"/>
@@ -35,58 +36,14 @@
             <ColumnDefinition Width="1*"/>
           </Grid.ColumnDefinitions>
 
-          <StackLayout Grid.Column="0" Orientation="Horizontal" HorizontalOptions="Center">
-            <Image Source="pin">
-              <Image.GestureRecognizers>
-                <TapGestureRecognizer Command="{Binding OpenNavigation}"></TapGestureRecognizer>
-              </Image.GestureRecognizers>
-            </Image>
-          </StackLayout>
+          <Button Grid.Column="0" BorderRadius="5" Command="{Binding OpenNavigation}" BorderColor="#939393" BackgroundColor="Transparent" TextColor="#939393" VerticalOptions="Center" HorizontalOptions="Center" Text="Navighate"></Button>
 
-          <StackLayout Grid.Column="1" Orientation="Horizontal" HorizontalOptions="Center">
-            <Image Source="sharethis">
-              <Image.GestureRecognizers>
-                <TapGestureRecognizer Command="{Binding OpenShare}"></TapGestureRecognizer>
-              </Image.GestureRecognizers>
-            </Image>
-          </StackLayout>
+          <Button Grid.Column="1" BorderRadius="0" Command="{Binding OpenShare}" BorderColor="#939393" BackgroundColor="Transparent" TextColor="#939393" VerticalOptions="Center" HorizontalOptions="Center" Text="Share"></Button>
 
-          <StackLayout Grid.Column="2" Orientation="Horizontal" HorizontalOptions="Center">
-            <Image Source="{Binding FavImage}">
-              <Image.GestureRecognizers>
-                <TapGestureRecognizer Command="{Binding SaveFavourite}"/>
-              </Image.GestureRecognizers>
-              <!--<Image.Source>
-                <OnPlatform  x:TypeArguments="ImageSource">
-                  <OnPlatform.iOS>heart_filled.png</OnPlatform.iOS>
-                  <OnPlatform.Android>favorite-black.png</OnPlatform.Android>
-                </OnPlatform>
-              </Image.Source>-->
-            </Image>
-          </StackLayout>
-
+          <Button Grid.Column="2" BorderRadius="5" Command="{Binding SaveFavourite}" BorderColor="#939393" BackgroundColor="Transparent" TextColor="#939393" VerticalOptions="Center" HorizontalOptions="Center" Text="Favourite"></Button>
+          
         </Grid>
-      </StackLayout>
-
-      <!--<StackLayout HorizontalOptions="FillAndExpand" Spacing="{DynamicResource CardSpacing}" Padding="{DynamicResource SmallPadding}">
-        <Grid>
-          <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
-          </Grid.ColumnDefinitions>
-              <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                <imagecircle:CircleImage WidthRequest="20" HeightRequest="20" VerticalOptions="Center" HorizontalOptions="FillAndExpand"
-                    FillColor="{Binding IsOpen, Converter={StaticResource OpenCloseColor}}"/>
-              </StackLayout>
-
-              <StackLayout Grid.Column="1" Orientation="Horizontal" HorizontalOptions="Center">
-                <Label VerticalOptions="Center" HorizontalOptions="Center" TextColor="{Binding IsOpen, Converter={StaticResource OpenCloseColor}}"  Style="{DynamicResource NearbyListItemTextStyle}" Text="{Binding IsOpen, Converter={StaticResource OpenCloseText}}"/>
-              </StackLayout>
-        </Grid>
-      </StackLayout>-->
-
-      <StackLayout BackgroundColor="{DynamicResource WindowBackgroundTable}" Spacing="{DynamicResource CardSpacing}" Padding="{DynamicResource CardPadding}">
-        
+   
         <control:CardView>
           <StackLayout Spacing="0">
             <control:LabelSection Text="Reviews"/>
@@ -196,10 +153,7 @@
                    IsVisible="{Binding HasContacts}">
                 <control:NonScrollableListView.ItemTemplate>
                   <DataTemplate>
-                    <TextCell Detail="{Binding PlaceDetailValue}">
-                    </TextCell>
-                     <!--<ViewCell StyleId="disclosure">
-
+                     <ViewCell>
                      <ViewCell.View>
                         <Grid ColumnSpacing="{StaticResource StandardSpacing}">
                           <Grid.Padding>
@@ -220,7 +174,7 @@
 
                         </Grid>
                        </ViewCell.View>
-                    </ViewCell>-->
+                    </ViewCell>
                   </DataTemplate>
                 </control:NonScrollableListView.ItemTemplate>
 

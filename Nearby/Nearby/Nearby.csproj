@@ -47,6 +47,7 @@
     <Compile Include="Controls\LabelSection.xaml.cs">
       <DependentUpon>LabelSection.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\NearbyButton.cs" />
     <Compile Include="Controls\NearbyNavigationPage.cs" />
     <Compile Include="Controls\NonScrollableListView.cs" />
     <Compile Include="Controls\TransparentConatiner.cs" />
