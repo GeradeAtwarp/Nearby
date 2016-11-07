@@ -55,7 +55,7 @@
                     <RowDefinition Height="Auto"/>
                   </Grid.RowDefinitions>
 
-                  <Button BorderRadius="0" x:Name="btnAddCustomLocation" BackgroundColor="#3F51B5" Command="{Binding NavigateToSearch}" TextColor="White" Text="Search"></Button>
+                  <Button BorderRadius="0" x:Name="btnAddCustomLocation" BackgroundColor="{DynamicResource Primary}" Command="{Binding NavigateToSearch}" TextColor="White" Text="Search"></Button>
                 </Grid>
 
               </StackLayout>

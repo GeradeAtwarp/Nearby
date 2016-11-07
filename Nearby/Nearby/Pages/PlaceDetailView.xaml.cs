@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
+using static Nearby.viewModel.PlaceDetailViewModel;
 
 namespace Nearby.Pages
 {
@@ -44,6 +45,13 @@ namespace Nearby.Pages
 
             ListPlaceContactDetails.ItemSelected += async (sender, e) =>
             {
+                PlceDetailItem item = e.SelectedItem as PlceDetailItem;
+
+                if (item == null)
+                    return;
+
+                item.Command.Execute(item.CommandParameter);
+
                 ListPlaceContactDetails.SelectedItem = null;
             };
         }

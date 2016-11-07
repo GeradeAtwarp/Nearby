@@ -9,12 +9,20 @@ using Nearby.Controls;
 using Nearby.viewModel;
 using FormsToolkit;
 using Nearby.Helpers;
+using Amazon;
+using Amazon.CognitoSync;
+using Amazon.CognitoSync.SyncManager;
+using Nearby.Utils;
 
 namespace Nearby
 {
     public partial class App : Application
     {
         public static App current;
+        static NavigationPage NavPage;
+
+        public static string AppName { get { return "GeradeDevNearbyApp"; } }
+        public static User User { get; set; }
 
         public App()
         {
@@ -23,10 +31,12 @@ namespace Nearby
 
             NearbyBaseViewModel.Init();
 
-            var navPage = new NavigationPage(new Home());
+            NavPage = new NavigationPage(new Home());
+
+            User = new User();
 
             // set the MainPage of the app to the navPage
-            MainPage = navPage;
+            MainPage = NavPage;
 
             if (Device.OS == TargetPlatform.iOS)
             {
@@ -69,6 +79,24 @@ namespace Nearby
                 var result = await task;
                 q?.OnCompleted?.Invoke(result);
             });
+        }
+        
+        public static Action SuccessfulLoginAction
+        {
+            get
+            {
+                return new Action(() => {
+                    NavPage.Navigation.InsertPageBefore(new Home(), NavPage.Navigation.NavigationStack.First());
+                    NavPage.Navigation.PopToRootAsync();
+                    //NavPage.Navigation.PopModalAsync();
+
+                    //if (IsLoggedIn)
+                    //{
+                    //    NavPage.Navigation.InsertPageBefore(new TodoListPage(), NavPage.Navigation.NavigationStack.First());
+                    //    NavPage.Navigation.PopToRootAsync();
+                    //}
+                });
+            }
         }
     }
 }

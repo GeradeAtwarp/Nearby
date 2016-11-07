@@ -1,7 +1,11 @@
-﻿using FormsToolkit;
+﻿using Amazon;
+using Amazon.DynamoDBv2;
+using Amazon.DynamoDBv2.DataModel;
+using FormsToolkit;
 using MvvmHelpers;
 using Nearby.Helpers;
 using Nearby.Interfaces;
+using Nearby.Models.DynamoDB;
 using Nearby.Utils.Entities;
 using Newtonsoft.Json;
 using System;
@@ -32,8 +36,15 @@ namespace Nearby.viewModel
             set { SetProperty(ref isOpen, value); }
         }
 
-        public bool hasOperatingHours = true;
+        public bool hasNoOperatingHours = false;
         public bool HasNoOperatingHours
+        {
+            get { return hasNoOperatingHours; }
+            set { SetProperty(ref hasNoOperatingHours, value); }
+        }
+
+        public bool hasOperatingHours = true;
+        public bool HasOperatingHours
         {
             get { return hasOperatingHours; }
             set { SetProperty(ref hasOperatingHours, value); }
@@ -105,18 +116,13 @@ namespace Nearby.viewModel
                 List<PlceDetailItem> contacts = new List<PlceDetailItem>();
 
                 if (!string.IsNullOrEmpty(Details.result.formatted_phone_number))
-                    contacts.Add(new PlceDetailItem { PlaceDetailLabel = "Telephone", PlaceDetailValue = Details.result.formatted_phone_number, Icon = ImageSource.FromFile("phone.png") });
+                    contacts.Add(new PlceDetailItem { Command = LaunchDialerCommand, CommandParameter = (!string.IsNullOrEmpty(Details.result.formatted_phone_number) ? Details.result.formatted_phone_number : ""), PlaceDetailLabel = "Telephone", PlaceDetailValue = Details.result.formatted_phone_number, Icon = ImageSource.FromFile("phone.png") });
 
                 if (!string.IsNullOrEmpty(Details.result.website))
-                    contacts.Add(new PlceDetailItem { PlaceDetailLabel = "Website", PlaceDetailValue = Details.result.website, Icon = ImageSource.FromFile("globe.png") });
+                    contacts.Add(new PlceDetailItem { Command = LaunchBrowserCommand, CommandParameter = (!string.IsNullOrEmpty(Details.result.website) ? Details.result.website : ""), PlaceDetailLabel = "Website", PlaceDetailValue = Details.result.website, Icon = ImageSource.FromFile("globe.png") });
 
                 PlaceContactDetails.AddRange(contacts);
-
-                if (Details.result.opening_hours != null)
-                {
-                    IsOpen = (Details.result.opening_hours.open_now ? true : false);
-                    HasNoOperatingHours = (Details.result.opening_hours.periods.Count() > 0 ? false : true);
-                }
+                
 
                 if (!string.IsNullOrEmpty(Details.result.formatted_phone_number) || !string.IsNullOrEmpty(Details.result.website))
                 {
@@ -133,52 +139,65 @@ namespace Nearby.viewModel
 
                 #region Get operation hours
 
-                foreach (Period p in Details.result.opening_hours.periods)
+                if (Details.result.opening_hours != null)
                 {
-                    switch (p.open.day)
+                    IsOpen = (Details.result.opening_hours.open_now ? true : false);
+
+                    foreach (Period p in Details.result?.opening_hours?.periods)
                     {
-                        case 0:
-                            {
-                                PlaceOperatingHours.Add(new PlceDetailItem { PlaceDetailLabel = "Sunday", PlaceDetailValue = p.open.time + " - " + p.close.time });
-                            }
-                            break;
-                        case 1:
-                            {
-                                PlaceOperatingHours.Add(new PlceDetailItem { PlaceDetailLabel = "Monday", PlaceDetailValue = p.open.time + " - " + p.close.time });
-                            }
-                            break;
-                        case 2:
-                            {
-                                PlaceOperatingHours.Add(new PlceDetailItem { PlaceDetailLabel = "Tuesday", PlaceDetailValue = p.open.time + " - " + p.close.time });
-                            }
-                            break;
-                        case 3:
-                            {
-                                PlaceOperatingHours.Add(new PlceDetailItem { PlaceDetailLabel = "Wednesday", PlaceDetailValue = p.open.time + " - " + p.close.time });
-                            }
-                            break;
-                        case 4:
-                            {
-                                PlaceOperatingHours.Add(new PlceDetailItem { PlaceDetailLabel = "Thursday", PlaceDetailValue = p.open.time + " - " + p.close.time });
-                            }
-                            break;
-                        case 5:
-                            {
-                                PlaceOperatingHours.Add(new PlceDetailItem { PlaceDetailLabel = "Friday", PlaceDetailValue = p.open.time + " - " + p.close.time });
-                            }
-                            break;
-                        case 6:
-                            {
-                                PlaceOperatingHours.Add(new PlceDetailItem { PlaceDetailLabel = "Saturday", PlaceDetailValue = p.open.time + " - " + p.close.time });
-                            }
-                            break;
+                        switch (p.open.day)
+                        {
+                            case 0:
+                                {
+                                    PlaceOperatingHours.Add(new PlceDetailItem { PlaceDetailLabel = "Sunday", PlaceDetailValue = p.open.time + " - " + p.close.time });
+                                }
+                                break;
+                            case 1:
+                                {
+                                    PlaceOperatingHours.Add(new PlceDetailItem { PlaceDetailLabel = "Monday", PlaceDetailValue = p.open.time + " - " + p.close.time });
+                                }
+                                break;
+                            case 2:
+                                {
+                                    PlaceOperatingHours.Add(new PlceDetailItem { PlaceDetailLabel = "Tuesday", PlaceDetailValue = p.open.time + " - " + p.close.time });
+                                }
+                                break;
+                            case 3:
+                                {
+                                    PlaceOperatingHours.Add(new PlceDetailItem { PlaceDetailLabel = "Wednesday", PlaceDetailValue = p.open.time + " - " + p.close.time });
+                                }
+                                break;
+                            case 4:
+                                {
+                                    PlaceOperatingHours.Add(new PlceDetailItem { PlaceDetailLabel = "Thursday", PlaceDetailValue = p.open.time + " - " + p.close.time });
+                                }
+                                break;
+                            case 5:
+                                {
+                                    PlaceOperatingHours.Add(new PlceDetailItem { PlaceDetailLabel = "Friday", PlaceDetailValue = p.open.time + " - " + p.close.time });
+                                }
+                                break;
+                            case 6:
+                                {
+                                    PlaceOperatingHours.Add(new PlceDetailItem { PlaceDetailLabel = "Saturday", PlaceDetailValue = p.open.time + " - " + p.close.time });
+                                }
+                                break;
+                        }
                     }
                 }
 
-                if (PlaceOperatingHours.Count() == 0)
-                    HasNoOperatingHours = true;
-
                 #endregion
+
+                if (PlaceOperatingHours.Count() == 0)
+                {
+                    HasOperatingHours = false;
+                    HasNoOperatingHours = true;
+                }
+                else
+                {
+                    HasOperatingHours = true;
+                    HasNoOperatingHours = false;
+                }
 
                 var fav = NearbyDataContext.GetItems<FavoritePlaces>().Where(x => x.PlaceId == Place.place_id).FirstOrDefault();
                 if (fav != null)
@@ -210,7 +229,7 @@ namespace Nearby.viewModel
                 var fav = NearbyDataContext.GetItems<FavoritePlaces>().Where(x => x.PlaceId == Place.place_id).FirstOrDefault();
                 if (fav == null)
                 {
-                    NearbyDataContext.SaveItem<FavoritePlaces>(new FavoritePlaces { Created = DateTime.Now, PlaceId = Place.place_id, PlaceName = Details.result.name , Latitude = Place.geometry.location.lat, Longitude = Place.geometry.location.lng, Vicinity = Place.vicinity});
+                    NearbyDataContext.SaveItem<FavoritePlaces>(new FavoritePlaces { Created = DateTime.Now, PlaceId = Place.place_id, PlaceName = Details.result.name, Latitude = Place.geometry.location.lat, Longitude = Place.geometry.location.lng, Vicinity = Place.vicinity });
                     FavImage = ImageSource.FromFile("heart_filled.png");
                     Application.Current?.MainPage?.DisplayAlert("Favourite", Details.result.name + " was successfully added to you favourites.", "Ok");
                 }
@@ -226,7 +245,7 @@ namespace Nearby.viewModel
                         {
                             if (!result)
                                 return;
-                            
+
                             if (fav != null)
                             {
                                 NearbyDataContext.RemoveItem<FavoritePlaces>(fav);
@@ -309,6 +328,8 @@ namespace Nearby.viewModel
             public String PlaceDetailLabel { get; set; }
             public String PlaceDetailValue { get; set; }
             public ImageSource Icon { get; set; }
+            public ICommand Command { get; set; }
+            public object CommandParameter { get; set; }
         }
 
         public class AddressComponent
