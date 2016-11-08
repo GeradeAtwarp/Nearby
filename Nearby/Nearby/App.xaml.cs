@@ -9,9 +9,6 @@ using Nearby.Controls;
 using Nearby.viewModel;
 using FormsToolkit;
 using Nearby.Helpers;
-using Amazon;
-using Amazon.CognitoSync;
-using Amazon.CognitoSync.SyncManager;
 using Nearby.Utils;
 
 namespace Nearby

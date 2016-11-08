@@ -1,9 +1,4 @@
-﻿using Amazon;
-using Amazon.CognitoSync;
-using Amazon.CognitoSync.SyncManager;
-using Amazon.DynamoDBv2;
-using Amazon.DynamoDBv2.DataModel;
-using MvvmHelpers;
+﻿using MvvmHelpers;
 using Nearby.Helpers;
 using Nearby.Interfaces;
 using Nearby.Utils;
@@ -25,8 +20,6 @@ namespace Nearby.viewModel
     {
         protected INavigation Navigation { get; }
         protected Database NearbyDataContext { get; }
-        protected static AmazonDynamoDBClient dynamoClient;
-        protected static DynamoDBContext dynamoContext;
 
         public NearbyBaseViewModel(INavigation navigation = null)
         {

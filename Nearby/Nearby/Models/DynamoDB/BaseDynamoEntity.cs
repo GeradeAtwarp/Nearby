@@ -1,5 +1,4 @@
-﻿using Amazon.DynamoDBv2.DataModel;
-using Nearby.Utils.Entities;
+﻿using Nearby.Utils.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace Nearby.Models.DynamoDB
 {
-    public class BaseDynamoEntity : IBaseDynamo
-    {
-        public BaseDynamoEntity()
-        {
+    //public class BaseDynamoEntity : IBaseDynamo
+    //{
+    //    public BaseDynamoEntity()
+    //    {
 
-        }
+    //    }
 
-        [DynamoDBHashKey] // Hash key.
-        public string Id { get; set; }
-    }
+    //    [DynamoDBHashKey] // Hash key.
+    //    public string Id { get; set; }
+    //}
 }

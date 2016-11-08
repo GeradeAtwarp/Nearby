@@ -1,7 +1,4 @@
-﻿using Amazon;
-using Amazon.DynamoDBv2;
-using Amazon.DynamoDBv2.DataModel;
-using FormsToolkit;
+﻿using FormsToolkit;
 using MvvmHelpers;
 using Nearby.Helpers;
 using Nearby.Interfaces;
