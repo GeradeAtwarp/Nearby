@@ -139,11 +139,11 @@ namespace Nearby.viewModel
 
                 #region Get operation hours
 
-                if (Details.result.opening_hours != null)
+                if (Details.result.opening_hours.periods != null)
                 {
                     IsOpen = (Details.result.opening_hours.open_now ? true : false);
 
-                    foreach (Period p in Details.result?.opening_hours?.periods)
+                    foreach (Period p in Details.result.opening_hours.periods)
                     {
                         switch (p.open.day)
                         {
