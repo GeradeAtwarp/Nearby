@@ -30,7 +30,7 @@ namespace Nearby.iOS
             global::Xamarin.Forms.Forms.Init();
             FormsMaps.Init();
 
-            UIApplication.SharedApplication.StatusBarStyle = UIStatusBarStyle.LightContent;
+            UIApplication.SharedApplication.SetStatusBarStyle(UIStatusBarStyle.LightContent, false);
 
             var manager = BITHockeyManager.SharedHockeyManager;
             manager.Configure("bc0b686325a74f8fa50134a03ce5efc9");

@@ -82,6 +82,13 @@ namespace Nearby.viewModel
             set { SetProperty(ref reviews, value); }
         }
 
+        public bool hasReviews = true;
+        public bool HasReviews
+        {
+            get { return hasReviews; }
+            set { SetProperty(ref hasReviews, value); }
+        }
+
         public PlaceDetailViewModel(INavigation navigation, Places place) : base(navigation)
         {
             Place = place;
@@ -136,49 +143,52 @@ namespace Nearby.viewModel
 
                 #region Get operation hours
 
-                if (Details.result.opening_hours.periods != null)
+                if (Details.result.opening_hours != null)
                 {
-                    IsOpen = (Details.result.opening_hours.open_now ? true : false);
-
-                    foreach (Period p in Details.result.opening_hours.periods)
+                    if (Details.result.opening_hours.periods != null)
                     {
-                        switch (p.open.day)
+                        IsOpen = (Details.result.opening_hours.open_now ? true : false);
+
+                        foreach (Period p in Details.result.opening_hours.periods)
                         {
-                            case 0:
-                                {
-                                    PlaceOperatingHours.Add(new PlceDetailItem { PlaceDetailLabel = "Sunday", PlaceDetailValue = p.open.time + " - " + p.close.time });
-                                }
-                                break;
-                            case 1:
-                                {
-                                    PlaceOperatingHours.Add(new PlceDetailItem { PlaceDetailLabel = "Monday", PlaceDetailValue = p.open.time + " - " + p.close.time });
-                                }
-                                break;
-                            case 2:
-                                {
-                                    PlaceOperatingHours.Add(new PlceDetailItem { PlaceDetailLabel = "Tuesday", PlaceDetailValue = p.open.time + " - " + p.close.time });
-                                }
-                                break;
-                            case 3:
-                                {
-                                    PlaceOperatingHours.Add(new PlceDetailItem { PlaceDetailLabel = "Wednesday", PlaceDetailValue = p.open.time + " - " + p.close.time });
-                                }
-                                break;
-                            case 4:
-                                {
-                                    PlaceOperatingHours.Add(new PlceDetailItem { PlaceDetailLabel = "Thursday", PlaceDetailValue = p.open.time + " - " + p.close.time });
-                                }
-                                break;
-                            case 5:
-                                {
-                                    PlaceOperatingHours.Add(new PlceDetailItem { PlaceDetailLabel = "Friday", PlaceDetailValue = p.open.time + " - " + p.close.time });
-                                }
-                                break;
-                            case 6:
-                                {
-                                    PlaceOperatingHours.Add(new PlceDetailItem { PlaceDetailLabel = "Saturday", PlaceDetailValue = p.open.time + " - " + p.close.time });
-                                }
-                                break;
+                            switch (p.open.day)
+                            {
+                                case 0:
+                                    {
+                                        PlaceOperatingHours.Add(new PlceDetailItem { PlaceDetailLabel = "Sunday", PlaceDetailValue = p.open.time + " - " + p.close.time });
+                                    }
+                                    break;
+                                case 1:
+                                    {
+                                        PlaceOperatingHours.Add(new PlceDetailItem { PlaceDetailLabel = "Monday", PlaceDetailValue = p.open.time + " - " + p.close.time });
+                                    }
+                                    break;
+                                case 2:
+                                    {
+                                        PlaceOperatingHours.Add(new PlceDetailItem { PlaceDetailLabel = "Tuesday", PlaceDetailValue = p.open.time + " - " + p.close.time });
+                                    }
+                                    break;
+                                case 3:
+                                    {
+                                        PlaceOperatingHours.Add(new PlceDetailItem { PlaceDetailLabel = "Wednesday", PlaceDetailValue = p.open.time + " - " + p.close.time });
+                                    }
+                                    break;
+                                case 4:
+                                    {
+                                        PlaceOperatingHours.Add(new PlceDetailItem { PlaceDetailLabel = "Thursday", PlaceDetailValue = p.open.time + " - " + p.close.time });
+                                    }
+                                    break;
+                                case 5:
+                                    {
+                                        PlaceOperatingHours.Add(new PlceDetailItem { PlaceDetailLabel = "Friday", PlaceDetailValue = p.open.time + " - " + p.close.time });
+                                    }
+                                    break;
+                                case 6:
+                                    {
+                                        PlaceOperatingHours.Add(new PlceDetailItem { PlaceDetailLabel = "Saturday", PlaceDetailValue = p.open.time + " - " + p.close.time });
+                                    }
+                                    break;
+                            }
                         }
                     }
                 }
@@ -204,7 +214,8 @@ namespace Nearby.viewModel
 
                 PlaceRating = Details.result.reviews[0].aspects[0].rating;
 
-                Reviews = "Based on " + Details.result.reviews.Count() + " reviews.";
+                Reviews = (Details.result.reviews.Count() > 0 ? "Based on " + Details.result.reviews.Count() + " reviews." : "No reviews were found.");
+                HasReviews = (Details.result.reviews.Count() > 0 ? true : false);
             }
             catch (Exception ex)
             {

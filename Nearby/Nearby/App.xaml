@@ -53,6 +53,11 @@
         <Setter Property="FontFamily" Value="{DynamicResource SectionLabelFontFamily}"/>
       </Style>
 
+      <Style x:Key="NearbyReviewDetailTextStyle" TargetType="Label" BaseResourceKey="ListItemDetailTextStyle">
+        <Setter Property="FontSize" Value="{DynamicResource NearbyListItemDetailTextStyleSize}" />
+        <Setter Property="TextColor" Value="{DynamicResource Primary}"/>
+      </Style>
+      
     </ResourceDictionary>
   </Application.Resources>
 </Application>

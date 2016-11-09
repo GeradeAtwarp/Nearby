@@ -21,7 +21,7 @@
       AbsoluteLayout.LayoutBounds="0,0,1,1"
       RowHeight="120">
       <ListView.SeparatorColor>
-        <OnPlatform x:TypeArguments="Color" iOS="{StaticResource ListSeparator}" WinPhone="{StaticResource ListSeparator}"/>
+        <OnPlatform x:TypeArguments="Color" iOS="{StaticResource ListSeparator}"/>
       </ListView.SeparatorColor>
       <ListView.ItemTemplate>
         <DataTemplate>
