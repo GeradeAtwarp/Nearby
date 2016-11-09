@@ -10,7 +10,7 @@ using Nearby.Utils.Entities;
 
 namespace Nearby.Droid
 {
-    [Activity(Label = "Nearby", Icon = "@drawable/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "Nearby", Icon = "@drawable/icon", Theme = "@style/splashscreen", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle bundle)
@@ -20,6 +20,8 @@ namespace Nearby.Droid
 
             //Set DB path
             Database.root = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
+
+            base.SetTheme(Resource.Style.MainTheme);
 
             base.OnCreate(bundle);
 

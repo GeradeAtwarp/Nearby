@@ -22,11 +22,11 @@ namespace Nearby.Pages
 
             BindingContext = new MainMenuViewModel(Navigation);
 
-            ListAccountProviderss.ItemSelected += (s, e) =>
-            {
-                ListAccountProviderss.SelectedItem = null;
+            //ListAccountProviderss.ItemSelected += (s, e) =>
+            //{
+            //    ListAccountProviderss.SelectedItem = null;
 
-            };
+            //};
         }
 
         protected override void OnAppearing()
@@ -40,8 +40,8 @@ namespace Nearby.Pages
             base.OnBindingContextChanged();
             vm = null;
 
-            var adjust = Device.OS != TargetPlatform.Android ? 1 : -ViewModel.AccountItems.Count + 1;
-            ListAccountProviderss.HeightRequest = (ViewModel.AccountItems.Count * ListAccountProviderss.RowHeight) - adjust;
+            //var adjust = Device.OS != TargetPlatform.Android ? 1 : -ViewModel.AccountItems.Count + 1;
+            //ListAccountProviderss.HeightRequest = (ViewModel.AccountItems.Count * ListAccountProviderss.RowHeight) - adjust;
         }
     }
 }

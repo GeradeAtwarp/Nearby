@@ -55,39 +55,44 @@
             <control:LabelSection Text="Reviews"/>
             <control:HeaderDivider/>
 
-            <Grid ColumnSpacing="{StaticResource StandardSpacing}">
-              <Grid.Padding>
-                <OnPlatform x:TypeArguments="Thickness" iOS="0,12" Android="16,8"/>
-              </Grid.Padding>
-              <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-              </Grid.ColumnDefinitions>
+            <StackLayout BackgroundColor="White">
+              <StackLayout.Padding Android="0" iOS="{StaticResource StandardPadding}"></StackLayout.Padding>
+              <Grid ColumnSpacing="{StaticResource StandardSpacing}">
+                <Grid.Padding>
+                  <OnPlatform x:TypeArguments="Thickness" iOS="0,12" Android="16,8"/>
+                </Grid.Padding>
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="1*"/>
+                  <ColumnDefinition Width="1*"/>
+                  <ColumnDefinition Width="1*"/>
+                  <ColumnDefinition Width="1*"/>
+                  <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
 
-              <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                <Image Source="{Binding PlaceRating, Converter={StaticResource RatingImageConverter}, ConverterParameter='1'}" Aspect="AspectFit"></Image>
-              </StackLayout>
-              <StackLayout Grid.Column="1" Orientation="Horizontal" HorizontalOptions="Center">
-                <Image Source="{Binding PlaceRating, Converter={StaticResource RatingImageConverter}, ConverterParameter='2'}" Aspect="AspectFit"></Image>
-              </StackLayout>
-              <StackLayout Grid.Column="2" Orientation="Horizontal" HorizontalOptions="Center">
-                <Image Source="{Binding PlaceRating, Converter={StaticResource RatingImageConverter}, ConverterParameter='3'}" Aspect="AspectFit"></Image>
-              </StackLayout>
-              <StackLayout Grid.Column="3" Orientation="Horizontal" HorizontalOptions="Center">
-                <Image Source="{Binding PlaceRating, Converter={StaticResource RatingImageConverter}, ConverterParameter='4'}" Aspect="AspectFit"></Image>
-              </StackLayout>
-              <StackLayout Grid.Column="4" Orientation="Horizontal" HorizontalOptions="Center">
-                <Image Source="{Binding PlaceRating, Converter={StaticResource RatingImageConverter}, ConverterParameter='5'}" Aspect="AspectFit"></Image>
-              </StackLayout>
-              
-               <StackLayout Grid.Row="1" Grid.ColumnSpan="5" Orientation="Horizontal" HorizontalOptions="Center">
-                 <Label VerticalOptions="Center"  Style="{DynamicResource NearbyListItemDetailTextStyle}" Text="{Binding Reviews}"/>
-               </StackLayout>  
-          
-            </Grid>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                  <Image Source="{Binding PlaceRating, Converter={StaticResource RatingImageConverter}, ConverterParameter='1'}" Aspect="AspectFit"></Image>
+                </StackLayout>
+                <StackLayout Grid.Column="1" Orientation="Horizontal" HorizontalOptions="Center">
+                  <Image Source="{Binding PlaceRating, Converter={StaticResource RatingImageConverter}, ConverterParameter='2'}" Aspect="AspectFit"></Image>
+                </StackLayout>
+                <StackLayout Grid.Column="2" Orientation="Horizontal" HorizontalOptions="Center">
+                  <Image Source="{Binding PlaceRating, Converter={StaticResource RatingImageConverter}, ConverterParameter='3'}" Aspect="AspectFit"></Image>
+                </StackLayout>
+                <StackLayout Grid.Column="3" Orientation="Horizontal" HorizontalOptions="Center">
+                  <Image Source="{Binding PlaceRating, Converter={StaticResource RatingImageConverter}, ConverterParameter='4'}" Aspect="AspectFit"></Image>
+                </StackLayout>
+                <StackLayout Grid.Column="4" Orientation="Horizontal" HorizontalOptions="Center">
+                  <Image Source="{Binding PlaceRating, Converter={StaticResource RatingImageConverter}, ConverterParameter='5'}" Aspect="AspectFit"></Image>
+                </StackLayout>
+
+                <StackLayout Grid.Row="1" Grid.ColumnSpan="5" Orientation="Horizontal" HorizontalOptions="Center">
+                  <Label VerticalOptions="Center"  Style="{DynamicResource NearbyListItemDetailTextStyle}" Text="{Binding Reviews}"/>
+                </StackLayout>
+
+              </Grid>
+
+            </StackLayout>
+
           </StackLayout>
         </control:CardView>
        

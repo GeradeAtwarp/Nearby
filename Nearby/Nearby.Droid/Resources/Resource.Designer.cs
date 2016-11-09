@@ -2665,8 +2665,8 @@ namespace Nearby.Droid
 			// aapt resource value: 0x7f0200d5
 			public const int mr_ic_play_light = 2130837717;
 			
-			// aapt resource value: 0x7f0200dc
-			public const int notification_template_icon_bg = 2130837724;
+			// aapt resource value: 0x7f0200dd
+			public const int notification_template_icon_bg = 2130837725;
 			
 			// aapt resource value: 0x7f0200d6
 			public const int phone = 2130837718;
@@ -2681,10 +2681,13 @@ namespace Nearby.Droid
 			public const int sharethis = 2130837721;
 			
 			// aapt resource value: 0x7f0200da
-			public const int star_empty = 2130837722;
+			public const int splash_screen = 2130837722;
 			
 			// aapt resource value: 0x7f0200db
-			public const int star_filled = 2130837723;
+			public const int star_empty = 2130837723;
+			
+			// aapt resource value: 0x7f0200dc
+			public const int star_filled = 2130837724;
 			
 			static Drawable()
 			{
@@ -5121,6 +5124,9 @@ namespace Nearby.Droid
 			
 			// aapt resource value: 0x7f0b0016
 			public const int Widget_MediaRouter_MediaRouteButton = 2131427350;
+			
+			// aapt resource value: 0x7f0b0178
+			public const int splashscreen = 2131427704;
 			
 			static Style()
 			{

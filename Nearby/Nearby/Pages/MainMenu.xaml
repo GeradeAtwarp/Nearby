@@ -26,6 +26,9 @@
                      x:Name="ListViewFeeds"
                      ItemsSource="{Binding ManualItems}"
                      RowHeight="44">
+              <control:NonScrollableListView.SeparatorColor>
+                <OnPlatform x:TypeArguments="Color" iOS="{StaticResource ListSeparator}" />
+              </control:NonScrollableListView.SeparatorColor>
               <control:NonScrollableListView.ItemTemplate>
                 <DataTemplate>
                   <control:SwitchCellCust1 Text="{Binding DetailLabel}"
@@ -123,6 +126,9 @@
                      x:Name="ListFiletrs"
                      ItemsSource="{Binding FilterItems, Mode=TwoWay }"
                      RowHeight="44">
+              <control:NonScrollableListView.SeparatorColor>
+                <OnPlatform x:TypeArguments="Color" iOS="{StaticResource ListSeparator}" />
+              </control:NonScrollableListView.SeparatorColor>
               <control:NonScrollableListView.ItemTemplate>
                 <DataTemplate>
                   <control:SwitchCellCust1 Text="{Binding DetailLabel}"
@@ -135,7 +141,7 @@
           </StackLayout>
         </control:CardView>
 
-        <control:CardView>
+        <!--<control:CardView>
           <StackLayout Spacing="0">
             <control:LabelSection Text="Accounts"/>
             <control:HeaderDivider/>
@@ -151,7 +157,7 @@
             </control:NonScrollableListView>
 
           </StackLayout>
-        </control:CardView>
+        </control:CardView>-->
 
       </StackLayout>
 

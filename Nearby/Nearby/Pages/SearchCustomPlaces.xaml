@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Nearby.Pages.SearchCustomPlaces"
-             Title="Seacrh for place">
+             Title="Search location">
 
   <ContentPage.Content>
   
@@ -20,7 +20,7 @@
         <StackLayout.BackgroundColor>
           <OnPlatform x:TypeArguments="Color" Android="{StaticResource Primary}"/>
         </StackLayout.BackgroundColor>
-        <SearchBar  Text="{Binding Filter}" FontSize="Small" x:Name="placeSeach" Placeholder="Search for location" SearchCommand="{Binding SearchPlacesCommand}">
+        <SearchBar  Text="{Binding Filter}" FontSize="Small" x:Name="placeSeach" Placeholder="Search" SearchCommand="{Binding SearchPlacesCommand}">
           <SearchBar.PlaceholderColor>
             <OnPlatform x:TypeArguments="Color" Android="White"></OnPlatform>
           </SearchBar.PlaceholderColor>
@@ -49,7 +49,7 @@
           AbsoluteLayout.LayoutBounds="0,0,1,1"
           RowHeight="50">
           <ListView.SeparatorColor>
-            <OnPlatform x:TypeArguments="Color" iOS="{StaticResource ListSeparator}" WinPhone="{StaticResource ListSeparator}"/>
+            <OnPlatform x:TypeArguments="Color" iOS="{StaticResource ListSeparator}"/>
           </ListView.SeparatorColor>
           <ListView.ItemTemplate>
             <DataTemplate>
