@@ -122,7 +122,22 @@ namespace Nearby.Helpers
 
         #endregion
 
+        #region Device connectivity
 
+        bool isConnected;
+        public bool IsConnected
+        {
+            get { return isConnected; }
+            set
+            {
+                if (isConnected == value)
+                    return;
+                isConnected = value;
+                OnPropertyChanged();
+            }
+        }
+
+        #endregion
 
 
 

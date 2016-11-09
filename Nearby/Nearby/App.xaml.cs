@@ -10,6 +10,8 @@ using Nearby.viewModel;
 using FormsToolkit;
 using Nearby.Helpers;
 using Nearby.Utils;
+using Plugin.Connectivity;
+using Plugin.Connectivity.Abstractions;
 
 namespace Nearby
 {
@@ -47,14 +49,11 @@ namespace Nearby
             OnResume();
         }
 
-        protected override void OnSleep()
-        {
-            //loc = null;
-        }
-
         protected override void OnResume()
         {
-            
+            Settings.Current.IsConnected = CrossConnectivity.Current.IsConnected;
+            CrossConnectivity.Current.ConnectivityChanged += ConnectivityChanged;
+
             //Start messaging service to display alert
             MessagingService.Current.Subscribe<MessagingServiceAlert>(MessageKeys.Message, async (m, info) =>
             {
@@ -76,23 +75,30 @@ namespace Nearby
                 var result = await task;
                 q?.OnCompleted?.Invoke(result);
             });
-        }
-        
-        public static Action SuccessfulLoginAction
-        {
-            get
-            {
-                return new Action(() => {
-                    NavPage.Navigation.InsertPageBefore(new Home(), NavPage.Navigation.NavigationStack.First());
-                    NavPage.Navigation.PopToRootAsync();
-                    //NavPage.Navigation.PopModalAsync();
 
-                    //if (IsLoggedIn)
-                    //{
-                    //    NavPage.Navigation.InsertPageBefore(new TodoListPage(), NavPage.Navigation.NavigationStack.First());
-                    //    NavPage.Navigation.PopToRootAsync();
-                    //}
-                });
+
+        }
+
+        protected override void OnSleep()
+        {
+            MessagingService.Current.Unsubscribe<MessagingServiceQuestion>(MessageKeys.Question);
+            MessagingService.Current.Unsubscribe<MessagingServiceAlert>(MessageKeys.Message);
+            
+            CrossConnectivity.Current.ConnectivityChanged -= ConnectivityChanged;
+        }
+
+
+        protected async void ConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
+        {
+            //save current state and then set it
+            var connected = Settings.Current.IsConnected;
+            Settings.Current.IsConnected = e.IsConnected;
+            if (connected && !e.IsConnected)
+            {
+                //we went offline, should alert the user and also update ui (done via settings)
+                var task = Application.Current?.MainPage?.DisplayAlert("Offline", "Oh snap! you have gone offline. Please check your internet connection.", "OK");
+                if (task != null)
+                    await task;
             }
         }
     }
