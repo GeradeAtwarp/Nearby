@@ -51,12 +51,11 @@
 	<array>
 		<string>location</string>
 	</array>
-  <key>NSLocationWhenInUseUsageDescription</key>
-  <string>You are about to use location!</string>
-
-  <key>NSLocationAlwaysUsageDescription</key>
-  <string>This will be called if location is used behind the scenes</string>
-  <key>View controller-based status bar appearance</key>
-  <string>NO</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>You are about to use location!</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>This will be called if location is used behind the scenes</string>
+	<key>View controller-based status bar appearance</key>
+	<string>NO</string>
 </dict>
 </plist>
