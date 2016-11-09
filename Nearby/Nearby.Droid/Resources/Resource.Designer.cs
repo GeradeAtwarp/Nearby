@@ -2665,29 +2665,32 @@ namespace Nearby.Droid
 			// aapt resource value: 0x7f0200d5
 			public const int mr_ic_play_light = 2130837717;
 			
-			// aapt resource value: 0x7f0200dd
-			public const int notification_template_icon_bg = 2130837725;
-			
 			// aapt resource value: 0x7f0200d6
-			public const int phone = 2130837718;
+			public const int nearby_icon = 2130837718;
+			
+			// aapt resource value: 0x7f0200de
+			public const int notification_template_icon_bg = 2130837726;
 			
 			// aapt resource value: 0x7f0200d7
-			public const int pin = 2130837719;
+			public const int phone = 2130837719;
 			
 			// aapt resource value: 0x7f0200d8
-			public const int settings_cog = 2130837720;
+			public const int pin = 2130837720;
 			
 			// aapt resource value: 0x7f0200d9
-			public const int sharethis = 2130837721;
+			public const int settings_cog = 2130837721;
 			
 			// aapt resource value: 0x7f0200da
-			public const int splash_screen = 2130837722;
+			public const int sharethis = 2130837722;
 			
 			// aapt resource value: 0x7f0200db
-			public const int star_empty = 2130837723;
+			public const int splash_screen = 2130837723;
 			
 			// aapt resource value: 0x7f0200dc
-			public const int star_filled = 2130837724;
+			public const int star_empty = 2130837724;
+			
+			// aapt resource value: 0x7f0200dd
+			public const int star_filled = 2130837725;
 			
 			static Drawable()
 			{
