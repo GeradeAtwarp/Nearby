@@ -56,13 +56,8 @@
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>This will be called if location is used behind the scenes</string>
 	<key>View controller-based status bar appearance</key>
-	<string>NO</string>
-
-  <key>UIStatusBarStyle</key>
-  <string>UIStatusBarStyleLightContent</string>
-  <key>UIViewControllerBasedStatusBarAppearance</key>
   <false/>
-
-
+	<key>UIStatusBarHidden</key>
+	<true/>
 </dict>
 </plist>
