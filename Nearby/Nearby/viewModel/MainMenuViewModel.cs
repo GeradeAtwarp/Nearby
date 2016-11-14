@@ -140,6 +140,14 @@ namespace Nearby.viewModel
         {
             SwitchCell custLocation = (SwitchCell)e;
             ChangeLocationIsEnabled = custLocation.On;
+
+            //Update setting to remove custom location
+            if (!custLocation.On)
+            {
+                CustomLocation = "";
+                CustomLongitude = "";
+                CustomLatitude = "";
+            }
         }
 
 
