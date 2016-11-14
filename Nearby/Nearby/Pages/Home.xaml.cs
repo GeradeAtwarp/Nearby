@@ -79,6 +79,16 @@ namespace Nearby.Pages
                 //Get the users current location
                 var locator = CrossGeolocator.Current;
                 position = await locator.GetPositionAsync(10000);
+
+                var pin = new Pin
+                {
+                    Type = PinType.Place,
+                    Label = "This is you!",
+                    Position = new Position(position.Latitude, position.Longitude)
+                };
+
+                placesMap.Pins.Add(pin);
+                placesMap.MoveToRegion(MapSpan.FromCenterAndRadius(pin.Position, Distance.FromMiles(0.5)));
             }
             else
             {
