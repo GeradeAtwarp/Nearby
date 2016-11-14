@@ -1,4 +1,5 @@
 ﻿using MvvmHelpers;
+using Nearby.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace Nearby.viewModel
 {
     public class SearchCustomPlaceViewModel : NearbyBaseViewModel
     {
-        public ObservableRangeCollection<SearchPlace> SearchResults { get; } = new ObservableRangeCollection<SearchPlace>();
+        public ObservableRangeCollection<CustomPlaceSearch> SearchResults { get; } = new ObservableRangeCollection<CustomPlaceSearch>();
 
         public SearchCustomPlaceViewModel(INavigation navigation) :base(navigation)
         {
@@ -58,7 +59,25 @@ namespace Nearby.viewModel
                     SearchPlaces places = JsonConvert.DeserializeObject<SearchPlaces>(placesResult);
 
                     SearchResults.Clear();
-                    SearchResults.AddRange(places.results);
+
+                    foreach (SearchPlace place in places.results)
+                    {
+                        CustomPlaceSearch sp = new CustomPlaceSearch();
+
+                        sp.Name = place.name;
+                        sp.PlaceId = place.place_id;
+
+                        if (place.types != null)
+                            sp.Tags = place.types[0].Replace("_", " ");
+
+                        sp.Address = place.formatted_address;
+
+                        sp.CoOrdinatesLat = place.geometry.location.lat;
+                        sp.CoOrdinatesLng = place.geometry.location.lng;
+
+                        SearchResults.Add(sp);
+                    }
+                    
 
                     if (SearchResults.Count() == 0)
                         HasNoResults = true;
@@ -74,15 +93,15 @@ namespace Nearby.viewModel
             }
         }
 
-        public async Task SetPlaceAsCustomLocation(SearchPlace place)
+        public async Task SetPlaceAsCustomLocation(CustomPlaceSearch place)
         {
             try
             {
-                Settings.CustomLatitude = place.geometry.location.lat.ToString();
-                Settings.CustomLongitude = place.geometry.location.lng.ToString();
-                Settings.CustomLocation = place.name;
+                Settings.CustomLatitude = place.CoOrdinatesLat.ToString();
+                Settings.CustomLongitude = place.CoOrdinatesLng.ToString();
+                Settings.CustomLocation = place.Name;
 
-                Application.Current?.MainPage?.DisplayAlert("Info", "Custom location was successfully set to " + place.name, "Ok");
+                Application.Current?.MainPage?.DisplayAlert("Info", "Custom location was successfully set to " + place.Name, "Ok");
                     
             }
             catch (Exception ex)

@@ -53,7 +53,30 @@
           </ListView.SeparatorColor>
           <ListView.ItemTemplate>
             <DataTemplate>
-              <TextCell Text="{Binding name}" Detail="{Binding formatted_address}"></TextCell>
+              <ViewCell>
+                <ViewCell.View>
+                  <StackLayout>
+                    <Grid Padding="{DynamicResource StandardPadding}" ColumnSpacing="{StaticResource StandardSpacing}">
+                      <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                      </Grid.RowDefinitions>
+                      <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="30"/>
+                      </Grid.ColumnDefinitions>
+
+                      <Label Text="{Binding Name}" Style="{DynamicResource NearbyListItemTextStyle}"/>
+
+                      <Label Grid.Row="1" Grid.Column="0" Text="{Binding Tags}"  Style="{DynamicResource NearbyListItemDetailTextStyle}"/>
+
+                      <Label Grid.Row="2" Grid.Column="0" Text="{Binding Address}" Style="{DynamicResource NearbyListItemDetailTextStyle}"/>
+
+                    </Grid>
+                  </StackLayout>
+                </ViewCell.View>
+              </ViewCell>
             </DataTemplate>
           </ListView.ItemTemplate>
         </ListView>

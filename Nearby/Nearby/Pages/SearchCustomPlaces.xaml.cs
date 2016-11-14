@@ -1,4 +1,5 @@
 ﻿using Nearby.Helpers;
+using Nearby.Models;
 using Nearby.viewModel;
 using System;
 using System.Collections.Generic;
@@ -29,7 +30,7 @@ namespace Nearby.Pages
 
         private void LstSearch_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            var selectedPlace = e.SelectedItem as Nearby.viewModel.SearchCustomPlaceViewModel.SearchPlace;
+            var selectedPlace = e.SelectedItem as CustomPlaceSearch;
 
             if(selectedPlace != null)
             {

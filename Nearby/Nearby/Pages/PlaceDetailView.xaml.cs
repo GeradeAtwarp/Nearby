@@ -54,6 +54,8 @@ namespace Nearby.Pages
 
                 ListPlaceContactDetails.SelectedItem = null;
             };
+
+            placeDetailMap.IsEnabled = false;
         }
 
         protected override void OnBindingContextChanged()

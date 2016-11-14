@@ -7,6 +7,7 @@ using Plugin.Share;
 using Plugin.Share.Abstractions;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,11 +21,15 @@ namespace Nearby.viewModel
     {
         protected INavigation Navigation { get; }
         protected Database NearbyDataContext { get; }
+        protected TextInfo CultureTextInfo { get; }
 
         public NearbyBaseViewModel(INavigation navigation = null)
         {
             Navigation = navigation;
             NearbyDataContext = new Database();
+
+            // Creates a TextInfo based on the "en-US" culture.
+            CultureTextInfo = new CultureInfo("en-US").TextInfo;
         }
 
         public static void Init(bool mock = true)

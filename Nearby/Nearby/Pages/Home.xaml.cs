@@ -82,22 +82,27 @@ namespace Nearby.Pages
             }
             else
             {
-                position = new Plugin.Geolocator.Abstractions.Position
+                if (Settings.Current.CustomLatitude == "" || Settings.Current.CustomLongitude == "")
+                    Application.Current?.MainPage.DisplayAlert("Location", "Please set a custom location, Or turn off the custom location option on the settings page.", "Got it");
+                else
                 {
-                    Latitude = Convert.ToDouble(Settings.Current.CustomLatitude),
-                    Longitude = Convert.ToDouble(Settings.Current.CustomLongitude)
-                };
+                    position = new Plugin.Geolocator.Abstractions.Position
+                    {
+                        Latitude = Convert.ToDouble(Settings.Current.CustomLatitude),
+                        Longitude = Convert.ToDouble(Settings.Current.CustomLongitude)
+                    };
+
+                    var pin = new Pin
+                    {
+                        Type = PinType.Place,
+                        Label = "This is you!",
+                        Position = new Position(position.Latitude, position.Longitude)
+                    };
+
+                    placesMap.Pins.Add(pin);
+                    placesMap.MoveToRegion(MapSpan.FromCenterAndRadius(pin.Position, Distance.FromMiles(0.5)));
+                }
             }
-
-            var pin = new Pin
-            {
-                Type = PinType.Place,
-                Label = "This is you!",
-                Position = new Position (position.Latitude, position.Longitude )
-            };
-
-            placesMap.Pins.Add(pin);
-            placesMap.MoveToRegion(MapSpan.FromCenterAndRadius(pin.Position, Distance.FromMiles(0.5)));
         }
 
         async Task SearchForPlacesNearby()

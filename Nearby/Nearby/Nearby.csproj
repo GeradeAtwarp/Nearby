@@ -64,6 +64,7 @@
     <Compile Include="Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\CustomPlaceSearch.cs" />
     <Compile Include="Models\DynamoDB\BaseDynamoEntity.cs" />
     <Compile Include="Models\DynamoDB\IBaseDynamo.cs" />
     <Compile Include="Models\DynamoDB\Nearby_Favorites.cs" />
