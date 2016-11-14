@@ -46,8 +46,7 @@
           BackgroundColor="White"
           IsVisible="{Binding IsNotBusy}"
           AbsoluteLayout.LayoutFlags="All"
-          AbsoluteLayout.LayoutBounds="0,0,1,1"
-          RowHeight="50">
+          AbsoluteLayout.LayoutBounds="0,0,1,1">
           <ListView.SeparatorColor>
             <OnPlatform x:TypeArguments="Color" iOS="{StaticResource ListSeparator}"/>
           </ListView.SeparatorColor>
@@ -55,7 +54,7 @@
             <DataTemplate>
               <ViewCell>
                 <ViewCell.View>
-                  <StackLayout>
+                  <StackLayout HorizontalOptions="FillAndExpand">
                     <Grid Padding="{DynamicResource StandardPadding}" ColumnSpacing="{StaticResource StandardSpacing}">
                       <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
