@@ -163,37 +163,37 @@ namespace Nearby.viewModel
                             {
                                 case 0:
                                     {
-                                        PlaceOperatingHours.Add(new PlceDetailItem { PlaceDetailLabel = "Sunday", PlaceDetailValue = (p.open.time != null ? p.open.time : "") + " - " + (p.close.time != null ? p.close.time : "") });
+                                        PlaceOperatingHours.Add(new PlceDetailItem { PlaceDetailLabel = "Sunday", PlaceDetailValue = (p.open != null ? p.open.time : "") + " - " + (p.close != null ? p.close.time : "") });
                                     }
                                     break;
                                 case 1:
                                     {
-                                        PlaceOperatingHours.Add(new PlceDetailItem { PlaceDetailLabel = "Monday", PlaceDetailValue = (p.open.time != null ? p.open.time : "") + " - " + (p.close.time != null ? p.close.time : "") });
+                                        PlaceOperatingHours.Add(new PlceDetailItem { PlaceDetailLabel = "Monday", PlaceDetailValue = (p.open != null ? p.open.time : "") + " - " + (p.close != null ? p.close.time : "") });
                                     }
                                     break;
                                 case 2:
                                     {
-                                        PlaceOperatingHours.Add(new PlceDetailItem { PlaceDetailLabel = "Tuesday", PlaceDetailValue = (p.open.time != null ? p.open.time : "") + " - " + (p.close.time != null ? p.close.time : "") });
+                                        PlaceOperatingHours.Add(new PlceDetailItem { PlaceDetailLabel = "Tuesday", PlaceDetailValue = (p.open != null ? p.open.time : "") + " - " + (p.close != null ? p.close.time : "") });
                                     }
                                     break;
                                 case 3:
                                     {
-                                        PlaceOperatingHours.Add(new PlceDetailItem { PlaceDetailLabel = "Wednesday", PlaceDetailValue = (p.open.time != null ? p.open.time : "") + " - " + (p.close.time != null ? p.close.time : "") });
+                                        PlaceOperatingHours.Add(new PlceDetailItem { PlaceDetailLabel = "Wednesday", PlaceDetailValue = (p.open != null ? p.open.time : "") + " - " + (p.close != null ? p.close.time : "") });
                                     }
                                     break;
                                 case 4:
                                     {
-                                        PlaceOperatingHours.Add(new PlceDetailItem { PlaceDetailLabel = "Thursday", PlaceDetailValue = (p.open.time != null ? p.open.time : "") + " - " + (p.close.time != null ? p.close.time : "") });
+                                        PlaceOperatingHours.Add(new PlceDetailItem { PlaceDetailLabel = "Thursday", PlaceDetailValue = (p.open != null ? p.open.time : "") + " - " + (p.close != null ? p.close.time : "") });
                                     }
                                     break;
                                 case 5:
                                     {
-                                        PlaceOperatingHours.Add(new PlceDetailItem { PlaceDetailLabel = "Friday", PlaceDetailValue = (p.open.time != null ? p.open.time : "") + " - " + (p.close.time != null ? p.close.time : "") });
+                                        PlaceOperatingHours.Add(new PlceDetailItem { PlaceDetailLabel = "Friday", PlaceDetailValue = (p.open != null ? p.open.time : "") + " - " + (p.close != null ? p.close.time : "")});
                                     }
                                     break;
                                 case 6:
                                     {
-                                        PlaceOperatingHours.Add(new PlceDetailItem { PlaceDetailLabel = "Saturday", PlaceDetailValue = (p.open.time != null ? p.open.time : "") + " - " + (p.close.time != null ? p.close.time : "") });
+                                        PlaceOperatingHours.Add(new PlceDetailItem { PlaceDetailLabel = "Saturday", PlaceDetailValue = (p.open != null ? p.open.time : "") + " - " + (p.close != null ? p.close.time : "") });
                                     }
                                     break;
                             }
