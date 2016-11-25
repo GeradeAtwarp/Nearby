@@ -58,7 +58,7 @@ namespace Nearby.Pages
                 await Navigation.PushAsync(new Favourites());
             });
 
-            //btnSearchPlaces.Clicked += (sender, ea) => SearchForPlacesNearby();
+            btnSearchPlaces.Clicked += (sender, ea) => SearchForPlacesNearby();
             fabsearch.Clicked += (sender, ea) => SearchForPlacesNearby();
             fabrefine.Clicked += (sender, e) => ToggleRefineOptions();
 

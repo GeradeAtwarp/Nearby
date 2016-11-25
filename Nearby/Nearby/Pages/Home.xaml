@@ -13,30 +13,37 @@
     <ToolbarItem x:Name="tbItemNavigateOptions" Icon="settings_cog" />
   </ContentPage.ToolbarItems>
 
-  <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+  <ContentPage.Content>
+    <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
     
     <maps:Map x:Name="placesMap" MapType="Street" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1"/>
     
-    <!-- Search and refine buttons Android -->-->
+    <!-- Search and refine buttons Android -->
     <OnPlatform x:TypeArguments="View">
       <OnPlatform.Android>
-        <StackLayout AbsoluteLayout.LayoutBounds="0.3, 1, AutoSize, AutoSize" AbsoluteLayout.LayoutFlags="PositionProportional">
-          <control:FloatingActionButtonView x:Name="fabsearch" Size="Mini" ImageName="search" ColorNormal="#7885cb" ColorPressed="#3F51B5" ColorRipple="#2C3E50" AbsoluteLayout.LayoutBounds="0.3, 1, AutoSize, AutoSize" AbsoluteLayout.LayoutFlags="PositionProportional" />
-          <control:FloatingActionButtonView x:Name="fabrefine" Size="Mini" ImageName="fab_refine" ColorNormal="#7885cb" ColorPressed="#3F51B5" ColorRipple="#2C3E50" AbsoluteLayout.LayoutBounds="0.7, 1, AutoSize, AutoSize" AbsoluteLayout.LayoutFlags="PositionProportional" />
-        </StackLayout>
+          <control:FloatingActionButtonView x:Name="fabsearch" Size="Mini" ImageName="search" ColorNormal="#7885cb" ColorPressed="#3F51B5" ColorRipple="#2C3E50" AbsoluteLayout.LayoutBounds="0.3, 1, AutoSize, AutoSize" AbsoluteLayout.LayoutFlags="PositionProportional" />          
       </OnPlatform.Android>
     </OnPlatform>
 
-    <!-- Search and refine buttons IOS -->-->
-    <!--<OnPlatform x:TypeArguments="View">
-      <OnPlatform.iOS>
-        <StackLayout AbsoluteLayout.LayoutBounds="0.3, 1, AutoSize, AutoSize" AbsoluteLayout.LayoutFlags="PositionProportional">
-          <Button BorderRadius="5" BorderColor="#3F51B5" WidthRequest="50" x:Name="btnSearchPlaces" BackgroundColor="Transparent" TextColor="White" VerticalOptions="End" Text="Search" AbsoluteLayout.LayoutBounds="0.3, 1, AutoSize, AutoSize" AbsoluteLayout.LayoutFlags="PositionProportional" ></Button>
-          <Button BorderRadius="5" BorderColor="#3F51B5" WidthRequest="50" x:Name="btnRefineSearch" BackgroundColor="Transparent" TextColor="White" VerticalOptions="End" Text="Refine" AbsoluteLayout.LayoutBounds="0.7, 1, AutoSize, AutoSize" AbsoluteLayout.LayoutFlags="PositionProportional" ></Button>
-        </StackLayout>
-      </OnPlatform.iOS>
-    </OnPlatform>-->
-     
+    <OnPlatform x:TypeArguments="View">
+      <OnPlatform.Android>
+        <control:FloatingActionButtonView x:Name="fabrefine" Size="Mini" ImageName="fab_refine" ColorNormal="#7885cb" ColorPressed="#3F51B5" ColorRipple="#2C3E50" AbsoluteLayout.LayoutBounds="0.7, 1, AutoSize, AutoSize" AbsoluteLayout.LayoutFlags="PositionProportional" />
+      </OnPlatform.Android>
+    </OnPlatform>
+
+      <!-- Search and refine buttons IOS-->
+    <Button BorderRadius="5" BorderColor="#3F51B5" WidthRequest="50" x:Name="btnSearchPlaces" BackgroundColor="Transparent" TextColor="#3F51B5" VerticalOptions="End" Text="Search" AbsoluteLayout.LayoutBounds="0.3, 1, AutoSize, AutoSize" AbsoluteLayout.LayoutFlags="PositionProportional">
+      <Button.IsVisible>
+        <OnPlatform x:TypeArguments="x:Boolean" iOS="true" Android="false"/>
+      </Button.IsVisible>
+    </Button>
+      
+    <Button BorderRadius="5" BorderColor="#3F51B5" WidthRequest="50" x:Name="btnRefineSearch" BackgroundColor="Transparent" TextColor="#3F51B5" VerticalOptions="End" Text="Refine" AbsoluteLayout.LayoutBounds="0.7, 1, AutoSize, AutoSize" AbsoluteLayout.LayoutFlags="PositionProportional">
+      <Button.IsVisible>
+        <OnPlatform x:TypeArguments="x:Boolean" iOS="true" Android="false"/>
+      </Button.IsVisible>
+    </Button>
+  
     <!-- Dialog popup with refine search options -->
     <StackLayout x:Name="RefineSearchMenu" Scale="0" BackgroundColor="White" Opacity="0.8" HorizontalOptions="FillAndExpand" AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional" AbsoluteLayout.LayoutBounds="0,0,1,AutoSize">
       
@@ -87,5 +94,6 @@
     </StackLayout>
     
   </AbsoluteLayout>
-  
+  </ContentPage.Content>
+      
 </ContentPage>
