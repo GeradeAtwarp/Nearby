@@ -89,6 +89,14 @@ namespace Nearby.viewModel
             set { SetProperty(ref hasReviews, value); }
         }
 
+        public string favouriteColor = "#3F51B5";
+        public string FavouriteColor
+        {
+            get { return favouriteColor; }
+            set { SetProperty(ref favouriteColor, value); }
+        }
+
+
         public PlaceDetailViewModel(INavigation navigation, Places place) : base(navigation)
         {
             Place = place;
@@ -209,7 +217,7 @@ namespace Nearby.viewModel
                 var fav = NearbyDataContext.GetItems<FavoritePlaces>().Where(x => x.PlaceId == Place.place_id).FirstOrDefault();
                 if (fav != null)
                 {
-                    FavImage = ImageSource.FromFile("heart_filled.png");
+                    FavouriteColor = "#FF0000";
                 }
 
                 PlaceRating = Details.result.reviews[0].aspects[0].rating;
@@ -238,7 +246,8 @@ namespace Nearby.viewModel
                 if (fav == null)
                 {
                     NearbyDataContext.SaveItem<FavoritePlaces>(new FavoritePlaces { Created = DateTime.Now, PlaceId = Place.place_id, PlaceName = Details.result.name, Latitude = Place.geometry.location.lat, Longitude = Place.geometry.location.lng, Vicinity = Place.vicinity });
-                    FavImage = ImageSource.FromFile("heart_filled.png");
+                    FavouriteColor = "#FF0000";
+
                     Application.Current?.MainPage?.DisplayAlert("Favourite", Details.result.name + " was successfully added to you favourites.", "Ok");
                 }
                 else
@@ -257,6 +266,7 @@ namespace Nearby.viewModel
                             if (fav != null)
                             {
                                 NearbyDataContext.RemoveItem<FavoritePlaces>(fav);
+                                FavouriteColor = "#3F51B5";
                             }
                         })
                     });

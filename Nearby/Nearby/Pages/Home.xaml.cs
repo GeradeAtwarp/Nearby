@@ -5,6 +5,8 @@ using Nearby.Utils;
 using Nearby.viewModel;
 using Newtonsoft.Json;
 using Plugin.Geolocator;
+using Plugin.Permissions;
+using Plugin.Permissions.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -57,6 +59,8 @@ namespace Nearby.Pages
             });
 
             btnSearchPlaces.Clicked += (sender, ea) => SearchForPlacesNearby();
+            fabsearch.Clicked += (sender, ea) => SearchForPlacesNearby();
+            fabrefine.Clicked += (sender, e) => ToggleRefineOptions();
 
             MoveToCurrentLocation();
         }
@@ -64,9 +68,7 @@ namespace Nearby.Pages
         protected override void OnAppearing()
         {
             base.OnAppearing();
-
             vm.UpdateItems();
-
             MoveToCurrentLocation();
         }
 
@@ -151,9 +153,20 @@ namespace Nearby.Pages
             }
         }
 
-        async Task PopSearchButton()
+        async Task ToggleRefineOptions()
         {
-            
+            if (RefineSearchMenu.Scale == 0)
+            {
+                fabrefine.ColorNormal = Color.FromHex("#3F51B5");
+                await Task.Delay(300);
+                await RefineSearchMenu.ScaleTo(1, 250, Easing.SinIn);
+            }
+            else
+            {
+                fabrefine.ColorNormal = Color.FromHex("#7885cb");
+                await Task.Delay(300);
+                await RefineSearchMenu.ScaleTo(0, 250, Easing.SinOut);
+            }
         }
 
         async Task GetMyCurrentLocation()

@@ -56,6 +56,18 @@ namespace Nearby.Pages
             };
 
             placeDetailMap.IsEnabled = false;
+
+            EaseIn();
+        }
+
+        async Task EaseIn()
+        {
+            await Task.Delay(300);
+
+            await Actionbuttons.ScaleTo(1, 250, Easing.SinIn);
+            await PlaceReviews.ScaleTo(1, 250, Easing.SinIn);
+            await PlaceOperating.ScaleTo(1, 250, Easing.SinIn);
+            await PlaceContact.ScaleTo(1, 250, Easing.SinIn);
         }
 
         protected override void OnBindingContextChanged()
