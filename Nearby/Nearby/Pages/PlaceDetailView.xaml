@@ -175,39 +175,10 @@
                             <OnPlatform x:TypeArguments="Thickness" iOS="16,8" Android="16,8"/>
                           </Grid.Padding>
                           <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="30"/>
-                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
                           </Grid.ColumnDefinitions>
-                          
-                           <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
-                              <StackLayout.IsVisible>
-                                <OnPlatform x:TypeArguments="x:Boolean" iOS="false" Android="true"/>
-                              </StackLayout.IsVisible>
-                            
-                              <Image Source="{Binding Icon}">
-                              <Image.IsVisible>
-                                <OnPlatform x:TypeArguments="x:Boolean" iOS="false" Android="true"/>
-                              </Image.IsVisible>
-                              </Image>
-                             
-                              <Label Grid.Column="1"
-                                     VerticalOptions="Center"
-                                     Style="{DynamicResource NearbyListItemTextStyle}"
-                                     Text="{Binding PlaceDetailValue}">
-                              </Label> 
-                          
-                           </StackLayout>
 
-                          <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
-                            <StackLayout.IsVisible>
-                              <OnPlatform x:TypeArguments="x:Boolean" iOS="true" Android="false"/>
-                            </StackLayout.IsVisible>
-                            <Label Grid.ColumnSpan="2"
-                                   VerticalOptions="Center"
-                                   Style="{DynamicResource NearbyListItemTextStyle}"
-                                   Text="{Binding PlaceDetailValue}">
-                            </Label>
-                          </StackLayout>
+                          <Label VerticalOptions="Center"  Style="{DynamicResource NearbyListItemTextStyle}" Text="{Binding PlaceDetailValue}" />
 
                         </Grid>
                        </ViewCell.View>

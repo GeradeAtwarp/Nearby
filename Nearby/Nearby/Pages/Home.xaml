@@ -32,13 +32,13 @@
     </OnPlatform>-->
 
      <!-- Search and refine buttons IOS-->
-    <Button BorderRadius="5" BorderColor="#3F51B5" WidthRequest="50" x:Name="btnSearchPlaces" BackgroundColor="Transparent" TextColor="#3F51B5" VerticalOptions="End" Text="Search" AbsoluteLayout.LayoutBounds="0.3, 1, AutoSize, AutoSize" AbsoluteLayout.LayoutFlags="PositionProportional">
+    <Button BorderRadius="5" BorderColor="#3F51B5" BorderWidth="1" Font="Bold" WidthRequest="50" x:Name="btnSearchPlaces" BackgroundColor="Transparent" TextColor="#3F51B5" VerticalOptions="End" Text="Search" AbsoluteLayout.LayoutBounds="0.3, 0.9, AutoSize, AutoSize" AbsoluteLayout.LayoutFlags="PositionProportional">
       <Button.IsVisible>
         <OnPlatform x:TypeArguments="x:Boolean" iOS="true" Android="false"/>
       </Button.IsVisible>
     </Button>
       
-    <Button BorderRadius="5" BorderColor="#3F51B5" WidthRequest="50" x:Name="btnRefineSearch" BackgroundColor="Transparent" TextColor="#3F51B5" VerticalOptions="End" Text="Refine" AbsoluteLayout.LayoutBounds="0.7, 1, AutoSize, AutoSize" AbsoluteLayout.LayoutFlags="PositionProportional">
+    <Button BorderRadius="5" BorderColor="#3F51B5" BorderWidth="1" Font="Bold" WidthRequest="50" x:Name="btnRefineSearch" BackgroundColor="Transparent" TextColor="#3F51B5" VerticalOptions="End" Text="Refine" AbsoluteLayout.LayoutBounds="0.7, 0.9, AutoSize, AutoSize" AbsoluteLayout.LayoutFlags="PositionProportional">
       <Button.IsVisible>
         <OnPlatform x:TypeArguments="x:Boolean" iOS="true" Android="false"/>
       </Button.IsVisible>
@@ -63,7 +63,7 @@
              <Label Text="Restuarant" HorizontalOptions="Center" Style="{DynamicResource NearbyReviewDetailTextStyle}"/>
           </StackLayout>
           
-          <StackLayout Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="#7885cb">
+          <StackLayout Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
             <Image Source="apartment" VerticalOptions="FillAndExpand" Aspect="AspectFit" HeightRequest="50" WidthRequest="50" />
             <Label Text="Accomodation" HorizontalOptions="Center" Style="{DynamicResource NearbyReviewDetailTextStyle}"/>
           </StackLayout>
