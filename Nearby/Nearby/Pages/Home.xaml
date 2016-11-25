@@ -21,21 +21,21 @@
     <OnPlatform x:TypeArguments="View">
       <OnPlatform.Android>
         <StackLayout AbsoluteLayout.LayoutBounds="0.3, 1, AutoSize, AutoSize" AbsoluteLayout.LayoutFlags="PositionProportional">
-          <control:FloatingActionButtonView x:Name="fabsearch" Size="20" ImageName="search" ColorNormal="#7885cb" ColorPressed="#3F51B5" ColorRipple="#2C3E50" AbsoluteLayout.LayoutBounds="0.3, 1, AutoSize, AutoSize" AbsoluteLayout.LayoutFlags="PositionProportional" />
-          <control:FloatingActionButtonView x:Name="fabrefine" ImageName="fab_refine" ColorNormal="#7885cb" ColorPressed="#3F51B5" ColorRipple="#2C3E50" AbsoluteLayout.LayoutBounds="0.7, 1, AutoSize, AutoSize" AbsoluteLayout.LayoutFlags="PositionProportional" />
+          <control:FloatingActionButtonView x:Name="fabsearch" Size="Mini" ImageName="search" ColorNormal="#7885cb" ColorPressed="#3F51B5" ColorRipple="#2C3E50" AbsoluteLayout.LayoutBounds="0.3, 1, AutoSize, AutoSize" AbsoluteLayout.LayoutFlags="PositionProportional" />
+          <control:FloatingActionButtonView x:Name="fabrefine" Size="Mini" ImageName="fab_refine" ColorNormal="#7885cb" ColorPressed="#3F51B5" ColorRipple="#2C3E50" AbsoluteLayout.LayoutBounds="0.7, 1, AutoSize, AutoSize" AbsoluteLayout.LayoutFlags="PositionProportional" />
         </StackLayout>
       </OnPlatform.Android>
     </OnPlatform>
 
     <!-- Search and refine buttons IOS -->-->
-    <OnPlatform x:TypeArguments="View">
+    <!--<OnPlatform x:TypeArguments="View">
       <OnPlatform.iOS>
         <StackLayout AbsoluteLayout.LayoutBounds="0.3, 1, AutoSize, AutoSize" AbsoluteLayout.LayoutFlags="PositionProportional">
           <Button BorderRadius="5" BorderColor="#3F51B5" WidthRequest="50" x:Name="btnSearchPlaces" BackgroundColor="Transparent" TextColor="White" VerticalOptions="End" Text="Search" AbsoluteLayout.LayoutBounds="0.3, 1, AutoSize, AutoSize" AbsoluteLayout.LayoutFlags="PositionProportional" ></Button>
           <Button BorderRadius="5" BorderColor="#3F51B5" WidthRequest="50" x:Name="btnRefineSearch" BackgroundColor="Transparent" TextColor="White" VerticalOptions="End" Text="Refine" AbsoluteLayout.LayoutBounds="0.7, 1, AutoSize, AutoSize" AbsoluteLayout.LayoutFlags="PositionProportional" ></Button>
         </StackLayout>
       </OnPlatform.iOS>
-    </OnPlatform>
+    </OnPlatform>-->
      
     <!-- Dialog popup with refine search options -->
     <StackLayout x:Name="RefineSearchMenu" Scale="0" BackgroundColor="White" Opacity="0.8" HorizontalOptions="FillAndExpand" AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional" AbsoluteLayout.LayoutBounds="0,0,1,AutoSize">
