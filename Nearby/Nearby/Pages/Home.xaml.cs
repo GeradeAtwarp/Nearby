@@ -58,9 +58,9 @@ namespace Nearby.Pages
                 await Navigation.PushAsync(new Favourites());
             });
 
-            btnSearchPlaces.Clicked += (sender, ea) => SearchForPlacesNearby();
-            fabsearch.Clicked += (sender, ea) => SearchForPlacesNearby();
-            fabrefine.Clicked += (sender, e) => ToggleRefineOptions();
+            //btnSearchPlaces.Clicked += (sender, ea) => SearchForPlacesNearby();
+            //fabsearch.Clicked += (sender, ea) => SearchForPlacesNearby();
+            //fabrefine.Clicked += (sender, e) => ToggleRefineOptions();
 
             MoveToCurrentLocation();
         }
@@ -157,13 +157,13 @@ namespace Nearby.Pages
         {
             if (RefineSearchMenu.Scale == 0)
             {
-                fabrefine.ColorNormal = Color.FromHex("#3F51B5");
+                //fabrefine.ColorNormal = Color.FromHex("#3F51B5");
                 await Task.Delay(300);
                 await RefineSearchMenu.ScaleTo(1, 250, Easing.SinIn);
             }
             else
             {
-                fabrefine.ColorNormal = Color.FromHex("#7885cb");
+                //fabrefine.ColorNormal = Color.FromHex("#7885cb");
                 await Task.Delay(300);
                 await RefineSearchMenu.ScaleTo(0, 250, Easing.SinOut);
             }
