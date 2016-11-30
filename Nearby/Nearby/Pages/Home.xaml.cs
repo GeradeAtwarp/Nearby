@@ -58,12 +58,8 @@ namespace Nearby.Pages
                 await Navigation.PushAsync(new Favourites());
             });
 
-            btnSearchPlaces.Clicked += (sender, ea) => SearchForPlacesNearby();
-            btnRefineSearch.Clicked += (sender, e) => ToggleRefineOptions();
-
-            //fabsearch.Clicked += (sender, ea) => SearchForPlacesNearby();
-            //fabrefine.Clicked += (sender, e) => ToggleRefineOptions();
-
+            AddSearchButtons();
+            
             MoveToCurrentLocation();
         }
 
@@ -216,6 +212,80 @@ namespace Nearby.Pages
 
             DisplayAlert("Location", position.Longitude + "---" + position.Latitude, "Ok");
         }
+
+        async Task AddSearchButtons()
+        {
+            if(Device.OS == TargetPlatform.Android)
+            {
+                SearchButton.Children.Add(new FloatingActionButtonView
+                {
+                    Size = FloatingActionButtonSize.Mini,
+                    ImageName = "search",
+                    ColorNormal = Color.FromHex("#7885cb"),
+                    ColorPressed = Color.FromHex("#3F51B5"),
+                    ColorRipple = Color.FromHex("#2C3E50"),
+                    Clicked = (sender, ea) => SearchForPlacesNearby()
+                });
+
+                SearchButton.Children.Add(new FloatingActionButtonView
+                {
+                    Size = FloatingActionButtonSize.Mini,
+                    ImageName = "fab_refine",
+                    ColorNormal = Color.FromHex("#7885cb"),
+                    ColorPressed = Color.FromHex("#3F51B5"),
+                    ColorRipple = Color.FromHex("#2C3E50"),
+                    Clicked = (sender, e) => ToggleRefineOptions()
+            });
+            }
+            else
+            {
+                Button btnSearch = new Button
+                {
+                    BorderRadius = 5,
+                    BorderColor = Color.FromHex("#3F51B5"),
+                    BorderWidth = 2,
+                    WidthRequest = 100,
+                    BackgroundColor = Color.Transparent,
+                    TextColor = Color.FromHex("#3F51B5"),
+                    Text = "Search",
+                    FontAttributes = FontAttributes.Bold
+                };
+
+                btnSearch.Clicked += (sender, ea) => SearchForPlacesNearby();
+
+                Button btnRefineSearch = new Button
+                {
+                    BorderRadius = 5,
+                    BorderColor = Color.FromHex("#3F51B5"),
+                    BorderWidth = 2,
+                    WidthRequest = 100,
+                    BackgroundColor = Color.Transparent,
+                    TextColor = Color.FromHex("#3F51B5"),
+                    Text = "Filter",
+                    FontAttributes = FontAttributes.Bold
+                };
+
+                btnRefineSearch.Clicked += (sender, e) => ToggleRefineOptions();
+
+                SearchButton.Children.Add(btnSearch);
+                SearchButton.Children.Add(btnRefineSearch);
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         public class Locations
         {
