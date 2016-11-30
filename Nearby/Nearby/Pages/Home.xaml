@@ -18,7 +18,7 @@
     
     <maps:Map x:Name="placesMap" MapType="Street" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1"/>
 
-    <StackLayout x:Name="SearchButton" AbsoluteLayout.LayoutBounds="0.2, 1, AutoSize, AutoSize" AbsoluteLayout.LayoutFlags="PositionProportional">
+    <StackLayout x:Name="SearchButton" AbsoluteLayout.LayoutBounds="0.2, 0.9, AutoSize, AutoSize" AbsoluteLayout.LayoutFlags="PositionProportional">
         
     </StackLayout>
 
