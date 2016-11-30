@@ -30,6 +30,8 @@
 	<string>1.0</string>
 	<key>CFBundleIconFiles</key>
 	<array>
+		<string>Icon@2x.png</string>
+		<string>Icon.png</string>
 		<string>Icon-60@2x.png</string>
 		<string>Icon-76.png</string>
 		<string>Icon-76@2x.png</string>
