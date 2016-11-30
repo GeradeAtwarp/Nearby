@@ -32,13 +32,13 @@
     </OnPlatform> -->
 
      <!-- Search and refine buttons IOS-->
-    <Button BorderRadius="5" BorderColor="#3F51B5" BorderWidth="1" Font="Bold" WidthRequest="50" x:Name="btnSearchPlaces" BackgroundColor="Transparent" TextColor="#3F51B5" VerticalOptions="End" Text="Search" AbsoluteLayout.LayoutBounds="0.3, 0.9, AutoSize, AutoSize" AbsoluteLayout.LayoutFlags="PositionProportional">
+    <Button BorderRadius="5" BorderColor="#3F51B5" BorderWidth="2" Font="Bold" WidthRequest="120" x:Name="btnSearchPlaces" BackgroundColor="Transparent" TextColor="#3F51B5" VerticalOptions="End" Text="Search" AbsoluteLayout.LayoutBounds="0.3, 0.9, AutoSize, AutoSize" AbsoluteLayout.LayoutFlags="PositionProportional">
       <Button.IsVisible>
         <OnPlatform x:TypeArguments="x:Boolean" iOS="true" Android="false"/>
       </Button.IsVisible>
     </Button>
       
-    <Button BorderRadius="5" BorderColor="#3F51B5" BorderWidth="1" Font="Bold" WidthRequest="50" x:Name="btnRefineSearch" BackgroundColor="Transparent" TextColor="#3F51B5" VerticalOptions="End" Text="Refine" AbsoluteLayout.LayoutBounds="0.7, 0.9, AutoSize, AutoSize" AbsoluteLayout.LayoutFlags="PositionProportional">
+    <Button BorderRadius="5" BorderColor="#3F51B5" BorderWidth="2" Font="Bold" WidthRequest="120" x:Name="btnRefineSearch" BackgroundColor="Transparent" TextColor="#3F51B5" VerticalOptions="End" Text="Refine" AbsoluteLayout.LayoutBounds="0.7, 0.9, AutoSize, AutoSize" AbsoluteLayout.LayoutFlags="PositionProportional">
       <Button.IsVisible>
         <OnPlatform x:TypeArguments="x:Boolean" iOS="true" Android="false"/>
       </Button.IsVisible>
