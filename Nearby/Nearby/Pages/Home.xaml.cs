@@ -227,7 +227,7 @@ namespace Nearby.Pages
                     Clicked = (sender, ea) => SearchForPlacesNearby()
                 });
 
-                SearchButton.Children.Add(new FloatingActionButtonView
+                RefineButton.Children.Add(new FloatingActionButtonView
                 {
                     Size = FloatingActionButtonSize.Mini,
                     ImageName = "fab_refine",
@@ -235,7 +235,7 @@ namespace Nearby.Pages
                     ColorPressed = Color.FromHex("#3F51B5"),
                     ColorRipple = Color.FromHex("#2C3E50"),
                     Clicked = (sender, e) => ToggleRefineOptions()
-            });
+                });
             }
             else
             {
@@ -268,7 +268,7 @@ namespace Nearby.Pages
                 btnRefineSearch.Clicked += (sender, e) => ToggleRefineOptions();
 
                 SearchButton.Children.Add(btnSearch);
-                SearchButton.Children.Add(btnRefineSearch);
+                RefineButton.Children.Add(btnRefineSearch);
             }
         }
 
