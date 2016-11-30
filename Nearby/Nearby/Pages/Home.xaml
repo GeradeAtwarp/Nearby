@@ -21,7 +21,9 @@
     <!-- Search and refine buttons Android -->
     <OnPlatform x:TypeArguments="View">
       <OnPlatform.Android>
-          <control:FloatingActionButtonView x:Name="fabsearch" Size="Mini" ImageName="search" ColorNormal="#7885cb" ColorPressed="#3F51B5" ColorRipple="#2C3E50" AbsoluteLayout.LayoutBounds="0.3, 1, AutoSize, AutoSize" AbsoluteLayout.LayoutFlags="PositionProportional" />          
+          <StackLayout>
+            <control:FloatingActionButtonView x:Name="fabsearch" Size="Mini" ImageName="search" ColorNormal="#7885cb" ColorPressed="#3F51B5" ColorRipple="#2C3E50" AbsoluteLayout.LayoutBounds="0.3, 1, AutoSize, AutoSize" AbsoluteLayout.LayoutFlags="PositionProportional" />
+          </StackLayout>
       </OnPlatform.Android>
     </OnPlatform>
 
@@ -59,7 +61,7 @@
           
           <StackLayout Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
             <Image Source="apartment" VerticalOptions="FillAndExpand" Aspect="AspectFit" HeightRequest="50" WidthRequest="50" />
-            <Label Text="Accomodation" HorizontalOptions="Center" Style="{DynamicResource NearbyReviewDetailTextStyle}"/>
+            <Label Text="Hotel" HorizontalOptions="Center" Style="{DynamicResource NearbyReviewDetailTextStyle}"/>
           </StackLayout>
         
           <StackLayout Grid.Column="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
@@ -69,12 +71,12 @@
         
           <StackLayout Grid.Row="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
             <Image Source="documentary"  VerticalOptions="FillAndExpand" Aspect="AspectFit" HeightRequest="50" WidthRequest="50" />
-            <Label Text="Movie Theatre" HorizontalOptions="Center" Style="{DynamicResource NearbyReviewDetailTextStyle}"/>
+            <Label Text="Theatre" HorizontalOptions="Center" Style="{DynamicResource NearbyReviewDetailTextStyle}"/>
           </StackLayout>
             
           <StackLayout Grid.Row="1" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
             <Image Source="beer_bottle" VerticalOptions="FillAndExpand" Aspect="AspectFit" HeightRequest="50" WidthRequest="50" />
-            <Label Text="Liquor Store" HorizontalOptions="Center" Style="{DynamicResource NearbyReviewDetailTextStyle}"/>
+            <Label Text="Liquor" HorizontalOptions="Center" Style="{DynamicResource NearbyReviewDetailTextStyle}"/>
           </StackLayout>
             
           <StackLayout Grid.Row="1"  Grid.Column="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
