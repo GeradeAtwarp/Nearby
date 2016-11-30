@@ -147,7 +147,7 @@
                      Style="{DynamicResource NearbyListItemTextStyle}"/>
             </StackLayout>
               
-            <StackLayout BackgroundColor="White" IsVisible="{Binding HasNoOperatingHours}" HorizontalOptions="FillAndExpand" HeightRequest="44">
+            <StackLayout BackgroundColor="White" IsVisible="{Binding HasNoOperatingHours}" HorizontalOptions="FillAndExpand" HeightRequest="44" Padding="{StaticResource StandardPadding}">
                 <StackLayout.Padding Android="0" iOS="{StaticResource StandardPadding}"></StackLayout.Padding>
                 <Label Text="Operating hours not available" HorizontalOptions="Center"/>
             </StackLayout>  
@@ -196,7 +196,7 @@
                        Style="{DynamicResource NearbyListItemTextStyle}"/>
               </StackLayout>
 
-              <StackLayout BackgroundColor="White" IsVisible="{Binding HasNoContacts}" HorizontalOptions="FillAndExpand" HeightRequest="44">
+              <StackLayout BackgroundColor="White" IsVisible="{Binding HasNoContacts}" HorizontalOptions="FillAndExpand" HeightRequest="44" Padding="{StaticResource StandardPadding}">
                   <StackLayout.Padding Android="0" iOS="{StaticResource StandardPadding}"></StackLayout.Padding>
                   <Label Text="No contact details" HorizontalOptions="Center"/>
               </StackLayout>
