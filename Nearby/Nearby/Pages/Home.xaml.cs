@@ -59,7 +59,7 @@ namespace Nearby.Pages
             });
 
             btnSearchPlaces.Clicked += (sender, ea) => SearchForPlacesNearby();
-            fabsearch.Clicked += (sender, ea) => SearchForPlacesNearby();
+            //fabsearch.Clicked += (sender, ea) => SearchForPlacesNearby();
             //fabrefine.Clicked += (sender, e) => ToggleRefineOptions();
 
             MoveToCurrentLocation();
