@@ -91,6 +91,9 @@
     <Compile Include="Pages\SearchCustomPlaces.xaml.cs">
       <DependentUpon>SearchCustomPlaces.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\TermsAndConditions.xaml.cs">
+      <DependentUpon>TermsAndConditions.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Renderers\NearbyButton.cs" />
     <Compile Include="Utils\Entities\BaseEntity.cs" />
@@ -296,6 +299,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Controls\FooterDivider.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\TermsAndConditions.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

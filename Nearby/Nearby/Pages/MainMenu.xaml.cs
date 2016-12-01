@@ -22,11 +22,27 @@ namespace Nearby.Pages
 
             BindingContext = new MainMenuViewModel(Navigation);
 
-            //ListAccountProviderss.ItemSelected += (s, e) =>
-            //{
-            //    ListAccountProviderss.SelectedItem = null;
+            ListViewAbout.ItemSelected += async (s, e) =>
+            {
+                if (e.SelectedItem == null)
+                    return;
 
-            //};
+                AboutMenuItem item = e.SelectedItem as AboutMenuItem;
+                Page page = null;
+
+                switch (item.Value)
+                {
+                    case "terms":
+                        page = new TermsAndConditions();
+                        break;
+                }
+
+                if (page == null)
+                    return;
+
+                await NavigationService.PushAsync(Navigation, page);
+                ListViewAbout.SelectedItem = null;
+            };
         }
 
         protected override void OnAppearing()
@@ -40,8 +56,8 @@ namespace Nearby.Pages
             base.OnBindingContextChanged();
             vm = null;
 
-            //var adjust = Device.OS != TargetPlatform.Android ? 1 : -ViewModel.AccountItems.Count + 1;
-            //ListAccountProviderss.HeightRequest = (ViewModel.AccountItems.Count * ListAccountProviderss.RowHeight) - adjust;
+            var adjust = Device.OS != TargetPlatform.Android ? 1 : -ViewModel.AboutItems.Count + 1;
+            ListViewAbout.HeightRequest = (ViewModel.AboutItems.Count * ListViewAbout.RowHeight) - adjust;
         }
     }
 }

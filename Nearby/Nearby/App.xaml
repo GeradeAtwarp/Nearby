@@ -37,7 +37,7 @@
 
       <OnPlatform x:TypeArguments="x:Double" Android="16" iOS="16" WinPhone="13" x:Key="NearbyListItemTextStyleSize" />
       <OnPlatform x:TypeArguments="x:Double" Android="13" iOS="13" WinPhone="13" x:Key="NearbyListItemDetailTextStyleSize" />
-
+      
       <Style x:Key="NearbyListItemTextStyle" TargetType="Label" BaseResourceKey="ListItemTextStyle">
         <Setter Property="FontSize" Value="{DynamicResource NearbyListItemTextStyleSize}" />
       </Style>
@@ -57,7 +57,15 @@
         <Setter Property="FontSize" Value="{DynamicResource NearbyListItemDetailTextStyleSize}" />
         <Setter Property="TextColor" Value="{DynamicResource Primary}"/>
       </Style>
-      
+
+      <Style x:Key="TitleStyle" TargetType="Label">
+        <Setter Property="FontSize" Value="{DynamicResource NearbyListItemTextStyleSize}" />
+        <Setter Property="FontAttributes" Value="Bold"/>
+        <Setter Property="FontFamily" Value="{DynamicResource SectionLabelFontFamily}"/>
+        <Setter Property="Font" Value="Semibold"/>
+      </Style>
+
+
     </ResourceDictionary>
   </Application.Resources>
 </Application>
