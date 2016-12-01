@@ -91,10 +91,7 @@ namespace Nearby.viewModel
 
                 string filter = "";
 
-                if (Settings.SearchFilters.Contains("Accomodation"))
-                    filter = "lodging";
-                else
-                    filter = Settings.SearchFilters.ToLower().Replace(' ', '_');
+                filter = Settings.SearchFilters.ToLower().Replace(' ', '_');
 
                 var httpClient = new HttpClient();
 

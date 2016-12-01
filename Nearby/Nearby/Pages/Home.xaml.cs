@@ -286,7 +286,7 @@ namespace Nearby.Pages
                         vm.SetActiveFilter.Execute("restaurant");
                         break;
                     case "apartment":
-                        vm.SetActiveFilter.Execute("accomodation");
+                        vm.SetActiveFilter.Execute("lodging");
                         break;
                     case "car":
                         vm.SetActiveFilter.Execute("parking");
