@@ -195,15 +195,7 @@ namespace Nearby.viewModel
                 });
             }
         }
-
-
-
-
-
-
-
-
-
+        
         public class MenuItem
         {
             bool detailValue;

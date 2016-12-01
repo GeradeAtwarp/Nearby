@@ -27,10 +27,11 @@
     </StackLayout>
   
     <!-- Dialog popup with refine search options -->
-    <StackLayout x:Name="RefineSearchMenu" Scale="0" BackgroundColor="White" HorizontalOptions="FillAndExpand" AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional" AbsoluteLayout.LayoutBounds="0,0,1,AutoSize">
+    <StackLayout x:Name="RefineSearchMenu" IsVisible="false" Scale="0" BackgroundColor="White" HorizontalOptions="FillAndExpand" AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional" AbsoluteLayout.LayoutBounds="0,0,1,AutoSize">
       
       <Grid Padding="{DynamicResource StandardPadding}" ColumnSpacing="{StaticResource StandardSpacing}">
           <Grid.RowDefinitions>
+           <RowDefinition Height="Auto"/>
            <RowDefinition Height="Auto"/>
            <RowDefinition Height="Auto"/>
           </Grid.RowDefinitions>
@@ -92,6 +93,12 @@
               </Image.GestureRecognizers>
             </Image>
             <Label Text="Cafe" HorizontalOptions="Center" Style="{DynamicResource NearbyReviewDetailTextStyle}"/>
+          </StackLayout>
+
+          <StackLayout Grid.Row="2" Grid.ColumnSpan="3" IsVisible="{Binding IsBusy}" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="White" Padding="{StaticResource StandardPadding}">
+            <ActivityIndicator IsRunning="{Binding IsBusy}">
+            </ActivityIndicator>
+            <Label Text="Refreshing Map..." HorizontalOptions="Center" Style="{DynamicResource NearbyListItemTextStyle}"/>
           </StackLayout>
             
       </Grid>  

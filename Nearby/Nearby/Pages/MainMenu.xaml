@@ -117,29 +117,6 @@
 
       </StackLayout>
 
-      
-        <control:CardView>
-          <StackLayout Spacing="0">
-            <control:LabelSection Text="Filters"/>
-            <control:HeaderDivider/>
-            <control:NonScrollableListView
-                     x:Name="ListFiletrs"
-                     ItemsSource="{Binding FilterItems, Mode=TwoWay }"
-                     RowHeight="44">
-              <control:NonScrollableListView.SeparatorColor>
-                <OnPlatform x:TypeArguments="Color" iOS="{StaticResource ListSeparator}" />
-              </control:NonScrollableListView.SeparatorColor>
-              <control:NonScrollableListView.ItemTemplate>
-                <DataTemplate>
-                  <control:SwitchCellCust1 Text="{Binding DetailLabel}"
-                                           On="{Binding DetailValue}"
-                                           Command="{Binding MenuItemCommand}"/>
-                </DataTemplate>
-              </control:NonScrollableListView.ItemTemplate>
-            </control:NonScrollableListView>
-
-          </StackLayout>
-        </control:CardView>
 
         <!--<control:CardView>
           <StackLayout Spacing="0">

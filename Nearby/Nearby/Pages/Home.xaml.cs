@@ -158,6 +158,7 @@ namespace Nearby.Pages
             {
                 //fabrefine.ColorNormal = Color.FromHex("#3F51B5");
                 await Task.Delay(300);
+                RefineSearchMenu.IsVisible = true;
                 await RefineSearchMenu.ScaleTo(1, 250, Easing.SinIn);
             }
             else
@@ -165,6 +166,7 @@ namespace Nearby.Pages
                 //fabrefine.ColorNormal = Color.FromHex("#7885cb");
                 await Task.Delay(300);
                 await RefineSearchMenu.ScaleTo(0, 250, Easing.SinOut);
+                RefineSearchMenu.IsVisible = false;
             }
         }
 
@@ -221,7 +223,7 @@ namespace Nearby.Pages
                 SearchButton.Children.Add(new FloatingActionButtonView
                 {
                     Size = FloatingActionButtonSize.Mini,
-                    ImageName = "search",
+                    ImageName = "search_small",
                     ColorNormal = Color.FromHex("#3F51B5"),
                     ColorPressed = Color.FromHex("#7885cb"),
                     ColorRipple = Color.FromHex("#2C3E50"),
@@ -231,7 +233,7 @@ namespace Nearby.Pages
                 RefineButton.Children.Add(new FloatingActionButtonView
                 {
                     Size = FloatingActionButtonSize.Mini,
-                    ImageName = "fab_refine",
+                    ImageName = "ic_more_vert_white",
                     ColorNormal = Color.FromHex("#3F51B5"),
                     ColorPressed = Color.FromHex("#7885cb"),
                     ColorRipple = Color.FromHex("#2C3E50"),
@@ -280,7 +282,7 @@ namespace Nearby.Pages
 
             if (source != null)
             {
-                switch(source.File)
+                switch (source.File)
                 {
                     case "pizza":
                         vm.SetActiveFilter.Execute("restaurant");
@@ -302,7 +304,10 @@ namespace Nearby.Pages
                         break;
                 }
 
-                ToggleRefineOptions();
+                SearchForPlacesNearby().ContinueWith(task => Device.BeginInvokeOnMainThread(() =>
+                {
+                    ToggleRefineOptions();
+                }));
             }
         }
 
