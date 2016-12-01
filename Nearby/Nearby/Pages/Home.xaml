@@ -27,7 +27,7 @@
     </StackLayout>
   
     <!-- Dialog popup with refine search options -->
-    <StackLayout x:Name="RefineSearchMenu" Scale="0" BackgroundColor="White" Opacity="0.8" HorizontalOptions="FillAndExpand" AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional" AbsoluteLayout.LayoutBounds="0,0,1,AutoSize">
+    <StackLayout x:Name="RefineSearchMenu" Scale="0" BackgroundColor="White" HorizontalOptions="FillAndExpand" AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional" AbsoluteLayout.LayoutBounds="0,0,1,AutoSize">
       
       <Grid Padding="{DynamicResource StandardPadding}" ColumnSpacing="{StaticResource StandardSpacing}">
           <Grid.RowDefinitions>
@@ -41,32 +41,56 @@
           </Grid.ColumnDefinitions>
           
           <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-            <Image Source="pizza" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Aspect="AspectFit" HeightRequest="50" WidthRequest="50" />
-             <Label Text="Restuarant" HorizontalOptions="Center" Style="{DynamicResource NearbyReviewDetailTextStyle}"/>
+            <Image Source="pizza" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Aspect="AspectFit" HeightRequest="50" WidthRequest="50">
+              <Image.GestureRecognizers>
+                <TapGestureRecognizer  Tapped="SetFilter" />
+              </Image.GestureRecognizers>
+            </Image>
+            <Label Text="Restuarant" HorizontalOptions="Center" Style="{DynamicResource NearbyReviewDetailTextStyle}"/>
           </StackLayout>
           
           <StackLayout Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-            <Image Source="apartment" VerticalOptions="FillAndExpand" Aspect="AspectFit" HeightRequest="50" WidthRequest="50" />
-            <Label Text="Accomodation" HorizontalOptions="Center" Style="{DynamicResource NearbyReviewDetailTextStyle}"/>
+            <Image Source="apartment" VerticalOptions="FillAndExpand" Aspect="AspectFit" HeightRequest="50" WidthRequest="50">
+            <Image.GestureRecognizers>
+                 <TapGestureRecognizer  Tapped="SetFilter" />
+              </Image.GestureRecognizers>
+            </Image>
+            <Label Text="Hotel" HorizontalOptions="Center" Style="{DynamicResource NearbyReviewDetailTextStyle}"/>
           </StackLayout>
         
           <StackLayout Grid.Column="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-            <Image Source="car" VerticalOptions="FillAndExpand" Aspect="AspectFit" HeightRequest="50" WidthRequest="50" />
+            <Image Source="car" VerticalOptions="FillAndExpand" Aspect="AspectFit" HeightRequest="50" WidthRequest="50">
+            <Image.GestureRecognizers>
+                 <TapGestureRecognizer  Tapped="SetFilter" />
+              </Image.GestureRecognizers>
+            </Image>
             <Label Text="Parking" HorizontalOptions="Center" Style="{DynamicResource NearbyReviewDetailTextStyle}"/>
           </StackLayout>
         
           <StackLayout Grid.Row="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-            <Image Source="documentary"  VerticalOptions="FillAndExpand" Aspect="AspectFit" HeightRequest="50" WidthRequest="50" />
-            <Label Text="Movie Theatre" HorizontalOptions="Center" Style="{DynamicResource NearbyReviewDetailTextStyle}"/>
+            <Image Source="documentary"  VerticalOptions="FillAndExpand" Aspect="AspectFit" HeightRequest="50" WidthRequest="50">
+             <Image.GestureRecognizers>
+                 <TapGestureRecognizer  Tapped="SetFilter" />
+              </Image.GestureRecognizers>
+            </Image>
+            <Label Text="Theatre" HorizontalOptions="Center" Style="{DynamicResource NearbyReviewDetailTextStyle}"/>
           </StackLayout>
             
           <StackLayout Grid.Row="1" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-            <Image Source="beer_bottle" VerticalOptions="FillAndExpand" Aspect="AspectFit" HeightRequest="50" WidthRequest="50" />
-            <Label Text="Liquor Store" HorizontalOptions="Center" Style="{DynamicResource NearbyReviewDetailTextStyle}"/>
+            <Image Source="beer_bottle" VerticalOptions="FillAndExpand" Aspect="AspectFit" HeightRequest="50" WidthRequest="50">
+             <Image.GestureRecognizers>
+                <TapGestureRecognizer  Tapped="SetFilter" />
+              </Image.GestureRecognizers>
+            </Image>
+            <Label Text="Liquor" HorizontalOptions="Center" Style="{DynamicResource NearbyReviewDetailTextStyle}"/>
           </StackLayout>
             
           <StackLayout Grid.Row="1"  Grid.Column="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-            <Image Source="coffee" VerticalOptions="FillAndExpand" Aspect="AspectFit" HeightRequest="50" WidthRequest="50" />
+            <Image Source="coffee" VerticalOptions="FillAndExpand" Aspect="AspectFit" HeightRequest="50" WidthRequest="50">
+             <Image.GestureRecognizers>
+                 <TapGestureRecognizer  Tapped="SetFilter" />
+              </Image.GestureRecognizers>
+            </Image>
             <Label Text="Cafe" HorizontalOptions="Center" Style="{DynamicResource NearbyReviewDetailTextStyle}"/>
           </StackLayout>
             

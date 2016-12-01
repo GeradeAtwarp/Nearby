@@ -14,6 +14,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 
@@ -221,8 +222,8 @@ namespace Nearby.Pages
                 {
                     Size = FloatingActionButtonSize.Mini,
                     ImageName = "search",
-                    ColorNormal = Color.FromHex("#7885cb"),
-                    ColorPressed = Color.FromHex("#3F51B5"),
+                    ColorNormal = Color.FromHex("#3F51B5"),
+                    ColorPressed = Color.FromHex("#7885cb"),
                     ColorRipple = Color.FromHex("#2C3E50"),
                     Clicked = (sender, ea) => SearchForPlacesNearby()
                 });
@@ -231,8 +232,8 @@ namespace Nearby.Pages
                 {
                     Size = FloatingActionButtonSize.Mini,
                     ImageName = "fab_refine",
-                    ColorNormal = Color.FromHex("#7885cb"),
-                    ColorPressed = Color.FromHex("#3F51B5"),
+                    ColorNormal = Color.FromHex("#3F51B5"),
+                    ColorPressed = Color.FromHex("#7885cb"),
                     ColorRipple = Color.FromHex("#2C3E50"),
                     Clicked = (sender, e) => ToggleRefineOptions()
                 });
@@ -272,18 +273,38 @@ namespace Nearby.Pages
             }
         }
 
+        void SetFilter(object sender, EventArgs args)
+        {
+            var image = (Image)sender;
+            var source = image.Source as FileImageSource;
 
+            if (source != null)
+            {
+                switch(source.File)
+                {
+                    case "pizza":
+                        vm.SetActiveFilter.Execute("restaurant");
+                        break;
+                    case "apartment":
+                        vm.SetActiveFilter.Execute("accomodation");
+                        break;
+                    case "car":
+                        vm.SetActiveFilter.Execute("parking");
+                        break;
+                    case "documentary":
+                        vm.SetActiveFilter.Execute("movie_theater");
+                        break;
+                    case "beer_bottle":
+                        vm.SetActiveFilter.Execute("liquor_store");
+                        break;
+                    case "cafe":
+                        vm.SetActiveFilter.Execute("cafe");
+                        break;
+                }
 
-
-
-
-
-
-
-
-
-
-
+                ToggleRefineOptions();
+            }
+        }
 
 
 

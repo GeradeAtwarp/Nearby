@@ -28,8 +28,6 @@ namespace Nearby.viewModel
 
         public FavoritesViewModel(INavigation navigation) : base(navigation)
         {
-            UpdateCurrentLocation();
-
             GetSavedFavorites();
         }
         
@@ -43,7 +41,11 @@ namespace Nearby.viewModel
             try
             {
                 IsBusy = true;
-                
+
+                await UpdateCurrentLocation();
+
+                var v = NearbyDataContext.GetItems<FavoritePlaces>();
+
                 FavPlaces.Clear();
                 FavPlaces.AddRange((from fp in NearbyDataContext.GetItems<FavoritePlaces>()
                                     select new FavPlaceItem
@@ -76,21 +78,27 @@ namespace Nearby.viewModel
 
         async Task UpdateCurrentLocation()
         {
-            if (!Settings.CustomLocationEnabled)
+            try
             {
-                //Get the users current location
-                var locator = CrossGeolocator.Current;
-                position = await locator.GetPositionAsync(10000);
-            }
-            else
-            {
-                position = new Plugin.Geolocator.Abstractions.Position
+                if (!Settings.CustomLocationEnabled)
                 {
-                    Latitude = Convert.ToDouble(Settings.CustomLatitude),
-                    Longitude = Convert.ToDouble(Settings.CustomLongitude)
-                };
+                    //Get the users current location
+                    var locator = CrossGeolocator.Current;
+                    position = await locator.GetPositionAsync(10000);
+                }
+                else
+                {
+                    position = new Plugin.Geolocator.Abstractions.Position
+                    {
+                        Latitude = Convert.ToDouble(Settings.CustomLatitude),
+                        Longitude = Convert.ToDouble(Settings.CustomLongitude)
+                    };
+                }
             }
+            catch(Exception ex)
+            {
 
+            }
         }
 
 

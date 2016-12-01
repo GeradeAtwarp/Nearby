@@ -44,6 +44,8 @@ namespace Nearby.viewModel
         {
             try
             {
+                HasNoResults = false;
+
                 if (Filter != String.Empty)
                 {
                     if (IsBusy)

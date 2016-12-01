@@ -59,9 +59,9 @@ namespace Nearby.viewModel
                 EnabledFilter = $"You are curerently filtering for only {Settings.SearchFilters}s";
         }
 
+        //Search for places nearby
         ICommand searchPlacesNearby;
         public ICommand SearchPlacesNearby => searchPlacesNearby ?? (searchPlacesNearby = new Command<string>(async (param) => await SearchNearby(param)));
-
         public async Task SearchNearby(string searctTerm)
         {
             try
@@ -121,6 +121,33 @@ namespace Nearby.viewModel
                 SearchButtonText = "Search for places nearby";
             }
         }
+        
+
+        //set a filter for searching places nearby
+        ICommand setActiveFilter;
+        public ICommand SetActiveFilter => setActiveFilter ?? (setActiveFilter = new Command<string>(async (param) => await UpdateActiveFilter(param)));
+        public async Task UpdateActiveFilter(string filter)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(filter))
+                {
+                    if (Settings.Current.SearchFilters == filter)
+                        Settings.Current.SearchFilters = "";
+                    else
+                        Settings.Current.SearchFilters = filter;
+                }
+                else
+                {
+                    Settings.Current.SearchFilters = "";
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
 
         public void UpdateItems()
         {
