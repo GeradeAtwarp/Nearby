@@ -82,20 +82,27 @@ namespace Nearby.viewModel
                 }
                 else
                 {
-                    position = new Plugin.Geolocator.Abstractions.Position
+                    if (Settings.Current.CustomLatitude == "" || Settings.Current.CustomLongitude == "")
                     {
-                        Latitude = Convert.ToDouble(Settings.CustomLatitude),
-                        Longitude = Convert.ToDouble(Settings.CustomLongitude)
-                    };
+                        Application.Current?.MainPage.DisplayAlert("Location", "Please set a custom location, Or turn off the custom location option on the settings page.", "Got it");
+                        return;
+                    }
+                    else
+                    {
+                        position = new Plugin.Geolocator.Abstractions.Position
+                        {
+                            Latitude = Convert.ToDouble(Settings.CustomLatitude),
+                            Longitude = Convert.ToDouble(Settings.CustomLongitude)
+                        };
+                    }
                 }
 
                 string filter = "";
-
                 filter = Settings.SearchFilters.ToLower().Replace(' ', '_');
 
                 var httpClient = new HttpClient();
-
                 var placesResult = "";
+
                 //Get all the places neaby
                 if (Device.OS == TargetPlatform.Android)
                     placesResult = await httpClient.GetStringAsync(new UriBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyDU4ZSeEmjTiTgT2CJgj7bZegShjj_rV7M&location=" + position.Latitude.ToString().Replace(',', '.') + "," + position.Longitude.ToString().Replace(',', '.') + "&radius=1500&type=" + filter).Uri.ToString());
@@ -103,9 +110,7 @@ namespace Nearby.viewModel
                     placesResult = await httpClient.GetStringAsync(new UriBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyAg-d-wLhMl65Fo_sfyj_U9tFOoW41UcDQ&location=" + position.Latitude.ToString().Replace(',', '.') + "," + position.Longitude.ToString().Replace(',', '.') + "&radius=1500&type=" + filter).Uri.ToString());
 
                 PlacesNearby.Clear();
-                PlacesNearby.AddRange(JsonConvert.DeserializeObject<PlaceNearby>(placesResult).results);
-
-                
+                PlacesNearby.AddRange(JsonConvert.DeserializeObject<PlaceNearby>(placesResult).results);                
             }
             catch (Exception ex)
             {
