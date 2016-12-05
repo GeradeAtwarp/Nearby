@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Nearby.Pages.Favourites"
              xmlns:converters="clr-namespace:Nearby.Helpers.Converters"
-             BackgroundColor="{DynamicResource WindowBackgroundTable}">
+             BackgroundColor="{DynamicResource WindowBackgroundTable}"
+             Title="Favourites">
 
   <!--<ContentPage.ToolbarItems>
     <ToolbarItem x:Name="tbBackToMap" Text="Done" />

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
+using static Nearby.viewModel.FavoritesViewModel;
 
 namespace Nearby.Pages
 {
@@ -19,19 +20,17 @@ namespace Nearby.Pages
         public Favourites()
         {
             InitializeComponent();
-
-            Title = "Favourites";
-
             BindingContext = vm = new FavoritesViewModel(Navigation);
-
-            //tbBackToMap.Command = new Command(async () =>
-            //{
-            //    await Navigation.PopModalAsync();
-            //});
 
             lstFavorites.ItemSelected += async (sender, e) =>
             {
+                if (e.SelectedItem == null)
+                    return;
+
+                FavPlaceItem fi = e.SelectedItem as FavPlaceItem;
+
                 lstFavorites.SelectedItem = null;
+                vm.GoToDetailsCommand.Execute(fi);
             };
         }
 

@@ -34,6 +34,7 @@
            <RowDefinition Height="Auto"/>
            <RowDefinition Height="Auto"/>
            <RowDefinition Height="Auto"/>
+           <RowDefinition Height="Auto"/>
           </Grid.RowDefinitions>
           <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
@@ -95,10 +96,14 @@
             <Label Text="Cafe" HorizontalOptions="Center" Style="{DynamicResource NearbyReviewDetailTextStyle}"/>
           </StackLayout>
 
-          <StackLayout Grid.Row="2" Grid.ColumnSpan="3" IsVisible="{Binding IsBusy}" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="White" Padding="{StaticResource StandardPadding}">
+          <Button Grid.ColumnSpan="3" x:Name="btnRemoveFilter" Grid.Row="2" IsVisible="{Binding IsFilterEnabled}}" HeightRequest="44" BorderWidth="1" BorderColor="#3F51B5" BackgroundColor="Transparent" TextColor="{DynamicResource Primary}" HorizontalOptions="Center" Text="Remove filter">
+            <Button.BorderRadius Android="1" iOS="5"></Button.BorderRadius>
+          </Button>
+
+          <StackLayout Grid.Row="3" Grid.ColumnSpan="3" IsVisible="{Binding IsBusy}" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="White" Padding="{StaticResource StandardPadding}">
             <ActivityIndicator IsRunning="{Binding IsBusy}">
             </ActivityIndicator>
-            <Label Text="Refreshing Map..." HorizontalOptions="Center" Style="{DynamicResource NearbyListItemTextStyle}"/>
+            <Label Text="Updating Places..." HorizontalOptions="Center" Style="{DynamicResource NearbyListItemTextStyle}"/>
           </StackLayout>
             
       </Grid>  

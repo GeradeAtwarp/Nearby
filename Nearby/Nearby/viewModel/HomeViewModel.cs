@@ -15,6 +15,7 @@ using Nearby.Pages;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Nearby.Helpers;
+using FormsToolkit;
 
 namespace Nearby.viewModel
 {
@@ -36,6 +37,7 @@ namespace Nearby.viewModel
             set
             {
                 SetProperty(ref isFilterEnabled, value);
+                Settings.IsSearchFilterEnabled = isFilterEnabled;
             }
         }
 
@@ -54,9 +56,6 @@ namespace Nearby.viewModel
         public HomeViewModel(INavigation navigation) : base(navigation)
         {
             IsFilterEnabled = Settings.IsSearchFilterEnabled;
-
-            if (Settings.IsSearchFilterEnabled)
-                EnabledFilter = $"You are curerently filtering for only {Settings.SearchFilters}s";
         }
 
         //Search for places nearby
@@ -135,13 +134,17 @@ namespace Nearby.viewModel
                 if (!string.IsNullOrEmpty(filter))
                 {
                     if (Settings.Current.SearchFilters == filter)
-                        Settings.Current.SearchFilters = "";
+                        MessagingService.Current.SendMessage<MessagingServiceAlert>(MessageKeys.Message, new MessagingServiceAlert { Title = "Already active", Message = "Filter has already been set to " + filter, Cancel = "Ok" });
                     else
+                    {
                         Settings.Current.SearchFilters = filter;
+                        IsFilterEnabled = true;
+                    }
                 }
                 else
                 {
                     Settings.Current.SearchFilters = "";
+                    IsFilterEnabled = false;
                 }
             }
             catch (Exception ex)
@@ -151,12 +154,22 @@ namespace Nearby.viewModel
         }
 
 
+        //remove filter for searching places nearby
+        ICommand removeActiveFilter;
+        public ICommand RemoveActiveFilter => removeActiveFilter ?? (removeActiveFilter = new Command(async () => await DeactivateFilter()));
+        public async Task DeactivateFilter()
+        {
+            try
+            {
+                IsFilterEnabled = false;
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
         public void UpdateItems()
         {
-            IsFilterEnabled = Settings.IsSearchFilterEnabled;
-
-            if (Settings.IsSearchFilterEnabled)
-                EnabledFilter = $"You are currently filtering for only {Settings.SearchFilters}s";
         }
     }
 

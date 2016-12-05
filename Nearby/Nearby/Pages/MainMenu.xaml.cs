@@ -28,6 +28,8 @@ namespace Nearby.Pages
                     return;
 
                 AboutMenuItem item = e.SelectedItem as AboutMenuItem;
+               
+                ListViewAbout.SelectedItem = null;
                 Page page = null;
 
                 switch (item.Value)
@@ -41,7 +43,6 @@ namespace Nearby.Pages
                     return;
 
                 await NavigationService.PushAsync(Navigation, page);
-                ListViewAbout.SelectedItem = null;
             };
         }
 

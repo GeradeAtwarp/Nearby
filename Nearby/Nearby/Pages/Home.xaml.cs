@@ -59,6 +59,14 @@ namespace Nearby.Pages
                 await Navigation.PushAsync(new Favourites());
             });
 
+            btnRemoveFilter.Clicked += async (sender, e) =>
+            {
+                vm.DeactivateFilter().ContinueWith(task => Device.BeginInvokeOnMainThread(() =>
+                {
+                    ToggleRefineOptions();
+                }));
+            };
+
             AddSearchButtons();
             
             MoveToCurrentLocation();
@@ -68,7 +76,9 @@ namespace Nearby.Pages
         {
             base.OnAppearing();
             vm.UpdateItems();
-            MoveToCurrentLocation();
+
+            if (placesMap.Pins.Count() == 0)
+                MoveToCurrentLocation();
         }
 
         async Task MoveToCurrentLocation()

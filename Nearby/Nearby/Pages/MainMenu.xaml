@@ -118,7 +118,7 @@
       </StackLayout>
 
 
-        <control:CardView Padding="0,32,0,0">
+        <control:CardView>
           <StackLayout Spacing="0">
             <control:LabelSection Text="About"/>
             <control:HeaderDivider/>
@@ -131,11 +131,10 @@
               </control:NonScrollableListView.SeparatorColor>
                 <control:NonScrollableListView.ItemTemplate>
                 <DataTemplate>
-                  <TextCell Text="{Binding Name}"/>
+                  <TextCell Text="{Binding Label}"/>
                 </DataTemplate>
               </control:NonScrollableListView.ItemTemplate>
             </control:NonScrollableListView>
-            <control:FooterDivider/>
           </StackLayout>
         </control:CardView>
 
