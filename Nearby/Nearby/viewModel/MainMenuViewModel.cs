@@ -44,7 +44,7 @@ namespace Nearby.viewModel
             AboutItems.AddRange(new[]
                {
                     new AboutMenuItem { Label = "Terms Of Use", Value = "terms" },
-                    //new AboutMenuItem { Label = "About this app", Value = "about" },
+                    new AboutMenuItem { Label = "About this app", Value = "about" },
             });
 
             AccountItems.Add(new AccountMenuItem

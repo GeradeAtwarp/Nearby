@@ -60,6 +60,13 @@ namespace Nearby.viewModel
 
             try
             {
+                if (arg.Contains("twitter"))
+                {
+                    var service = DependencyService.Get<IAppLauncher>();
+                    if (service.OpenTwitterProfile("Raidzen10"))
+                        return;
+                }
+                
                 await CrossShare.Current.OpenBrowser(arg, new BrowserOptions
                 {
                     ChromeShowTitle = true,

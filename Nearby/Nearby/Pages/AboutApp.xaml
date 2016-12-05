@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Nearby.Pages.AboutApp"
+             xmlns:control="clr-namespace:Nearby.Controls"
+             BackgroundColor="{DynamicResource WindowBackgroundTable}"
+             Title="About Nearby">
+
+
+  <control:AlwaysScrollView>
+    <StackLayout Spacing="0">
+      <StackLayout BackgroundColor="{DynamicResource WindowBackgroundTable}"
+                           Spacing="{DynamicResource CardSpacing}"
+                           Padding="{DynamicResource CardPadding}">
+        
+         <control:CardView>
+          <StackLayout Padding="0" Spacing="0" BackgroundColor="White">
+            <control:HeaderDivider/>
+            <StackLayout Padding="{StaticResource StandardPadding}">
+              <StackLayout Padding="32,16,32,0">
+                <Image
+                    Grid.Column="1"
+                    Grid.Row="1"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand"
+                    Aspect="AspectFit"
+                    HeightRequest="150"
+                    Source="{Binding AppLogo}">
+                </Image>
+              </StackLayout>
+              <StackLayout Spacing="0">
+                <Label Text="Nearby" Style="{DynamicResource EvolveListItemTextStyle}"/>
+              </StackLayout>
+              <StackLayout Padding="0,16">
+                <Label Text="Nearby is an Application that allows Users to search and identify points of interest according to their geographical position."  Style="{DynamicResource EvolveListItemTextStyle}"/>
+              </StackLayout>
+            </StackLayout>
+    
+            <control:FooterDivider/>
+          </StackLayout>
+        </control:CardView>
+      
+         <control:CardView>
+            <StackLayout Spacing="0">
+            <control:LabelSection Text="Links"/>
+                <control:HeaderDivider/>
+                <control:NonScrollableListView 
+                    ItemsSource="{Binding FollowItems}" 
+                    VerticalOptions="Start" 
+                    x:Name="ListViewFollow"
+                    SelectedItem="{Binding SelectedFollowItem, Mode=TwoWay}"
+                    RowHeight="44"> 
+                    <control:NonScrollableListView.SeparatorColor>
+                        <OnPlatform x:TypeArguments="Color" iOS="{StaticResource ListSeparator}"/>
+                    </control:NonScrollableListView.SeparatorColor>
+                    <control:NonScrollableListView.ItemTemplate>
+                        <DataTemplate>
+                          <ViewCell>
+                            <ViewCell.View>
+                              <Grid ColumnSpacing="{StaticResource StandardSpacing}">
+                                <Grid.Padding>
+                                  <OnPlatform x:TypeArguments="Thickness" iOS="16,8" Android="16,8"/>
+                                </Grid.Padding>
+                                <Grid.ColumnDefinitions>
+                                  <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label VerticalOptions="Center"  Style="{DynamicResource NearbyListItemTextStyle}" Text="{Binding ProviderLabel}" />
+
+                              </Grid>
+                            </ViewCell.View>
+                          </ViewCell>
+                        </DataTemplate>
+                    </control:NonScrollableListView.ItemTemplate>
+                </control:NonScrollableListView>
+                <control:FooterDivider/>
+            </StackLayout>
+            </control:CardView>
+              
+         <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="End" Padding="{DynamicResource SmallPadding}">
+            <Label HorizontalOptions="Center" Style="{DynamicResource NearbyListItemDetailTextStyle}" Text="{Binding MadeByText}" />
+         </StackLayout>
+      
+      </StackLayout>
+    </StackLayout>  
+  </control:AlwaysScrollView>
+</ContentPage>

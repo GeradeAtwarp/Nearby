@@ -1,4 +1,5 @@
-﻿using MapKit;
+﻿using Foundation;
+using MapKit;
 using Nearby.Interfaces;
 using Nearby.iOS.DependencyServices;
 using Social;
@@ -48,5 +49,28 @@ namespace Nearby.iOS.DependencyServices
             return success;
         }
 
+        public bool OpenTwitterProfile(string username)
+        {
+            try
+            {
+                if (UIApplication.SharedApplication.OpenUrl(NSUrl.FromString($"twitter://user?screen_name={username}")))
+                    return true;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Unable to launch url" + ex);
+            }
+
+            try
+            {
+                if (UIApplication.SharedApplication.OpenUrl(NSUrl.FromString($"tweetbot://{username}/timeline")))
+                    return true;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Unable to launch url " + ex);
+            }
+            return false;
+        }
     }
 }

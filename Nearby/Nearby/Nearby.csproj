@@ -73,6 +73,9 @@
     <Compile Include="Models\DynamoDB\BaseDynamoEntity.cs" />
     <Compile Include="Models\DynamoDB\IBaseDynamo.cs" />
     <Compile Include="Models\DynamoDB\Nearby_Favorites.cs" />
+    <Compile Include="Pages\AboutApp.xaml.cs">
+      <DependentUpon>AboutApp.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Auth\Authenticate.xaml.cs">
       <DependentUpon>Authenticate.xaml</DependentUpon>
     </Compile>
@@ -103,6 +106,7 @@
     <Compile Include="Utils\Entities\UserPreferences.cs" />
     <Compile Include="Utils\Services\AWSIntegration.cs" />
     <Compile Include="Utils\User.cs" />
+    <Compile Include="viewModel\AboutAppViewModel.cs" />
     <Compile Include="viewModel\FavoritesViewModel.cs" />
     <Compile Include="viewModel\HomeViewModel.cs" />
     <Compile Include="viewModel\MainMenuViewModel.cs" />
@@ -305,6 +309,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Pages\TermsAndConditions.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\AboutApp.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

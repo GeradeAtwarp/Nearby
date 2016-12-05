@@ -37,6 +37,9 @@ namespace Nearby.Pages
                     case "terms":
                         page = new TermsAndConditions();
                         break;
+                    case "about":
+                        page = new AboutApp();
+                        break;
                 }
 
                 if (page == null)

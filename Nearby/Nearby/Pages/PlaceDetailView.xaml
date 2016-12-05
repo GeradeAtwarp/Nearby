@@ -206,8 +206,8 @@
         
       </StackLayout>
 
-      <StackLayout BackgroundColor="{DynamicResource WindowBackgroundTable}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="{DynamicResource SmallPadding}">
-        <Label VerticalOptions="End" HorizontalOptions="Center" Style="{DynamicResource NearbyListItemTextStyle}" Text="Powered by Google"></Label>
+      <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="{DynamicResource SmallPadding}">
+        <Label VerticalOptions="End" HorizontalOptions="Center" Style="{DynamicResource NearbyListItemDetailTextStyle}" Text="Powered by Google"></Label>
       </StackLayout>
 
     </StackLayout>

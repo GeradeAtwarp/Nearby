@@ -120,7 +120,7 @@
 
         <control:CardView>
           <StackLayout Spacing="0">
-            <control:LabelSection Text="About"/>
+            <control:LabelSection Text="Info"/>
             <control:HeaderDivider/>
             <control:NonScrollableListView
                 x:Name="ListViewAbout"

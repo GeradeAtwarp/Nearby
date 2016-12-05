@@ -46,5 +46,18 @@ namespace Nearby.Droid.DependencyService
 
             return false;
         }
+
+        public bool OpenTwitterProfile(string username)
+        {
+            try
+            {
+                var intent = Forms.Context.PackageManager.GetLaunchIntentForPackage("com.twitter.android");
+                Forms.Context.StartActivity(intent);
+                return true;
+            }
+            catch (Exception ex) { }
+
+            return false;
+        }
     }
 }

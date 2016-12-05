@@ -11,5 +11,7 @@ namespace Nearby.Interfaces
         bool OpenNativeMaps(double lat, double longitude,string place);
         
         bool SendTweet(string tweet);
+
+        bool OpenTwitterProfile(string username);
     }
 }
