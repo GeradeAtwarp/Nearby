@@ -37,7 +37,7 @@ namespace Nearby.viewModel
             set
             {
                 SetProperty(ref isFilterEnabled, value);
-                Settings.IsSearchFilterEnabled = isFilterEnabled;
+                Settings.Current.IsSearchFilterEnabled = isFilterEnabled;
             }
         }
 
@@ -55,7 +55,7 @@ namespace Nearby.viewModel
 
         public HomeViewModel(INavigation navigation) : base(navigation)
         {
-            IsFilterEnabled = Settings.IsSearchFilterEnabled;
+            IsFilterEnabled = Settings.Current.IsSearchFilterEnabled;
         }
 
         //Search for places nearby
@@ -73,7 +73,7 @@ namespace Nearby.viewModel
 
                 Plugin.Geolocator.Abstractions.Position position;
 
-                if (!Settings.CustomLocationEnabled)
+                if (!Settings.Current.CustomLocationEnabled)
                 {
                     //Get the users current location
                     var locator = CrossGeolocator.Current;
@@ -90,14 +90,14 @@ namespace Nearby.viewModel
                     {
                         position = new Plugin.Geolocator.Abstractions.Position
                         {
-                            Latitude = Convert.ToDouble(Settings.CustomLatitude),
-                            Longitude = Convert.ToDouble(Settings.CustomLongitude)
+                            Latitude = Convert.ToDouble(Settings.Current.CustomLatitude),
+                            Longitude = Convert.ToDouble(Settings.Current.CustomLongitude)
                         };
                     }
                 }
 
                 string filter = "";
-                filter = Settings.SearchFilters.ToLower().Replace(' ', '_');
+                filter = Settings.Current.SearchFilters.ToLower().Replace(' ', '_');
 
                 var httpClient = new HttpClient();
                 var placesResult = "";

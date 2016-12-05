@@ -75,8 +75,6 @@ namespace Nearby
                 var result = await task;
                 q?.OnCompleted?.Invoke(result);
             });
-
-
         }
 
         protected override void OnSleep()

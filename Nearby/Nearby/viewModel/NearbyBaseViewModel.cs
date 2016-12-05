@@ -38,7 +38,6 @@ namespace Nearby.viewModel
 
             //dynamoClient = new AmazonDynamoDBClient(AWSUtils.Credentials, RegionEndpoint.USWest2);
             //dynamoContext = new DynamoDBContext(dynamoClient);
-
         }
 
         public Settings Settings

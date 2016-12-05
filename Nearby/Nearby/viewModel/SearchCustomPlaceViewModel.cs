@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 using static Nearby.viewModel.PlaceDetailViewModel;
+using Nearby.Helpers;
 
 namespace Nearby.viewModel
 {
@@ -99,9 +100,9 @@ namespace Nearby.viewModel
         {
             try
             {
-                Settings.CustomLatitude = place.CoOrdinatesLat.ToString();
-                Settings.CustomLongitude = place.CoOrdinatesLng.ToString();
-                Settings.CustomLocation = place.Name;
+                Settings.Current.CustomLatitude = place.CoOrdinatesLat.ToString();
+                Settings.Current.CustomLongitude = place.CoOrdinatesLng.ToString();
+                Settings.Current.CustomLocation = place.Name;
 
                 Application.Current?.MainPage?.DisplayAlert("Info", "Custom location was successfully set to " + place.Name, "Ok");
                     

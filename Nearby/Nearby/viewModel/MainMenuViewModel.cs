@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
+using Nearby.Helpers;
 
 namespace Nearby.viewModel
 {
@@ -22,7 +23,7 @@ namespace Nearby.viewModel
         {
             Title = "Settings";
 
-            ChangeLocationIsEnabled = Settings.CustomLocationEnabled;
+            ChangeLocationIsEnabled = Settings.Current.CustomLocationEnabled;
 
             ManualItems.Add(new MenuItem
             {
@@ -31,14 +32,14 @@ namespace Nearby.viewModel
                 MenuItemCommand = ToggleCustomLocation
             });
 
-            if (Settings.CustomLocationEnabled)
+            if (Settings.Current.CustomLocationEnabled)
             {
-                CustomLatitude = Settings.CustomLatitude;
-                CustomLongitude = Settings.CustomLongitude;
+                CustomLatitude = Settings.Current.CustomLatitude;
+                CustomLongitude = Settings.Current.CustomLongitude;
             }
 
-            if (Settings.CustomLocation != "")
-                CustomLocation = Settings.CustomLocation;
+            if (Settings.Current.CustomLocation != "")
+                CustomLocation = Settings.Current.CustomLocation;
 
             AboutItems.AddRange(new[]
                {
@@ -55,13 +56,13 @@ namespace Nearby.viewModel
 
         public void UpdateItems()
         {
-            CustomLocation = Settings.CustomLocation;
-            ChangeLocationIsEnabled = Settings.CustomLocationEnabled;
+            CustomLocation = Settings.Current.CustomLocation;
+            ChangeLocationIsEnabled = Settings.Current.CustomLocationEnabled;
 
-            if (Settings.CustomLocationEnabled)
+            if (Settings.Current.CustomLocationEnabled)
             {
-                CustomLatitude = Settings.CustomLatitude;
-                CustomLongitude = Settings.CustomLongitude;
+                CustomLatitude = Settings.Current.CustomLatitude;
+                CustomLongitude = Settings.Current.CustomLongitude;
             }
         }
 
@@ -80,13 +81,13 @@ namespace Nearby.viewModel
             set
             {
                 SetProperty(ref changelocationIsEnabled, value);
-                Settings.CustomLocationEnabled = value;
+                Settings.Current.CustomLocationEnabled = value;
 
                 if (!value)
                 {
-                    Settings.CustomLocation = "";
-                    Settings.CustomLatitude = "";
-                    Settings.CustomLongitude = "";
+                    Settings.Current.CustomLocation = "";
+                    Settings.Current.CustomLatitude = "";
+                    Settings.Current.CustomLongitude = "";
                 }
             }
         }
@@ -98,7 +99,7 @@ namespace Nearby.viewModel
             set
             {
                 SetProperty(ref customLatitude, value);
-                Settings.CustomLatitude = value;
+                Settings.Current.CustomLatitude = value;
             }
         }
 
@@ -109,7 +110,7 @@ namespace Nearby.viewModel
             set
             {
                 SetProperty(ref customLongitude, value);
-                Settings.CustomLongitude = value;
+                Settings.Current.CustomLongitude = value;
             }
         }
 
@@ -121,7 +122,7 @@ namespace Nearby.viewModel
             set
             {
                 SetProperty(ref customLocation, value);
-                Settings.CustomLocation = value;
+                Settings.Current.CustomLocation = value;
             }
         }
 
@@ -154,18 +155,18 @@ namespace Nearby.viewModel
             SwitchCell filter = (SwitchCell)e;
 
             if (filter.On)
-                Settings.SearchFilters = filter.Text;
+                Settings.Current.SearchFilters = filter.Text;
             else
             {
-                if (Settings.SearchFilters == filter.Text)
-                    Settings.SearchFilters = "";
+                if (Settings.Current.SearchFilters == filter.Text)
+                    Settings.Current.SearchFilters = "";
             }
 
-            if (Settings.SearchFilters == "")
-                Settings.IsSearchFilterEnabled = false;
+            if (Settings.Current.SearchFilters == "")
+                Settings.Current.IsSearchFilterEnabled = false;
             else
             {
-                Settings.IsSearchFilterEnabled = true;
+                Settings.Current.IsSearchFilterEnabled = true;
             }
         }
     }

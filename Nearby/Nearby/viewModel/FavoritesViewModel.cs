@@ -80,7 +80,7 @@ namespace Nearby.viewModel
         {
             try
             {
-                if (!Settings.CustomLocationEnabled)
+                if (!Settings.Current.CustomLocationEnabled)
                 {
                     //Get the users current location
                     var locator = CrossGeolocator.Current;
@@ -90,8 +90,8 @@ namespace Nearby.viewModel
                 {
                     position = new Plugin.Geolocator.Abstractions.Position
                     {
-                        Latitude = Convert.ToDouble(Settings.CustomLatitude),
-                        Longitude = Convert.ToDouble(Settings.CustomLongitude)
+                        Latitude = Convert.ToDouble(Settings.Current.CustomLatitude),
+                        Longitude = Convert.ToDouble(Settings.Current.CustomLongitude)
                     };
                 }
             }
