@@ -268,7 +268,8 @@ namespace Nearby.Pages
                     BackgroundColor = Color.Transparent,
                     TextColor = Color.FromHex("#3F51B5"),
                     Text = "Search",
-                    FontAttributes = FontAttributes.Bold
+                    FontAttributes = FontAttributes.Bold,
+                    HeightRequest = 20
                 };
 
                 btnSearch.Clicked += (sender, ea) => SearchForPlacesNearby();
@@ -282,7 +283,8 @@ namespace Nearby.Pages
                     BackgroundColor = Color.Transparent,
                     TextColor = Color.FromHex("#3F51B5"),
                     Text = "Filter",
-                    FontAttributes = FontAttributes.Bold
+                    FontAttributes = FontAttributes.Bold,
+                    HeightRequest = 20
                 };
 
                 btnRefineSearch.Clicked += (sender, e) => ToggleRefineOptions();

@@ -12,10 +12,14 @@ namespace Nearby.viewModel
     public class AboutAppViewModel : NearbyBaseViewModel
     {
         public ObservableRangeCollection<FollowItem> FollowItems { get; } = new ObservableRangeCollection<FollowItem>();
-
-
-        public string MadeByText = $"Made with <3 by Gerade";
-
+        
+        public string madeByText = $"Made with <3 by Gerade";
+        public string MadeByText
+        {
+            get { return madeByText; }
+            set { SetProperty(ref madeByText, value); }
+        }
+        
         public ImageSource appLogo = ImageSource.FromFile("nearby-logo.png");
         public ImageSource AppLogo
         {
@@ -44,7 +48,7 @@ namespace Nearby.viewModel
         {
             FollowItems.AddRange(new[]
                {
-                    new FollowItem { ProviderLabel = "Twitter", ProviderValue = "twitter", FollowItemCommandProperty="twitter" },
+                    new FollowItem { ProviderLabel = "Twitter", ProviderValue = "twitter", FollowItemCommandProperty="https://twitter.com/Raidzen10" },
                     //new FollowItem { ProviderLabel = "Email", ProviderValue = "email" },
             });
         }

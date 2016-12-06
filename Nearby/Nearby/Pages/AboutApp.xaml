@@ -9,6 +9,7 @@
 
   <control:AlwaysScrollView>
     <StackLayout Spacing="0">
+      
       <StackLayout BackgroundColor="{DynamicResource WindowBackgroundTable}"
                            Spacing="{DynamicResource CardSpacing}"
                            Padding="{DynamicResource CardPadding}">
@@ -55,33 +56,21 @@
                     </control:NonScrollableListView.SeparatorColor>
                     <control:NonScrollableListView.ItemTemplate>
                         <DataTemplate>
-                          <ViewCell>
-                            <ViewCell.View>
-                              <Grid ColumnSpacing="{StaticResource StandardSpacing}">
-                                <Grid.Padding>
-                                  <OnPlatform x:TypeArguments="Thickness" iOS="16,8" Android="16,8"/>
-                                </Grid.Padding>
-                                <Grid.ColumnDefinitions>
-                                  <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-
-                                <Label VerticalOptions="Center"  Style="{DynamicResource NearbyListItemTextStyle}" Text="{Binding ProviderLabel}" />
-
-                              </Grid>
-                            </ViewCell.View>
-                          </ViewCell>
+                          <TextCell Text="{Binding ProviderLabel}" />
                         </DataTemplate>
                     </control:NonScrollableListView.ItemTemplate>
                 </control:NonScrollableListView>
                 <control:FooterDivider/>
             </StackLayout>
             </control:CardView>
-              
-         <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="End" Padding="{DynamicResource SmallPadding}">
-            <Label HorizontalOptions="Center" Style="{DynamicResource NearbyListItemDetailTextStyle}" Text="{Binding MadeByText}" />
-         </StackLayout>
       
       </StackLayout>
-    </StackLayout>  
+
+      <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="End" Padding="{DynamicResource SmallPadding}">
+        <Label HorizontalOptions="Center" Style="{DynamicResource NearbyListItemDetailTextStyle}" Text="{Binding MadeByText}" />
+      </StackLayout>
+      
+    </StackLayout>
+    
   </control:AlwaysScrollView>
 </ContentPage>
