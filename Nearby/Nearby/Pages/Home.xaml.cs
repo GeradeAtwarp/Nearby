@@ -263,28 +263,27 @@ namespace Nearby.Pages
                 {
                     BorderRadius = 5,
                     BorderColor = Color.FromHex("#3F51B5"),
-                    BorderWidth = 2,
+                    BorderWidth = 1,
                     WidthRequest = 100,
                     BackgroundColor = Color.Transparent,
                     TextColor = Color.FromHex("#3F51B5"),
                     Text = "Search",
                     FontAttributes = FontAttributes.Bold,
-                    HeightRequest = 20
+                    HeightRequest = 40
                 };
 
                 btnSearch.Clicked += (sender, ea) => SearchForPlacesNearby();
 
                 Button btnRefineSearch = new Button
                 {
-                    BorderRadius = 5,
                     BorderColor = Color.FromHex("#3F51B5"),
-                    BorderWidth = 2,
+                    BorderWidth = 1,
                     WidthRequest = 100,
                     BackgroundColor = Color.Transparent,
                     TextColor = Color.FromHex("#3F51B5"),
                     Text = "Filter",
                     FontAttributes = FontAttributes.Bold,
-                    HeightRequest = 20
+                    HeightRequest = 40
                 };
 
                 btnRefineSearch.Clicked += (sender, e) => ToggleRefineOptions();

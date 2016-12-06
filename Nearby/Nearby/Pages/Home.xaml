@@ -96,7 +96,7 @@
             <Label Text="Cafe" HorizontalOptions="Center" Style="{DynamicResource NearbyReviewDetailTextStyle}"/>
           </StackLayout>
 
-          <Button Grid.ColumnSpan="3" x:Name="btnRemoveFilter" Grid.Row="2" IsVisible="{Binding IsFilterEnabled}}" HeightRequest="44" BorderWidth="1" BorderColor="#3F51B5" BackgroundColor="Transparent" TextColor="{DynamicResource Primary}" HorizontalOptions="Center" Text="Remove filter">
+          <Button Grid.ColumnSpan="3" x:Name="btnRemoveFilter" Grid.Row="2" IsVisible="{Binding IsFilterEnabled}}" BorderWidth="1" BorderColor="#3F51B5" BackgroundColor="Transparent" TextColor="{DynamicResource Primary}" HorizontalOptions="Center" Text="Remove filter" WidthRequest="100">
             <Button.BorderRadius Android="1" iOS="5"></Button.BorderRadius>
           </Button>
 
