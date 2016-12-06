@@ -11,6 +11,7 @@ using System.Windows.Input;
 using Xamarin.Forms;
 using static Nearby.viewModel.PlaceDetailViewModel;
 using Nearby.Helpers;
+using FormsToolkit;
 
 namespace Nearby.viewModel
 {
@@ -47,7 +48,7 @@ namespace Nearby.viewModel
             {
                 HasNoResults = false;
 
-                if (Filter != String.Empty)
+                if (Filter != String.Empty && Settings.Current.IsConnected)
                 {
                     if (IsBusy)
                         return;
@@ -80,10 +81,14 @@ namespace Nearby.viewModel
 
                         SearchResults.Add(sp);
                     }
-                    
+
 
                     if (SearchResults.Count() == 0)
                         HasNoResults = true;
+                }
+                else
+                {
+                    MessagingService.Current.SendMessage<MessagingServiceAlert>(MessageKeys.Message, new MessagingServiceAlert { Title = "Invalid", Message = "Please ensure that you have entered a place to search for above, else, please check that you are connected to the internet.", Cancel = "Ok" });
                 }
             }
             catch (Exception ex)
@@ -104,8 +109,8 @@ namespace Nearby.viewModel
                 Settings.Current.CustomLongitude = place.CoOrdinatesLng.ToString();
                 Settings.Current.CustomLocation = place.Name;
 
-                Application.Current?.MainPage?.DisplayAlert("Info", "Custom location was successfully set to " + place.Name, "Ok");
-                    
+                await Application.Current?.MainPage?.DisplayAlert("Info", "Custom location was successfully set to " + place.Name, "Ok");
+                await Navigation.PopAsync();
             }
             catch (Exception ex)
             { }

@@ -1,4 +1,5 @@
-﻿using Nearby.Controls;
+﻿using FormsToolkit;
+using Nearby.Controls;
 using Nearby.DependencyServices;
 using Nearby.Helpers;
 using Nearby.Utils;
@@ -155,7 +156,14 @@ namespace Nearby.Pages
 
                     pin.Clicked += async (sender, e) =>
                     {
-                        await Navigation.PushAsync(new PlaceDetailView(pn));
+                        if (Settings.Current.IsConnected)
+                        {
+                            await Navigation.PushAsync(new PlaceDetailView(pn));
+                        }
+                        else
+                        {
+                            MessagingService.Current.SendMessage<MessagingServiceAlert>(MessageKeys.Message, new MessagingServiceAlert { Title = "Offline", Message = "Oh snap! you have gone offline. Please check your internet connection.", Cancel = "Ok" });
+                        }
                     };
 
                     placesMap.Pins.Add(pin);

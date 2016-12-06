@@ -13,7 +13,7 @@ namespace Nearby.viewModel
     {
         public ObservableRangeCollection<FollowItem> FollowItems { get; } = new ObservableRangeCollection<FollowItem>();
         
-        public string madeByText = $"Made with <3 by Gerade";
+        public string madeByText = $"By Gerade";
         public string MadeByText
         {
             get { return madeByText; }

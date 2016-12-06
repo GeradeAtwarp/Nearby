@@ -65,51 +65,58 @@ namespace Nearby.viewModel
         {
             try
             {
-                if (IsBusy)
-                    return;
-
-                SearchButtonText = "Please wait...";
-                IsBusy = true;
-
-                Plugin.Geolocator.Abstractions.Position position;
-
-                if (!Settings.Current.CustomLocationEnabled)
+                if (Settings.Current.IsConnected)
                 {
-                    //Get the users current location
-                    var locator = CrossGeolocator.Current;
-                    position = await locator.GetPositionAsync(10000);
-                }
-                else
-                {
-                    if (Settings.Current.CustomLatitude == "" || Settings.Current.CustomLongitude == "")
-                    {
-                        Application.Current?.MainPage.DisplayAlert("Location", "Please set a custom location, Or turn off the custom location option on the settings page.", "Got it");
+                    if (IsBusy)
                         return;
+
+                    SearchButtonText = "Please wait...";
+                    IsBusy = true;
+
+                    Plugin.Geolocator.Abstractions.Position position;
+
+                    if (!Settings.Current.CustomLocationEnabled)
+                    {
+                        //Get the users current location
+                        var locator = CrossGeolocator.Current;
+                        position = await locator.GetPositionAsync(10000);
                     }
                     else
                     {
-                        position = new Plugin.Geolocator.Abstractions.Position
+                        if (Settings.Current.CustomLatitude == "" || Settings.Current.CustomLongitude == "")
                         {
-                            Latitude = Convert.ToDouble(Settings.Current.CustomLatitude),
-                            Longitude = Convert.ToDouble(Settings.Current.CustomLongitude)
-                        };
+                            Application.Current?.MainPage.DisplayAlert("Location", "Please set a custom location, Or turn off the custom location option on the settings page.", "Got it");
+                            return;
+                        }
+                        else
+                        {
+                            position = new Plugin.Geolocator.Abstractions.Position
+                            {
+                                Latitude = Convert.ToDouble(Settings.Current.CustomLatitude),
+                                Longitude = Convert.ToDouble(Settings.Current.CustomLongitude)
+                            };
+                        }
                     }
+
+                    string filter = "";
+                    filter = Settings.Current.SearchFilters.ToLower().Replace(' ', '_');
+
+                    var httpClient = new HttpClient();
+                    var placesResult = "";
+
+                    //Get all the places neaby
+                    if (Device.OS == TargetPlatform.Android)
+                        placesResult = await httpClient.GetStringAsync(new UriBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyDU4ZSeEmjTiTgT2CJgj7bZegShjj_rV7M&location=" + position.Latitude.ToString().Replace(',', '.') + "," + position.Longitude.ToString().Replace(',', '.') + "&radius=1500&type=" + filter).Uri.ToString());
+                    else
+                        placesResult = await httpClient.GetStringAsync(new UriBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyAg-d-wLhMl65Fo_sfyj_U9tFOoW41UcDQ&location=" + position.Latitude.ToString().Replace(',', '.') + "," + position.Longitude.ToString().Replace(',', '.') + "&radius=1500&type=" + filter).Uri.ToString());
+
+                    PlacesNearby.Clear();
+                    PlacesNearby.AddRange(JsonConvert.DeserializeObject<PlaceNearby>(placesResult).results);
                 }
-
-                string filter = "";
-                filter = Settings.Current.SearchFilters.ToLower().Replace(' ', '_');
-
-                var httpClient = new HttpClient();
-                var placesResult = "";
-
-                //Get all the places neaby
-                if (Device.OS == TargetPlatform.Android)
-                    placesResult = await httpClient.GetStringAsync(new UriBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyDU4ZSeEmjTiTgT2CJgj7bZegShjj_rV7M&location=" + position.Latitude.ToString().Replace(',', '.') + "," + position.Longitude.ToString().Replace(',', '.') + "&radius=1500&type=" + filter).Uri.ToString());
                 else
-                    placesResult = await httpClient.GetStringAsync(new UriBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyAg-d-wLhMl65Fo_sfyj_U9tFOoW41UcDQ&location=" + position.Latitude.ToString().Replace(',', '.') + "," + position.Longitude.ToString().Replace(',', '.') + "&radius=1500&type=" + filter).Uri.ToString());
-
-                PlacesNearby.Clear();
-                PlacesNearby.AddRange(JsonConvert.DeserializeObject<PlaceNearby>(placesResult).results);                
+                {
+                    MessagingService.Current.SendMessage<MessagingServiceAlert>(MessageKeys.Message, new MessagingServiceAlert { Title = "Offline", Message = "Oh snap! you have gone offline. Please check your internet connection.", Cancel = "Ok" });
+                }              
             }
             catch (Exception ex)
             {

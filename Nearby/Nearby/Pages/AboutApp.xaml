@@ -33,7 +33,7 @@
                 <Label Text="Nearby" Style="{DynamicResource EvolveListItemTextStyle}"/>
               </StackLayout>
               <StackLayout Padding="0,16">
-                <Label Text="Nearby is an Application that allows Users to search and identify points of interest according to their geographical position."  Style="{DynamicResource EvolveListItemTextStyle}"/>
+                <Label Text="Nearby is an Application that allows Users to search and identify points of interest according to their geographical position." Style="{DynamicResource NearbyListItemDetailTextStyle}"/>
               </StackLayout>
             </StackLayout>
     

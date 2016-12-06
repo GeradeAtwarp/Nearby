@@ -44,9 +44,15 @@
             <Button.BorderRadius Android="1" iOS="5"></Button.BorderRadius>
           </Button>
 
-          <Button Grid.Column="2" x:Name="btnSaveFav" HeightRequest="44" BorderWidth="1" Command="{Binding SaveFavourite}" BorderColor="#3F51B5" BackgroundColor="Transparent" TextColor="{Binding FavouriteColor}" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Text="Favourite">
+          <Image Grid.Column="2" HeightRequest="15" WidthRequest="15" Source="{Binding FavImageStatus}" Aspect="AspectFit">
+            <Image.GestureRecognizers>
+              <TapGestureRecognizer Command="{Binding SaveFavourite}"/>
+            </Image.GestureRecognizers>
+          </Image>
+          
+          <!--<Button Grid.Column="2" x:Name="btnSaveFav" HeightRequest="44" BorderWidth="1" Command="{Binding SaveFavourite}" BorderColor="#3F51B5" BackgroundColor="Transparent" TextColor="{Binding FavouriteColor}" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Text="Favourite">
             <Button.BorderRadius Android="1" iOS="5"></Button.BorderRadius>
-          </Button>
+          </Button>-->
           
         </Grid>
         

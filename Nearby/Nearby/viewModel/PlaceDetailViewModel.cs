@@ -61,11 +61,11 @@ namespace Nearby.viewModel
             set { SetProperty(ref hasContacts, value); }
         }
 
-        public ImageSource favImage = ImageSource.FromFile("heart_empty.png");
-        public ImageSource FavImage
+        public ImageSource favImageStatus = ImageSource.FromFile("heart_empty.png");
+        public ImageSource FavImageStatus
         {
-            get { return favImage; }
-            set { SetProperty(ref favImage, value); }
+            get { return favImageStatus; }
+            set { SetProperty(ref favImageStatus, value); }
         }
 
         public int placeRating = 0;
@@ -218,12 +218,28 @@ namespace Nearby.viewModel
                 if (fav != null)
                 {
                     FavouriteColor = "#FF0000";
+                    FavImageStatus = ImageSource.FromFile("heart_filled.png");
                 }
 
-                PlaceRating = Details.result.reviews[0].aspects[0].rating;
-
-                Reviews = (Details.result.reviews.Count() > 0 ? "Based on " + Details.result.reviews.Count() + " reviews." : "No reviews were found.");
-                HasReviews = (Details.result.reviews.Count() > 0 ? true : false);
+                if (Details.result.reviews != null)
+                {
+                    if (Details.result.reviews.Count() > 0)
+                    {
+                        PlaceRating = Details.result.reviews[0].aspects[0].rating;
+                        Reviews = "Based on " + Details.result.reviews.Count() + " reviews.";
+                        HasReviews = true;
+                    }
+                    else
+                    {
+                        Reviews = "No reviews were found.";
+                        HasReviews = false;
+                    }
+                }
+                else
+                {
+                    Reviews = "No reviews were found.";
+                    HasReviews = false;
+                }
             }
             catch (Exception ex)
             {
@@ -247,29 +263,13 @@ namespace Nearby.viewModel
                 {
                     NearbyDataContext.SaveItem<FavoritePlaces>(new FavoritePlaces { Created = DateTime.Now, PlaceId = Place.place_id, PlaceName = Details.result.name, Latitude = Place.geometry.location.lat, Longitude = Place.geometry.location.lng, Vicinity = Place.vicinity });
                     FavouriteColor = "#FF0000";
-
-                    Application.Current?.MainPage?.DisplayAlert("Favourite", Details.result.name + " was successfully added to you favourites.", "Ok");
+                    FavImageStatus = ImageSource.FromFile("heart_filled.png");
                 }
                 else
                 {
-                    MessagingService.Current.SendMessage<MessagingServiceQuestion>(MessageKeys.Question, new MessagingServiceQuestion
-                    {
-                        Negative = "No",
-                        Positive = "Continue",
-                        Question = "You have already saved " + Details.result.name + " as a favourite. Would you like to remove it?",
-                        Title = "Edit Favourite",
-                        OnCompleted = (async (result) =>
-                        {
-                            if (!result)
-                                return;
-
-                            if (fav != null)
-                            {
-                                NearbyDataContext.RemoveItem<FavoritePlaces>(fav);
-                                FavouriteColor = "#3F51B5";
-                            }
-                        })
-                    });
+                    NearbyDataContext.RemoveItem<FavoritePlaces>(fav);
+                    FavouriteColor = "#3F51B5";
+                    FavImageStatus = ImageSource.FromFile("heart_empty.png");
                 }
             }
             catch (Exception ex)

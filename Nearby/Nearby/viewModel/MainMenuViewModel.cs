@@ -44,7 +44,7 @@ namespace Nearby.viewModel
             AboutItems.AddRange(new[]
                {
                     new AboutMenuItem { Label = "Terms Of Use", Value = "terms" },
-                    new AboutMenuItem { Label = "About this app", Value = "about" },
+                    new AboutMenuItem { Label = "About This App", Value = "about" },
             });
 
             AccountItems.Add(new AccountMenuItem
@@ -56,7 +56,9 @@ namespace Nearby.viewModel
 
         public void UpdateItems()
         {
-            CustomLocation = Settings.Current.CustomLocation;
+            if (Settings.Current.CustomLocation != "")
+                CustomLocation = Settings.Current.CustomLocation;
+
             ChangeLocationIsEnabled = Settings.Current.CustomLocationEnabled;
 
             if (Settings.Current.CustomLocationEnabled)
@@ -115,7 +117,7 @@ namespace Nearby.viewModel
         }
 
 
-        string customLocation = "Not set";
+        string customLocation = "";
         public string CustomLocation
         {
             get { return customLocation; }
