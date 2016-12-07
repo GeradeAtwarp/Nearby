@@ -78,8 +78,7 @@ namespace Nearby.Pages
             base.OnAppearing();
             vm.UpdateItems();
 
-            if (placesMap.Pins.Count() == 0)
-                MoveToCurrentLocation();
+            MoveToCurrentLocation();
         }
 
         async Task MoveToCurrentLocation()
@@ -118,7 +117,7 @@ namespace Nearby.Pages
 
                         var pin = new Pin
                         {
-                            Type = PinType.Place,
+                            Type = PinType.SavedPin,
                             Label = "This is you!",
                             Position = new Position(position.Latitude, position.Longitude)
                         };
