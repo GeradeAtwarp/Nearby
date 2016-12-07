@@ -135,7 +135,7 @@ namespace Nearby.Pages
 
         async Task SearchForPlacesNearby()
         {
-            if (RefineSearchMenu.Scale == 1)
+            if (RefineSearchMenu.Scale > 0)
             {
                 await RefineSearchMenu.ScaleTo(0, 250, Easing.SinOut);
                 RefineSearchMenu.IsVisible = false;
@@ -274,7 +274,7 @@ namespace Nearby.Pages
                 {
                     BorderRadius = 5,
                     BorderColor = Color.FromHex("#3F51B5"),
-                    BorderWidth = 1,
+                    BorderWidth = 2,
                     WidthRequest = 100,
                     BackgroundColor = Color.Transparent,
                     TextColor = Color.FromHex("#3F51B5"),
@@ -288,7 +288,7 @@ namespace Nearby.Pages
                 Button btnRefineSearch = new Button
                 {
                     BorderColor = Color.FromHex("#3F51B5"),
-                    BorderWidth = 1,
+                    BorderWidth = 2,
                     WidthRequest = 100,
                     BackgroundColor = Color.Transparent,
                     TextColor = Color.FromHex("#3F51B5"),
