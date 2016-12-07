@@ -60,13 +60,6 @@ namespace Nearby.viewModel
 
             try
             {
-                if (arg.Contains("twitter"))
-                {
-                    var service = DependencyService.Get<IAppLauncher>();
-                    if (service.OpenTwitterProfile("Raidzen10"))
-                        return;
-                }
-                
                 await CrossShare.Current.OpenBrowser(arg, new BrowserOptions
                 {
                     ChromeShowTitle = true,
@@ -110,6 +103,46 @@ namespace Nearby.viewModel
             catch (Exception ex) { }
             finally
             { IsBusy = false; }
+        }
+
+
+        public async Task ShareToProvider(string provider, string stareText = "")
+        {
+            try
+            {
+                var successShare = false;
+
+                //Open the app to share the message
+                var shareService = DependencyService.Get<ISharer>();
+                if (shareService != null)
+                {
+                    switch (provider.ToLower())
+                    {
+                        case "facebook":
+                            successShare = shareService.PostToFacebook(stareText);
+                            break;
+                        case "twitter":
+                            successShare = shareService.SendTweet(stareText);
+                            break;
+                    }
+                }
+
+                //If the app is not installed, open the browser
+                if (!successShare)
+                {
+                    switch (provider.ToLower())
+                    {
+                        case "facebook":
+                            LaunchBrowserCommand.Execute("https://www.facebook.com/");
+                            break;
+                        case "twitter":
+                            LaunchBrowserCommand.Execute("https://twitter.com/");
+                            break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            { }
         }
     }
 }

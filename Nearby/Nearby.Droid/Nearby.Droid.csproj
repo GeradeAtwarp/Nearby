@@ -275,6 +275,8 @@
     <Compile Include="DependencyService\AppLauncher.cs" />
     <Compile Include="DependencyService\LocationManager.cs" />
     <Compile Include="DependencyService\PhoneDialer.cs" />
+    <Compile Include="DependencyService\Sharing.cs" />
+    <Compile Include="DependencyService\Toasting.cs" />
     <Compile Include="Helpers\Settings.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="MainApplication.cs" />
@@ -640,7 +642,7 @@
     <AndroidResource Include="Resources\drawable-xxhdpi\search_small.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\nearby-logo.png" />
+    <EmbeddedResource Include="Resources\drawable-hdpi\nearby-logo.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-xhdpi\nearby-logo.png" />

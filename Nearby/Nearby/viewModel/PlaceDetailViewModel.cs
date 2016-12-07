@@ -61,7 +61,7 @@ namespace Nearby.viewModel
             set { SetProperty(ref hasContacts, value); }
         }
 
-        public ImageSource favImageStatus = ImageSource.FromFile("heart_empty.png");
+        public ImageSource favImageStatus = ImageSource.FromFile("favorite.png");
         public ImageSource FavImageStatus
         {
             get { return favImageStatus; }
@@ -96,6 +96,8 @@ namespace Nearby.viewModel
             set { SetProperty(ref favouriteColor, value); }
         }
 
+        public string[] shareOptions = new string[] { "Facebook", "Twitter" };
+
 
         public PlaceDetailViewModel(INavigation navigation, Places place) : base(navigation)
         {
@@ -118,6 +120,14 @@ namespace Nearby.viewModel
                 HasNoContacts = false;
 
                 IsBusy = true;
+
+                //Set fav image if place has already been set as favourite
+                var fav = NearbyDataContext.GetItems<FavoritePlaces>().Where(x => x.PlaceId == Place.place_id).FirstOrDefault();
+                if (fav != null)
+                {
+                    FavouriteColor = "#FF0000";
+                    FavImageStatus = ImageSource.FromFile("heart_filled.png");
+                }
 
                 var httpClient = new HttpClient();
 
@@ -214,13 +224,6 @@ namespace Nearby.viewModel
                     HasNoOperatingHours = false;
                 }
 
-                var fav = NearbyDataContext.GetItems<FavoritePlaces>().Where(x => x.PlaceId == Place.place_id).FirstOrDefault();
-                if (fav != null)
-                {
-                    FavouriteColor = "#FF0000";
-                    FavImageStatus = ImageSource.FromFile("heart_filled.png");
-                }
-
                 if (Details.result.reviews != null)
                 {
                     if (Details.result.reviews.Count() > 0)
@@ -253,7 +256,6 @@ namespace Nearby.viewModel
 
         ICommand savefavourite;
         public ICommand SaveFavourite => savefavourite ?? (savefavourite = new Command(async () => await AddToFavourites()));
-
         async Task AddToFavourites()
         {
             try
@@ -269,7 +271,7 @@ namespace Nearby.viewModel
                 {
                     NearbyDataContext.RemoveItem<FavoritePlaces>(fav);
                     FavouriteColor = "#3F51B5";
-                    FavImageStatus = ImageSource.FromFile("heart_empty.png");
+                    FavImageStatus = ImageSource.FromFile("favorite.png");
                 }
             }
             catch (Exception ex)
@@ -278,13 +280,9 @@ namespace Nearby.viewModel
             }
         }
 
-
-
-
-
+        
         ICommand openNavigation;
         public ICommand OpenNavigation => openNavigation ?? (openNavigation = new Command(async () => await OpenNavigationToPlace()));
-
         async Task OpenNavigationToPlace()
         {
             try
@@ -301,32 +299,42 @@ namespace Nearby.viewModel
         }
 
 
-        ICommand openShare;
-        public ICommand OpenShare => openShare ?? (openShare = new Command(async () => await DisplayShareOptions()));
+        //ICommand openShare;
+        //public ICommand OpenShare => openShare ?? (openShare = new Command(async () => await DisplayShareOptions()));
+        //async Task DisplayShareOptions()
+        //{
+        //    try
+        //    {
+        //        if (Device.OS == TargetPlatform.Android)
+        //            Device.OpenUri(new Uri("twitter://post?message=Guess what i am doing at " + Place.name + "? Come join me."));
+        //        else
+        //        {
+        //            var service = DependencyService.Get<IAppLauncher>();
+        //            service.SendTweet("Guess what i am doing at " + Place.name + "? Come join me.");
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
 
-        async Task DisplayShareOptions()
+        //    }
+        //}
+
+        
+        ICommand sharePlace;
+        public ICommand SharePlace =>
+            sharePlace ?? (sharePlace = new Command(async () => await SharePlaceCommand()));
+        async Task SharePlaceCommand()
         {
-            try
-            {
-                if (Device.OS == TargetPlatform.Android)
-                    Device.OpenUri(new Uri("twitter://post?message=Guess what i am doing at " + Place.name + "? Come join me."));
-                else
-                {
-                    var service = DependencyService.Get<IAppLauncher>();
-                    service.SendTweet("Guess what i am doing at " + Place.name + "? Come join me.");
-                }
-            }
-            catch (Exception ex)
-            {
+            var task = Application.Current?.MainPage?.DisplayActionSheet("Share", "Cancel", null, shareOptions);
+            if (task == null)
+                return;
 
-            }
+            var provider = await task;
+
+            string textToShare = "Guess what i am doing at " + Place.name + "? Come join me.";
+
+            ShareToProvider(provider, textToShare);
         }
-
-
-
-
-
-
 
 
 

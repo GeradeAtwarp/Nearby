@@ -16,6 +16,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Nearby.Helpers;
 using FormsToolkit;
+using Nearby.Interfaces;
 
 namespace Nearby.viewModel
 {
@@ -109,6 +110,12 @@ namespace Nearby.viewModel
                         placesResult = await httpClient.GetStringAsync(new UriBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyDU4ZSeEmjTiTgT2CJgj7bZegShjj_rV7M&location=" + position.Latitude.ToString().Replace(',', '.') + "," + position.Longitude.ToString().Replace(',', '.') + "&radius=1500&type=" + filter).Uri.ToString());
                     else
                         placesResult = await httpClient.GetStringAsync(new UriBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyAg-d-wLhMl65Fo_sfyj_U9tFOoW41UcDQ&location=" + position.Latitude.ToString().Replace(',', '.') + "," + position.Longitude.ToString().Replace(',', '.') + "&radius=1500&type=" + filter).Uri.ToString());
+
+                    if(JsonConvert.DeserializeObject<PlaceNearby>(placesResult).results.Count() == 0)
+                    {
+                        var toaster = DependencyService.Get<IToast>();
+                        toaster.SendToast("0 places were found. Maybe update you search criteria and try again.");
+                    }
 
                     PlacesNearby.Clear();
                     PlacesNearby.AddRange(JsonConvert.DeserializeObject<PlaceNearby>(placesResult).results);

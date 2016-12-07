@@ -36,6 +36,8 @@ namespace Nearby.Pages
 
                 placeDetailMap.Pins.Add(pin);
                 placeDetailMap.MoveToRegion(MapSpan.FromCenterAndRadius(pin.Position, Distance.FromMeters(500)));
+
+                tbItemFav.Clicked += async (sender, e) => { vm.SaveFavourite.Execute(null); };
             }
 
             ListPlaceDetails.ItemSelected += async (sender, e) =>

@@ -133,7 +133,7 @@ namespace Nearby.viewModel
                 {
                     Negative = "No",
                     Positive = "Continue",
-                    Question = "Are uou sure you want remove this favourite?",
+                    Question = "Are you sure you want remove this place from your favourites?",
                     Title = "Remove Favourite",
                     OnCompleted = (async (result) =>
                     {
@@ -144,10 +144,8 @@ namespace Nearby.viewModel
 
                         if (favToRemove != null)
                         {
-                            NearbyDataContext.RemoveItem<FavoritePlaces>(favToRemove);
-
-                            FavPlaces.Clear();
-                            FavPlaces.AddRange((from fp in NearbyDataContext.GetItems<FavoritePlaces>()
+                            NearbyDataContext.RemoveItem<FavoritePlaces>(favToRemove);                            
+                            FavPlaces.ReplaceRange((from fp in NearbyDataContext.GetItems<FavoritePlaces>()
                                                 select new FavPlaceItem
                                                 {
                                                     ID = fp.Id,

@@ -1,4 +1,5 @@
 ﻿using MvvmHelpers;
+using Nearby.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,7 +39,12 @@ namespace Nearby.viewModel
                 if (selectedFollowItem == null)
                     return;
 
-                LaunchBrowserCommand.Execute(selectedFollowItem.FollowItemCommandProperty);
+                var service = DependencyService.Get<IAppLauncher>();
+                if (service.OpenTwitterProfile("Raidzen10"))
+                    return;
+                else
+                    launchBrowserCommand.Execute(selectedFollowItem.FollowItemCommandProperty);
+
                 SelectedFollowItem = null;
             }
         }

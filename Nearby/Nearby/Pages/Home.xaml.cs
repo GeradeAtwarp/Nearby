@@ -136,6 +136,12 @@ namespace Nearby.Pages
 
         async Task SearchForPlacesNearby()
         {
+            if (RefineSearchMenu.Scale == 1)
+            {
+                await RefineSearchMenu.ScaleTo(0, 250, Easing.SinOut);
+                RefineSearchMenu.IsVisible = false;
+            }
+
             await vm.SearchNearby("");
 
             try
@@ -182,14 +188,12 @@ namespace Nearby.Pages
             if (RefineSearchMenu.Scale == 0)
             {
                 //fabrefine.ColorNormal = Color.FromHex("#3F51B5");
-                await Task.Delay(300);
                 RefineSearchMenu.IsVisible = true;
                 await RefineSearchMenu.ScaleTo(1, 250, Easing.SinIn);
             }
             else
             {
                 //fabrefine.ColorNormal = Color.FromHex("#7885cb");
-                await Task.Delay(300);
                 await RefineSearchMenu.ScaleTo(0, 250, Easing.SinOut);
                 RefineSearchMenu.IsVisible = false;
             }
