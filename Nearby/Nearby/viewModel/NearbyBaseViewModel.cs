@@ -97,7 +97,7 @@ namespace Nearby.viewModel
                 var service = DependencyService.Get<IPhoneDialer>();
 
                 if (service != null)
-                    service.LaunchCall(arg);
+                    service.LaunchCall(arg.Replace(" ", ""));
 
             }
             catch (Exception ex) { }

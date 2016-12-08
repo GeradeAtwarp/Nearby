@@ -16,7 +16,7 @@ namespace Nearby.iOS.DependencyServices
     {
         public bool LaunchCall(string telnumber)
         {
-            return UIApplication.SharedApplication.OpenUrl(new NSUrl("tel:" + telnumber));
+            return UIApplication.SharedApplication.OpenUrl(new NSUrl("telprompt://" + telnumber));
         }
     }
 }
