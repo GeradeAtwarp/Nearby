@@ -21,7 +21,7 @@ namespace Nearby.viewModel
             set { SetProperty(ref madeByText, value); }
         }
         
-        public ImageSource appLogo = ImageSource.FromFile("nearby-logo.png");
+        public ImageSource appLogo = ImageSource.FromFile("nearby_logo.png");
         public ImageSource AppLogo
         {
             get { return appLogo; }

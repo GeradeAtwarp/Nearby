@@ -2778,41 +2778,44 @@ namespace Nearby.Droid
 			// aapt resource value: 0x7f0200e3
 			public const int nearby_icon = 2130837731;
 			
-			// aapt resource value: 0x7f0200ef
-			public const int notification_template_icon_bg = 2130837743;
-			
 			// aapt resource value: 0x7f0200e4
-			public const int phone = 2130837732;
+			public const int nearby_logo = 2130837732;
+			
+			// aapt resource value: 0x7f0200f0
+			public const int notification_template_icon_bg = 2130837744;
 			
 			// aapt resource value: 0x7f0200e5
-			public const int pin = 2130837733;
+			public const int phone = 2130837733;
 			
 			// aapt resource value: 0x7f0200e6
-			public const int pizza = 2130837734;
+			public const int pin = 2130837734;
 			
 			// aapt resource value: 0x7f0200e7
-			public const int pizza_white = 2130837735;
+			public const int pizza = 2130837735;
 			
 			// aapt resource value: 0x7f0200e8
-			public const int search = 2130837736;
+			public const int pizza_white = 2130837736;
 			
 			// aapt resource value: 0x7f0200e9
-			public const int search_small = 2130837737;
+			public const int search = 2130837737;
 			
 			// aapt resource value: 0x7f0200ea
-			public const int settings_cog = 2130837738;
+			public const int search_small = 2130837738;
 			
 			// aapt resource value: 0x7f0200eb
-			public const int sharethis = 2130837739;
+			public const int settings_cog = 2130837739;
 			
 			// aapt resource value: 0x7f0200ec
-			public const int splash_screen = 2130837740;
+			public const int sharethis = 2130837740;
 			
 			// aapt resource value: 0x7f0200ed
-			public const int star_empty = 2130837741;
+			public const int splash_screen = 2130837741;
 			
 			// aapt resource value: 0x7f0200ee
-			public const int star_filled = 2130837742;
+			public const int star_empty = 2130837742;
+			
+			// aapt resource value: 0x7f0200ef
+			public const int star_filled = 2130837743;
 			
 			static Drawable()
 			{

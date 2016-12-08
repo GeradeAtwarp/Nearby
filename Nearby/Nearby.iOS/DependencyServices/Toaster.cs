@@ -6,6 +6,7 @@ using Nearby.Interfaces;
 using Nearby.iOS.DependencyServices;
 using Xamarin.Forms;
 using ToastIOS;
+using CoreGraphics;
 
 [assembly:Dependency(typeof(Toaster))]
 
@@ -17,7 +18,7 @@ namespace Nearby.iOS.DependencyServices
         {
             Device.BeginInvokeOnMainThread(() =>
             {
-                Toast.MakeText(text, Toast.LENGTH_LONG).SetCornerRadius(0).Show();
+                Toast.MakeText(text, Toast.LENGTH_LONG).SetCornerRadius(5).SetGravity(ToastGravity.Top).Show();
             });
         }
     }
