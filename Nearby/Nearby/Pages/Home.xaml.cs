@@ -333,10 +333,7 @@ namespace Nearby.Pages
                         break;
                 }
 
-                SearchForPlacesNearby().ContinueWith(task => Device.BeginInvokeOnMainThread(() =>
-                {
-                    ToggleRefineOptions();
-                }));
+                SearchForPlacesNearby();
             }
         }
 
