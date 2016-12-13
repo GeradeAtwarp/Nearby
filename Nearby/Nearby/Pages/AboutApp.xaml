@@ -65,6 +65,10 @@
             </control:CardView>
       
       </StackLayout>
+
+      <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="{DynamicResource SmallPadding}">
+        <Label HorizontalOptions="Center" Style="{DynamicResource NearbyListItemDetailTextStyle}" Text="{Binding MadeByText}" />
+      </StackLayout>
       
     </StackLayout>
     
