@@ -49,6 +49,7 @@ namespace Nearby.viewModel
             set
             {
                 SetProperty(ref enabledFilter, value);
+                Settings.Current.SearchFilters = enabledFilter;
             }
         }
 
@@ -176,6 +177,7 @@ namespace Nearby.viewModel
             try
             {
                 IsFilterEnabled = false;
+                EnabledFilter = "";
             }
             catch (Exception ex)
             {
