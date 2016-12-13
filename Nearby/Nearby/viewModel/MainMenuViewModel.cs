@@ -19,6 +19,13 @@ namespace Nearby.viewModel
         public ObservableRangeCollection<AboutMenuItem> AboutItems { get; } = new ObservableRangeCollection<AboutMenuItem>();
         public ObservableRangeCollection<AccountMenuItem> AccountItems { get; } = new ObservableRangeCollection<AccountMenuItem>();
 
+        public string madeByText = $"By Gerade";
+        public string MadeByText
+        {
+            get { return madeByText; }
+            set { SetProperty(ref madeByText, value); }
+        }
+
         public MainMenuViewModel(INavigation navigation) : base(navigation)
         {
             Title = "Settings";

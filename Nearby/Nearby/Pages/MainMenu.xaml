@@ -158,6 +158,10 @@
 
       </StackLayout>
 
+      <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="End" Padding="{DynamicResource SmallPadding}">
+        <Label HorizontalOptions="Center" Style="{DynamicResource NearbyListItemDetailTextStyle}" Text="{Binding MadeByText}" />
+      </StackLayout>
+
     </StackLayout>
   </control:AlwaysScrollView>
   

@@ -49,6 +49,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
               </Grid.RowDefinitions>
 
               <Label Text="Users of the Services offered by Nearby acknowledge and accept these terms and conditions."  Style="{DynamicResource TitleStyle}"/>
@@ -117,9 +118,9 @@
 
               <Label Grid.Row="32" Text="All communications relating to Nearby must be sent using the contacts stated on the Contact Us page." Style="{DynamicResource NearbyListItemDetailTextStyle}"/>
 
-              <Label Grid.Row="33" Text="Governing law and jurisdiction" Style="{DynamicResource TitleStyle}"/>
+              <Label Grid.Row="34" Text="Governing law and jurisdiction" Style="{DynamicResource TitleStyle}"/>
 
-              <Label Grid.Row="34" Text="These Terms and any dispute concerning the implementation, interpretation and validity of this agreement are subject to Italian law. The parties agree to resolve any dispute, within the limits of the applicable law, under the jurisdiction of the Italian courts with the exclusive jurisdiction of the court of Milan, Italy." Style="{DynamicResource NearbyListItemDetailTextStyle}"/>
+              <Label Grid.Row="35" Text="These Terms and any dispute concerning the implementation, interpretation and validity of this agreement are subject to Italian law. The parties agree to resolve any dispute, within the limits of the applicable law, under the jurisdiction of the Italian courts with the exclusive jurisdiction of the court of Milan, Italy." Style="{DynamicResource NearbyListItemDetailTextStyle}"/>
 
             </Grid>
 

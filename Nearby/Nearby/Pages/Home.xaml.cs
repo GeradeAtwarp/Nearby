@@ -272,7 +272,7 @@ namespace Nearby.Pages
             {
                 Button btnSearch = new Button
                 {
-                    BorderRadius = 5,
+                    BorderRadius = 20,
                     BorderColor = Color.FromHex("#3F51B5"),
                     BorderWidth = 2,
                     WidthRequest = 100,
@@ -287,6 +287,7 @@ namespace Nearby.Pages
 
                 Button btnRefineSearch = new Button
                 {
+                    BorderRadius = 20,
                     BorderColor = Color.FromHex("#3F51B5"),
                     BorderWidth = 2,
                     WidthRequest = 100,
