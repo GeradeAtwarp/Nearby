@@ -96,7 +96,6 @@
     <Compile Include="Helpers\Settings.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
-    <Compile Include="Renderers\FloatingActionButtonViewRendererIOS.cs" />
     <Compile Include="Renderers\NearbyButton.cs" />
     <Compile Include="Renderers\NonScrollableListViewRenderer.cs" />
     <None Include="app.config" />
@@ -123,6 +122,14 @@
     </InterfaceDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="FAB.Forms, Version=2.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\FAB.Forms.2.1.1\lib\Xamarin.iOS10\FAB.Forms.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FAB.iOS, Version=2.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\FAB.Forms.2.1.1\lib\Xamarin.iOS10\FAB.iOS.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="FormsToolkit, Version=1.1.18.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\FormsToolkit.1.1.18\lib\Xamarin.iOS10\FormsToolkit.dll</HintPath>
       <Private>True</Private>
@@ -146,9 +153,6 @@
     <Reference Include="ImageCircle.Forms.Plugin.iOS, Version=1.8.0.5, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Xam.Plugins.Forms.ImageCircle.1.8.0.5\lib\Xamarin.iOS10\ImageCircle.Forms.Plugin.iOS.dll</HintPath>
       <Private>True</Private>
-    </Reference>
-    <Reference Include="LiquidFloatingActionButton">
-      <HintPath>..\..\Components\liquidfloatingactionbutton-1.0.0.1\lib\ios-unified\LiquidFloatingActionButton.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.WindowsAzure.Mobile, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -533,10 +537,6 @@
     <BundleResource Include="Resources\nearby_logo%402x.png" />
   </ItemGroup>
   <ItemGroup>
-    <XamarinComponentReference Include="liquidfloatingactionbutton">
-      <Visible>False</Visible>
-      <Version>1.0.0.1</Version>
-    </XamarinComponentReference>
     <XamarinComponentReference Include="ToastIOS">
       <Visible>False</Visible>
       <Version>1.6</Version>
