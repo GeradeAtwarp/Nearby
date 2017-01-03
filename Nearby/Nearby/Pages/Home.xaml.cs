@@ -1,4 +1,5 @@
-﻿using FormsToolkit;
+﻿using FAB.Forms;
+using FormsToolkit;
 using Nearby.Controls;
 using Nearby.DependencyServices;
 using Nearby.Helpers;
@@ -270,38 +271,51 @@ namespace Nearby.Pages
             }
             else
             {
-                Button btnSearch = new Button
-                {
-                    BorderRadius = 20,
-                    BorderColor = Color.FromHex("#3F51B5"),
-                    BorderWidth = 2,
-                    WidthRequest = 100,
-                    BackgroundColor = Color.Transparent,
-                    TextColor = Color.FromHex("#3F51B5"),
-                    Text = "Search",
-                    FontAttributes = FontAttributes.Bold,
-                    HeightRequest = 40
-                };
+                FloatingActionButton searchFab = new FloatingActionButton();
+                searchFab.Source = "search_small.png";
+                searchFab.Size = FabSize.Normal;
+                searchFab.NormalColor = Color.FromHex("#3F51B5");
+                searchFab.RippleColor = Color.FromHex("#2C3E50");
 
-                btnSearch.Clicked += (sender, ea) => SearchForPlacesNearby();
+                FloatingActionButton refineFab = new FloatingActionButton();
+                refineFab.Source = "ic_more_vert_white.png";
+                refineFab.Size = FabSize.Normal;
+                refineFab.NormalColor = Color.FromHex("#3F51B5");
+                refineFab.RippleColor = Color.FromHex("#2C3E50");
 
-                Button btnRefineSearch = new Button
-                {
-                    BorderRadius = 20,
-                    BorderColor = Color.FromHex("#3F51B5"),
-                    BorderWidth = 2,
-                    WidthRequest = 100,
-                    BackgroundColor = Color.Transparent,
-                    TextColor = Color.FromHex("#3F51B5"),
-                    Text = "Filter",
-                    FontAttributes = FontAttributes.Bold,
-                    HeightRequest = 40
-                };
 
-                btnRefineSearch.Clicked += (sender, e) => ToggleRefineOptions();
+                //Button btnSearch = new Button
+                //{
+                //    BorderRadius = 20,
+                //    BorderColor = Color.FromHex("#3F51B5"),
+                //    BorderWidth = 2,
+                //    WidthRequest = 100,
+                //    BackgroundColor = Color.Transparent,
+                //    TextColor = Color.FromHex("#3F51B5"),
+                //    Text = "Search",
+                //    FontAttributes = FontAttributes.Bold,
+                //    HeightRequest = 40
+                //};
 
-                SearchButton.Children.Add(btnSearch);
-                RefineButton.Children.Add(btnRefineSearch);
+                searchFab.Clicked += (sender, ea) => SearchForPlacesNearby();
+
+                //Button btnRefineSearch = new Button
+                //{
+                //    BorderRadius = 20,
+                //    BorderColor = Color.FromHex("#3F51B5"),
+                //    BorderWidth = 2,
+                //    WidthRequest = 100,
+                //    BackgroundColor = Color.Transparent,
+                //    TextColor = Color.FromHex("#3F51B5"),
+                //    Text = "Filter",
+                //    FontAttributes = FontAttributes.Bold,
+                //    HeightRequest = 40
+                //};
+
+                refineFab.Clicked += (sender, e) => ToggleRefineOptions();
+
+                SearchButton.Children.Add(searchFab);
+                RefineButton.Children.Add(refineFab);
             }
         }
 
