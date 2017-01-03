@@ -4,7 +4,6 @@ using Nearby.Helpers;
 using Nearby.Interfaces;
 using Nearby.Models;
 using Nearby.Models.DynamoDB;
-using Nearby.Services;
 using Nearby.Utils.Entities;
 using Newtonsoft.Json;
 using System;
@@ -290,10 +289,7 @@ namespace Nearby.viewModel
                         Latitude = 0,
                         Longitude = 0,
                         Vicinity = Place.vicinity
-                    };
-
-                    var service = DependencyService.Get<AzureService>();
-                    service.SaveNewFav(sfp);                   
+                    };                
                 }
             }
             catch (Exception ex)

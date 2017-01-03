@@ -3,7 +3,6 @@ using MvvmHelpers;
 using Nearby.Helpers;
 using Nearby.Models;
 using Nearby.Pages;
-using Nearby.Services;
 using Nearby.Utils.Entities;
 using Plugin.Geolocator;
 using System;
@@ -75,23 +74,23 @@ namespace Nearby.viewModel
                 else
                 {
                     //Else, retreive the favourites from azure
-                    var service = DependencyService.Get<AzureService>();
-                    var items = await service.GetAllFavourites();
+                    //var service = DependencyService.Get<AzureService>();
+                    //var items = await service.GetAllFavourites();
 
-                    FavPlaces.Clear();
-                    FavPlaces.AddRange((from fp in items
-                                        select new FavPlaceItem
-                                        {
-                                            ID = fp.ID,
-                                            Name = fp.Name,
-                                            PlaceID = fp.PlaceID,
-                                            //ViewDetailsCommand = GoToDetailsCommand,
-                                            //RemoveCommand = DeleteFavCommand,
-                                            Latitude = fp.Latitude,
-                                            Longitude = fp.Longitude,
-                                            Vicinity = fp.Vicinity,
-                                            DistanceFromCurrentLocation = DistanceTo(position.Latitude, position.Longitude, fp.Latitude, fp.Longitude)
-                                        }).ToList());
+                    //FavPlaces.Clear();
+                    //FavPlaces.AddRange((from fp in items
+                    //                    select new FavPlaceItem
+                    //                    {
+                    //                        ID = fp.ID,
+                    //                        Name = fp.Name,
+                    //                        PlaceID = fp.PlaceID,
+                    //                        //ViewDetailsCommand = GoToDetailsCommand,
+                    //                        //RemoveCommand = DeleteFavCommand,
+                    //                        Latitude = fp.Latitude,
+                    //                        Longitude = fp.Longitude,
+                    //                        Vicinity = fp.Vicinity,
+                    //                        DistanceFromCurrentLocation = DistanceTo(position.Latitude, position.Longitude, fp.Latitude, fp.Longitude)
+                    //                    }).ToList());
 
 
                     if (FavPlaces.Count() == 0)
