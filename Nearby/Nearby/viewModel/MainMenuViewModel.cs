@@ -150,11 +150,18 @@ namespace Nearby.viewModel
                 CustomLongitude = "";
                 CustomLatitude = "";
             }
+            else
+            {
+
+            }
         }
 
 
         ICommand navigateToSearch;
-        public ICommand NavigateToSearch => navigateToSearch ?? (navigateToSearch = new Command(async () => await Navigation.PushAsync(new SearchCustomPlaces())));
+        public ICommand NavigateToSearch => navigateToSearch ?? (navigateToSearch = new Command(async () => {
+            if (ChangeLocationIsEnabled)
+                await Navigation.PushAsync(new SearchCustomPlaces());
+            }));
 
 
         ICommand toggleFiltern;
