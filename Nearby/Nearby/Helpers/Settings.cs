@@ -25,6 +25,12 @@ namespace Nearby.Helpers
             get { return settings ?? (settings = new Settings()); }
         }
 
+        //Which app service are we using
+        public bool CurrentService
+        {
+            get { return false; }
+        }
+
         //Settings
         #region Is custom location enabled
 

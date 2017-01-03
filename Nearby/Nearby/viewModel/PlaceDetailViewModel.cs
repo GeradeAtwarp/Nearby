@@ -2,7 +2,9 @@
 using MvvmHelpers;
 using Nearby.Helpers;
 using Nearby.Interfaces;
+using Nearby.Models;
 using Nearby.Models.DynamoDB;
+using Nearby.Services;
 using Nearby.Utils.Entities;
 using Newtonsoft.Json;
 using System;
@@ -261,17 +263,37 @@ namespace Nearby.viewModel
             try
             {
                 var fav = NearbyDataContext.GetItems<FavoritePlaces>().Where(x => x.PlaceId == Place.place_id).FirstOrDefault();
-                if (fav == null)
+
+                //Save to local sqlLite db if azure is not enabled
+                if (!Settings.Current.CurrentService)
                 {
-                    NearbyDataContext.SaveItem<FavoritePlaces>(new FavoritePlaces { Created = DateTime.Now, PlaceId = Place.place_id, PlaceName = Details.result.name, Latitude = Place.geometry.location.lat, Longitude = Place.geometry.location.lng, Vicinity = Place.vicinity });
-                    FavouriteColor = "#FF0000";
-                    FavImageStatus = ImageSource.FromFile("heart_filled.png");
+                    if (fav == null)
+                    {
+                        NearbyDataContext.SaveItem<FavoritePlaces>(new FavoritePlaces { Created = DateTime.Now, PlaceId = Place.place_id, PlaceName = Details.result.name, Latitude = Place.geometry.location.lat, Longitude = Place.geometry.location.lng, Vicinity = Place.vicinity });
+                        FavouriteColor = "#FF0000";
+                        FavImageStatus = ImageSource.FromFile("heart_filled.png");
+                    }
+                    else
+                    {
+                        NearbyDataContext.RemoveItem<FavoritePlaces>(fav);
+                        FavouriteColor = "#3F51B5";
+                        FavImageStatus = ImageSource.FromFile("favorite.png");
+                    }
                 }
                 else
                 {
-                    NearbyDataContext.RemoveItem<FavoritePlaces>(fav);
-                    FavouriteColor = "#3F51B5";
-                    FavImageStatus = ImageSource.FromFile("favorite.png");
+                    var sfp = new FavPlaceItem
+                    {
+                        Name = Place.name,
+                        PlaceID = Place.place_id,
+                        SavedOn = "Saved on " + DateTime.Now.ToString("yyyy/MM/dd"),
+                        Latitude = 0,
+                        Longitude = 0,
+                        Vicinity = Place.vicinity
+                    };
+
+                    var service = DependencyService.Get<AzureService>();
+                    service.SaveNewFav(sfp);                   
                 }
             }
             catch (Exception ex)

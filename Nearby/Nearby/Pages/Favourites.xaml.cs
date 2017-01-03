@@ -1,5 +1,6 @@
 ﻿using Nearby.Controls;
 using Nearby.Helpers;
+using Nearby.Models;
 using Nearby.viewModel;
 using System;
 using System.Collections.Generic;

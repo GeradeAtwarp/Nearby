@@ -1,7 +1,9 @@
 ﻿using FormsToolkit;
 using MvvmHelpers;
 using Nearby.Helpers;
+using Nearby.Models;
 using Nearby.Pages;
+using Nearby.Services;
 using Nearby.Utils.Entities;
 using Plugin.Geolocator;
 using System;
@@ -42,29 +44,59 @@ namespace Nearby.viewModel
             {
                 IsBusy = true;
 
+                //Get the users current location
                 await UpdateCurrentLocation();
 
-                var v = NearbyDataContext.GetItems<FavoritePlaces>();
+                //Retreive favourites from local sqlLite db, if no service is set up
+                if (!Settings.Current.CurrentService)
+                {
+                    var v = NearbyDataContext.GetItems<FavoritePlaces>();
 
-                FavPlaces.Clear();
-                FavPlaces.AddRange((from fp in NearbyDataContext.GetItems<FavoritePlaces>()
-                                    select new FavPlaceItem
-                                    {
-                                        ID = fp.Id,
-                                        Name = fp.PlaceName,
-                                        PlaceID = fp.PlaceId,
-                                        SavedOn = "Saved on " + fp.Created.ToString("yyyy/MM/dd"),
-                                        ViewDetailsCommand = GoToDetailsCommand,
-                                        RemoveCommand = DeleteFavCommand,
-                                        Latitude = fp.Latitude,
-                                        Longitude = fp.Longitude,
-                                        Vicinity = fp.Vicinity,
-                                        DistanceFromCurrentLocation = DistanceTo(position.Latitude, position.Longitude, fp.Latitude, fp.Longitude)
-                                    }).ToList());
+                    FavPlaces.Clear();
+                    FavPlaces.AddRange((from fp in NearbyDataContext.GetItems<FavoritePlaces>()
+                                        select new FavPlaceItem
+                                        {
+                                            ID = fp.Id,
+                                            Name = fp.PlaceName,
+                                            PlaceID = fp.PlaceId,
+                                            SavedOn = "Saved on " + fp.Created.ToString("yyyy/MM/dd"),
+                                            //ViewDetailsCommand = GoToDetailsCommand,
+                                            //RemoveCommand = DeleteFavCommand,
+                                            Latitude = fp.Latitude,
+                                            Longitude = fp.Longitude,
+                                            Vicinity = fp.Vicinity,
+                                            DistanceFromCurrentLocation = DistanceTo(position.Latitude, position.Longitude, fp.Latitude, fp.Longitude)
+                                        }).ToList());
 
 
-                if (FavPlaces.Count() == 0)
-                    HasFavorites = true;
+                    if (FavPlaces.Count() == 0)
+                        HasFavorites = true;
+                }
+                else
+                {
+                    //Else, retreive the favourites from azure
+                    var service = DependencyService.Get<AzureService>();
+                    var items = await service.GetAllFavourites();
+
+                    FavPlaces.Clear();
+                    FavPlaces.AddRange((from fp in items
+                                        select new FavPlaceItem
+                                        {
+                                            ID = fp.ID,
+                                            Name = fp.Name,
+                                            PlaceID = fp.PlaceID,
+                                            //ViewDetailsCommand = GoToDetailsCommand,
+                                            //RemoveCommand = DeleteFavCommand,
+                                            Latitude = fp.Latitude,
+                                            Longitude = fp.Longitude,
+                                            Vicinity = fp.Vicinity,
+                                            DistanceFromCurrentLocation = DistanceTo(position.Latitude, position.Longitude, fp.Latitude, fp.Longitude)
+                                        }).ToList());
+
+
+                    if (FavPlaces.Count() == 0)
+                        HasFavorites = true;
+                }
             }
             catch (Exception ex)
             {
@@ -152,8 +184,8 @@ namespace Nearby.viewModel
                                                     Name = fp.PlaceName,
                                                     PlaceID = fp.PlaceId,
                                                     SavedOn = "Saved on " + fp.Created.ToString("yyyy/MM/dd"),
-                                                    ViewDetailsCommand = GoToDetailsCommand,
-                                                    RemoveCommand = DeleteFavCommand,
+                                                    //ViewDetailsCommand = GoToDetailsCommand,
+                                                    //RemoveCommand = DeleteFavCommand,
                                                     Latitude = fp.Latitude,
                                                     Longitude = fp.Longitude,
                                                     Vicinity = fp.Vicinity
@@ -198,30 +230,6 @@ namespace Nearby.viewModel
 
             return dist;
         }
-
-
-
-
-
-
-
-
-
-
-
-
-        public class FavPlaceItem
-        {
-            public int ID { get; set; }
-            public string Name { get; set; }
-            public string PlaceID { get; set; }
-            public string SavedOn { get; set; }
-            public ICommand ViewDetailsCommand { get; set; }
-            public ICommand RemoveCommand { get; set; }
-            public double Latitude { get; set; }
-            public double Longitude { get; set; }
-            public string Vicinity { get; set; }
-            public double DistanceFromCurrentLocation { get; set; }
-        }
+        
     }
 }
