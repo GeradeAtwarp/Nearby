@@ -270,20 +270,22 @@ namespace Nearby.Pages
             }
             else
             {
-                Button btnSearch = new Button
-                {
-                    BorderRadius = 20,
-                    BorderColor = Color.FromHex("#3F51B5"),
-                    BorderWidth = 2,
-                    WidthRequest = 100,
-                    BackgroundColor = Color.Transparent,
-                    TextColor = Color.FromHex("#3F51B5"),
-                    Text = "Search",
-                    FontAttributes = FontAttributes.Bold,
-                    HeightRequest = 40
-                };
+                FloatingActionButtonViewIOS fabIOS = new FloatingActionButtonViewIOS();
 
-                btnSearch.Clicked += (sender, ea) => SearchForPlacesNearby();
+                //Button btnSearch = new Button
+                //{
+                //    BorderRadius = 20,
+                //    BorderColor = Color.FromHex("#3F51B5"),
+                //    BorderWidth = 2,
+                //    WidthRequest = 100,
+                //    BackgroundColor = Color.Transparent,
+                //    TextColor = Color.FromHex("#3F51B5"),
+                //    Text = "Search",
+                //    FontAttributes = FontAttributes.Bold,
+                //    HeightRequest = 40
+                //};
+
+                //btnSearch.Clicked += (sender, ea) => SearchForPlacesNearby();
 
                 Button btnRefineSearch = new Button
                 {
@@ -300,7 +302,7 @@ namespace Nearby.Pages
 
                 btnRefineSearch.Clicked += (sender, e) => ToggleRefineOptions();
 
-                SearchButton.Children.Add(btnSearch);
+                SearchButton.Children.Add(fabIOS);
                 RefineButton.Children.Add(btnRefineSearch);
             }
         }
