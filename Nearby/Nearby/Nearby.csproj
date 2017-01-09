@@ -54,7 +54,9 @@
     </Compile>
     <Compile Include="Controls\NearbyButton.cs" />
     <Compile Include="Controls\NearbyNavigationPage.cs" />
+    <Compile Include="Controls\NoBarsScrollViewer.cs" />
     <Compile Include="Controls\NonScrollableListView.cs" />
+    <Compile Include="Controls\StackedList.cs" />
     <Compile Include="Controls\TransparentConatiner.cs" />
     <Compile Include="DependencyServices\ILocationManager.cs" />
     <Compile Include="Helpers\AWSUtils.cs" />
@@ -64,6 +66,7 @@
     <Compile Include="Helpers\Converters\OpenCloseTextConverter.cs" />
     <Compile Include="Helpers\Converters\RatingStarCalculator.cs" />
     <Compile Include="Helpers\NavigationService.cs" />
+    <Compile Include="Helpers\OnCustomPlatform.cs" />
     <Compile Include="Helpers\Settings.cs" />
     <Compile Include="Interfaces\IAppLauncher.cs" />
     <Compile Include="Interfaces\IPhoneDialer.cs" />
@@ -76,6 +79,7 @@
     <Compile Include="Models\DynamoDB\BaseDynamoEntity.cs" />
     <Compile Include="Models\DynamoDB\IBaseDynamo.cs" />
     <Compile Include="Models\DynamoDB\Nearby_Favorites.cs" />
+    <Compile Include="Models\EventNearbyItem.cs" />
     <Compile Include="Models\FavPlaceItem.cs" />
     <Compile Include="Pages\AboutApp.xaml.cs">
       <DependentUpon>AboutApp.xaml</DependentUpon>
@@ -91,6 +95,9 @@
     </Compile>
     <Compile Include="Pages\MainMenu.xaml.cs">
       <DependentUpon>MainMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\NearbyEvents.xaml.cs">
+      <DependentUpon>NearbyEvents.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\PlaceDetailView.xaml.cs">
       <DependentUpon>PlaceDetailView.xaml</DependentUpon>
@@ -111,6 +118,7 @@
     <Compile Include="Utils\Services\AWSIntegration.cs" />
     <Compile Include="Utils\User.cs" />
     <Compile Include="viewModel\AboutAppViewModel.cs" />
+    <Compile Include="viewModel\EventsViewModel.cs" />
     <Compile Include="viewModel\FavoritesViewModel.cs" />
     <Compile Include="viewModel\HomeViewModel.cs" />
     <Compile Include="viewModel\MainMenuViewModel.cs" />
@@ -140,6 +148,18 @@
   <ItemGroup>
     <Reference Include="FAB.Forms, Version=2.1.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\FAB.Forms.2.1.1\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\FAB.Forms.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FFImageLoading, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Xamarin.FFImageLoading.2.2.6\lib\portable-net45+win8+wpa81+wp8\FFImageLoading.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FFImageLoading.Forms, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Xamarin.FFImageLoading.Forms.2.2.6\lib\portable-net45+win8+wpa81+wp8\FFImageLoading.Forms.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FFImageLoading.Platform, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Xamarin.FFImageLoading.2.2.6\lib\portable-net45+win8+wpa81+wp8\FFImageLoading.Platform.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="FormsToolkit, Version=1.1.18.0, Culture=neutral, processorArchitecture=MSIL">
@@ -329,6 +349,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\NearbyEvents.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.3.3.175\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.3.175\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />

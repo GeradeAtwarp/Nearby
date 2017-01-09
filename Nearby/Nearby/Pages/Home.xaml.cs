@@ -61,6 +61,18 @@ namespace Nearby.Pages
                 await Navigation.PushAsync(new Favourites());
             });
 
+            tbItemNavigateEvents.Command = new Command(async () =>
+            {
+                var nav = Application.Current?.MainPage?.Navigation;
+                if (nav == null)
+                    return;
+
+                if (vm.IsBusy)
+                    return;
+
+                await Navigation.PushAsync(new NearbyEvents());
+            });
+
             btnRemoveFilter.Clicked += async (sender, e) =>
             {
                 vm.DeactivateFilter().ContinueWith(task => Device.BeginInvokeOnMainThread(() =>
@@ -321,7 +333,7 @@ namespace Nearby.Pages
 
         void SetFilter(object sender, EventArgs args)
         {
-            var image = (Image)sender;
+            var image = (Xamarin.Forms.Image)sender;
             var source = image.Source as FileImageSource;
 
             if (source != null)

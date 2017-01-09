@@ -9,6 +9,7 @@
              Title="Nearby">
 
   <ContentPage.ToolbarItems>
+    <ToolbarItem x:Name="tbItemNavigateEvents" Icon="today" />
     <ToolbarItem x:Name="tbItemNavigateFav" Icon="favorite" />
     <ToolbarItem x:Name="tbItemNavigateOptions" Icon="settings_cog" />
   </ContentPage.ToolbarItems>

@@ -3,6 +3,7 @@ using Nearby.Helpers;
 using Nearby.Interfaces;
 using Nearby.Utils;
 using Nearby.Utils.Entities;
+using Plugin.Geolocator;
 using Plugin.Share;
 using Plugin.Share.Abstractions;
 using System;
@@ -43,6 +44,33 @@ namespace Nearby.viewModel
         public Settings Settings
         {
             get { return Settings.Current; }
+        }
+        
+        public async Task<Plugin.Geolocator.Abstractions.Position> UpdateCurrentLocation()
+        {
+            Plugin.Geolocator.Abstractions.Position position = new Plugin.Geolocator.Abstractions.Position();
+
+            try
+            {
+                if (!Settings.Current.CustomLocationEnabled)
+                {
+                    //Get the users current location
+                    var locator = CrossGeolocator.Current;
+                    position = await locator.GetPositionAsync(10000);
+
+                }
+                else
+                {
+                    position = new Plugin.Geolocator.Abstractions.Position
+                    {
+                        Latitude = Convert.ToDouble(Settings.Current.CustomLatitude),
+                        Longitude = Convert.ToDouble(Settings.Current.CustomLongitude)
+                    };
+                }
+            }
+            catch { }
+
+            return position;
         }
 
 

@@ -44,7 +44,7 @@ namespace Nearby.viewModel
                 IsBusy = true;
 
                 //Get the users current location
-                await UpdateCurrentLocation();
+                position = await UpdateCurrentLocation();
 
                 //Retreive favourites from local sqlLite db, if no service is set up
                 if (!Settings.Current.CurrentService)
@@ -104,31 +104,6 @@ namespace Nearby.viewModel
             finally
             {
                 IsBusy = false;
-            }
-        }
-
-        async Task UpdateCurrentLocation()
-        {
-            try
-            {
-                if (!Settings.Current.CustomLocationEnabled)
-                {
-                    //Get the users current location
-                    var locator = CrossGeolocator.Current;
-                    position = await locator.GetPositionAsync(10000);
-                }
-                else
-                {
-                    position = new Plugin.Geolocator.Abstractions.Position
-                    {
-                        Latitude = Convert.ToDouble(Settings.Current.CustomLatitude),
-                        Longitude = Convert.ToDouble(Settings.Current.CustomLongitude)
-                    };
-                }
-            }
-            catch(Exception ex)
-            {
-
             }
         }
 
