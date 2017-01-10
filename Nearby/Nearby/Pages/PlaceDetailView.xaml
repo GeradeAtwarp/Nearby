@@ -215,8 +215,8 @@
         
       </StackLayout>
 
-      <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="{DynamicResource SmallPadding}">
-        <Label VerticalOptions="End" HorizontalOptions="Center" Style="{DynamicResource NearbyListItemDetailTextStyle}" Text="Powered by Google"></Label>
+      <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <control:AdView />
       </StackLayout>
 
     </StackLayout>

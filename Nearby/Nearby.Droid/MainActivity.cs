@@ -8,6 +8,7 @@ using Android.Widget;
 using Android.OS;
 using Nearby.Utils.Entities;
 using Plugin.Permissions;
+using Android.Gms.Ads;
 
 namespace Nearby.Droid
 {
@@ -21,6 +22,7 @@ namespace Nearby.Droid
 
             //Set DB path
             Database.root = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
+            MobileAds.Initialize(ApplicationContext, "bc0b686325a74f8fa50134a03ce5efc9");
 
             base.SetTheme(Resource.Style.MainTheme);
 

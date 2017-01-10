@@ -9,6 +9,7 @@ using HockeyApp.iOS;
 using Nearby.Utils.Entities;
 using ImageCircle.Forms.Plugin.iOS;
 using Nearby.iOS.Renderers;
+using Google.MobileAds;
 
 namespace Nearby.iOS
 {
@@ -46,6 +47,8 @@ namespace Nearby.iOS
 
             ImageCircleRenderer.Init();
             NonScrollableListViewRenderer.Initialize();
+
+            MobileAds.Configure("pub-1631454081193991");
 
             LoadApplication(new App());
 
