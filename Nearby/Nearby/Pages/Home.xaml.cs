@@ -299,26 +299,26 @@ namespace Nearby.Pages
                 Button btnSearch = new Button
                 {
                     BorderRadius = 20,
-                    BorderColor = Color.FromHex("#3F51B5"),
-                    BorderWidth = 2,
+                    BackgroundColor = Color.FromHex("#3F51B5"),
+                    //BorderColor = Color.FromHex("#3F51B5"),
+                    //BorderWidth = 2,
                     WidthRequest = 100,
-                    BackgroundColor = Color.Transparent,
-                    TextColor = Color.FromHex("#3F51B5"),
+                    TextColor = Color.White,
                     Text = "Search",
                     FontAttributes = FontAttributes.Bold,
                     HeightRequest = 40
                 };
 
-                btnSearch.Clicked += (sender, ea) => SearchForPlacesNearby();
+                btnSearch.Clicked += async (sender, ea) => await Navigation.PushAsync(new NearbyEvents());
 
                 Button btnRefineSearch = new Button
                 {
                     BorderRadius = 20,
-                    BorderColor = Color.FromHex("#3F51B5"),
-                    BorderWidth = 2,
+                    BackgroundColor = Color.FromHex("#3F51B5"),
+                    //BorderColor = Color.FromHex("#3F51B5"),
+                    //BorderWidth = 2,
                     WidthRequest = 100,
-                    BackgroundColor = Color.Transparent,
-                    TextColor = Color.FromHex("#3F51B5"),
+                    TextColor = Color.White,
                     Text = "Filter",
                     FontAttributes = FontAttributes.Bold,
                     HeightRequest = 40
