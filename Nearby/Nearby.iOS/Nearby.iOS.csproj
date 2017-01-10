@@ -571,6 +571,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="GoogleService-Info.plist" />
+    <BundleResource Include="Resources\reminder_empty.png" />
+    <BundleResource Include="Resources\reminder_empty%402x.png" />
+    <BundleResource Include="Resources\reminder_empty%403x.png" />
+    <BundleResource Include="Resources\reminder_filled.png" />
+    <BundleResource Include="Resources\reminder_filled%402x.png" />
+    <BundleResource Include="Resources\reminder_filled%403x.png" />
+    <BundleResource Include="Resources\today.png" />
+    <BundleResource Include="Resources\today%403x.png" />
+    <BundleResource Include="Resources\today%402x.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.3.3.175\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.3.175\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />

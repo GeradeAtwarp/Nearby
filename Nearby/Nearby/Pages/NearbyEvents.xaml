@@ -6,7 +6,8 @@
              xmlns:helpers="clr-namespace:Nearby.Helpers"
              Title="Events Nearby">
 
-
+  <Grid>
+    
    <ListView
       x:Name="lstEvents"
       ItemsSource="{Binding EventsNearby}"
@@ -57,12 +58,45 @@
                         </Grid.RowDefinitions>
                         <Label TextColor="White"
                             Grid.Row="0"
-                            Text="{Binding title}"/>
+                            Text="{Binding Title}"
+                            Style="{StaticResource EventTitleLabelStyle}"/>
                         <Label TextColor="White"
                             Grid.Row="1"
-                            Text="{Binding city_name}"
+                            Text="{Binding CityName}"
+                            FontSize="{StaticResource ExtraBigSize}"
+                            Style="{StaticResource EventTitleLabelStyle}"
                             LineBreakMode="TailTruncation"/>
                     </Grid>
+                  <StackLayout Grid.Row="1">
+                    <BoxView HorizontalOptions="FillAndExpand" HeightRequest="1" Margin="0,8" BackgroundColor="White" />
+                    <Grid>
+                      <Grid.ColumnDefinitions>
+                        <ColumnDefinition>
+                          <ColumnDefinition.Width>
+                            <OnPlatform
+                                x:TypeArguments="GridLength"
+                                iOS="20"
+                                Android="30"
+                                WinPhone="30"/>
+                          </ColumnDefinition.Width>
+                        </ColumnDefinition>
+                        <ColumnDefinition />
+                      </Grid.ColumnDefinitions>
+                      <Image
+                          Grid.Column="0"
+                          Aspect="AspectFit"
+                          Source="reminder_empty.png" >
+                          <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SetReminder}" CommandParameter="{Binding .}"></TapGestureRecognizer>
+                          </Image.GestureRecognizers>
+                      </Image>
+
+                      <Label Grid.Column="1" HorizontalOptions="EndAndExpand"
+                             Text="{Binding StartTime, Converter={StaticResource DateConverter}}"
+                             Style="{StaticResource EventLabelStyle}" />
+                    </Grid>
+                  </StackLayout>
+                  
                   </Grid>
               </Grid>
             </ViewCell.View>
@@ -71,4 +105,6 @@
         </DataTemplate>
       </ListView.ItemTemplate>
     </ListView>
+
+  </Grid>
 </ContentPage>

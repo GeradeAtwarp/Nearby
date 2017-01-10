@@ -66,6 +66,7 @@
     <Compile Include="Helpers\Converters\OpenCloseColorConverter.cs" />
     <Compile Include="Helpers\Converters\OpenCloseTextConverter.cs" />
     <Compile Include="Helpers\Converters\RatingStarCalculator.cs" />
+    <Compile Include="Helpers\Converters\ToDateConverter.cs" />
     <Compile Include="Helpers\NavigationService.cs" />
     <Compile Include="Helpers\OnCustomPlatform.cs" />
     <Compile Include="Helpers\Settings.cs" />

@@ -36,31 +36,11 @@ namespace Nearby.Pages
 
             BindingContext = vm = new HomeViewModel(Navigation);
 
-            //Navigate to options page
-            tbItemNavigateOptions.Command = new Command(async () =>
-            {
-                var nav = Application.Current?.MainPage?.Navigation;
-                if (nav == null)
-                    return;
+            var tbItemNavigateEvents = new ToolbarItem() { Icon = "today" };
+            var tbItemNavigateFav = new ToolbarItem() { Icon = "favorite"};
+            var tbItemNavigateOptions = new ToolbarItem() { Icon = "settings_cog"};
 
-                if (vm.IsBusy)
-                        return;
-
-                await Navigation.PushAsync(new MainMenu());
-            });
-
-            tbItemNavigateFav.Command = new Command(async () =>
-            {
-                var nav = Application.Current?.MainPage?.Navigation;
-                if (nav == null)
-                    return;
-
-                if (vm.IsBusy)
-                    return;
-
-                await Navigation.PushAsync(new Favourites());
-            });
-
+            //Navigate to nearby page
             tbItemNavigateEvents.Command = new Command(async () =>
             {
                 var nav = Application.Current?.MainPage?.Navigation;
@@ -73,6 +53,41 @@ namespace Nearby.Pages
                 await Navigation.PushAsync(new NearbyEvents());
             });
 
+            //Navigate to favs page
+            tbItemNavigateFav.Command = new Command(async () =>
+            {
+                var nav = Application.Current?.MainPage?.Navigation;
+                if (nav == null)
+                    return;
+                await Navigation.PushAsync(new NearbyEvents());
+            });
+
+            //Navigate to options page
+            tbItemNavigateOptions.Command = new Command(async () =>
+            {
+                var nav = Application.Current?.MainPage?.Navigation;
+                if (nav == null)
+                    return;
+
+                if (vm.IsBusy)
+                    return;
+
+                await Navigation.PushAsync(new MainMenu());
+            });
+
+            if (Device.OS != TargetPlatform.Android)
+            {
+                ToolbarItems.Add(tbItemNavigateFav);
+                ToolbarItems.Add(tbItemNavigateOptions);
+            }
+            else
+            {
+                ToolbarItems.Add(tbItemNavigateEvents);
+                ToolbarItems.Add(tbItemNavigateFav);
+                ToolbarItems.Add(tbItemNavigateOptions);
+            }
+                       
+
             btnRemoveFilter.Clicked += async (sender, e) =>
             {
                 vm.DeactivateFilter().ContinueWith(task => Device.BeginInvokeOnMainThread(() =>
@@ -80,9 +95,8 @@ namespace Nearby.Pages
                     ToggleRefineOptions();
                 }));
             };
-
-            AddSearchButtons();
             
+            AddSearchButtons();            
             MoveToCurrentLocation();
         }
 

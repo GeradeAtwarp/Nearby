@@ -22,11 +22,11 @@ namespace Nearby.Droid
 
             //Set DB path
             Database.root = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
-            MobileAds.Initialize(ApplicationContext, "bc0b686325a74f8fa50134a03ce5efc9");
 
             base.SetTheme(Resource.Style.MainTheme);
 
             base.OnCreate(bundle);
+            MobileAds.Initialize(ApplicationContext, "bc0b686325a74f8fa50134a03ce5efc9");
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
             LoadApplication(new App());

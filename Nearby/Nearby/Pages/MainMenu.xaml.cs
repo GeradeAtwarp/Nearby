@@ -22,6 +22,22 @@ namespace Nearby.Pages
 
             BindingContext = new MainMenuViewModel(Navigation);
 
+            ListViewFeeds.ItemSelected += async (s, e) =>
+            {
+                if (e.SelectedItem == null)
+                    return;
+
+                var item = e.SelectedItem as viewModel.MenuItem;
+                Page page = new Favourites();
+                
+                if (!item.isSwitch)
+                {
+                    await NavigationService.PushAsync(Navigation, page);
+                }
+
+                ListViewFeeds.SelectedItem = null;
+            };
+
             ListViewAbout.ItemSelected += async (s, e) =>
             {
                 if (e.SelectedItem == null)
@@ -62,6 +78,17 @@ namespace Nearby.Pages
 
             var adjust = Device.OS != TargetPlatform.Android ? 1 : -ViewModel.AboutItems.Count + 1;
             ListViewAbout.HeightRequest = (ViewModel.AboutItems.Count * ListViewAbout.RowHeight) - adjust;
+        }
+    }
+
+    public class MainMenuItemSelector : DataTemplateSelector
+    {
+        public DataTemplate SwitchCellDataTemplate { get; set; }
+        public DataTemplate TextCellDataTemplate { get; set; }
+
+        protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
+        {
+            return ((viewModel.MenuItem)item).isSwitch ? SwitchCellDataTemplate : TextCellDataTemplate;
         }
     }
 }

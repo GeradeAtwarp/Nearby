@@ -32,12 +32,25 @@ namespace Nearby.viewModel
 
             ChangeLocationIsEnabled = Settings.Current.CustomLocationEnabled;
 
+            //Add menu item to navigate to favs on IOS only
+            if (Device.OS == TargetPlatform.iOS)
+            {
+                ManualItems.Add(new MenuItem
+                {
+                    DetailLabel = "Favourites",
+                    MenuItemCommand = NavigateToFavourites,
+                    isSwitch = false
+                });
+            }
+
             ManualItems.Add(new MenuItem
             {
                 DetailLabel = "Use custom location?",
                 DetailValue = ChangeLocationIsEnabled,
-                MenuItemCommand = ToggleCustomLocation
+                MenuItemCommand = ToggleCustomLocation,
+                isSwitch = true
             });
+
 
             if (Settings.Current.CustomLocationEnabled)
             {
@@ -185,6 +198,13 @@ namespace Nearby.viewModel
                 Settings.Current.IsSearchFilterEnabled = true;
             }
         }
+
+
+        public ICommand NavigateToFavourites => new Command(NavigateToFavouritesCommand);
+        private async void NavigateToFavouritesCommand()
+        {
+            await Navigation.PushAsync(new SearchCustomPlaces());
+        }
     }
 
     public class MenuItem
@@ -195,6 +215,7 @@ namespace Nearby.viewModel
         public bool DetailValue { get; set; }
         public ICommand MenuItemCommand { get; set; }
         public String MenuItemCommandProperty { get; set; }
+        public Boolean isSwitch { get; set; }
     }
 
     public class AccountMenuItem

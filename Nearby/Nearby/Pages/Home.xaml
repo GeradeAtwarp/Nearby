@@ -8,11 +8,11 @@
              x:Class="Nearby.Pages.Home"
              Title="Nearby">
 
-  <ContentPage.ToolbarItems>
+  <!--<ContentPage.ToolbarItems>
+    <ToolbarItem x:Name="tbItemNavigateEvents" Icon="today" />
     <ToolbarItem x:Name="tbItemNavigateFav" Icon="favorite" />
     <ToolbarItem x:Name="tbItemNavigateOptions" Icon="settings_cog" />
-    <ToolbarItem x:Name="tbItemNavigateEvents" Icon="today" />
-  </ContentPage.ToolbarItems>
+  </ContentPage.ToolbarItems>-->
 
   <ContentPage.Content>
     <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
