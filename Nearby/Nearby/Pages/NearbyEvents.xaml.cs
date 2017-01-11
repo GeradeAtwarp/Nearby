@@ -19,6 +19,19 @@ namespace Nearby.Pages
             InitializeComponent();
 
             BindingContext = vm = new EventsViewModel(Navigation);
+
+            lstEvents.ItemSelected += (s, e) =>
+            {
+                lstEvents.SelectedItem = null;
+            };
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            if (vm.EventsNearby.Count == 0)
+                vm.RefreshCommand.Execute(null);
         }
 
         protected override void OnBindingContextChanged()

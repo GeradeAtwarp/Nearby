@@ -26,6 +26,8 @@ namespace Nearby.Droid
             base.SetTheme(Resource.Style.MainTheme);
 
             base.OnCreate(bundle);
+
+            FFImageLoading.Forms.Droid.CachedImageRenderer.Init();
             MobileAds.Initialize(ApplicationContext, "bc0b686325a74f8fa50134a03ce5efc9");
 
             global::Xamarin.Forms.Forms.Init(this, bundle);

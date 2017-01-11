@@ -49,6 +49,8 @@ namespace Nearby.iOS
             NonScrollableListViewRenderer.Initialize();
 
             MobileAds.Configure("pub-1631454081193991");
+            FFImageLoading.Forms.Touch.CachedImageRenderer.Init();
+
 
             LoadApplication(new App());
 

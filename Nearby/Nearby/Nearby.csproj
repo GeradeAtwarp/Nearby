@@ -62,7 +62,9 @@
     <Compile Include="DependencyServices\ILocationManager.cs" />
     <Compile Include="Helpers\AWSUtils.cs" />
     <Compile Include="Helpers\Constants.cs" />
+    <Compile Include="Helpers\Converters\DateToTimeConverter.cs" />
     <Compile Include="Helpers\Converters\DistanceConverter.cs" />
+    <Compile Include="Helpers\Converters\EventImageSelector.cs" />
     <Compile Include="Helpers\Converters\OpenCloseColorConverter.cs" />
     <Compile Include="Helpers\Converters\OpenCloseTextConverter.cs" />
     <Compile Include="Helpers\Converters\RatingStarCalculator.cs" />
@@ -206,6 +208,14 @@
     </Reference>
     <Reference Include="PInvoke.Windows.Core, Version=0.3.0.0, Culture=neutral, PublicKeyToken=9e300f9f87f04a7a, processorArchitecture=MSIL">
       <HintPath>..\..\packages\PInvoke.Windows.Core.0.3.2\lib\portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10\PInvoke.Windows.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Plugin.Calendars, Version=0.6.10.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CClarke.Plugin.Calendars.0.6.10-beta\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10+UAP10\Plugin.Calendars.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Plugin.Calendars.Abstractions, Version=0.6.10.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CClarke.Plugin.Calendars.0.6.10-beta\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10+UAP10\Plugin.Calendars.Abstractions.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Plugin.Connectivity, Version=2.2.12.0, Culture=neutral, processorArchitecture=MSIL">

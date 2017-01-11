@@ -40,7 +40,7 @@
                      Aspect="AspectFill"
                      AbsoluteLayout.LayoutFlags="All" 
                      AbsoluteLayout.LayoutBounds="0, 0, 1.0, 1.0"
-                     Source="https://raw.githubusercontent.com/Microsoft/BikeSharing360_MobileApps/master/src/CommonResources/suggestion_bronx_river.png" ></Image>
+                     Source="{Binding Categories, Converter={StaticResource EventImageSelector}}" ></Image>
                 </AbsoluteLayout>
                 
                 <Grid
@@ -81,17 +81,22 @@
                           </ColumnDefinition.Width>
                         </ColumnDefinition>
                         <ColumnDefinition />
+                        <ColumnDefinition />
                       </Grid.ColumnDefinitions>
                       <Image
                           Grid.Column="0"
                           Aspect="AspectFit"
-                          Source="reminder_empty.png" >
+                          Source="{Binding AlarmBellStatus}" >
                           <Image.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding SetReminder}" CommandParameter="{Binding .}"></TapGestureRecognizer>
                           </Image.GestureRecognizers>
                       </Image>
+                      
+                      <Label Grid.Column="1" HorizontalOptions="FillAndExpand"
+                             Text="{Binding StartTime, Converter={StaticResource DateToTimeConverter}}"
+                             Style="{StaticResource EventLabelStyle}" />                      
 
-                      <Label Grid.Column="1" HorizontalOptions="EndAndExpand"
+                      <Label Grid.Column="2" HorizontalOptions="EndAndExpand"
                              Text="{Binding StartTime, Converter={StaticResource DateConverter}}"
                              Style="{StaticResource EventLabelStyle}" />
                     </Grid>

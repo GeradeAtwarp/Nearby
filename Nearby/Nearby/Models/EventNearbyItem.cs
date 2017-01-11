@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace Nearby.Models
 {
@@ -48,6 +49,7 @@ namespace Nearby.Models
             public Medium medium { get; set; }
             public string url { get; set; }
             public Thumb thumb { get; set; }
+
             public string height { get; set; }
         }
 
@@ -95,12 +97,25 @@ namespace Nearby.Models
             public string stop_time { get; set; }
             public string venue_name { get; set; }
             public string venue_url { get; set; }
+            public Categories categories { get; set; }
         }
 
         public class Events
         {
             public List<Event> @event { get; set; }
         }
+
+        public class Category
+        {
+            public string name { get; set; }
+            public string id { get; set; }
+        }
+
+        public class Categories
+        {
+            public List<Category> category { get; set; }
+        }
+
     }
 
 
@@ -118,5 +133,13 @@ namespace Nearby.Models
         public String EventURL { get; set; }
 
         public ICommand SetReminder { get; set; }
+        public ImageSource AlarmBellStatus { get; set; }
+        public ImageSource EventImage { get; set; }
+        public String Categories { get; set;}
+
+        public EventNearbyItem()
+        {
+            AlarmBellStatus = ImageSource.FromFile("reminder_empty.png");
+        }
     }
 }

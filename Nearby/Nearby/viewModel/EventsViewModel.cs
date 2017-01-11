@@ -14,6 +14,8 @@ namespace Nearby.viewModel
 {
     public class EventsViewModel : NearbyBaseViewModel
     {
+        #region Properties
+
         public ObservableRangeCollection<EventNearbyItem> EventsNearby { get; } = new ObservableRangeCollection<EventNearbyItem>();
         Plugin.Geolocator.Abstractions.Position position;
 
@@ -23,13 +25,12 @@ namespace Nearby.viewModel
             get { return hasEvents; }
             set { SetProperty(ref hasEvents, value); }
         }
+        
+        #endregion
 
 
-        public EventsViewModel(INavigation navigation) : base(navigation)
-        {
-            LoadEventsNearby();
-        }
-
+        #region Commands
+        
         public ICommand RefreshCommand => new Command(RefreshEventsCommand);
         private async void RefreshEventsCommand(object obj)
         {
@@ -43,12 +44,30 @@ namespace Nearby.viewModel
 
             if (nearbyEvent != null)
             {
+                new Plugin.Calendars.Abstractions.CalendarEvent
+                {
+                    Description = nearbyEvent.Description,
+                    Location = nearbyEvent.VenueName,
+                    AllDay = true,
+                    Name = nearbyEvent.Title,
+                    Start = Convert.ToDateTime(nearbyEvent.StartTime),
+                    End = Convert.ToDateTime(nearbyEvent.StopTime)
+                };
+
                 Application.Current?.MainPage.DisplayAlert("Reminder", "Reminder was successfully set.", "Ok");
             }
             else
                 return;
         }
 
+        #endregion
+
+
+        public EventsViewModel(INavigation navigation) : base(navigation)
+        {
+            LoadEventsNearby();
+        }
+        
         async Task LoadEventsNearby()
         {
             if (IsBusy)
@@ -64,7 +83,7 @@ namespace Nearby.viewModel
                 var httpClient = new HttpClient();
                 var eventsResults = "";
 
-                eventsResults = await httpClient.GetStringAsync(new UriBuilder("http://api.eventful.com/json/events/search?app_key=hTRdwhLvk8LgjnFL&within=30&page_size=30&sort_order=date&location=" + position.Latitude.ToString().Replace(',', '.') + "," + position.Longitude.ToString().Replace(',', '.')).Uri.ToString());
+                eventsResults = await httpClient.GetStringAsync(new UriBuilder("http://api.eventful.com/json/events/search?app_key=hTRdwhLvk8LgjnFL&within=30&page_size=30&sort_order=date&include=categories&location=" + position.Latitude.ToString().Replace(',', '.') + "," + position.Longitude.ToString().Replace(',', '.')).Uri.ToString());
 
                 var response = JsonConvert.DeserializeObject<EventNearbyResult>(eventsResults).events.@event;
 
@@ -86,7 +105,9 @@ namespace Nearby.viewModel
                         StopTime = re.stop_time,
                         VenueName = re.venue_name,
                         EventURL = re.venue_url,
-                        SetReminder = SetReminder
+                        SetReminder = SetReminder,
+                        EventImage = (re.image != null ? ImageSource.FromUri(new Uri(re.image.url)) : ImageSource.FromUri(new Uri("https://raw.githubusercontent.com/Microsoft/BikeSharing360_MobileApps/master/src/CommonResources/suggestion_bronx_river.png"))),
+                        Categories = String.Join(String.Empty, (re.categories != null ? re.categories.category.Select(x => x.name).ToList() : new List<string>()))
                     });
                 }
 
@@ -99,15 +120,6 @@ namespace Nearby.viewModel
                 IsBusy = false;
             }
         }
-    }
 
-
-
-
-
-
-
-
-
-    
+    }   
 }

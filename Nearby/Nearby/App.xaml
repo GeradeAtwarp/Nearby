@@ -83,7 +83,8 @@
       </Style>
 
       <converters:ToDateConverter x:Key="DateConverter" />
-      
+      <converters:DateToTimeConverter x:Key="DateToTimeConverter" />
+      <converters:EventImageSelector x:Key="EventImageSelector" />
 
     </ResourceDictionary>
   </Application.Resources>
