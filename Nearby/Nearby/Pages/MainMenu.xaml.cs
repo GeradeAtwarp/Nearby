@@ -38,30 +38,18 @@ namespace Nearby.Pages
                 ListViewFeeds.SelectedItem = null;
             };
 
-            ListViewAbout.ItemSelected += async (s, e) =>
+            lstAbout.ItemSelected += async (s, e) =>
             {
                 if (e.SelectedItem == null)
                     return;
 
                 AboutMenuItem item = e.SelectedItem as AboutMenuItem;
-               
-                ListViewAbout.SelectedItem = null;
-                Page page = null;
 
-                switch (item.Value)
-                {
-                    case "terms":
-                        page = new TermsAndConditions();
-                        break;
-                    case "about":
-                        page = new AboutApp();
-                        break;
-                }
+                lstAbout.SelectedItem = null;
+                //Page page = null;
 
-                if (page == null)
-                    return;
-
-                await NavigationService.PushAsync(Navigation, page);
+                //if (item.AboutCommand != null)
+                //    item.AboutCommand.Execute(item.AboutCommandProperty);
             };
         }
 
@@ -77,7 +65,10 @@ namespace Nearby.Pages
             vm = null;
 
             var adjust = Device.OS != TargetPlatform.Android ? 1 : -ViewModel.AboutItems.Count + 1;
-            ListViewAbout.HeightRequest = (ViewModel.AboutItems.Count * ListViewAbout.RowHeight) - adjust;
+            lstAbout.HeightRequest = (ViewModel.AboutItems.Count * lstAbout.RowHeight) - adjust;
+
+            adjust = Device.OS != TargetPlatform.Android ? 1 : -ViewModel.TermsItems.Count + 1;
+            lstTerms.HeightRequest = (ViewModel.TermsItems.Count * lstTerms.RowHeight) - adjust;
         }
     }
 

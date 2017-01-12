@@ -2,21 +2,28 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Nearby.Pages.NearbyEvents"
-             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"  
+             xmlns:control="clr-namespace:Nearby.Controls"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:helpers="clr-namespace:Nearby.Helpers"
+             BackgroundColor="White"
              Title="Events Nearby">
 
-  <Grid>
-    
-   <ListView
-      x:Name="lstEvents"
-      ItemsSource="{Binding EventsNearby}"
-      HasUnevenRows="True"
-      BackgroundColor="White"
-      CachingStrategy="RecycleElement"
-      IsPullToRefreshEnabled="True"
-      RefreshCommand="{Binding RefreshCommand}"
-      IsRefreshing="{Binding IsBusy, Mode=OneWay}">
+
+    <StackLayout Padding="{DynamicResource CardPadding}">
+      <Label Text="Going on vacation? Visiting family members accross the country? Want to know what places are awaiting you? No problem, just search for you destination below, then select a place to set as you custom location. :-)"
+             HorizontalOptions="StartAndExpand"
+             Style="{DynamicResource SectionLabelTextStyle}"/>
+    </StackLayout>
+
+    <ListView
+        x:Name="lstEvents"
+        ItemsSource="{Binding EventsNearby}"
+        HasUnevenRows="True"
+        BackgroundColor="White"
+        CachingStrategy="RecycleElement"
+        IsPullToRefreshEnabled="True"
+        RefreshCommand="{Binding RefreshCommand}"
+        IsRefreshing="{Binding IsBusy, Mode=OneWay}">
       <ListView.SeparatorColor>
         <OnPlatform x:TypeArguments="Color" iOS="{StaticResource ListSeparator}"/>
       </ListView.SeparatorColor>
@@ -24,49 +31,49 @@
         <DataTemplate>
           <ViewCell>
             <ViewCell.View>
-              <Grid Padding="5, 0, 5, 10">
-                 <Grid.HeightRequest>
-                    <helpers:OnCustomPlatform
-                        x:TypeArguments="x:Double"
-                        iOS="180"
-                        Android="200" 
-                        WinPhone="150"
-                        Windows="160"/>
+              <Grid Padding="0,0,0,16">
+                <Grid.HeightRequest>
+                  <helpers:OnCustomPlatform
+                      x:TypeArguments="x:Double"
+                      iOS="180"
+                      Android="200"
+                      WinPhone="150"
+                      Windows="160"/>
                 </Grid.HeightRequest>
                 <AbsoluteLayout>
                   <Image
-                     HorizontalOptions="FillAndExpand"
-                     VerticalOptions="FillAndExpand"
-                     Aspect="AspectFill"
-                     AbsoluteLayout.LayoutFlags="All" 
-                     AbsoluteLayout.LayoutBounds="0, 0, 1.0, 1.0"
-                     Source="{Binding Categories, Converter={StaticResource EventImageSelector}}" ></Image>
+                      HorizontalOptions="FillAndExpand"
+                      VerticalOptions="FillAndExpand"
+                      Aspect="AspectFill"
+                      AbsoluteLayout.LayoutFlags="All"
+                      AbsoluteLayout.LayoutBounds="0, 0, 1.0, 1.0"
+                      Source="{Binding Categories, Converter={StaticResource EventImageSelector}}" ></Image>
                 </AbsoluteLayout>
-                
+
                 <Grid
                     Padding="15, 10"
                     VerticalOptions="EndAndExpand">
+                  <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                  </Grid.RowDefinitions>
+                  <Grid
+                      Grid.Row="0">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="Auto" />
+                      <RowDefinition Height="Auto" />
+                      <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <Grid
-                        Grid.Row="0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
-                        <Label TextColor="White"
-                            Grid.Row="0"
-                            Text="{Binding Title}"
-                            Style="{StaticResource EventTitleLabelStyle}"/>
-                        <Label TextColor="White"
-                            Grid.Row="1"
-                            Text="{Binding CityName}"
-                            FontSize="{StaticResource ExtraBigSize}"
-                            Style="{StaticResource EventTitleLabelStyle}"
-                            LineBreakMode="TailTruncation"/>
-                    </Grid>
+                    <Label TextColor="White"
+                        Grid.Row="0"
+                        Text="{Binding Title}"
+                        Style="{StaticResource EventTitleLabelStyle}"/>
+                    <Label TextColor="White"
+                        Grid.Row="1"
+                        Text="{Binding CityName}"
+                        FontSize="{StaticResource ExtraBigSize}"
+                        Style="{StaticResource EventTitleLabelStyle}"
+                        LineBreakMode="TailTruncation"/>
+                  </Grid>
                   <StackLayout Grid.Row="1">
                     <BoxView HorizontalOptions="FillAndExpand" HeightRequest="1" Margin="0,8" BackgroundColor="White" />
                     <Grid>
@@ -81,35 +88,33 @@
                           </ColumnDefinition.Width>
                         </ColumnDefinition>
                         <ColumnDefinition />
-                        <ColumnDefinition />
                       </Grid.ColumnDefinitions>
                       <Image
                           Grid.Column="0"
                           Aspect="AspectFit"
                           Source="{Binding AlarmBellStatus}" >
-                          <Image.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding SetReminder}" CommandParameter="{Binding .}"></TapGestureRecognizer>
-                          </Image.GestureRecognizers>
+                        <Image.GestureRecognizers>
+                          <TapGestureRecognizer Command="{Binding SetReminder}" CommandParameter="{Binding .}"></TapGestureRecognizer>
+                        </Image.GestureRecognizers>
                       </Image>
-                      
-                      <Label Grid.Column="1" HorizontalOptions="FillAndExpand"
-                             Text="{Binding StartTime, Converter={StaticResource DateToTimeConverter}}"
-                             Style="{StaticResource EventLabelStyle}" />                      
 
-                      <Label Grid.Column="2" HorizontalOptions="EndAndExpand"
-                             Text="{Binding StartTime, Converter={StaticResource DateConverter}}"
-                             Style="{StaticResource EventLabelStyle}" />
+                      <!--<Label Grid.Column="1" HorizontalOptions="FillAndExpand"
+                              Text="{Binding StartTime, Converter={StaticResource DateToTimeConverter}}"
+                              Style="{StaticResource EventLabelStyle}" />-->
+
+                      <Label Grid.Column="1" HorizontalOptions="EndAndExpand"
+                              Text="{Binding StartTime, Converter={StaticResource DateConverter}}"
+                              Style="{StaticResource EventLabelStyle}" />
                     </Grid>
                   </StackLayout>
-                  
-                  </Grid>
+
+                </Grid>
               </Grid>
             </ViewCell.View>
           </ViewCell>
-          
+
         </DataTemplate>
       </ListView.ItemTemplate>
     </ListView>
-
-  </Grid>
+  
 </ContentPage>

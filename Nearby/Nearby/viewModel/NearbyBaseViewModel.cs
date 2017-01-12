@@ -172,5 +172,23 @@ namespace Nearby.viewModel
             catch (Exception ex)
             { }
         }
+        
+        public ICommand OpenSocialProfile => new Command<string>(async (t) => await OpenSocialProfileCommand(t));
+        async Task OpenSocialProfileCommand(string arg)
+        {
+            try
+            {
+                //Open the app to share the message
+                var shareService = DependencyService.Get<ISharer>();
+                if (shareService != null)
+                {
+                    if (shareService.OpenUserName("Raidzen10"))
+                        return;
+                }
+
+                LaunchBrowserCommand.Execute(arg);
+            }
+            catch { }
+        }
     }
 }

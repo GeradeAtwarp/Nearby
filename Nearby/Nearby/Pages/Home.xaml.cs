@@ -77,7 +77,7 @@ namespace Nearby.Pages
 
             if (Device.OS != TargetPlatform.Android)
             {
-                ToolbarItems.Add(tbItemNavigateFav);
+                ToolbarItems.Add(tbItemNavigateEvents);
                 ToolbarItems.Add(tbItemNavigateOptions);
             }
             else

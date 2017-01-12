@@ -107,7 +107,7 @@ namespace Nearby.viewModel
                         EventURL = re.venue_url,
                         SetReminder = SetReminder,
                         EventImage = (re.image != null ? ImageSource.FromUri(new Uri(re.image.url)) : ImageSource.FromUri(new Uri("https://raw.githubusercontent.com/Microsoft/BikeSharing360_MobileApps/master/src/CommonResources/suggestion_bronx_river.png"))),
-                        Categories = (re.categories != null ? re.categories.category.Select(x => x.name).FirstOrDefault() : "")
+                        Categories = String.Join(String.Empty, (re.categories != null ? re.categories.category.Select(x => x.name).ToList() : new List<string>()))
                     });
                 }
 

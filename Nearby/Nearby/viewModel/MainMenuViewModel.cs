@@ -18,6 +18,7 @@ namespace Nearby.viewModel
         public List<MenuItem> ManualItems { get; } = new List<MenuItem>();
         public ObservableRangeCollection<AboutMenuItem> AboutItems { get; } = new ObservableRangeCollection<AboutMenuItem>();
         public ObservableRangeCollection<AccountMenuItem> AccountItems { get; } = new ObservableRangeCollection<AccountMenuItem>();
+        public ObservableRangeCollection<AboutMenuItem> TermsItems { get; } = new ObservableRangeCollection<AboutMenuItem>();
 
         public string madeByText = $"By Gerade";
         public string MadeByText
@@ -62,15 +63,16 @@ namespace Nearby.viewModel
                 CustomLocation = Settings.Current.CustomLocation;
 
             AboutItems.AddRange(new[]
-               {
-                    new AboutMenuItem { Label = "Terms Of Use", Value = "terms" },
-                    new AboutMenuItem { Label = "About This App", Value = "about" },
+            {
+                new AboutMenuItem { Label = "Created by", Value = "Gerade Geldenhuys", AboutCommand = OpenSocialProfile, AboutCommandProperty = "www.twitter.com/raidzen10" },
+                new AboutMenuItem { Label = "Version 1.0", Value = "Copyright " + DateTime.Now.Year},
+                new AboutMenuItem { Label = "Feedback", Value = "Have a say", AboutCommand = LaunchBrowserCommand, AboutCommandProperty = "www.twitter.com/raidzen10"},
+                new AboutMenuItem { Label = "About This App", AboutCommand = NavigateToAbout},
             });
 
-            AccountItems.Add(new AccountMenuItem
+            TermsItems.AddRange(new[]
             {
-                ProviderLabel = "Google",
-                ProviderValue = "google",
+                new AboutMenuItem { Label = "Terms Of Use", Value = "terms" }
             });
         }
 
@@ -176,6 +178,11 @@ namespace Nearby.viewModel
                 await Navigation.PushAsync(new SearchCustomPlaces());
             }));
 
+        ICommand navigateToAbout;
+        public ICommand NavigateToAbout => navigateToAbout ?? (navigateToAbout = new Command(async () => {
+                await Navigation.PushAsync(new AboutApp());
+        }));
+
 
         ICommand toggleFiltern;
         public ICommand ToggleFiltern => toggleFiltern ?? (toggleFiltern = new Command<object>(async (e) => await SetFilterStatus(e)));
@@ -230,5 +237,7 @@ namespace Nearby.viewModel
     {
         public String Label { get; set; }
         public String Value { get; set; }
+        public ICommand AboutCommand { get; set; }
+        public String AboutCommandProperty { get; set; }
     }
 }

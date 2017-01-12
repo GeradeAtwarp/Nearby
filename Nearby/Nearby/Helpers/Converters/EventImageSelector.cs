@@ -17,26 +17,18 @@ namespace Nearby.Helpers.Converters
         {
             if ((string)value != "")
             {
-                switch (value.ToString())
-                {
-                    case "music":
-                        return ImageSource.FromFile("concert.jpg");
-                        break;
-                    case "conference":
-                        return ImageSource.FromFile("conference.jpg");
-                        break;
-                    case "food":
-                        return ImageSource.FromFile("wine_food.jpg");
-                        break;
-                    case "outdoors_recreation":
-                        return ImageSource.FromFile("running.jpg");
-                        break;
-                    case "performing_arts":
-                        return ImageSource.FromFile("performing_arts.jpg");
-                        break;
-                    default:
-                        return ImageSource.FromFile("stadium.jpg");
-                }
+                if (value.ToString().ToLower().Contains("music"))
+                    return ImageSource.FromFile("concert.jpg");
+                else if (value.ToString().ToLower().Contains("conference"))
+                    return ImageSource.FromFile("conference.jpg");
+                else if (value.ToString().ToLower().Contains("food"))
+                    return ImageSource.FromFile("wine_food.jpg");
+                else if (value.ToString().ToLower().Contains("outdoors"))
+                    return ImageSource.FromFile("running.jpg");
+                else if (value.ToString().ToLower().Contains("performing"))
+                    return ImageSource.FromFile("performing_arts.jpg");
+                else
+                    return ImageSource.FromFile("stadium.jpg");
             }
             else
                 return ImageSource.FromFile("stadium.jpg");
