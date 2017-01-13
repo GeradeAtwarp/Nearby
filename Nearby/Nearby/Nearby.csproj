@@ -123,6 +123,7 @@
     <Compile Include="Utils\User.cs" />
     <Compile Include="viewModel\AboutAppViewModel.cs" />
     <Compile Include="viewModel\EventsViewModel.cs" />
+    <Compile Include="viewModel\ExtendedBindableObject.cs" />
     <Compile Include="viewModel\FavoritesViewModel.cs" />
     <Compile Include="viewModel\HomeViewModel.cs" />
     <Compile Include="viewModel\MainMenuViewModel.cs" />

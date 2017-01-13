@@ -50,15 +50,13 @@
                                             Windows="160"/>
                                     </Grid.HeightRequest>
                                     <AbsoluteLayout>
-                                        <ffimageloading:CachedImage 
-                                            Source="{Binding Categories, Converter={StaticResource EventImageSelector}}"
-                                            Aspect="AspectFill"
-                                            CacheDuration="30"
-                                            CacheType="Disk"
-                                            DownsampleToViewSize="True"
-                                            AbsoluteLayout.LayoutFlags="All" 
-                                            AbsoluteLayout.LayoutBounds="0, 0, 1.0, 1.0">
-                                        </ffimageloading:CachedImage>
+                                        <Image
+                                              HorizontalOptions="FillAndExpand"
+                                              VerticalOptions="FillAndExpand"
+                                              Aspect="AspectFill"
+                                              AbsoluteLayout.LayoutFlags="All"
+                                              AbsoluteLayout.LayoutBounds="0, 0, 1.0, 1.0"
+                                              Source="{Binding Categories, Converter={StaticResource EventImageSelector}}" ></Image>
                                     </AbsoluteLayout>
                                     <Grid
                                         Padding="15, 10"

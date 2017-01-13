@@ -10,6 +10,8 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -189,6 +191,28 @@ namespace Nearby.viewModel
                 LaunchBrowserCommand.Execute(arg);
             }
             catch { }
+        }
+
+        public void RaisePropertyChanged<T>(Expression<Func<T>> property)
+        {
+            var name = GetMemberInfo(property).Name;
+            OnPropertyChanged(name);
+        }
+
+        private MemberInfo GetMemberInfo(Expression expression)
+        {
+            MemberExpression operand;
+            LambdaExpression lambdaExpression = (LambdaExpression)expression;
+            if (lambdaExpression.Body as UnaryExpression != null)
+            {
+                UnaryExpression body = (UnaryExpression)lambdaExpression.Body;
+                operand = (MemberExpression)body.Operand;
+            }
+            else
+            {
+                operand = (MemberExpression)lambdaExpression.Body;
+            }
+            return operand.Member;
         }
     }
 }

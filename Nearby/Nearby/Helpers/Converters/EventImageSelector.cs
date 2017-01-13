@@ -23,12 +23,30 @@ namespace Nearby.Helpers.Converters
                     return ImageSource.FromFile("conference.jpg");
                 else if (value.ToString().ToLower().Contains("food"))
                     return ImageSource.FromFile("wine_food.jpg");
+                else if (value.ToString().ToLower().Contains("performing"))
+                    return ImageSource.FromFile("performance_arts.jpg");
+                if (value.ToString().ToLower().Contains("comedy"))
+                    return ImageSource.FromFile("stand_up.jpg");
+                else if (value.ToString().ToLower().Contains("fun"))
+                    return ImageSource.FromFile("Family_fun_day.jpg");
+                if (value.ToString().ToLower().Contains("book"))
+                    return ImageSource.FromFile("book_education.jpg");
+                if (value.ToString().ToLower().Contains("science"))
+                    return ImageSource.FromFile("science.jpg");
+                else if (value.ToString().ToLower().Contains("religion"))
+                    return ImageSource.FromFile("religion.jpg");
+                else if (value.ToString().ToLower().Contains("parades"))
+                    return ImageSource.FromFile("parade.jpg");
+                else if (value.ToString().ToLower().Contains("movies"))
+                    return ImageSource.FromFile("movie_theater.jpg");
+                else if (value.ToString().ToLower().Contains("technology"))
+                    return ImageSource.FromFile("technology.jpg");
+                else if (value.ToString().ToLower().Contains("social"))
+                    return ImageSource.FromFile("social_single.jpg");
                 else if (value.ToString().ToLower().Contains("outdoors"))
                     return ImageSource.FromFile("running.jpg");
-                else if (value.ToString().ToLower().Contains("performing"))
-                    return ImageSource.FromFile("performing_arts.jpg");
                 else
-                    return ImageSource.FromFile("stadium.jpg");
+                    return ImageSource.FromFile("generic_placeholder.jpg");
             }
             else
                 return ImageSource.FromFile("stadium.jpg");
@@ -41,11 +59,11 @@ namespace Nearby.Helpers.Converters
 
         
       //
-      //comedy
-      //learning_education
-      //family_fun_kids
-      //festivals_parades
-      //movies_film
+      //
+      //
+      //
+      //
+      //_film
       //
       //fundraisers
       //art

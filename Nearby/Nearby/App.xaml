@@ -83,8 +83,8 @@
       
       <OnPlatform x:Key="BigSize" x:TypeArguments="x:Double" iOS="20" Android="24" WinPhone="24"/>
       <OnPlatform x:Key="ExtraBigSize" x:TypeArguments="x:Double" iOS="24" Android="32"  WinPhone="32"/>
-      <OnPlatform x:Key="MediumSize" x:TypeArguments="x:Double" iOS="14" Android="16" WinPhone="16"/>
-
+      <OnPlatform x:Key="MediumSize" x:TypeArguments="x:Double" iOS="14" Android="16" WinPhone="16"/>  
+      <OnPlatform x:Key="MidMediumSize" x:TypeArguments="x:Double" iOS="12" Android="14" WinPhone="14"/>
       <OnPlatform x:Key="LittleSize" x:TypeArguments="x:Double" iOS="11" Android="12" WinPhone="12"/>
 
       <OnPlatform x:Key="LargeSize"  x:TypeArguments="x:Double" iOS="16" Android="18" WinPhone="18"/>
@@ -113,6 +113,16 @@
         <Setter Property="TextColor" Value="{StaticResource GrayColor}" />
         <Setter Property="FontSize" Value="{StaticResource LargerSize}" />
         <Setter Property="Margin" Value="15, 10, 0, 0" />
+      </Style>
+
+      <Style x:Key="HeaderLabelStyle" TargetType="{x:Type Label}">
+        <Setter Property="TextColor" Value="{StaticResource WhiteColor}" />
+        <Setter Property="FontSize" Value="{StaticResource MidMediumSize}" />
+      </Style>
+
+      <Style x:Key="TempLabelStyle" TargetType="{x:Type Label}">
+        <Setter Property="TextColor" Value="{StaticResource WhiteColor}" />
+        <Setter Property="FontSize" Value="{StaticResource HugeSize}" />
       </Style>
 
       <converters:ToDateConverter x:Key="DateConverter" />

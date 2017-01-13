@@ -594,6 +594,17 @@
     <BundleResource Include="Resources\performance_arts.jpg" />
     <BundleResource Include="Resources\running.jpg" />
     <BundleResource Include="Resources\stadium.jpg" />
+    <BundleResource Include="Resources\book_education.jpg" />
+    <BundleResource Include="Resources\Family_fun_%29day.jpg" />
+    <BundleResource Include="Resources\generic_placeholder.jpg" />
+    <BundleResource Include="Resources\movie_theater.jpg" />
+    <BundleResource Include="Resources\parade.jpg" />
+    <BundleResource Include="Resources\religion.jpg" />
+    <BundleResource Include="Resources\science.jpg" />
+    <BundleResource Include="Resources\stand_up.jpg" />
+    <BundleResource Include="Resources\technology.jpg" />
+    <BundleResource Include="Resources\wine_food.jpg" />
+    <BundleResource Include="Resources\social_single.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.3.3.175\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.3.175\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />

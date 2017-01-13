@@ -17,7 +17,7 @@ namespace Nearby.viewModel
     {
         #region Properties
 
-        public ObservableCollection<EventNearbyItem> _eventsNearby = new ObservableCollection<EventNearbyItem>();
+        private ObservableCollection<EventNearbyItem> _eventsNearby = new ObservableCollection<EventNearbyItem>();
         public ObservableCollection<EventNearbyItem> EventsNearby
         {
             get
@@ -28,7 +28,7 @@ namespace Nearby.viewModel
             set
             {
                 _eventsNearby = value;
-                SetProperty(ref _eventsNearby, value);
+                RaisePropertyChanged(() => EventsNearby);
             }
         }
 
@@ -40,12 +40,26 @@ namespace Nearby.viewModel
             get { return hasEvents; }
             set { SetProperty(ref hasEvents, value); }
         }
-        
+
+        string currentDate = "";
+        public string CurrentDate
+        {
+            get { return currentDate; }
+            set { SetProperty(ref currentDate, value); }
+        }
+
+        string temp = "";
+        public string Temp
+        {
+            get { return temp; }
+            set { SetProperty(ref temp, value); }
+        }
+
         #endregion
 
 
         #region Commands
-        
+
         public ICommand RefreshCommand => new Command(RefreshEventsCommand);
         private async void RefreshEventsCommand(object obj)
         {
@@ -80,6 +94,8 @@ namespace Nearby.viewModel
 
         public EventsViewModel(INavigation navigation) : base(navigation)
         {
+            CurrentDate = DateTime.Now.ToString("dddd, dd MMM yyyy");
+
             LoadEventsNearby();
         }
         
@@ -91,7 +107,9 @@ namespace Nearby.viewModel
             try
             {
                 IsBusy = true;
-                
+
+                Temp = "0";
+
                 //Get the users current location
                 position = await UpdateCurrentLocation();
 
