@@ -9,7 +9,207 @@
              Title="Events Nearby">
 
 
-    <StackLayout Padding="{DynamicResource CardPadding}">
+  <Grid>
+        <ScrollView x:Name="mainScrollView">
+            <StackLayout Orientation="Vertical">
+               
+                <Grid x:Name="ContentPanel" BackgroundColor="{StaticResource BackgroundGrayColor}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Label 
+                        Text="Events Nearby"
+                        VerticalOptions="Center"
+                        Style="{StaticResource SectionLabelStyle}" />
+                    <control:StackedList 
+                        x:Name="SuggestionsList"         
+                        Grid.Row="1"
+                        Spacing="15"
+                        ItemsSource="{Binding EventsNearby}"
+                        Padding="5, 0, 5, 10">
+                        <control:StackedList.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.Margin>
+                                        <OnPlatform x:TypeArguments="Thickness"
+                                                    WinPhone="10,0,0,10"/>
+                                    </Grid.Margin>
+                                    <Grid.WidthRequest>
+                                        <helpers:OnCustomPlatform 
+                                            x:TypeArguments="x:Double"                                      
+                                            WinPhone="280"
+                                            Windows="380"/>
+                                    </Grid.WidthRequest>
+                                    <Grid.HeightRequest>
+                                        <helpers:OnCustomPlatform
+                                            x:TypeArguments="x:Double"
+                                            iOS="180"
+                                            Android="200" 
+                                            WinPhone="150"
+                                            Windows="160"/>
+                                    </Grid.HeightRequest>
+                                    <AbsoluteLayout>
+                                        <ffimageloading:CachedImage 
+                                            Source="{Binding Categories, Converter={StaticResource EventImageSelector}}"
+                                            Aspect="AspectFill"
+                                            CacheDuration="30"
+                                            CacheType="Disk"
+                                            DownsampleToViewSize="True"
+                                            AbsoluteLayout.LayoutFlags="All" 
+                                            AbsoluteLayout.LayoutBounds="0, 0, 1.0, 1.0">
+                                        </ffimageloading:CachedImage>
+                                    </AbsoluteLayout>
+                                    <Grid
+                                        Padding="15, 10"
+                                        VerticalOptions="EndAndExpand">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <Grid
+                                            Grid.Row="0">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="*" />
+                                            </Grid.RowDefinitions>
+                                            <Label
+                                                Grid.Row="0"
+                                                Text="{Binding Title}"
+                                                Style="{StaticResource EventTitleLabelStyle}" />
+                                            <Label 
+                                                Grid.Row="1"
+                                                Text="{Binding CityName}"
+                                                FontSize="{StaticResource ExtraBigSize}"
+                                                Style="{StaticResource EventTitleLabelStyle}"
+                                                LineBreakMode="TailTruncation"/>
+                                        </Grid>
+                                        <StackLayout Grid.Row="1">
+                                            <BoxView HorizontalOptions="FillAndExpand"
+                                                     HeightRequest="1"
+                                                     Margin="0, 8"
+                                                     BackgroundColor="White" />
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition>
+                                                        <ColumnDefinition.Width>
+                                                            <OnPlatform 
+                                                                x:TypeArguments="GridLength"
+                                                                iOS="20"
+                                                                Android="30" 
+                                                                WinPhone="30"/>
+                                                        </ColumnDefinition.Width>
+                                                    </ColumnDefinition>
+                                                    <ColumnDefinition />
+                                                </Grid.ColumnDefinitions>
+                                                <ffimageloading:CachedImage 
+                                                    Grid.Column="0" 
+                                                    Source="{Binding AlarmBellStatus}" 
+                                                    Aspect="AspectFit" />
+                                                  <Label Grid.Column="1" HorizontalOptions="EndAndExpand"
+                                                          Text="{Binding StartTime, Converter={StaticResource DateConverter}}"
+                                                          Style="{StaticResource EventLabelStyle}" />
+                                            </Grid>
+                                        </StackLayout>
+                                    </Grid>
+                                </Grid>
+                            </DataTemplate>
+                        </control:StackedList.ItemTemplate>
+                    </control:StackedList>
+                </Grid>
+            </StackLayout>
+        </ScrollView>
+        <ActivityIndicator 
+            IsRunning="{Binding IsBusy}"   
+            IsVisible="{Binding IsBusy}"
+            VerticalOptions="Center"
+            HorizontalOptions="Center">
+            <ActivityIndicator.Color>
+                <OnPlatform 
+                    x:TypeArguments="Color" 
+                    iOS="{StaticResource Primary}" 
+                    Android="{StaticResource Primary}"
+                    WinPhone="{StaticResource Primary}" />
+            </ActivityIndicator.Color>
+            <ActivityIndicator.WidthRequest>
+                <OnPlatform 
+                    x:TypeArguments="x:Double" 
+                    iOS="100" 
+                    Android="100"
+                    WinPhone="400" />
+            </ActivityIndicator.WidthRequest>
+        </ActivityIndicator>
+    </Grid>
+    
+
+
+  
+  
+  
+    
+
+
+
+
+
+
+
+    
+      
+    
+    
+      
+        
+          
+            
+              
+                
+                  
+
+
+
+
+              
+              
+                
+                  
+
+
+
+
+
+              
+              
+              
+                
+
+                
+                  
+                  
+                
+                
+                  
+                  
+                    
+                    
+                  
+                  
+
+
+
+                  
+
+
+
+
+
+                
+                
+                  
+                  
+                    
+                      
+    <!--<StackLayout Padding="{DynamicResource CardPadding}">
       <Label Text="Going on vacation? Visiting family members accross the country? Want to know what places are awaiting you? No problem, just search for you destination below, then select a place to set as you custom location. :-)"
              HorizontalOptions="StartAndExpand"
              Style="{DynamicResource SectionLabelTextStyle}"/>
@@ -98,9 +298,9 @@
                         </Image.GestureRecognizers>
                       </Image>
 
-                      <!--<Label Grid.Column="1" HorizontalOptions="FillAndExpand"
+                      --><!--<Label Grid.Column="1" HorizontalOptions="FillAndExpand"
                               Text="{Binding StartTime, Converter={StaticResource DateToTimeConverter}}"
-                              Style="{StaticResource EventLabelStyle}" />-->
+                              Style="{StaticResource EventLabelStyle}" />--><!--
 
                       <Label Grid.Column="1" HorizontalOptions="EndAndExpand"
                               Text="{Binding StartTime, Converter={StaticResource DateConverter}}"
@@ -115,6 +315,6 @@
 
         </DataTemplate>
       </ListView.ItemTemplate>
-    </ListView>
+    </ListView>-->
   
 </ContentPage>

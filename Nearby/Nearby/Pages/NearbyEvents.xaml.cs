@@ -20,18 +20,15 @@ namespace Nearby.Pages
 
             BindingContext = vm = new EventsViewModel(Navigation);
 
-            lstEvents.ItemSelected += (s, e) =>
-            {
-                lstEvents.SelectedItem = null;
-            };
+            //lstEvents.ItemSelected += (s, e) =>
+            //{
+            //    lstEvents.SelectedItem = null;
+            //};
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
-
-            if (vm.EventsNearby.Count == 0)
-                vm.RefreshCommand.Execute(null);
         }
 
         protected override void OnBindingContextChanged()
@@ -39,8 +36,8 @@ namespace Nearby.Pages
             base.OnBindingContextChanged();
             vm = null;
 
-            var adjust = Device.OS != TargetPlatform.Android ? 1 : -ViewModel.EventsNearby.Count + 1;
-            lstEvents.HeightRequest = (ViewModel.EventsNearby.Count * lstEvents.RowHeight) - adjust;
+            //var adjust = Device.OS != TargetPlatform.Android ? 1 : -ViewModel.EventsNearby.Count + 1;
+            //lstEvents.HeightRequest = (ViewModel.EventsNearby.Count * lstEvents.RowHeight) - adjust;
         }
     }
 }

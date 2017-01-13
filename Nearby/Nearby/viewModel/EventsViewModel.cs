@@ -3,6 +3,7 @@ using Nearby.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -16,7 +17,21 @@ namespace Nearby.viewModel
     {
         #region Properties
 
-        public ObservableRangeCollection<EventNearbyItem> EventsNearby { get; } = new ObservableRangeCollection<EventNearbyItem>();
+        public ObservableCollection<EventNearbyItem> _eventsNearby = new ObservableCollection<EventNearbyItem>();
+        public ObservableCollection<EventNearbyItem> EventsNearby
+        {
+            get
+            {
+                return _eventsNearby;
+            }
+
+            set
+            {
+                _eventsNearby = value;
+                SetProperty(ref _eventsNearby, value);
+            }
+        }
+
         Plugin.Geolocator.Abstractions.Position position;
 
         bool hasEvents = false;
@@ -111,7 +126,7 @@ namespace Nearby.viewModel
                     });
                 }
 
-                EventsNearby.AddRange(eventsList);
+                EventsNearby = new ObservableCollection<EventNearbyItem>(eventsList);
             }
             catch (Exception ex) {
                 IsBusy = false;
