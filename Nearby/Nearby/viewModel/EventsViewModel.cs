@@ -95,10 +95,11 @@ namespace Nearby.viewModel
         public EventsViewModel(INavigation navigation) : base(navigation)
         {
             CurrentDate = DateTime.Now.ToString("dddd, dd MMM yyyy");
+            Temp = "0";
 
             LoadEventsNearby();
         }
-        
+
         async Task LoadEventsNearby()
         {
             if (IsBusy)
@@ -108,10 +109,11 @@ namespace Nearby.viewModel
             {
                 IsBusy = true;
 
-                Temp = "0";
-
                 //Get the users current location
                 position = await UpdateCurrentLocation();
+
+                //Get the weather for the users location
+                GetCurrentWeather();
 
                 var httpClient = new HttpClient();
                 var eventsResults = "";
@@ -146,13 +148,31 @@ namespace Nearby.viewModel
 
                 EventsNearby = new ObservableCollection<EventNearbyItem>(eventsList);
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 IsBusy = false;
             }
-            finally{
+            finally
+            {
                 IsBusy = false;
             }
         }
 
-    }   
+        async Task GetCurrentWeather()
+        {
+
+            try
+            {
+                var httpClient = new HttpClient();
+                var weatherResults = "";
+
+                weatherResults = await httpClient.GetStringAsync(new UriBuilder("api.openweathermap.org/data/2.5/weather?lat=" + position.Latitude.ToString().Replace(',', '.') + "&lon=" + position.Longitude.ToString().Replace(',', '.') + "&units=metric").Uri.ToString());
+
+                var response = JsonConvert.DeserializeObject<WatherResult>(weatherResults);
+
+                Temp = response.main.temp.ToString();
+            }
+            catch { }
+        }
+    }
 }

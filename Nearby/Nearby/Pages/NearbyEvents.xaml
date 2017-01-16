@@ -12,14 +12,37 @@
   <Grid>
         <ScrollView x:Name="mainScrollView">
             <StackLayout Orientation="Vertical">
-               
-                <Grid x:Name="ContentPanel" BackgroundColor="{StaticResource BackgroundGrayColor}">
+              
+              <Grid>
+                <StackLayout x:Name="infoPanel">
+                  <StackLayout.Margin>
+                    <OnPlatform
+                        x:TypeArguments="Thickness"
+                        Android="16, 73, 0, 0"
+                        iOS="16, 53, 0, 0"
+                        WinPhone="16, 73, 0, 0"/>
+                  </StackLayout.Margin>
+                  <StackLayout.HeightRequest>
+                    <OnPlatform
+                        x:TypeArguments="x:Double"
+                        Android="105"
+                        iOS="85"
+                        WinPhone="105"/>
+                  </StackLayout.HeightRequest>
+                  <Label Text="{Binding CurrentDate}" Style="{StaticResource HeaderLabelStyle}" />
+                  <Label Text="Pretoria"
+                         Style="{StaticResource HeaderLabelStyle}" />
+                  <Label Text="{Binding Temp, StringFormat='{0}°C'}" Style="{StaticResource TempLabelStyle}" />
+                </StackLayout>
+              </Grid>
+
+              <Grid x:Name="ContentPanel" BackgroundColor="{StaticResource BackgroundGrayColor}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="40" />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <Label 
-                        Text="Events Nearby"
+                        Text="{Binding Temp}"
                         VerticalOptions="Center"
                         Style="{StaticResource SectionLabelStyle}" />
                     <control:StackedList 
@@ -115,6 +138,7 @@
                         </control:StackedList.ItemTemplate>
                     </control:StackedList>
                 </Grid>
+              
             </StackLayout>
         </ScrollView>
         <ActivityIndicator 

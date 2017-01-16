@@ -85,6 +85,7 @@
     <Compile Include="Models\DynamoDB\Nearby_Favorites.cs" />
     <Compile Include="Models\EventNearbyItem.cs" />
     <Compile Include="Models\FavPlaceItem.cs" />
+    <Compile Include="Models\WatherResult.cs" />
     <Compile Include="Pages\AboutApp.xaml.cs">
       <DependentUpon>AboutApp.xaml</DependentUpon>
     </Compile>
