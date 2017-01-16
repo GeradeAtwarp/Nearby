@@ -15,13 +15,6 @@
               
               <Grid>
                 <StackLayout x:Name="infoPanel">
-                  <StackLayout.Margin>
-                    <OnPlatform
-                        x:TypeArguments="Thickness"
-                        Android="16, 73, 0, 0"
-                        iOS="16, 53, 0, 0"
-                        WinPhone="16, 73, 0, 0"/>
-                  </StackLayout.Margin>
                   <StackLayout.HeightRequest>
                     <OnPlatform
                         x:TypeArguments="x:Double"

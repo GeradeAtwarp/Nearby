@@ -29,9 +29,6 @@ namespace Nearby.Pages
         protected override void OnAppearing()
         {
             base.OnAppearing();
-
-            if (vm.EventsNearby.Count() == 0)
-                vm.RefreshCommand.Execute(null);
         }
 
         protected override void OnBindingContextChanged()
