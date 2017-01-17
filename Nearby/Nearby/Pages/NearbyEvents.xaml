@@ -14,14 +14,7 @@
             <StackLayout Orientation="Vertical">
               
               <Grid>
-                <StackLayout x:Name="infoPanel">
-                  <StackLayout.HeightRequest>
-                    <OnPlatform
-                        x:TypeArguments="x:Double"
-                        Android="105"
-                        iOS="85"
-                        WinPhone="105"/>
-                  </StackLayout.HeightRequest>
+                <StackLayout x:Name="infoPanel" HorizontalOptions="FillAndExpand">
                   <Label Text="{Binding CurrentDate}" Style="{StaticResource HeaderLabelStyle}" />
                   <Label Text="Pretoria"
                          Style="{StaticResource HeaderLabelStyle}" />
