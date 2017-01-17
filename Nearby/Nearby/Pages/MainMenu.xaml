@@ -15,17 +15,7 @@
       </DataTemplate>
 
       <DataTemplate x:Key="TextCellDataTemplate">
-        <ViewCell>
-          <Grid ColumnSpacing="{StaticResource StandardSpacing}">
-            <Grid.Padding>
-              <OnPlatform x:TypeArguments="Thickness" iOS="0,12" Android="16,8"/>
-            </Grid.Padding>
-            <Grid.ColumnDefinitions>
-              <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Label VerticalOptions="Center"  Style="{DynamicResource NearbyListItemTextStyle}" Text="{Binding DetailLabel}"/>
-          </Grid>
-        </ViewCell>
+        <TextCell Text="{Binding DetailLabel}" />
       </DataTemplate>
 
       <local:MainMenuItemSelector x:Key="MainMenuItemSelector" SwitchCellDataTemplate="{StaticResource SwitchCellDataTemplate}" TextCellDataTemplate="{StaticResource TextCellDataTemplate}" />

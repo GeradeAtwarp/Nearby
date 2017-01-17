@@ -122,7 +122,7 @@
 
       <Style x:Key="TempLabelStyle" TargetType="{x:Type Label}">
         <Setter Property="TextColor" Value="{StaticResource WhiteColor}" />
-        <Setter Property="FontSize" Value="{StaticResource HugeSize}" />
+        <Setter Property="FontSize" Value="{StaticResource LargeSize}" />
       </Style>
 
       <converters:ToDateConverter x:Key="DateConverter" />

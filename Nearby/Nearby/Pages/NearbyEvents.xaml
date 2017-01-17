@@ -13,27 +13,26 @@
         <ScrollView x:Name="mainScrollView">
             <StackLayout Orientation="Vertical">
               
-              <Grid>
-                <StackLayout x:Name="infoPanel" HorizontalOptions="FillAndExpand">
-                  <Label Text="{Binding CurrentDate}" Style="{StaticResource HeaderLabelStyle}" />
-                  <Label Text="Pretoria"
-                         Style="{StaticResource HeaderLabelStyle}" />
-                  <Label Text="{Binding Temp, StringFormat='{0}°C'}" Style="{StaticResource TempLabelStyle}" />
-                </StackLayout>
+              <Grid BackgroundColor="{StaticResource Primary}" Padding="{StaticResource MediumPadding}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="1*"/>
+                  <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                
+                <Label Grid.Column="0" Text="{Binding Temp}" Style="{StaticResource TempLabelStyle}" HorizontalOptions="CenterAndExpand" />                
+                <Label Grid.Column="1" Text="{Binding WeatherDesc}" Style="{StaticResource HeaderLabelStyle}" HorizontalOptions="CenterAndExpand" />
+                <Label Grid.Row="1" Grid.Column="0" Text="{Binding TempHiLow}" Style="{StaticResource HeaderLabelStyle}" HorizontalOptions="CenterAndExpand" />
+                <Label Grid.Row="1" Grid.Column="1" Text="{Binding WeatherLocation}" Style="{StaticResource HeaderLabelStyle}" HorizontalOptions="CenterAndExpand" />
+                
               </Grid>
 
-              <Grid x:Name="ContentPanel" BackgroundColor="{StaticResource BackgroundGrayColor}">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="40" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <Label 
-                        Text="{Binding Temp}"
-                        VerticalOptions="Center"
-                        Style="{StaticResource SectionLabelStyle}" />
+              <Grid x:Name="ContentPanel">
                     <control:StackedList 
-                        x:Name="SuggestionsList"         
-                        Grid.Row="1"
+                        x:Name="SuggestionsList" 
                         Spacing="15"
                         ItemsSource="{Binding EventsNearby}"
                         Padding="5, 0, 5, 10">
@@ -109,13 +108,12 @@
                                                     </ColumnDefinition>
                                                     <ColumnDefinition />
                                                 </Grid.ColumnDefinitions>
-                                                <ffimageloading:CachedImage 
-                                                    Grid.Column="0" 
-                                                    Source="{Binding AlarmBellStatus}" 
-                                                    Aspect="AspectFit" />
-                                                  <Label Grid.Column="1" HorizontalOptions="EndAndExpand"
-                                                          Text="{Binding StartTime, Converter={StaticResource DateConverter}}"
-                                                          Style="{StaticResource EventLabelStyle}" />
+                                                <ffimageloading:CachedImage Grid.Column="0" Source="{Binding AlarmBellStatus}" Aspect="AspectFit">
+                                                  <ffimageloading:CachedImage.GestureRecognizers>
+                                                     <TapGestureRecognizer Command="{Binding SetReminder}" CommandParameter="{Binding .}"></TapGestureRecognizer>
+                                                  </ffimageloading:CachedImage.GestureRecognizers>
+                                                </ffimageloading:CachedImage>
+                                                  <Label Grid.Column="1" HorizontalOptions="EndAndExpand" Text="{Binding StartTime, Converter={StaticResource DateConverter}}" Style="{StaticResource EventLabelStyle}" />
                                             </Grid>
                                         </StackLayout>
                                     </Grid>

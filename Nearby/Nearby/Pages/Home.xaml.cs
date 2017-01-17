@@ -59,7 +59,7 @@ namespace Nearby.Pages
                 var nav = Application.Current?.MainPage?.Navigation;
                 if (nav == null)
                     return;
-                await Navigation.PushAsync(new NearbyEvents());
+                await Navigation.PushAsync(new Favourites());
             });
 
             //Navigate to options page
@@ -313,7 +313,7 @@ namespace Nearby.Pages
                 Button btnSearch = new Button
                 {
                     BorderRadius = 20,
-                    BackgroundColor = Color.FromHex("#9fa8da"),
+                    BackgroundColor = Color.FromHex("#3F51B5"),
                     //BorderColor = Color.FromHex("#3F51B5"),
                     //BorderWidth = 2,
                     WidthRequest = 100,
@@ -328,7 +328,7 @@ namespace Nearby.Pages
                 Button btnRefineSearch = new Button
                 {
                     BorderRadius = 20,
-                    BackgroundColor = Color.FromHex("#9fa8da"),
+                    BackgroundColor = Color.FromHex("#3F51B5"),
                     //BorderColor = Color.FromHex("#3F51B5"),
                     //BorderWidth = 2,
                     WidthRequest = 100,

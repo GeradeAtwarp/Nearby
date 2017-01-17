@@ -17,6 +17,7 @@ using System.Runtime.CompilerServices;
 using Nearby.Helpers;
 using FormsToolkit;
 using Nearby.Interfaces;
+using Acr.UserDialogs;
 
 namespace Nearby.viewModel
 {
@@ -72,8 +73,11 @@ namespace Nearby.viewModel
                     if (IsBusy)
                         return;
 
-                    SearchButtonText = "Please wait...";
                     IsBusy = true;
+
+                    UserDialogs.Instance.ShowLoading("Loading Places...", MaskType.Clear);
+
+                    SearchButtonText = "Please wait...";
 
                     Plugin.Geolocator.Abstractions.Position position;
 
@@ -135,6 +139,7 @@ namespace Nearby.viewModel
             {
                 IsBusy = false;
                 SearchButtonText = "Search for places nearby";
+                UserDialogs.Instance.HideLoading();
             }
         }
         

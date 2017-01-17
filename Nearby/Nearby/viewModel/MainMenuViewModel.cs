@@ -64,9 +64,9 @@ namespace Nearby.viewModel
 
             AboutItems.AddRange(new[]
             {
-                new AboutMenuItem { Label = "Created by", Value = "Gerade Geldenhuys", AboutCommand = OpenSocialProfile, AboutCommandProperty = "www.twitter.com/raidzen10" },
+                new AboutMenuItem { Label = "Created by", Value = "Gerade Geldenhuys", AboutCommand = OpenSocialProfile, AboutCommandProperty = "https://twitter.com/Raidzen10" },
                 new AboutMenuItem { Label = "Version 1.0", Value = "Copyright " + DateTime.Now.Year},
-                new AboutMenuItem { Label = "Feedback", Value = "Have a say", AboutCommand = LaunchBrowserCommand, AboutCommandProperty = "www.twitter.com/raidzen10"},
+                new AboutMenuItem { Label = "Feedback", Value = "Have a say", AboutCommand = LaunchBrowserCommand, AboutCommandProperty = "https://twitter.com/Raidzen10"},
                 new AboutMenuItem { Label = "About This App", AboutCommand = NavigateToAbout},
             });
 

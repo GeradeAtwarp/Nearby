@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -55,6 +56,27 @@ namespace Nearby.viewModel
             set { SetProperty(ref temp, value); }
         }
 
+        string weatherDesc = "";
+        public string WeatherDesc
+        {
+            get { return weatherDesc; }
+            set { SetProperty(ref weatherDesc, value); }
+        }
+
+        string tempHiLow = "";
+        public string TempHiLow
+        {
+            get { return tempHiLow; }
+            set { SetProperty(ref tempHiLow, value); }
+        }
+
+        string weatherLocation = "";
+        public string WeatherLocation
+        {
+            get { return weatherLocation; }
+            set { SetProperty(ref weatherLocation, value); }
+        }
+
         #endregion
 
 
@@ -95,8 +117,6 @@ namespace Nearby.viewModel
         public EventsViewModel(INavigation navigation) : base(navigation)
         {
             CurrentDate = DateTime.Now.ToString("dddd, dd MMM yyyy");
-            Temp = "0";
-
             LoadEventsNearby();
         }
 
@@ -118,7 +138,7 @@ namespace Nearby.viewModel
                 var httpClient = new HttpClient();
                 var eventsResults = "";
 
-                eventsResults = await httpClient.GetStringAsync(new UriBuilder("http://api.eventful.com/json/events/search?app_key=hTRdwhLvk8LgjnFL&within=30&page_size=30&sort_order=date&include=categories&location=" + position.Latitude.ToString().Replace(',', '.') + "," + position.Longitude.ToString().Replace(',', '.')).Uri.ToString());
+                eventsResults = await httpClient.GetStringAsync(new UriBuilder("http://api.eventful.com/json/events/search?app_key=hTRdwhLvk8LgjnFL&within=30&page_size=30&sort_order=popularity&include=categories&location=" + position.Latitude.ToString().Replace(',', '.') + "," + position.Longitude.ToString().Replace(',', '.')).Uri.ToString());
 
                 var response = JsonConvert.DeserializeObject<EventNearbyResult>(eventsResults).events.@event;
 
@@ -151,6 +171,7 @@ namespace Nearby.viewModel
             catch (Exception ex)
             {
                 IsBusy = false;
+                Debug.WriteLine(ex.Message);
             }
             finally
             {
@@ -160,19 +181,21 @@ namespace Nearby.viewModel
 
         async Task GetCurrentWeather()
         {
-
             try
             {
                 var httpClient = new HttpClient();
                 var weatherResults = "";
 
-                weatherResults = await httpClient.GetStringAsync(new UriBuilder("api.openweathermap.org/data/2.5/weather?lat=" + position.Latitude.ToString().Replace(',', '.') + "&lon=" + position.Longitude.ToString().Replace(',', '.') + "&units=metric").Uri.ToString());
+                weatherResults = await httpClient.GetStringAsync(new UriBuilder("http://api.openweathermap.org/data/2.5/weather?APPID=b806514997d45be8cf0f0000935b48e6&lat=" + position.Latitude.ToString().Replace(',', '.') + "&lon=" + position.Longitude.ToString().Replace(',', '.') + "&units=metric").Uri.ToString());
 
                 var response = JsonConvert.DeserializeObject<WatherResult>(weatherResults);
 
-                Temp = response.main.temp.ToString();
+                Temp = String.Format("{0}°C",response.main.temp.ToString());
+                WeatherDesc = response.weather[0].description;
+                TempHiLow = String.Format("{0}° / {1}°", response.main.temp_min, response.main.temp_max);
+                WeatherLocation = response.name;
             }
-            catch { }
+            catch (Exception ex) { Debug.WriteLine(ex.Message); }
         }
     }
 }
