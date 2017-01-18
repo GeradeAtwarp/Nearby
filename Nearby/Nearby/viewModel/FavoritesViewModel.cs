@@ -27,7 +27,7 @@ namespace Nearby.viewModel
             set { SetProperty(ref hasFavorites, value); }
         }
 
-        public FavoritesViewModel(INavigation navigation) : base(navigation)
+        public FavoritesViewModel()
         {
             GetSavedFavorites();
         }

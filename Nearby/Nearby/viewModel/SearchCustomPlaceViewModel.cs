@@ -19,7 +19,7 @@ namespace Nearby.viewModel
     {
         public ObservableRangeCollection<CustomPlaceSearch> SearchResults { get; } = new ObservableRangeCollection<CustomPlaceSearch>();
 
-        public SearchCustomPlaceViewModel(INavigation navigation) :base(navigation)
+        public SearchCustomPlaceViewModel()
         {
 
         }

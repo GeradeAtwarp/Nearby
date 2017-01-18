@@ -56,7 +56,7 @@ namespace Nearby.viewModel
 
         public ObservableRangeCollection<Places> PlacesNearby { get; } = new ObservableRangeCollection<Places>();
 
-        public HomeViewModel(INavigation navigation) : base(navigation)
+        public HomeViewModel()
         {
             IsFilterEnabled = Settings.Current.IsSearchFilterEnabled;
         }

@@ -50,7 +50,7 @@ namespace Nearby.viewModel
         }
 
 
-        public AboutAppViewModel(INavigation nav) : base(nav)
+        public AboutAppViewModel()
         {
             FollowItems.AddRange(new[]
                {

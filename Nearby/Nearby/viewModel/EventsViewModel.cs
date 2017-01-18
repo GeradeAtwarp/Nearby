@@ -19,7 +19,7 @@ namespace Nearby.viewModel
     {
         #region Properties
 
-        private ObservableCollection<EventNearbyItem> _eventsNearby = new ObservableCollection<EventNearbyItem>();
+        public ObservableCollection<EventNearbyItem> _eventsNearby = new ObservableCollection<EventNearbyItem>();
         public ObservableCollection<EventNearbyItem> EventsNearby
         {
             get
@@ -122,7 +122,7 @@ namespace Nearby.viewModel
         #endregion
 
 
-        public EventsViewModel(INavigation navigation) : base(navigation)
+        public EventsViewModel() : base()
         {
             CurrentDate = DateTime.Now.ToString("dddd, dd MMM yyyy");
         }

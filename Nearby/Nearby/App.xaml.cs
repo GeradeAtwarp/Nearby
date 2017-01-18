@@ -31,9 +31,9 @@ namespace Nearby
             current = this;
             InitializeComponent();
 
-            NearbyBaseViewModel.Init();
-
             NavPage = new NavigationPage(new Home());
+
+            NearbyBaseViewModel.Init(NavPage.Navigation);
 
             User = new User();
 

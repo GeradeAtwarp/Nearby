@@ -22,25 +22,21 @@ namespace Nearby.viewModel
 {
     public class NearbyBaseViewModel : BaseViewModel
     {
-        protected INavigation Navigation { get; }
+        protected static INavigation Navigation { get; set; }
         protected Database NearbyDataContext { get; }
         protected TextInfo CultureTextInfo { get; }
 
-        public NearbyBaseViewModel(INavigation navigation = null)
+        public NearbyBaseViewModel()
         {
-            Navigation = navigation;
             NearbyDataContext = new Database();
 
             // Creates a TextInfo based on the "en-US" culture.
             CultureTextInfo = new CultureInfo("en-US").TextInfo;
         }
 
-        public static void Init(bool mock = true)
+        public static void Init(INavigation navigation = null)
         {
-            //CognitoSyncManager syncManager = new CognitoSyncManager(AWSUtils.Credentials, new AmazonCognitoSyncConfig { RegionEndpoint = RegionEndpoint.USWest2 });\
-
-            //dynamoClient = new AmazonDynamoDBClient(AWSUtils.Credentials, RegionEndpoint.USWest2);
-            //dynamoContext = new DynamoDBContext(dynamoClient);
+            Navigation = navigation;
         }
 
         public Settings Settings

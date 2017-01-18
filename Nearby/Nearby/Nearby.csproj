@@ -132,6 +132,7 @@
     <Compile Include="viewModel\NearbyBaseViewModel.cs" />
     <Compile Include="viewModel\PlaceDetailViewModel.cs" />
     <Compile Include="viewModel\SearchCustomPlaceViewModel.cs" />
+    <Compile Include="viewModel\ViewModelLocator.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Controls\LabelSection.xaml">

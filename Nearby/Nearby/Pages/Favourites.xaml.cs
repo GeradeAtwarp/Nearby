@@ -21,7 +21,7 @@ namespace Nearby.Pages
         public Favourites()
         {
             InitializeComponent();
-            BindingContext = vm = new FavoritesViewModel(Navigation);
+            BindingContext = vm = new FavoritesViewModel();
 
             lstFavorites.ItemSelected += async (sender, e) =>
             {

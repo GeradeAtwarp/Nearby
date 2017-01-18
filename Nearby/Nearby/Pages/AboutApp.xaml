@@ -41,29 +41,6 @@
           </StackLayout>
         </control:CardView>
       
-         <control:CardView>
-            <StackLayout Spacing="0">
-            <control:LabelSection Text="Links"/>
-                <control:HeaderDivider/>
-                <control:NonScrollableListView 
-                    ItemsSource="{Binding FollowItems}" 
-                    VerticalOptions="Start" 
-                    x:Name="ListViewFollow"
-                    SelectedItem="{Binding SelectedFollowItem, Mode=TwoWay}"
-                    RowHeight="44"> 
-                    <control:NonScrollableListView.SeparatorColor>
-                        <OnPlatform x:TypeArguments="Color" iOS="{StaticResource ListSeparator}"/>
-                    </control:NonScrollableListView.SeparatorColor>
-                    <control:NonScrollableListView.ItemTemplate>
-                        <DataTemplate>
-                          <TextCell Text="{Binding ProviderLabel}" />
-                        </DataTemplate>
-                    </control:NonScrollableListView.ItemTemplate>
-                </control:NonScrollableListView>
-                <control:FooterDivider/>
-            </StackLayout>
-            </control:CardView>
-      
       </StackLayout>
 
       <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="{DynamicResource SmallPadding}">

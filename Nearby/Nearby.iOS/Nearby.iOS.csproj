@@ -595,7 +595,7 @@
     <BundleResource Include="Resources\calendar_menu%403x.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="GoogleService-Info.plist" />
+    <BundleResource Include="GoogleService-Info.plist" />
     <BundleResource Include="Resources\reminder_empty.png" />
     <BundleResource Include="Resources\reminder_empty%402x.png" />
     <BundleResource Include="Resources\reminder_empty%403x.png" />

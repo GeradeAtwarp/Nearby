@@ -161,7 +161,7 @@
               </control:NonScrollableListView.SeparatorColor>
                 <control:NonScrollableListView.ItemTemplate>
                 <DataTemplate>
-                  <TextCell Text="{Binding Label}"/>
+                  <TextCell Text="{Binding Label}" Command="{Binding AboutCommand}" CommandParameter="{Binding AboutCommandProperty}"/>
                 </DataTemplate>
               </control:NonScrollableListView.ItemTemplate>
             </control:NonScrollableListView>

@@ -20,7 +20,7 @@ namespace Nearby.Pages
         {
             InitializeComponent();
 
-            BindingContext = vm = new PlaceDetailViewModel(Navigation, place);
+            BindingContext = vm = new PlaceDetailViewModel(place);
 
             if (place != null)
             {

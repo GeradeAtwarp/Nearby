@@ -34,7 +34,7 @@ namespace Nearby.Pages
         {
             InitializeComponent();
 
-            BindingContext = vm = new HomeViewModel(Navigation);
+            BindingContext = vm = new HomeViewModel();
 
             var tbItemNavigateEvents = new ToolbarItem() { Icon = "today" };
             var tbItemNavigateFav = new ToolbarItem() { Icon = "favorite"};

@@ -100,7 +100,7 @@ namespace Nearby.viewModel
         public string[] shareOptions = new string[] { "Facebook", "Twitter" };
 
 
-        public PlaceDetailViewModel(INavigation navigation, Places place) : base(navigation)
+        public PlaceDetailViewModel(Places place)
         {
             Place = place;
 

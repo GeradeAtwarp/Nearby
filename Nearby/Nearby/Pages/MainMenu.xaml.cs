@@ -20,7 +20,7 @@ namespace Nearby.Pages
         {
             InitializeComponent();
 
-            BindingContext = new MainMenuViewModel(Navigation);
+            BindingContext = new MainMenuViewModel();
 
             ListViewFeeds.ItemSelected += async (s, e) =>
             {
@@ -29,7 +29,7 @@ namespace Nearby.Pages
 
                 var item = e.SelectedItem as viewModel.MenuItem;
                 Page page = new Favourites();
-                
+
                 if (!item.isSwitch)
                 {
                     await NavigationService.PushAsync(Navigation, page);
@@ -46,10 +46,24 @@ namespace Nearby.Pages
                 AboutMenuItem item = e.SelectedItem as AboutMenuItem;
 
                 lstAbout.SelectedItem = null;
-                //Page page = null;
+                Page page = null;
 
-                //if (item.AboutCommand != null)
-                //    item.AboutCommand.Execute(item.AboutCommandProperty);
+                if (item.AboutCommand != null)
+                    item.AboutCommand.Execute(item.AboutCommandProperty);
+            };
+
+            lstTerms.ItemSelected += async (s, e) =>
+            {
+                if (e.SelectedItem == null)
+                    return;
+
+                AboutMenuItem item = e.SelectedItem as AboutMenuItem;
+
+                lstTerms.SelectedItem = null;
+                Page page = null;
+
+                if (item.AboutCommand != null)
+                    item.AboutCommand.Execute(item.AboutCommandProperty);
             };
         }
 

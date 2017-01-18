@@ -133,14 +133,7 @@
             IsRunning="{Binding IsBusy}"   
             IsVisible="{Binding IsBusy}"
             VerticalOptions="Center"
-            HorizontalOptions="Center">
-            <ActivityIndicator.Color>
-                <OnPlatform 
-                    x:TypeArguments="Color" 
-                    iOS="{StaticResource Primary}" 
-                    Android="{StaticResource Primary}"
-                    WinPhone="{StaticResource Primary}" />
-            </ActivityIndicator.Color>
+            HorizontalOptions="Center" Color="{StaticResource Primary}">
             <ActivityIndicator.WidthRequest>
                 <OnPlatform 
                     x:TypeArguments="x:Double" 

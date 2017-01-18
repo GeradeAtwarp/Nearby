@@ -27,7 +27,7 @@ namespace Nearby.viewModel
             set { SetProperty(ref madeByText, value); }
         }
 
-        public MainMenuViewModel(INavigation navigation) : base(navigation)
+        public MainMenuViewModel() 
         {
             Title = "Settings";
 
@@ -72,7 +72,7 @@ namespace Nearby.viewModel
 
             TermsItems.AddRange(new[]
             {
-                new AboutMenuItem { Label = "Terms Of Use", Value = "terms" }
+                new AboutMenuItem { Label = "Terms Of Use", Value = "terms", AboutCommand = NavigateTerms }
             });
         }
 
@@ -181,6 +181,11 @@ namespace Nearby.viewModel
         ICommand navigateToAbout;
         public ICommand NavigateToAbout => navigateToAbout ?? (navigateToAbout = new Command(async () => {
                 await Navigation.PushAsync(new AboutApp());
+        }));
+
+        ICommand navigateTerms;
+        public ICommand NavigateTerms => navigateTerms ?? (navigateTerms = new Command(async () => {
+            await Navigation.PushAsync(new TermsAndConditions());
         }));
 
 
