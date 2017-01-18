@@ -74,6 +74,7 @@
     <Compile Include="Helpers\Settings.cs" />
     <Compile Include="Interfaces\IAppLauncher.cs" />
     <Compile Include="Interfaces\IPhoneDialer.cs" />
+    <Compile Include="Interfaces\IReminderService.cs" />
     <Compile Include="Interfaces\ISharer.cs" />
     <Compile Include="Interfaces\IToast.cs" />
     <Compile Include="Login.xaml.cs">

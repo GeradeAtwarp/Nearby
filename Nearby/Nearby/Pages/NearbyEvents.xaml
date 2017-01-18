@@ -30,6 +30,10 @@
                 
               </Grid>
 
+              <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <control:AdView />
+              </StackLayout>
+
               <Grid x:Name="ContentPanel">
                     <control:StackedList 
                         x:Name="SuggestionsList" 

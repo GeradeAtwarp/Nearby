@@ -9,5 +9,6 @@ namespace Nearby.Controls
 {
     public class AdView : View
     {
+
     }
 }

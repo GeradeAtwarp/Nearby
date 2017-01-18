@@ -29,7 +29,7 @@ namespace Nearby.Droid
             base.OnCreate(bundle);
 
             FFImageLoading.Forms.Droid.CachedImageRenderer.Init();
-            MobileAds.Initialize(ApplicationContext, "bc0b686325a74f8fa50134a03ce5efc9");
+            MobileAds.Initialize(ApplicationContext, "pub-1631454081193991");
             UserDialogs.Init(this);
 
             global::Xamarin.Forms.Forms.Init(this, bundle);

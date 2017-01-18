@@ -12,6 +12,9 @@ using Nearby.Helpers;
 using Nearby.Utils;
 using Plugin.Connectivity;
 using Plugin.Connectivity.Abstractions;
+using Xamarin.Forms.Xaml;
+
+[assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 
 namespace Nearby
 {

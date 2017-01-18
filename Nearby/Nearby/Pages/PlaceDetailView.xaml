@@ -215,7 +215,7 @@
         
       </StackLayout>
 
-      <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+      <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="50">
         <control:AdView />
       </StackLayout>
 

@@ -14,7 +14,7 @@ namespace Nearby.iOS.Renderers
 {
     public class AdViewRenderer : ViewRenderer<AdView, BannerView>
     {
-        string bannerId = "";
+        string bannerId = "ca-app-pub-1631454081193991/8291188269";
         BannerView adview;
 
         BannerView CreateNativeControl()

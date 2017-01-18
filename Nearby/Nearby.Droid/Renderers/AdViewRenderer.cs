@@ -14,7 +14,7 @@ using Xamarin.Forms.Platform.Android;
 using Xamarin.Forms;
 using Android.Gms.Ads;
 
-[assembly: ExportRenderer(typeof(AdView), typeof(AdViewRenderer))]
+[assembly: ExportRenderer(typeof(Nearby.Controls.AdView), typeof(AdViewRenderer))]
 
 namespace Nearby.Droid.Renderers
 {

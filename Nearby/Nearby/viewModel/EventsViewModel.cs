@@ -1,4 +1,5 @@
 ﻿using MvvmHelpers;
+using Nearby.Interfaces;
 using Nearby.Models;
 using Newtonsoft.Json;
 using System;
@@ -95,17 +96,24 @@ namespace Nearby.viewModel
 
             if (nearbyEvent != null)
             {
-                new Plugin.Calendars.Abstractions.CalendarEvent
-                {
-                    Description = nearbyEvent.Description,
-                    Location = nearbyEvent.VenueName,
-                    AllDay = true,
-                    Name = nearbyEvent.Title,
-                    Start = Convert.ToDateTime(nearbyEvent.StartTime),
-                    End = Convert.ToDateTime(nearbyEvent.StopTime)
-                };
+                var reminderService = DependencyService.Get<IReminderService>();
 
-                Application.Current?.MainPage.DisplayAlert("Reminder", "Reminder was successfully set.", "Ok");
+                reminderService.AddEvent(Convert.ToDateTime(nearbyEvent.StartTime), Convert.ToDateTime(nearbyEvent.StopTime), nearbyEvent.Title, nearbyEvent.VenueName, string.Empty, (success) =>
+                {
+                    Application.Current?.MainPage.DisplayAlert("Reminder", "Reminder was successfully set.", "Ok");
+                }, "4242016400");
+
+                //new Plugin.Calendars.Abstractions.CalendarEvent
+                //{
+                //    Description = nearbyEvent.Description,
+                //    Location = nearbyEvent.VenueName,
+                //    AllDay = true,
+                //    Name = nearbyEvent.Title,
+                //    Start = Convert.ToDateTime(nearbyEvent.StartTime),
+                //    End = Convert.ToDateTime(nearbyEvent.StopTime)
+                //};
+
+                
             }
             else
                 return;
@@ -117,7 +125,6 @@ namespace Nearby.viewModel
         public EventsViewModel(INavigation navigation) : base(navigation)
         {
             CurrentDate = DateTime.Now.ToString("dddd, dd MMM yyyy");
-            LoadEventsNearby();
         }
 
         async Task LoadEventsNearby()
