@@ -60,7 +60,9 @@
         </Grid>
         
       </StackLayout>
-      
+
+      <control:AdView />
+
       <StackLayout BackgroundColor="{DynamicResource WindowBackgroundTable}" Spacing="{DynamicResource CardSpacing}" Padding="{DynamicResource CardPadding}">
        
         <control:CardView>
@@ -213,10 +215,6 @@
             </StackLayout>
         </control:CardView>
         
-      </StackLayout>
-
-      <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="50">
-        <control:AdView />
       </StackLayout>
 
     </StackLayout>

@@ -92,7 +92,7 @@ namespace Nearby.Pages
             {
                 vm.DeactivateFilter().ContinueWith(task => Device.BeginInvokeOnMainThread(() =>
                 {
-                    ToggleRefineOptions();
+                    SearchForPlacesNearby();
                 }));
             };
             

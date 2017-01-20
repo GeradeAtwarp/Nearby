@@ -37,34 +37,6 @@ namespace Nearby.Pages
 
                 ListViewFeeds.SelectedItem = null;
             };
-
-            lstAbout.ItemSelected += async (s, e) =>
-            {
-                if (e.SelectedItem == null)
-                    return;
-
-                AboutMenuItem item = e.SelectedItem as AboutMenuItem;
-
-                lstAbout.SelectedItem = null;
-                Page page = null;
-
-                if (item.AboutCommand != null)
-                    item.AboutCommand.Execute(item.AboutCommandProperty);
-            };
-
-            lstTerms.ItemSelected += async (s, e) =>
-            {
-                if (e.SelectedItem == null)
-                    return;
-
-                AboutMenuItem item = e.SelectedItem as AboutMenuItem;
-
-                lstTerms.SelectedItem = null;
-                Page page = null;
-
-                if (item.AboutCommand != null)
-                    item.AboutCommand.Execute(item.AboutCommandProperty);
-            };
         }
 
         protected override void OnAppearing()

@@ -11,13 +11,14 @@ namespace Nearby.Pages
 {
     public partial class NearbyEvents : ContentPage
     {
+        EventsViewModel ViewModel => vm ?? (vm = BindingContext as EventsViewModel);
         EventsViewModel vm;
 
         public NearbyEvents()
         {
             InitializeComponent();
 
-            BindingContext = vm = ViewModelLocator.MainventsViewModel;
+            BindingContext = vm = new EventsViewModel();
         }
 
         protected override void OnAppearing()
