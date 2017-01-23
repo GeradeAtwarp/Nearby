@@ -31,6 +31,8 @@ namespace Nearby
             current = this;
             InitializeComponent();
 
+            Settings.Current.DidNotifyUserOnStart = false;
+
             NavPage = new NavigationPage(new Home());
 
             NearbyBaseViewModel.Init(NavPage.Navigation);

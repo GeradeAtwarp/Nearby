@@ -57,10 +57,10 @@
               </StackLayout>
             </ViewCell.View>
 
-            <ViewCell.ContextActions>
+            <!--<ViewCell.ContextActions>
               <MenuItem Command="{Binding ViewDetailsCommand}" CommandParameter="{Binding .}" Text="Details"></MenuItem>
               <MenuItem Command="{Binding RemoveCommand}" CommandParameter="{Binding .}" Text="Remove" IsDestructive="True"></MenuItem>
-            </ViewCell.ContextActions>          
+            </ViewCell.ContextActions>-->          
             
           </ViewCell>
           

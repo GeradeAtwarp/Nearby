@@ -99,13 +99,6 @@ namespace Nearby.Pages
             
             AddSearchButtons();            
             MoveToCurrentLocation();
-
-            //Notify user on statup that a filter is currently enabled
-            if(!Settings.Current.DidNotifyUserOnStart && Settings.Current.IsSearchFilterEnabled)
-            {
-                vm.ShowToast("You currently have a search filter enabled.");
-                Settings.Current.DidNotifyUserOnStart = true;
-            }
         }
 
         protected override void OnAppearing()
@@ -114,6 +107,13 @@ namespace Nearby.Pages
             vm.UpdateItems();
 
             MoveToCurrentLocation();
+
+            //Notify user on statup that a filter is currently enabled
+            if (!Settings.Current.DidNotifyUserOnStart && Settings.Current.IsSearchFilterEnabled)
+            {
+                vm.ShowToast("You currently have a search filter enabled.");
+                Settings.Current.DidNotifyUserOnStart = true;
+            }
         }
 
         async Task MoveToCurrentLocation()
