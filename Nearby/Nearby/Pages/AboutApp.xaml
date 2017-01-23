@@ -33,14 +33,14 @@
                 <Label Text="Nearby - Places To Visit" Style="{DynamicResource EvolveListItemTextStyle}"/>
               </StackLayout>
               <StackLayout Padding="0,16">
-                <Label Text="Nearby is an Application that allows Users to search and identify points of interest according to their geographical position." Style="{DynamicResource EvolveListItemTextStyle}"/>
+                <Label Text="Nearby is an Application that allows Users to search and identify points of interest according to their geographical position." Style="{DynamicResource DetailTextColor}"/>
               </StackLayout>
 
               <StackLayout Spacing="0,16">
                 <Label Text="Nearby - Event to Attend" Style="{DynamicResource EvolveListItemTextStyle}"/>
               </StackLayout>
               <StackLayout Padding="0,16">
-                <Label Text="Nearby also provides you with a list of local events and entertainment. Concerts, confrences, stand up performances. Simply supply your location, and we will do the rest." Style="{DynamicResource EvolveListItemTextStyle}"/>
+                <Label Text="Nearby also provides you with a list of local events and entertainment. Concerts, confrences, stand up performances. Simply supply your location, and we will do the rest." Style="{DynamicResource DetailTextColor}"/>
               </StackLayout>
               
             </StackLayout>

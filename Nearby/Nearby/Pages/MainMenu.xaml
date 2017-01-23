@@ -140,7 +140,7 @@
                      RowHeight="44">
               <control:NonScrollableListView.ItemTemplate>
                 <DataTemplate>
-                  <TextCell TextColor="{DynamicResource BackgroundGrayColor}" Text="{Binding Label}" Detail="{Binding Value}" Command="{Binding AboutCommand}" CommandParameter="{Binding AboutCommandProperty}"/>
+                  <TextCell TextColor="{DynamicResource DetailTextColor}" Text="{Binding Label}" Detail="{Binding Value}" Command="{Binding AboutCommand}" CommandParameter="{Binding AboutCommandProperty}"/>
                 </DataTemplate>
               </control:NonScrollableListView.ItemTemplate>
             </control:NonScrollableListView>
@@ -161,7 +161,7 @@
               </control:NonScrollableListView.SeparatorColor>
                 <control:NonScrollableListView.ItemTemplate>
                 <DataTemplate>
-                  <TextCell TextColor="{DynamicResource SectionLabelTextStyle}" Text="{Binding Label}" Command="{Binding AboutCommand}" CommandParameter="{Binding AboutCommandProperty}"/>
+                  <TextCell TextColor="{DynamicResource DetailTextColor}" Text="{Binding Label}" Command="{Binding AboutCommand}" CommandParameter="{Binding AboutCommandProperty}"/>
                 </DataTemplate>
               </control:NonScrollableListView.ItemTemplate>
             </control:NonScrollableListView>

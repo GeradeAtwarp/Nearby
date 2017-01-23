@@ -30,9 +30,9 @@
                 <Label Grid.Row="0" Grid.ColumnSpan="2" Text="{Binding CurrentDate}" Style="{StaticResource HeaderLabelStyle}" HorizontalOptions="StartAndExpand" />
                 
                 <Label Grid.Row="1" Grid.Column="0" Text="{Binding WeatherDesc, Converter={StaticResource ToTitleCaseConverter}}" Style="{StaticResource TempLabelStyle}" HorizontalOptions="StartAndExpand" Margin="0, 10, 0, 0" />                
-                <Label Grid.Row="1" Grid.Column="1" Text="{Binding Temp}" Style="{StaticResource TempLabelStyle}" HorizontalOptions="StartAndExpand" Margin="0, 10, 0, 0" />
+                <Label Grid.Row="1" Grid.Column="1" Text="{Binding Temp}" Style="{StaticResource TempLabelStyle}" HorizontalOptions="CenterAndExpand" Margin="0, 10, 0, 0" />
                 <Label Grid.Row="2" Grid.Column="0" Text="{Binding WeatherLocation, Converter={StaticResource ToTitleCaseConverter}}" Style="{StaticResource TempLabelStyle}" HorizontalOptions="StartAndExpand" />
-                <Label Grid.Row="2" Grid.Column="1" Text="{Binding TempHiLow}" Style="{StaticResource TempLabelStyle}" HorizontalOptions="StartAndExpand" />
+                <Label Grid.Row="2" Grid.Column="1" Text="{Binding TempHiLow}" Style="{StaticResource TempLabelStyle}" HorizontalOptions="CenterAndExpand" />
                 
               </Grid>
 
