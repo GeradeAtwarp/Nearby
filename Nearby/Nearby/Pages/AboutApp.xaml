@@ -10,15 +10,12 @@
   <control:AlwaysScrollView>
     <StackLayout Spacing="0">
       
-      <StackLayout BackgroundColor="{DynamicResource WindowBackgroundTable}"
-                           Spacing="{DynamicResource CardSpacing}"
-                           Padding="{DynamicResource CardPadding}">
+      <StackLayout Spacing="{DynamicResource CardSpacing}" Padding="{DynamicResource CardPadding}">
         
          <control:CardView>
-          <StackLayout Padding="0" Spacing="0" BackgroundColor="White">
+          <StackLayout>
             <control:HeaderDivider/>
-            <StackLayout Padding="{StaticResource StandardPadding}">
-              <StackLayout Padding="32,16,32,0">
+            <StackLayout Padding="32,16,32,0" BackgroundColor="{DynamicResource WindowBackgroundTable}">
                 <Image
                     Grid.Column="1"
                     Grid.Row="1"
@@ -28,13 +25,24 @@
                     HeightRequest="150"
                     Source="{Binding AppLogo}">
                 </Image>
-              </StackLayout>
+            </StackLayout>
+
+            <StackLayout Padding="{StaticResource StandardPadding}" BackgroundColor="White">
+
               <StackLayout Spacing="0">
-                <Label Text="Nearby" Style="{DynamicResource EvolveListItemTextStyle}"/>
+                <Label Text="Nearby - Places To Visit" Style="{DynamicResource EvolveListItemTextStyle}"/>
               </StackLayout>
               <StackLayout Padding="0,16">
-                <Label Text="Nearby is an Application that allows Users to search and identify points of interest according to their geographical position." Style="{DynamicResource NearbyListItemDetailTextStyle}"/>
+                <Label Text="Nearby is an Application that allows Users to search and identify points of interest according to their geographical position." Style="{DynamicResource EvolveListItemTextStyle}"/>
               </StackLayout>
+
+              <StackLayout Spacing="0,16">
+                <Label Text="Nearby - Event to Attend" Style="{DynamicResource EvolveListItemTextStyle}"/>
+              </StackLayout>
+              <StackLayout Padding="0,16">
+                <Label Text="Nearby also provides you with a list of local events and entertainment. Concerts, confrences, stand up performances. Simply supply your location, and we will do the rest." Style="{DynamicResource EvolveListItemTextStyle}"/>
+              </StackLayout>
+              
             </StackLayout>
     
             <control:FooterDivider/>
@@ -42,11 +50,6 @@
         </control:CardView>
       
       </StackLayout>
-
-      <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="{DynamicResource SmallPadding}">
-        <Label HorizontalOptions="Center" Style="{DynamicResource NearbyListItemDetailTextStyle}" Text="{Binding MadeByText}" />
-      </StackLayout>
-      
     </StackLayout>
     
   </control:AlwaysScrollView>
