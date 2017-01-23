@@ -2894,8 +2894,8 @@ namespace Nearby.Droid
 			// aapt resource value: 0x7f0200ee
 			public const int nearby_logo = 2130837742;
 			
-			// aapt resource value: 0x7f02010a
-			public const int notification_template_icon_bg = 2130837770;
+			// aapt resource value: 0x7f02010b
+			public const int notification_template_icon_bg = 2130837771;
 			
 			// aapt resource value: 0x7f0200ef
 			public const int parade = 2130837743;
@@ -2916,67 +2916,70 @@ namespace Nearby.Droid
 			public const int pizza_white = 2130837748;
 			
 			// aapt resource value: 0x7f0200f5
-			public const int religion = 2130837749;
+			public const int recreational_activities = 2130837749;
 			
 			// aapt resource value: 0x7f0200f6
-			public const int reminder_empty = 2130837750;
+			public const int religion = 2130837750;
 			
 			// aapt resource value: 0x7f0200f7
-			public const int reminder_filled = 2130837751;
+			public const int reminder_empty = 2130837751;
 			
 			// aapt resource value: 0x7f0200f8
-			public const int roundedbg = 2130837752;
+			public const int reminder_filled = 2130837752;
 			
 			// aapt resource value: 0x7f0200f9
-			public const int roundedbgdark = 2130837753;
+			public const int roundedbg = 2130837753;
 			
 			// aapt resource value: 0x7f0200fa
-			public const int running = 2130837754;
+			public const int roundedbgdark = 2130837754;
 			
 			// aapt resource value: 0x7f0200fb
-			public const int science = 2130837755;
+			public const int running = 2130837755;
 			
 			// aapt resource value: 0x7f0200fc
-			public const int search = 2130837756;
+			public const int science = 2130837756;
 			
 			// aapt resource value: 0x7f0200fd
-			public const int search_small = 2130837757;
+			public const int search = 2130837757;
 			
 			// aapt resource value: 0x7f0200fe
-			public const int settings_cog = 2130837758;
+			public const int search_small = 2130837758;
 			
 			// aapt resource value: 0x7f0200ff
-			public const int sharethis = 2130837759;
+			public const int settings_cog = 2130837759;
 			
 			// aapt resource value: 0x7f020100
-			public const int social_single = 2130837760;
+			public const int sharethis = 2130837760;
 			
 			// aapt resource value: 0x7f020101
-			public const int splash_screen = 2130837761;
+			public const int social_single = 2130837761;
 			
 			// aapt resource value: 0x7f020102
-			public const int stadium = 2130837762;
+			public const int splash_screen = 2130837762;
 			
 			// aapt resource value: 0x7f020103
-			public const int stand_up = 2130837763;
+			public const int stadium = 2130837763;
 			
 			// aapt resource value: 0x7f020104
-			public const int star_empty = 2130837764;
+			public const int stand_up = 2130837764;
 			
 			// aapt resource value: 0x7f020105
-			public const int star_filled = 2130837765;
+			public const int star_empty = 2130837765;
 			
 			// aapt resource value: 0x7f020106
-			public const int suggestion_central_park = 2130837766;
+			public const int star_filled = 2130837766;
 			
 			// aapt resource value: 0x7f020107
-			public const int technology = 2130837767;
+			public const int suggestion_central_park = 2130837767;
 			
 			// aapt resource value: 0x7f020108
-			public const int today = 2130837768;
+			public const int technology = 2130837768;
 			
 			// aapt resource value: 0x7f020109
-			public const int wine_food = 2130837769;
+			public const int today = 2130837769;
+			
+			// aapt resource value: 0x7f02010a
+			public const int wine_food = 2130837770;
 			
 			static Drawable()
 			{

@@ -145,6 +145,21 @@ namespace Nearby.Helpers
 
         #endregion
 
+        #region Notify user on start of filter enabled
+
+        const string UserNitifiedOfFilterKey = "filters_enabled_notified";
+        static readonly bool UserNitifiedOfFilterOnStart = false;
+        public bool DidNotifyUserOnStart
+        {
+            get { return AppSettings.GetValueOrDefault<bool>(UserNitifiedOfFilterKey, UserNitifiedOfFilterOnStart); }
+            set
+            {
+                if (AppSettings.AddOrUpdateValue<bool>(UserNitifiedOfFilterKey, value))
+                    OnPropertyChanged();
+            }
+        }
+
+        #endregion
 
 
 

@@ -60,6 +60,7 @@
     <Compile Include="Controls\StackedList.cs" />
     <Compile Include="Controls\TransparentConatiner.cs" />
     <Compile Include="DependencyServices\ILocationManager.cs" />
+    <Compile Include="GlobalKeys.cs" />
     <Compile Include="Helpers\AWSUtils.cs" />
     <Compile Include="Helpers\Constants.cs" />
     <Compile Include="Helpers\Converters\DateToTimeConverter.cs" />

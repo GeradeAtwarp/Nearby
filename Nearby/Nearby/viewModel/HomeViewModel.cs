@@ -118,8 +118,7 @@ namespace Nearby.viewModel
 
                     if(JsonConvert.DeserializeObject<PlaceNearby>(placesResult).results.Count() == 0)
                     {
-                        var toaster = DependencyService.Get<IToast>();
-                        toaster.SendToast("0 places were found. Maybe update you search criteria and try again.");
+                        ShowToast("0 places were found. Maybe update you search criteria and try again.");
                     }
 
                     PlacesNearby.Clear();

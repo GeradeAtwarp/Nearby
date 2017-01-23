@@ -14,7 +14,11 @@
             <StackLayout Orientation="Vertical">
               
               <Grid BackgroundColor="{StaticResource Primary}" Padding="{StaticResource MediumPadding}">
+                <Grid.HeightRequest>
+                  <OnPlatform x:TypeArguments="x:Double" Android="85" iOS="85" ></OnPlatform>
+                </Grid.HeightRequest>
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
@@ -22,11 +26,13 @@
                   <ColumnDefinition Width="1*"/>
                   <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
+
+                <Label Grid.Row="0" Grid.ColumnSpan="2" Text="{Binding CurrentDate}" Style="{StaticResource HeaderLabelStyle}" HorizontalOptions="StartAndExpand" />
                 
-                <Label Grid.Column="0" Text="{Binding Temp}" Style="{StaticResource TempLabelStyle}" HorizontalOptions="CenterAndExpand" />                
-                <Label Grid.Column="1" Text="{Binding WeatherDesc}" Style="{StaticResource HeaderLabelStyle}" HorizontalOptions="CenterAndExpand" />
-                <Label Grid.Row="1" Grid.Column="0" Text="{Binding TempHiLow}" Style="{StaticResource HeaderLabelStyle}" HorizontalOptions="CenterAndExpand" />
-                <Label Grid.Row="1" Grid.Column="1" Text="{Binding WeatherLocation}" Style="{StaticResource HeaderLabelStyle}" HorizontalOptions="CenterAndExpand" />
+                <Label Grid.Row="1" Grid.Column="0" Text="{Binding WeatherDesc}" Style="{StaticResource HeaderLabelStyle}" HorizontalOptions="StartAndExpand" Margin="0, 10, 0, 0" />                
+                <Label Grid.Row="1" Grid.Column="1" Text="{Binding Temp}" Style="{StaticResource HeaderLabelStyle}" HorizontalOptions="StartAndExpand" Margin="0, 10, 0, 0" />
+                <Label Grid.Row="2" Grid.Column="0" Text="{Binding WeatherLocation}" Style="{StaticResource HeaderLabelStyle}" HorizontalOptions="StartAndExpand" />
+                <Label Grid.Row="2" Grid.Column="1" Text="{Binding TempHiLow}" Style="{StaticResource HeaderLabelStyle}" HorizontalOptions="StartAndExpand" />
                 
               </Grid>
 

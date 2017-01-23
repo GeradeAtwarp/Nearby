@@ -145,7 +145,7 @@ namespace Nearby.viewModel
                 var httpClient = new HttpClient();
                 var eventsResults = "";
 
-                eventsResults = await httpClient.GetStringAsync(new UriBuilder("http://api.eventful.com/json/events/search?app_key=hTRdwhLvk8LgjnFL&within=30&page_size=30&sort_order=popularity&include=categories&location=" + position.Latitude.ToString().Replace(',', '.') + "," + position.Longitude.ToString().Replace(',', '.')).Uri.ToString());
+                eventsResults = await httpClient.GetStringAsync(new UriBuilder("http://api.eventful.com/json/events/search?app_key="+ GlobalKeys.EventfulAPIKey +"&category=" + GlobalKeys.EventSearchCriteria + "&within=30&page_size=30&sort_order=popularity&sort_direction=ascending&include=categories&location=" + position.Latitude.ToString().Replace(',', '.') + "," + position.Longitude.ToString().Replace(',', '.')).Uri.ToString());
 
                 var response = JsonConvert.DeserializeObject<EventNearbyResult>(eventsResults).events.@event;
 
@@ -169,7 +169,7 @@ namespace Nearby.viewModel
                         EventURL = re.venue_url,
                         SetReminder = SetReminder,
                         EventImage = (re.image != null ? ImageSource.FromUri(new Uri(re.image.url)) : ImageSource.FromUri(new Uri("https://raw.githubusercontent.com/Microsoft/BikeSharing360_MobileApps/master/src/CommonResources/suggestion_bronx_river.png"))),
-                        Categories = String.Join(String.Empty, (re.categories != null ? re.categories.category.Select(x => x.name).ToList() : new List<string>()))
+                        Categories = String.Join(String.Empty, (re.categories != null ? re.categories.category.Select(x => x.id).ToList() : new List<string>()))
                     });
                 }
 
@@ -193,11 +193,11 @@ namespace Nearby.viewModel
                 var httpClient = new HttpClient();
                 var weatherResults = "";
 
-                weatherResults = await httpClient.GetStringAsync(new UriBuilder("http://api.openweathermap.org/data/2.5/weather?APPID=b806514997d45be8cf0f0000935b48e6&lat=" + position.Latitude.ToString().Replace(',', '.') + "&lon=" + position.Longitude.ToString().Replace(',', '.') + "&units=metric").Uri.ToString());
+                weatherResults = await httpClient.GetStringAsync(new UriBuilder("http://api.openweathermap.org/data/2.5/weather?APPID="+ GlobalKeys.OpenWeatherAPIKey +"&lat=" + position.Latitude.ToString().Replace(',', '.') + "&lon=" + position.Longitude.ToString().Replace(',', '.') + "&units=metric").Uri.ToString());
 
                 var response = JsonConvert.DeserializeObject<WatherResult>(weatherResults);
 
-                Temp = String.Format("{0}°C",response.main.temp.ToString());
+                Temp = String.Format("{0}° C", (int)response.main.temp);
                 WeatherDesc = response.weather[0].description;
                 TempHiLow = String.Format("{0}° / {1}°", response.main.temp_min, response.main.temp_max);
                 WeatherLocation = response.name;

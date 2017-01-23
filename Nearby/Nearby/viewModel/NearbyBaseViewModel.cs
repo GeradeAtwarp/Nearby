@@ -25,6 +25,7 @@ namespace Nearby.viewModel
         protected static INavigation Navigation { get; set; }
         protected Database NearbyDataContext { get; }
         protected TextInfo CultureTextInfo { get; }
+        protected static IToast Toaster { get; set; }
 
         public NearbyBaseViewModel()
         {
@@ -37,6 +38,7 @@ namespace Nearby.viewModel
         public static void Init(INavigation navigation = null)
         {
             Navigation = navigation;
+            Toaster = DependencyService.Get<IToast>();
         }
 
         public Settings Settings
@@ -131,6 +133,10 @@ namespace Nearby.viewModel
             { IsBusy = false; }
         }
 
+        public async Task ShowToast(string arg)
+        {
+            Toaster.SendToast(arg);
+        }
 
         public async Task ShareToProvider(string provider, string stareText = "")
         {

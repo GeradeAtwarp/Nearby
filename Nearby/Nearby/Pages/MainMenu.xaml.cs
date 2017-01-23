@@ -37,6 +37,16 @@ namespace Nearby.Pages
 
                 ListViewFeeds.SelectedItem = null;
             };
+
+            lstAbout.ItemSelected += async (s, e) =>
+            {
+                lstAbout.SelectedItem = null;
+            };
+
+            lstTerms.ItemSelected += async (s, e) =>
+            {
+                lstTerms.SelectedItem = null;
+            };
         }
 
         protected override void OnAppearing()
