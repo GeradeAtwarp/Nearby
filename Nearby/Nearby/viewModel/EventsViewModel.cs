@@ -1,6 +1,7 @@
 ﻿using MvvmHelpers;
 using Nearby.Interfaces;
 using Nearby.Models;
+using Nearby.Pages;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -89,35 +90,18 @@ namespace Nearby.viewModel
             await LoadEventsNearby();
         }
 
-        public ICommand SetReminder => new Command(SetReminderCommand);
-        private async void SetReminderCommand(object e)
+        public ICommand NavigateToDetails => new Command<EventNearbyItem>(ShowEventAsync);
+
+
+
+        private async void ShowEventAsync(EventNearbyItem @event)
         {
-            var nearbyEvent = e as EventNearbyItem;
-
-            if (nearbyEvent != null)
+            if (@event != null)
             {
-                var reminderService = DependencyService.Get<IReminderService>();
-
-                reminderService.AddEvent(Convert.ToDateTime(nearbyEvent.StartTime), Convert.ToDateTime(nearbyEvent.StopTime), nearbyEvent.Title, nearbyEvent.VenueName, string.Empty, (success) =>
-                {
-                    Application.Current?.MainPage.DisplayAlert("Reminder", "Reminder was successfully set.", "Ok");
-                }, "4242016400");
-
-                //new Plugin.Calendars.Abstractions.CalendarEvent
-                //{
-                //    Description = nearbyEvent.Description,
-                //    Location = nearbyEvent.VenueName,
-                //    AllDay = true,
-                //    Name = nearbyEvent.Title,
-                //    Start = Convert.ToDateTime(nearbyEvent.StartTime),
-                //    End = Convert.ToDateTime(nearbyEvent.StopTime)
-                //};
-
-                
+                await Navigation.PushAsync(new EventDetail(@event));
             }
-            else
-                return;
         }
+
 
         #endregion
 

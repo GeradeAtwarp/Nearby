@@ -95,6 +95,9 @@
     <Compile Include="Pages\Auth\Authenticate.xaml.cs">
       <DependentUpon>Authenticate.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\EventDetail.xaml.cs">
+      <DependentUpon>EventDetail.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Favourites.xaml.cs">
       <DependentUpon>Favourites.xaml</DependentUpon>
     </Compile>
@@ -126,6 +129,7 @@
     <Compile Include="Utils\Services\AWSIntegration.cs" />
     <Compile Include="Utils\User.cs" />
     <Compile Include="viewModel\AboutAppViewModel.cs" />
+    <Compile Include="viewModel\EventDetailViewModel.cs" />
     <Compile Include="viewModel\EventsViewModel.cs" />
     <Compile Include="viewModel\ExtendedBindableObject.cs" />
     <Compile Include="viewModel\FavoritesViewModel.cs" />
@@ -384,6 +388,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Pages\NearbyEvents.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\EventDetail.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

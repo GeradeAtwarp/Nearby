@@ -195,6 +195,17 @@ namespace Nearby.viewModel
             catch { }
         }
 
+        ICommand shareCommand;
+        public ICommand ShareCommand => shareCommand ?? (shareCommand = new Command<string>(async (m) => await ExecuteShareCommandAsync(m)));
+
+        async Task ExecuteShareCommandAsync(string message)
+        {
+            await CrossShare.Current.Share(message, "Share");
+        }
+
+
+
+
         public void RaisePropertyChanged<T>(Expression<Func<T>> property)
         {
             var name = GetMemberInfo(property).Name;

@@ -45,6 +45,7 @@
                         x:Name="SuggestionsList" 
                         Spacing="15"
                         ItemsSource="{Binding EventsNearby}"
+                        SelectedCommand="{Binding NavigateToDetails}"
                         Padding="5, 0, 5, 10">
                         <control:StackedList.ItemTemplate>
                             <DataTemplate>

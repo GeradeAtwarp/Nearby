@@ -2894,8 +2894,8 @@ namespace Nearby.Droid
 			// aapt resource value: 0x7f0200ee
 			public const int nearby_logo = 2130837742;
 			
-			// aapt resource value: 0x7f02010b
-			public const int notification_template_icon_bg = 2130837771;
+			// aapt resource value: 0x7f02010c
+			public const int notification_template_icon_bg = 2130837772;
 			
 			// aapt resource value: 0x7f0200ef
 			public const int parade = 2130837743;
@@ -2979,7 +2979,10 @@ namespace Nearby.Droid
 			public const int today = 2130837769;
 			
 			// aapt resource value: 0x7f02010a
-			public const int wine_food = 2130837770;
+			public const int toolbar_share = 2130837770;
+			
+			// aapt resource value: 0x7f02010b
+			public const int wine_food = 2130837771;
 			
 			static Drawable()
 			{
