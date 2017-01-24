@@ -151,7 +151,6 @@ namespace Nearby.viewModel
                         StopTime = re.stop_time,
                         VenueName = re.venue_name,
                         EventURL = re.venue_url,
-                        SetReminder = SetReminder,
                         EventImage = (re.image != null ? ImageSource.FromUri(new Uri(re.image.url)) : ImageSource.FromUri(new Uri("https://raw.githubusercontent.com/Microsoft/BikeSharing360_MobileApps/master/src/CommonResources/suggestion_bronx_river.png"))),
                         Categories = String.Join(String.Empty, (re.categories != null ? re.categories.category.Select(x => x.id).ToList() : new List<string>()))
                     });
@@ -183,7 +182,7 @@ namespace Nearby.viewModel
 
                 Temp = String.Format("{0}° C", (int)response.main.temp);
                 WeatherDesc = response.weather[0].description;
-                TempHiLow = String.Format("{0}° / {1}°", response.main.temp_min, response.main.temp_max);
+                TempHiLow = String.Format("{0}° / {1}°", (int)response.main.temp_min, (int)response.main.temp_max);
                 WeatherLocation = response.name;
             }
             catch (Exception ex) { Debug.WriteLine(ex.Message); }
