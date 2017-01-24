@@ -119,11 +119,11 @@
                                                     </ColumnDefinition>
                                                     <ColumnDefinition />
                                                 </Grid.ColumnDefinitions>
-                                                <ffimageloading:CachedImage Grid.Column="0" Source="{Binding AlarmBellStatus}" Aspect="AspectFit">
+                                                <!--<ffimageloading:CachedImage Grid.Column="0" Source="{Binding AlarmBellStatus}" Aspect="AspectFit">
                                                   <ffimageloading:CachedImage.GestureRecognizers>
                                                      <TapGestureRecognizer Command="{Binding SetReminder}" CommandParameter="{Binding .}"></TapGestureRecognizer>
                                                   </ffimageloading:CachedImage.GestureRecognizers>
-                                                </ffimageloading:CachedImage>
+                                                </ffimageloading:CachedImage>-->
                                                   <Label Grid.Column="1" HorizontalOptions="EndAndExpand" Text="{Binding StartTime, Converter={StaticResource DateConverter}}" Style="{StaticResource EventLabelStyle}" />
                                             </Grid>
                                         </StackLayout>
