@@ -75,7 +75,7 @@
               <StackLayout Margin="16,0" Spacing="0" Orientation="Horizontal" BackgroundColor="{DynamicResource WhiteColor}">
                 <Button Text="Add Reminder"
                        FontAttributes="Bold"
-                       HorizontalOptions="StartAndExpand"
+                       HorizontalOptions="CenterAndExpand"
                        BackgroundColor="{StaticResource Primary}"
                        TextColor="{DynamicResource WhiteColor}"
                        Command="{Binding SetReminder}">
@@ -86,7 +86,7 @@
 
                 <Button Text="Add Reminder"
                         FontAttributes="Bold"
-                        HorizontalOptions="StartAndExpand"
+                        HorizontalOptions="CenterAndExpand"
                         TextColor="{DynamicResource Primary}"
                         Command="{Binding SetReminder}">
                   <Button.IsVisible>
