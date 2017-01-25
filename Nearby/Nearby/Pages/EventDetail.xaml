@@ -51,7 +51,7 @@
         </control:CardView>
 
         <!-- Ad -->
-        <control:AdView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="0,5,0,5" />
+        <control:AdView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
         
         <!-- Event Description -->
         <control:CardView >
