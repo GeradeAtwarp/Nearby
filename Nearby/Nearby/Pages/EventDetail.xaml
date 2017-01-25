@@ -34,8 +34,8 @@
                 <RowDefinition Height="Auto" />
               </Grid.RowDefinitions>
               <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
               </Grid.ColumnDefinitions>
 
               <Label Text="Date" Style="{DynamicResource NearbyListItemTextStyle}"></Label>
@@ -51,7 +51,7 @@
         </control:CardView>
 
         <!-- Ad -->
-        <control:AdView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
+        <control:AdView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="0,5,0,5" />
         
         <!-- Event Description -->
         <control:CardView >
@@ -74,7 +74,7 @@
               <StackLayout Margin="16,0" Spacing="0" Orientation="Horizontal" BackgroundColor="{DynamicResource WhiteColor}">
                 <Button Text="Add Reminder"
                        FontAttributes="Bold"
-                       HorizontalOptions="FillAndExpand"
+                       HorizontalOptions="StartAndExpand"
                        BackgroundColor="{StaticResource Primary}"
                        TextColor="{DynamicResource WhiteColor}"
                        Command="{Binding SetReminder}">
@@ -85,7 +85,7 @@
 
                 <Button Text="Add Reminder"
                         FontAttributes="Bold"
-                        HorizontalOptions="FillAndExpand"
+                        HorizontalOptions="StartAndExpand"
                         TextColor="{DynamicResource Primary}"
                         Command="{Binding SetReminder}">
                   <Button.IsVisible>
@@ -107,26 +107,14 @@
                    ItemsSource="{Binding EventActionItems}"
                    x:Name="listEventActions"
                    RowHeight="44">
+              <control:NonScrollableListView.SeparatorColor>
+                <OnPlatform x:TypeArguments="Color" iOS="{StaticResource ListSeparator}"/>
+              </control:NonScrollableListView.SeparatorColor>
               <control:NonScrollableListView.ItemTemplate>
                 <DataTemplate>
-                  <ViewCell>
-                    <ViewCell.View>
-                      <Grid ColumnSpacing="{StaticResource StandardSpacing}">
-                        <Grid.Padding>
-                          <OnPlatform x:TypeArguments="Thickness" iOS="16,8" Android="16,8"/>
-                        </Grid.Padding>
-                        <Grid.ColumnDefinitions>
-                          <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Label VerticalOptions="Center"  Style="{DynamicResource NearbyListItemTextStyle}" Text="{Binding .}" />
-
-                      </Grid>
-                    </ViewCell.View>
-                  </ViewCell>
+                  <TextCell StyleId="disclosure" TextColor="{DynamicResource DetailTextColor}" Text="{Binding .}"/>
                 </DataTemplate>
               </control:NonScrollableListView.ItemTemplate>
-
             </control:NonScrollableListView>
           </StackLayout>
         </control:CardView>

@@ -133,6 +133,7 @@ namespace Nearby.viewModel
             {
                 IsBusy = false;
                 HockeyApp.MetricsManager.TrackEvent("An error Ocured getting places: " + ex.Message);
+                UserDialogs.Instance.HideLoading();
             }
             finally
             {

@@ -1,4 +1,5 @@
-﻿using MvvmHelpers;
+﻿using Acr.UserDialogs;
+using MvvmHelpers;
 using Nearby.Interfaces;
 using Nearby.Models;
 using Nearby.Pages;
@@ -120,6 +121,8 @@ namespace Nearby.viewModel
             {
                 IsBusy = true;
 
+                UserDialogs.Instance.ShowLoading("Loading Events...", MaskType.Clear);
+
                 //Get the users current location
                 position = await UpdateCurrentLocation();
 
@@ -144,14 +147,13 @@ namespace Nearby.viewModel
                         EventId = re.id,
                         Title = re.title,
                         CityName = re.city_name,
-                        Description = re.description,
+                        Description = (re.description != "" ? re.description : "Description Not Available"),
                         Latitude = re.latitude,
                         Longitude = re.longitude,
                         StartTime = re.start_time,
                         StopTime = re.stop_time,
                         VenueName = re.venue_name,
                         EventURL = re.venue_url,
-                        EventImage = (re.image != null ? ImageSource.FromUri(new Uri(re.image.url)) : ImageSource.FromUri(new Uri("https://raw.githubusercontent.com/Microsoft/BikeSharing360_MobileApps/master/src/CommonResources/suggestion_bronx_river.png"))),
                         Categories = String.Join(String.Empty, (re.categories != null ? re.categories.category.Select(x => x.id).ToList() : new List<string>()))
                     });
                 }
@@ -162,10 +164,12 @@ namespace Nearby.viewModel
             {
                 IsBusy = false;
                 Debug.WriteLine(ex.Message);
+                UserDialogs.Instance.HideLoading();
             }
             finally
             {
                 IsBusy = false;
+                UserDialogs.Instance.HideLoading();
             }
         }
 

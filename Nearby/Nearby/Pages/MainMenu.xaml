@@ -15,7 +15,7 @@
       </DataTemplate>
 
       <DataTemplate x:Key="TextCellDataTemplate">
-        <TextCell Text="{Binding DetailLabel}" />
+        <TextCell Text="{Binding DetailLabel}" StyleId="disclosure" />
       </DataTemplate>
 
       <local:MainMenuItemSelector x:Key="MainMenuItemSelector" SwitchCellDataTemplate="{StaticResource SwitchCellDataTemplate}" TextCellDataTemplate="{StaticResource TextCellDataTemplate}" />
@@ -138,9 +138,12 @@
                      x:Name="lstAbout"
                      ItemsSource="{Binding AboutItems}"
                      RowHeight="44">
+              <control:NonScrollableListView.SeparatorColor>
+                <OnPlatform x:TypeArguments="Color" iOS="{StaticResource ListSeparator}"/>
+              </control:NonScrollableListView.SeparatorColor>
               <control:NonScrollableListView.ItemTemplate>
                 <DataTemplate>
-                  <TextCell TextColor="{DynamicResource DetailTextColor}" Text="{Binding Label}" Detail="{Binding Value}" Command="{Binding AboutCommand}" CommandParameter="{Binding AboutCommandProperty}"/>
+                  <TextCell StyleId="disclosure" TextColor="{DynamicResource DetailTextColor}" Text="{Binding Label}" Detail="{Binding Value}" Command="{Binding AboutCommand}" CommandParameter="{Binding AboutCommandProperty}"/>
                 </DataTemplate>
               </control:NonScrollableListView.ItemTemplate>
             </control:NonScrollableListView>
@@ -161,7 +164,7 @@
               </control:NonScrollableListView.SeparatorColor>
                 <control:NonScrollableListView.ItemTemplate>
                 <DataTemplate>
-                  <TextCell TextColor="{DynamicResource DetailTextColor}" Text="{Binding Label}" Command="{Binding AboutCommand}" CommandParameter="{Binding AboutCommandProperty}"/>
+                  <TextCell StyleId="disclosure" TextColor="{DynamicResource DetailTextColor}" Text="{Binding Label}" Command="{Binding AboutCommand}" CommandParameter="{Binding AboutCommandProperty}"/>
                 </DataTemplate>
               </control:NonScrollableListView.ItemTemplate>
             </control:NonScrollableListView>
