@@ -43,6 +43,7 @@
     <Compile Include="Controls\AdView.cs" />
     <Compile Include="Controls\AlwaysScrollView.cs" />
     <Compile Include="Controls\CardView.cs" />
+    <Compile Include="Controls\CustomSearchBar.cs" />
     <Compile Include="Controls\FloatingActionButtonView.cs" />
     <Compile Include="Controls\FooterDivider.xaml.cs">
       <DependentUpon>FooterDivider.xaml</DependentUpon>

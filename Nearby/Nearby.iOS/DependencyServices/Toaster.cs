@@ -18,7 +18,7 @@ namespace Nearby.iOS.DependencyServices
         {
             Device.BeginInvokeOnMainThread(() =>
             {
-                Toast.MakeText(text, Toast.LENGTH_LONG).SetCornerRadius(10).SetGravity(ToastGravity.Center).Show();
+                Toast.MakeText(text, Toast.LENGTH_LONG).SetCornerRadius(10).SetGravity(ToastGravity.Bottom).Show();
             });
         }
     }

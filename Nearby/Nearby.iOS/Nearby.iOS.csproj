@@ -99,6 +99,7 @@
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Renderers\AdViewRenderer.cs" />
+    <Compile Include="Renderers\CustomSearchBarRenderer .cs" />
     <Compile Include="Renderers\NearbyButton.cs" />
     <Compile Include="Renderers\NoBarsScrollViewerRenderer.cs" />
     <Compile Include="Renderers\NonScrollableListViewRenderer.cs" />

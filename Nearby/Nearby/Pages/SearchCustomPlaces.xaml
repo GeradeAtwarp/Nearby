@@ -2,6 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Nearby.Pages.SearchCustomPlaces"
+             xmlns:control="clr-namespace:Nearby.Controls"
+             xmlns:helpers="clr-namespace:Nearby.Helpers"
              Title="Search location">
 
   <ContentPage.Content>
@@ -14,6 +16,9 @@
       </Grid.RowDefinitions>
 
       <StackLayout BackgroundColor="{StaticResource Primary}">
+        <StackLayout.IsVisible>
+          <helpers:OnCustomPlatform x:TypeArguments="x:Boolean" iOS="False" Android="True"/>
+        </StackLayout.IsVisible>
         <StackLayout.Padding>
           <OnPlatform x:TypeArguments="Thickness" Android="0,8,8,8" iOS="0" WinPhone="0"/>
         </StackLayout.Padding>
@@ -30,6 +35,16 @@
         </SearchBar>
       </StackLayout>
 
+      <StackLayout BackgroundColor="{StaticResource Primary}">
+         <StackLayout.IsVisible>
+          <helpers:OnCustomPlatform x:TypeArguments="x:Boolean" iOS="True" Android="False"/>
+         </StackLayout.IsVisible>
+         <StackLayout.Padding>
+          <OnPlatform x:TypeArguments="Thickness" Android="0,8,8,8" iOS="0" WinPhone="0"/>
+        </StackLayout.Padding>
+        <control:CustomSearchBar BarTint="{StaticResource Primary}" ></control:CustomSearchBar>
+      </StackLayout>
+      
       <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="StartAndExpand" BackgroundColor="White" Padding="{StaticResource MediumPadding}">
         <Label VerticalOptions="Center" Style="{DynamicResource NearbyListItemDetailTextStyle}" Text="Please enter and search for the location you wish to set as your current location"/>
       </StackLayout>

@@ -120,45 +120,54 @@ namespace Nearby.Pages
         {
             try
             {
-                Plugin.Geolocator.Abstractions.Position position;
-
-                if (!Settings.Current.CustomLocationEnabled)
+                if (RefineSearchMenu.Scale > 0)
                 {
-                    //Get the users current location
-                    var locator = CrossGeolocator.Current;
-                    position = await locator.GetPositionAsync(10000);
-
-                    var pin = new Pin
-                    {
-                        Type = PinType.Place,
-                        Label = "This is you!",
-                        Position = new Position(position.Latitude, position.Longitude)
-                    };
-
-                    placesMap.Pins.Add(pin);
-                    placesMap.MoveToRegion(MapSpan.FromCenterAndRadius(pin.Position, Distance.FromMiles(0.5)));
+                    await RefineSearchMenu.ScaleTo(0, 250, Easing.SinOut);
+                    RefineSearchMenu.IsVisible = false;
                 }
-                else
+
+                if (placesMap.Pins.Count() == 0)
                 {
-                    if (Settings.Current.CustomLatitude == "" || Settings.Current.CustomLongitude == "")
-                        Application.Current?.MainPage.DisplayAlert("Location", "Please set a custom location, Or turn off the custom location option on the settings page.", "Got it");
-                    else
+                    Plugin.Geolocator.Abstractions.Position position;
+
+                    if (!Settings.Current.CustomLocationEnabled)
                     {
-                        position = new Plugin.Geolocator.Abstractions.Position
-                        {
-                            Latitude = Convert.ToDouble(Settings.Current.CustomLatitude),
-                            Longitude = Convert.ToDouble(Settings.Current.CustomLongitude)
-                        };
+                        //Get the users current location
+                        var locator = CrossGeolocator.Current;
+                        position = await locator.GetPositionAsync(10000);
 
                         var pin = new Pin
                         {
-                            Type = PinType.SavedPin,
+                            Type = PinType.Place,
                             Label = "This is you!",
                             Position = new Position(position.Latitude, position.Longitude)
                         };
-
+                        
                         placesMap.Pins.Add(pin);
                         placesMap.MoveToRegion(MapSpan.FromCenterAndRadius(pin.Position, Distance.FromMiles(0.5)));
+                    }
+                    else
+                    {
+                        if (Settings.Current.CustomLatitude == "" || Settings.Current.CustomLongitude == "")
+                            Application.Current?.MainPage.DisplayAlert("Location", "Please set a custom location, Or turn off the custom location option on the settings page.", "Got it!");
+                        else
+                        {
+                            position = new Plugin.Geolocator.Abstractions.Position
+                            {
+                                Latitude = Convert.ToDouble(Settings.Current.CustomLatitude),
+                                Longitude = Convert.ToDouble(Settings.Current.CustomLongitude)
+                            };
+
+                            var pin = new Pin
+                            {
+                                Type = PinType.SavedPin,
+                                Label = "This is you!",
+                                Position = new Position(position.Latitude, position.Longitude)
+                            };
+
+                            placesMap.Pins.Add(pin);
+                            placesMap.MoveToRegion(MapSpan.FromCenterAndRadius(pin.Position, Distance.FromMiles(0.5)));
+                        }
                     }
                 }
             }
