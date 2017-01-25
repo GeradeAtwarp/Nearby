@@ -35,6 +35,9 @@ namespace Nearby.Pages
 
                 listEventActions.SelectedItem = null;
             };
+
+            if (Device.OS == TargetPlatform.iOS)
+                NavigationPage.SetBackButtonTitle(this, "");
         }
     }
 }

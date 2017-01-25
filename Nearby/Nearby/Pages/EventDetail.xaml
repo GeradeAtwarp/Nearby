@@ -5,7 +5,8 @@
              xmlns:local="clr-namespace:Nearby.Pages"
              xmlns:control="clr-namespace:Nearby.Controls"
              xmlns:helpers="clr-namespace:Nearby.Helpers"
-             Title="{Binding EventDetails.Title}">
+             Title="{Binding EventDetails.Title}"
+             BackgroundColor="{DynamicResource WindowBackgroundTable}">
 
   <ContentPage.ToolbarItems>
     <ToolbarItem Icon="toolbar_share.png" Text="Share" Command="{Binding ShareCommand}" CommandParameter="{Binding EventShareMessage}"/>
@@ -29,9 +30,9 @@
             <control:HeaderDivider></control:HeaderDivider>
             <Grid Padding="{StaticResource StandardPadding}" BackgroundColor="{DynamicResource WhiteColor}">
               <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
+                <RowDefinition Height="44" />
+                <RowDefinition Height="44" />
+                <RowDefinition Height="44" />
               </Grid.RowDefinitions>
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
@@ -112,7 +113,7 @@
               </control:NonScrollableListView.SeparatorColor>
               <control:NonScrollableListView.ItemTemplate>
                 <DataTemplate>
-                  <TextCell StyleId="disclosure" TextColor="{DynamicResource DetailTextColor}" Text="{Binding .}"/>
+                  <TextCell StyleId="disclosure" Text="{Binding .}"/>
                 </DataTemplate>
               </control:NonScrollableListView.ItemTemplate>
             </control:NonScrollableListView>

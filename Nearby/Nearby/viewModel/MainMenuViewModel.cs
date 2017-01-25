@@ -66,7 +66,7 @@ namespace Nearby.viewModel
             {
                 new AboutMenuItem { Label = "Created by", Value = "Gerade Geldenhuys", AboutCommand = OpenSocialProfile, AboutCommandProperty = "https://twitter.com/Raidzen10" },
                 new AboutMenuItem { Label = "Version 1.0", Value = "Copyright " + DateTime.Now.Year},
-                new AboutMenuItem { Label = "Feedback", Value = "Have a say", AboutCommand = OpenSocialProfile, AboutCommandProperty = "https://twitter.com/Raidzen10"},
+                new AboutMenuItem { Label = "Feedback", Value = "Have a say", AboutCommand = OpenReviewsCommand},
                 new AboutMenuItem { Label = "About This App", AboutCommand = NavigateToAbout},
             });
 

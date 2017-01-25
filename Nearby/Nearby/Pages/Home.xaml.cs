@@ -80,6 +80,8 @@ namespace Nearby.Pages
             {
                 ToolbarItems.Add(tbItemNavigateEvents);
                 ToolbarItems.Add(tbItemNavigateOptions);
+
+                NavigationPage.SetBackButtonTitle(this, "");
             }
             else
             {

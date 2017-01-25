@@ -20,9 +20,6 @@ namespace Nearby.Pages
         {
             InitializeComponent();
 
-            if (Device.OS == TargetPlatform.iOS)
-                NavigationPage.SetBackButtonTitle(this, "");
-
             BindingContext = new SearchCustomPlaceViewModel();
 
             lstSearch.ItemSelected += LstSearch_ItemSelected;

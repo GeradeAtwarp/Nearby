@@ -15,6 +15,9 @@ namespace Nearby
         //Open weather API
         public static String OpenWeatherAPIKey = "b806514997d45be8cf0f0000935b48e6";
 
+        //Store App IDs
+        public static String AppStoreID = "1191495162";
+
 
     }
 }

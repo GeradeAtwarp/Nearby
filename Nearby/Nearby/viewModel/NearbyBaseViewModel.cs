@@ -3,6 +3,8 @@ using Nearby.Helpers;
 using Nearby.Interfaces;
 using Nearby.Utils;
 using Nearby.Utils.Entities;
+using Plugin.DeviceInfo;
+using Plugin.DeviceInfo.Abstractions;
 using Plugin.Geolocator;
 using Plugin.Share;
 using Plugin.Share.Abstractions;
@@ -46,39 +48,12 @@ namespace Nearby.viewModel
             get { return Settings.Current; }
         }
         
-        public async Task<Plugin.Geolocator.Abstractions.Position> UpdateCurrentLocation()
-        {
-            Plugin.Geolocator.Abstractions.Position position = new Plugin.Geolocator.Abstractions.Position();
 
-            try
-            {
-                if (!Settings.Current.CustomLocationEnabled)
-                {
-                    //Get the users current location
-                    var locator = CrossGeolocator.Current;
-                    position = await locator.GetPositionAsync(10000);
-
-                }
-                else
-                {
-                    position = new Plugin.Geolocator.Abstractions.Position
-                    {
-                        Latitude = Convert.ToDouble(Settings.Current.CustomLatitude),
-                        Longitude = Convert.ToDouble(Settings.Current.CustomLongitude)
-                    };
-                }
-            }
-            catch { }
-
-            return position;
-        }
-
-
-
+        /// <summary>
+        /// Launch the browser
+        /// </summary>
         public ICommand launchBrowserCommand;
-        public ICommand LaunchBrowserCommand =>
-        launchBrowserCommand ?? (launchBrowserCommand = new Command<string>(async (t) => await ExecuteLaunchBrowserAsync(t)));
-
+        public ICommand LaunchBrowserCommand => launchBrowserCommand ?? (launchBrowserCommand = new Command<string>(async (t) => await ExecuteLaunchBrowserAsync(t)));
         async Task ExecuteLaunchBrowserAsync(string arg)
         {
             if (IsBusy)
@@ -108,11 +83,11 @@ namespace Nearby.viewModel
         }
 
 
-
+        /// <summary>
+        /// Open the phone app to make a call
+        /// </summary>
         public ICommand launchDialerCommand;
-        public ICommand LaunchDialerCommand =>
-        launchDialerCommand ?? (launchDialerCommand = new Command<string>(async (t) => await ExecuteLaunchDialerAsync(t)));
-
+        public ICommand LaunchDialerCommand => launchDialerCommand ?? (launchDialerCommand = new Command<string>(async (t) => await ExecuteLaunchDialerAsync(t)));
         async Task ExecuteLaunchDialerAsync(string arg)
         {
             try
@@ -133,6 +108,63 @@ namespace Nearby.viewModel
             { IsBusy = false; }
         }
 
+
+        /// <summary>
+        /// Open Twitter to my profile
+        /// </summary>
+        public ICommand OpenSocialProfile => new Command<string>(async (t) => await OpenSocialProfileCommand(t));
+        async Task OpenSocialProfileCommand(string arg)
+        {
+            try
+            {
+                //Open the app to share the message
+                var shareService = DependencyService.Get<ISharer>();
+                if (shareService != null)
+                {
+                    if (shareService.OpenUserName("Raidzen10"))
+                        return;
+                }
+
+                LaunchBrowserCommand.Execute(arg);
+            }
+            catch { }
+        }
+
+
+        /// <summary>
+        /// Open the share options
+        /// </summary>
+        ICommand shareCommand;
+        public ICommand ShareCommand => shareCommand ?? (shareCommand = new Command<string>(async (m) => await ExecuteShareCommandAsync(m)));
+        async Task ExecuteShareCommandAsync(string message)
+        {
+            await CrossShare.Current.Share(message, "Share");
+        }
+
+
+        /// <summary>
+        /// Open the devices respective store and direct to app revies
+        /// </summary>
+        public ICommand OpenReviewsCommand => new Command(async () => await OpenReviews());
+        public async Task OpenReviews()
+        {
+            var reviewUrl = string.Empty;
+
+            if (CrossDeviceInfo.Current.Platform == Platform.iOS)
+            {
+                reviewUrl = $"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id={GlobalKeys.AppStoreID}&onlyLatestVersion=true&pageNumber=0&sortOrdering=1&type=Purple+Software";
+            }
+
+            if (reviewUrl != string.Empty)
+                ExecuteLaunchBrowserAsync(reviewUrl);
+        }
+
+
+
+
+
+        #region Global Methods
+        
         public async Task ShowToast(string arg)
         {
             Toaster.SendToast(arg);
@@ -176,42 +208,43 @@ namespace Nearby.viewModel
             catch (Exception ex)
             { }
         }
-        
-        public ICommand OpenSocialProfile => new Command<string>(async (t) => await OpenSocialProfileCommand(t));
-        async Task OpenSocialProfileCommand(string arg)
+
+        public async Task<Plugin.Geolocator.Abstractions.Position> UpdateCurrentLocation()
         {
+            Plugin.Geolocator.Abstractions.Position position = new Plugin.Geolocator.Abstractions.Position();
+
             try
             {
-                //Open the app to share the message
-                var shareService = DependencyService.Get<ISharer>();
-                if (shareService != null)
+                if (!Settings.Current.CustomLocationEnabled)
                 {
-                    if (shareService.OpenUserName("Raidzen10"))
-                        return;
-                }
+                    //Get the users current location
+                    var locator = CrossGeolocator.Current;
+                    position = await locator.GetPositionAsync(10000);
 
-                LaunchBrowserCommand.Execute(arg);
+                }
+                else
+                {
+                    position = new Plugin.Geolocator.Abstractions.Position
+                    {
+                        Latitude = Convert.ToDouble(Settings.Current.CustomLatitude),
+                        Longitude = Convert.ToDouble(Settings.Current.CustomLongitude)
+                    };
+                }
             }
             catch { }
+
+            return position;
         }
 
-        ICommand shareCommand;
-        public ICommand ShareCommand => shareCommand ?? (shareCommand = new Command<string>(async (m) => await ExecuteShareCommandAsync(m)));
+        #endregion
 
-        async Task ExecuteShareCommandAsync(string message)
-        {
-            await CrossShare.Current.Share(message, "Share");
-        }
-
-
-
+        #region Internals
 
         public void RaisePropertyChanged<T>(Expression<Func<T>> property)
         {
             var name = GetMemberInfo(property).Name;
             OnPropertyChanged(name);
         }
-
         private MemberInfo GetMemberInfo(Expression expression)
         {
             MemberExpression operand;
@@ -227,5 +260,7 @@ namespace Nearby.viewModel
             }
             return operand.Member;
         }
+
+        #endregion
     }
 }

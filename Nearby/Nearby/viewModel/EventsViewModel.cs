@@ -147,7 +147,7 @@ namespace Nearby.viewModel
                         EventId = re.id,
                         Title = re.title,
                         CityName = re.city_name,
-                        Description = (re.description != "" ? re.description : "Description Not Available"),
+                        Description = (!string.IsNullOrEmpty(re.description) ? re.description : "Description Not Available"),
                         Latitude = re.latitude,
                         Longitude = re.longitude,
                         StartTime = re.start_time,

@@ -47,6 +47,9 @@ namespace Nearby.Pages
             {
                 lstTerms.SelectedItem = null;
             };
+
+            if (Device.OS == TargetPlatform.iOS)
+                NavigationPage.SetBackButtonTitle(this, "");
         }
 
         protected override void OnAppearing()
