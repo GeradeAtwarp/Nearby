@@ -3,6 +3,8 @@ using Nearby.Helpers;
 using Nearby.Interfaces;
 using Nearby.Utils;
 using Nearby.Utils.Entities;
+using Plugin.DeviceInfo;
+using Plugin.DeviceInfo.Abstractions;
 using Plugin.Geolocator;
 using Plugin.Share;
 using Plugin.Share.Abstractions;
@@ -148,7 +150,7 @@ namespace Nearby.viewModel
         {
             var reviewUrl = string.Empty;
 
-            if (Device.OS == TargetPlatform.iOS)
+            if (CrossDeviceInfo.Current.Platform == Platform.iOS)
             {
                 reviewUrl = $"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id={GlobalKeys.AppStoreID}&onlyLatestVersion=true&pageNumber=0&sortOrdering=1&type=Purple+Software";
             }

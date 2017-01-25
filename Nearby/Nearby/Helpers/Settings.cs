@@ -161,7 +161,50 @@ namespace Nearby.Helpers
 
         #endregion
 
+        #region Nearby calendare and reminder
 
+        const string HasSetReminderKey = "set_a_reminder";
+        static readonly bool HasSetReminderDefault = false;
+
+        public bool HasSetReminder
+        {
+            get { return AppSettings.GetValueOrDefault<bool>(HasSetReminderKey, HasSetReminderDefault); }
+            set
+            {
+                AppSettings.AddOrUpdateValue<bool>(HasSetReminderKey, value);
+            }
+        }
+
+        const string EvolveCalendarIdKey = "nearby_calendar";
+        static readonly string EvolveCalendarIdDefault = string.Empty;
+        public string EvolveCalendarId
+        {
+            get { return AppSettings.GetValueOrDefault<string>(EvolveCalendarIdKey, EvolveCalendarIdDefault); }
+            set { AppSettings.AddOrUpdateValue<string>(EvolveCalendarIdKey, value); }
+        }
+
+        public void SaveReminderId(string id, string calId)
+        {
+            AppSettings.AddOrUpdateValue<string>(GetReminderId(id), calId);
+        }
+
+        string GetReminderId(string id)
+        {
+            return "reminder_" + id;
+        }
+
+        public string GetEventId(string id)
+        {
+            return AppSettings.GetValueOrDefault(GetReminderId(id), string.Empty);
+        }
+
+        public void RemoveReminderId(string id)
+        {
+            AppSettings.Remove(GetReminderId(id));
+        }
+
+
+        #endregion
 
 
 

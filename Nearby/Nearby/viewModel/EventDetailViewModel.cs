@@ -1,4 +1,5 @@
 ﻿using Nearby.Models;
+using Nearby.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,15 @@ namespace Nearby.viewModel
         {
             get { return eventShareMessage; }
             set { SetProperty(ref eventShareMessage, value); }
+        }
+
+        public bool ShowReminder { get; set; }
+
+        bool isReminderSet;
+        public bool IsReminderSet
+        {
+            get { return isReminderSet; }
+            set { SetProperty(ref isReminderSet, value); }
         }
 
         public EventDetailViewModel(EventNearbyItem currentEvent)
@@ -73,15 +83,21 @@ namespace Nearby.viewModel
         {
             if (_eventDetails != null)
             {
-                new Plugin.Calendars.Abstractions.CalendarEvent
-                {
-                    Description = _eventDetails.Description,
-                    Location = _eventDetails.VenueName,
-                    AllDay = true,
-                    Name = _eventDetails.Title,
-                    Start = Convert.ToDateTime(_eventDetails.StartTime),
-                    End = Convert.ToDateTime(_eventDetails.StopTime)
-                };
+                var result = await ReminderService.AddReminderAsync(_eventDetails.EventId,
+                   new Plugin.Calendars.Abstractions.CalendarEvent
+                   {
+                       Description = _eventDetails.Description,
+                       Location = _eventDetails.VenueName,
+                       AllDay = true,
+                       Name = _eventDetails.Title,
+                       Start = Convert.ToDateTime(_eventDetails.StartTime),
+                       End = Convert.ToDateTime(_eventDetails.StopTime)
+                   });
+
+                if (!result)
+                    return;
+                
+                IsReminderSet = true;
             }
             else
                 return;
