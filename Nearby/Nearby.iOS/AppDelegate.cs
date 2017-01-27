@@ -10,6 +10,7 @@ using Nearby.Utils.Entities;
 using ImageCircle.Forms.Plugin.iOS;
 using Nearby.iOS.Renderers;
 using Google.MobileAds;
+using Firebase.Analytics;
 
 namespace Nearby.iOS
 {
@@ -51,6 +52,14 @@ namespace Nearby.iOS
             MobileAds.Configure("pub-1631454081193991");
             FFImageLoading.Forms.Touch.CachedImageRenderer.Init();
 
+            //Firebase analytics
+            Firebase.Analytics.App.Configure();
+
+            NSString[] keys = { new NSString("app_open") };
+            NSObject[] values = { new NSString("User opened app") };
+            var parameters = NSDictionary<NSString, NSObject>.FromObjectsAndKeys(keys, values, keys.Length);
+
+            Analytics.LogEvent("app_start", parameters);
 
             LoadApplication(new App());
 
