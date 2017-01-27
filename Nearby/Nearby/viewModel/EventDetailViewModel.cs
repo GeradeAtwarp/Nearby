@@ -70,9 +70,9 @@ namespace Nearby.viewModel
                 IsReminderSet = await ReminderService.HasReminderAsync(EventDetails.EventId);
 
                 if (!IsReminderSet)
-                    EventReminderText = "Remove Reminder";
-                else
                     EventReminderText = "Set Reminder";
+                else
+                    EventReminderText = "Remove Reminder";
             }
             catch (Exception ex)
             {
