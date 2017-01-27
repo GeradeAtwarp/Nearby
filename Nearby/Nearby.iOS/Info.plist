@@ -57,5 +57,7 @@
 	<false/>
 	<key>UIStatusBarStyle</key>
 	<string>UIStatusBarStyleLightContent</string>
+  <key>NSCalendarsUsageDescription</key>
+  <string>This app needs access to calendar.</string>
 </dict>
 </plist>
