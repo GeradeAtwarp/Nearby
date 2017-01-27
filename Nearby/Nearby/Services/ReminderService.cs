@@ -8,6 +8,7 @@ using FormsToolkit;
 using System.Diagnostics;
 using Nearby.Helpers;
 using Xamarin.Forms;
+using Nearby.Interfaces;
 
 namespace Nearby.Services
 {
@@ -35,7 +36,6 @@ namespace Nearby.Services
             {
                 Debug.WriteLine("Event has an Id, but doesn't exist, removing" + ex);
                 Settings.Current.RemoveReminderId(id);
-
             }
             return false;
         }
@@ -134,10 +134,10 @@ namespace Nearby.Services
                                     Negative = "Maybe Later",
                                     OnCompleted = (result) =>
                                     {
-                                        //if (result)
-                                        //{
-                                        //    DependencyService.Get<IPushNotifications>().OpenSettings();
-                                        //}
+                                        if (result)
+                                        {
+                                            DependencyService.Get<IPushNotifications>().OpenSettings();
+                                        }
                                     }
                                 });
                         }

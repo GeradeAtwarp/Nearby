@@ -93,6 +93,7 @@
     <Compile Include="DependencyServices\CalendarEnets.cs" />
     <Compile Include="DependencyServices\GetMyLocation.cs" />
     <Compile Include="DependencyServices\PhoneDialer.cs" />
+    <Compile Include="DependencyServices\PushNotifications.cs" />
     <Compile Include="DependencyServices\Sharing.cs" />
     <Compile Include="DependencyServices\Toaster.cs" />
     <Compile Include="Helpers\Settings.cs" />
