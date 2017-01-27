@@ -1,13 +1,13 @@
 ﻿using System;
 using UIKit;
 using System.Threading.Tasks;
-using XamarinEvolve.iOS;
 using Xamarin.Forms;
 using Foundation;
 using Nearby.Interfaces;
+using Nearby.iOS.DependencyServices;
 
 [assembly:Dependency(typeof(PushNotifications))]
-namespace XamarinEvolve.iOS
+namespace Nearby.iOS.DependencyServices
 {
     public class PushNotifications : IPushNotifications
     {

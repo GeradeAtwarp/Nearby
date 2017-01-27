@@ -36,7 +36,10 @@
                 
               </Grid>
 
-             <control:AdView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
+              <!-- Ad -->
+              <StackLayout  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="8,0">
+                <control:AdView />
+              </StackLayout>
 
               <Grid x:Name="ContentPanel">
                     <control:StackedList 
