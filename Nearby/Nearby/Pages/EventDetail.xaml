@@ -30,9 +30,9 @@
             <control:HeaderDivider></control:HeaderDivider>
             <Grid Padding="{StaticResource StandardPadding}" BackgroundColor="{DynamicResource WhiteColor}">
               <Grid.RowDefinitions>
-                <RowDefinition Height="44" />
-                <RowDefinition Height="44" />
-                <RowDefinition Height="44" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
               </Grid.RowDefinitions>
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
@@ -71,7 +71,7 @@
           <StackLayout Spacing="0">
             <control:LabelSection Text="Track Event"></control:LabelSection>
             <control:HeaderDivider></control:HeaderDivider>
-            <Grid Padding="{StaticResource StandardPadding}" BackgroundColor="{DynamicResource WhiteColor}">
+            <Grid BackgroundColor="{DynamicResource WhiteColor}">
               <StackLayout Margin="16,0" Spacing="0" Orientation="Horizontal" BackgroundColor="{DynamicResource WhiteColor}">
                 <Button Text="{Binding EventReminderText}"
                        FontAttributes="Bold"
