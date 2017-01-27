@@ -73,7 +73,7 @@
             <control:HeaderDivider></control:HeaderDivider>
             <Grid Padding="{StaticResource StandardPadding}" BackgroundColor="{DynamicResource WhiteColor}">
               <StackLayout Margin="16,0" Spacing="0" Orientation="Horizontal" BackgroundColor="{DynamicResource WhiteColor}">
-                <Button Text="Add Reminder"
+                <Button Text="{Binding EventReminderText}"
                        FontAttributes="Bold"
                        HorizontalOptions="FillAndExpand"
                        BackgroundColor="{StaticResource Primary}"
@@ -84,7 +84,7 @@
                   </Button.IsVisible>
                 </Button>
 
-                <Button Text="Add Reminder"
+                <Button Text="{Binding EventReminderText}"
                         FontAttributes="Bold"
                         HorizontalOptions="FillAndExpand"
                         TextColor="{DynamicResource Primary}"

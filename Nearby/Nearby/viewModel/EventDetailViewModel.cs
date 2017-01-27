@@ -37,6 +37,13 @@ namespace Nearby.viewModel
             set { SetProperty(ref isReminderSet, value); }
         }
 
+        string eventReminderText = "Set Reminder";
+        public string EventReminderText
+        {
+            get { return eventReminderText; }
+            set { SetProperty(ref eventReminderText, value); }
+        }
+
         public EventDetailViewModel(EventNearbyItem currentEvent)
         {
             EventDetails = currentEvent;
@@ -47,9 +54,36 @@ namespace Nearby.viewModel
                 "View In Browser"
             });
 
-            EventShareMessage = $"Join me @ {EventDetails.Title} in {EventDetails.CityName} on {DateTime.Parse(EventDetails.StartTime).ToString("ddd, MMM dd")}";
+            EventShareMessage = $"Join me for {EventDetails.Title} in {EventDetails.CityName} on {DateTime.Parse(EventDetails.StartTime).ToString("ddd, MMM dd")}";
+
+            HasReminderSetAsync();
         }
-        
+
+        public async Task HasReminderSetAsync()
+        {
+            if (IsBusy)
+                return;
+
+            try
+            {
+                IsBusy = true;
+                IsReminderSet = await ReminderService.HasReminderAsync(EventDetails.EventId);
+
+                if (!IsReminderSet)
+                    EventReminderText = "Remove Reminder";
+                else
+                    EventReminderText = "Set Reminder";
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+        }
+
         #region Commands
 
         public ICommand OpenInMapsCommand => new Command(OpenInMaps);
@@ -81,26 +115,37 @@ namespace Nearby.viewModel
         public ICommand SetReminder => new Command(SetReminderCommand);
         private async void SetReminderCommand(object e)
         {
-            if (_eventDetails != null)
+            if (!IsReminderSet)
             {
-                var result = await ReminderService.AddReminderAsync(_eventDetails.EventId,
-                   new Plugin.Calendars.Abstractions.CalendarEvent
-                   {
-                       Description = _eventDetails.Description,
-                       Location = _eventDetails.VenueName,
-                       AllDay = true,
-                       Name = _eventDetails.Title,
-                       Start = Convert.ToDateTime(_eventDetails.StartTime),
-                       End = Convert.ToDateTime(_eventDetails.StopTime)
-                   });
+                if (_eventDetails != null)
+                {
+                    var result = await ReminderService.AddReminderAsync(_eventDetails.EventId,
+                       new Plugin.Calendars.Abstractions.CalendarEvent
+                       {
+                           Description = _eventDetails.Description,
+                           Location = _eventDetails.VenueName,
+                           AllDay = true,
+                           Name = _eventDetails.Title,
+                           Start = Convert.ToDateTime(_eventDetails.StartTime),
+                           End = Convert.ToDateTime(_eventDetails.StopTime)
+                       });
 
-                if (!result)
+                    if (!result)
+                        return;
+
+                    HasReminderSetAsync();
+                }
+                else
                     return;
-                
-                IsReminderSet = true;
             }
             else
-                return;
+            {
+                var result = await ReminderService.RemoveReminderAsync(EventDetails.EventId);
+                if (!result)
+                    return;
+
+                HasReminderSetAsync();
+            }
         }
 
         #endregion
