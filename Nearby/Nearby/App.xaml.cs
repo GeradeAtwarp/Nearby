@@ -13,6 +13,8 @@ using Nearby.Utils;
 using Plugin.Connectivity;
 using Plugin.Connectivity.Abstractions;
 using Xamarin.Forms.Xaml;
+using Microsoft.Azure.Mobile.Analytics;
+using Microsoft.Azure.Mobile.Crashes;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 
@@ -47,6 +49,8 @@ namespace Nearby
                 MainPage.SetValue(NavigationPage.BarBackgroundColorProperty, Color.FromHex("#3F51B5"));
                 MainPage.SetValue(NavigationPage.BarTextColorProperty, Color.White);
             }
+
+            Microsoft.Azure.Mobile.MobileCenter.Start(typeof(Analytics), typeof(Crashes));
         }
 
         protected override void OnStart()

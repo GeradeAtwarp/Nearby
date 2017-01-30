@@ -1,4 +1,5 @@
-﻿using MvvmHelpers;
+﻿using Microsoft.Azure.Mobile.Analytics;
+using MvvmHelpers;
 using Nearby.Helpers;
 using Nearby.Interfaces;
 using Nearby.Utils;
@@ -105,6 +106,7 @@ namespace Nearby.viewModel
                 if (service != null)
                     service.LaunchCall(arg.Replace(" ", ""));
 
+                Analytics.TrackEvent("Phone_Dialer_Place_Details", new Dictionary<string, string> { { "Action", "User initiated call to place." }});
             }
             catch (Exception ex) { }
             finally
@@ -139,8 +141,9 @@ namespace Nearby.viewModel
         /// </summary>
         ICommand shareCommand;
         public ICommand ShareCommand => shareCommand ?? (shareCommand = new Command<string>(async (m) => await ExecuteShareCommandAsync(m)));
-        async Task ExecuteShareCommandAsync(string message)
+        public async Task ExecuteShareCommandAsync(string message)
         {
+            Analytics.TrackEvent("Open_Share", new Dictionary<string, string> { { "Action", "User opened share dialog." } });
             await CrossShare.Current.Share(message, "Share");
         }
 
@@ -161,6 +164,8 @@ namespace Nearby.viewModel
                 {
                     ExecuteLaunchBrowserAsync($"https://play.google.com/store/apps/details?id={GlobalKeys.PlayAppStoreID}");
                 }
+
+                Analytics.TrackEvent("Open_reviews", new Dictionary<string, string> { { "Action", "User opened app reviews." } });
             }
             catch(Exception ex)
             { }

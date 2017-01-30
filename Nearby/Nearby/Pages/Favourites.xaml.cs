@@ -1,4 +1,5 @@
-﻿using Nearby.Controls;
+﻿using Microsoft.Azure.Mobile.Analytics;
+using Nearby.Controls;
 using Nearby.Helpers;
 using Nearby.Models;
 using Nearby.viewModel;
@@ -32,6 +33,8 @@ namespace Nearby.Pages
 
                 lstFavorites.SelectedItem = null;
                 vm.GoToDetailsCommand.Execute(fi);
+
+                Analytics.TrackEvent("Fav_Details", new Dictionary<string, string> { { "Action", "User navigated to details of favourited place." } });
             };
         }
 

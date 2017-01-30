@@ -15,7 +15,7 @@
 
       <!-- Animations -->
       <animations:StoryBoard x:Key="EventDetailPanelInitialAnimation" Target="{x:Reference EventDetailContainer}">
-        <animations:TranslateToAnimation TranslateY="0" Delay="500" Easing="SpringOut" Duration="1500" />
+        <animations:TranslateToAnimation TranslateY="0" Delay="0" Easing="SpringOut" Duration="1500" />
       </animations:StoryBoard>
 
 

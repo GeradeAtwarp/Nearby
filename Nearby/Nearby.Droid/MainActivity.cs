@@ -10,6 +10,7 @@ using Nearby.Utils.Entities;
 using Plugin.Permissions;
 using Android.Gms.Ads;
 using Acr.UserDialogs;
+using Microsoft.Azure.Mobile;
 
 namespace Nearby.Droid
 {
@@ -31,6 +32,9 @@ namespace Nearby.Droid
             FFImageLoading.Forms.Droid.CachedImageRenderer.Init();
             MobileAds.Initialize(ApplicationContext, "pub-1631454081193991");
             UserDialogs.Init(this);
+
+            //Configure Mobile Center Analytics
+            MobileCenter.Configure("91aa7090-7188-49f2-9506-b0ba75400bd2");
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
             LoadApplication(new App());

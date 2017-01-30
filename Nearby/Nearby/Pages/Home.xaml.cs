@@ -1,5 +1,6 @@
 ﻿using FAB.Forms;
 using FormsToolkit;
+using Microsoft.Azure.Mobile.Analytics;
 using Nearby.Controls;
 using Nearby.DependencyServices;
 using Nearby.Helpers;
@@ -93,6 +94,8 @@ namespace Nearby.Pages
 
             btnRemoveFilter.Clicked += async (sender, e) =>
             {
+                Analytics.TrackEvent("Search_Filter_Removed", new Dictionary<string, string> { { "Action", "User removed search filter." } });
+
                 vm.DeactivateFilter().ContinueWith(task => Device.BeginInvokeOnMainThread(() =>
                 {
                     SearchForPlacesNearby();
@@ -393,6 +396,7 @@ namespace Nearby.Pages
                         break;
                 }
 
+                Analytics.TrackEvent("Search_Filter_Update", new Dictionary<string, string> { { "Action", "User updated filter to narrow search results to " + source.File } });
                 SearchForPlacesNearby();
             }
         }

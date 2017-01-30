@@ -11,6 +11,7 @@ using ImageCircle.Forms.Plugin.iOS;
 using Nearby.iOS.Renderers;
 using Google.MobileAds;
 using Firebase.Analytics;
+using Microsoft.Azure.Mobile;
 
 namespace Nearby.iOS
 {
@@ -55,9 +56,8 @@ namespace Nearby.iOS
             //Firebase analytics
             Firebase.Analytics.App.Configure();
 
-            NSString[] keys = { new NSString("app_open") };
-            NSObject[] values = { new NSString("User opened app") };
-            var parameters = NSDictionary<NSString, NSObject>.FromObjectsAndKeys(keys, values, keys.Length);
+            //Configure Mobile Center Analytics
+            MobileCenter.Configure("6174be7f-3e65-4e82-afd6-f28a4e7fa13b");
 
             LoadApplication(new App());
 

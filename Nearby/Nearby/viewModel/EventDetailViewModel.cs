@@ -1,4 +1,5 @@
-﻿using Nearby.Models;
+﻿using Microsoft.Azure.Mobile.Analytics;
+using Nearby.Models;
 using Nearby.Services;
 using System;
 using System.Collections.Generic;
@@ -95,6 +96,8 @@ namespace Nearby.viewModel
                     Device.OpenUri(new Uri("http://maps.google.com/?daddr=" + _eventDetails.Latitude + "," + _eventDetails.Longitude));
                 else
                     Device.OpenUri(new Uri("http://maps.apple.com/?daddr=" + _eventDetails.Latitude.Replace(",", ".") + "," + _eventDetails.Latitude.Replace(",", ".")));
+
+                Analytics.TrackEvent("View_Event_Map", new Dictionary<string, string> { { "Action", "User viewed event venue on the maps app." } });
             }
             catch (Exception ex)
             {
@@ -133,6 +136,8 @@ namespace Nearby.viewModel
                     if (!result)
                         return;
 
+                    Analytics.TrackEvent("Track_Event", new Dictionary<string, string> { { "Action", "User added reminder for event." } });
+
                     HasReminderSetAsync();
                 }
                 else
@@ -144,6 +149,7 @@ namespace Nearby.viewModel
                 if (!result)
                     return;
 
+                Analytics.TrackEvent("UnTrack_Event", new Dictionary<string, string> { { "Action", "User removed reminder for event." } });
                 HasReminderSetAsync();
             }
         }

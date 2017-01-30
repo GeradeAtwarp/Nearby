@@ -1,4 +1,5 @@
 ﻿using FormsToolkit;
+using Microsoft.Azure.Mobile.Analytics;
 using MvvmHelpers;
 using Nearby.Helpers;
 using Nearby.Interfaces;
@@ -103,9 +104,7 @@ namespace Nearby.viewModel
         public PlaceDetailViewModel(Places place)
         {
             Place = place;
-
             Title = place.name;
-            
             GetDetails();
         }
 
@@ -289,7 +288,9 @@ namespace Nearby.viewModel
                         Latitude = 0,
                         Longitude = 0,
                         Vicinity = Place.vicinity
-                    };                
+                    };
+
+                    Analytics.TrackEvent("Add_Fav", new Dictionary<string, string> { { "Action", "User added new Favourite place." } });
                 }
             }
             catch (Exception ex)
@@ -309,6 +310,8 @@ namespace Nearby.viewModel
                     Device.OpenUri(new Uri("http://maps.google.com/?daddr=" + Place.geometry.location.lat + "," + Place.geometry.location.lng));
                 else
                     Device.OpenUri(new Uri("http://maps.apple.com/?daddr=" + Place.geometry.location.lat.ToString().Replace(",", ".") + "," + Place.geometry.location.lng.ToString().Replace(",", ".")));
+
+                Analytics.TrackEvent("View_Place_Map", new Dictionary<string, string> { { "Action", "User viewed place on the maps app." } });
             }
             catch (Exception ex)
             {
@@ -343,15 +346,20 @@ namespace Nearby.viewModel
             sharePlace ?? (sharePlace = new Command(async () => await SharePlaceCommand()));
         async Task SharePlaceCommand()
         {
-            var task = Application.Current?.MainPage?.DisplayActionSheet("Share", "Cancel", null, shareOptions);
-            if (task == null)
-                return;
+            try
+            {
+                var task = Application.Current?.MainPage?.DisplayActionSheet("Share", "Cancel", null, shareOptions);
+                if (task == null)
+                    return;
 
-            var provider = await task;
+                var provider = await task;
 
-            string textToShare = "Guess what i am doing at " + Place.name + "? Come join me.";
+                string textToShare = "Guess what i am doing at " + Place.name + "? Come join me.";
 
-            ShareToProvider(provider, textToShare);
+                ExecuteShareCommandAsync(textToShare);
+            }
+            catch
+            { }
         }
 
 

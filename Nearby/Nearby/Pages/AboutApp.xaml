@@ -10,12 +10,11 @@
   <control:AlwaysScrollView>
     <StackLayout Spacing="0">
       
-      <StackLayout Spacing="{DynamicResource CardSpacing}" Padding="{DynamicResource CardPadding}">
+      <StackLayout Spacing="{DynamicResource CardSpacing}">
         
          <control:CardView>
-          <StackLayout>
-            <control:HeaderDivider/>
-            <StackLayout Padding="32,16,32,0" BackgroundColor="{DynamicResource WindowBackgroundTable}">
+          <StackLayout BackgroundColor="{DynamicResource WindowBackgroundTable}">
+            <StackLayout Padding="32,16,32,0">
                 <Image
                     Grid.Column="1"
                     Grid.Row="1"
@@ -27,17 +26,17 @@
                 </Image>
             </StackLayout>
 
-            <StackLayout Margin="0,12,0,0" BackgroundColor="White">
+            <StackLayout Margin="0,16,0,0" BackgroundColor="White" Padding="{DynamicResource StandardPadding}">
 
               <StackLayout Spacing="0">
-                <Label Text="Nearby - Places to visit" Style="{DynamicResource NearbyListItemTextStyle}"/>
+                <Label Text="Nearby - Places to visit"  Style="{DynamicResource TitleStyle}"/>
               </StackLayout>
               <StackLayout Padding="0,16">
                 <Label Text="Nearby is an Application that allows Users to search and identify points of interest according to their geographical position." Style="{DynamicResource NearbyListItemDetailTextStyle}"/>
               </StackLayout>
 
               <StackLayout Spacing="0,16">
-                <Label Text="Nearby - Events to attend" Style="{DynamicResource EvolveListItemTextStyle}"/>
+                <Label Text="Nearby - Events to attend"  Style="{DynamicResource TitleStyle}"/>
               </StackLayout>
               <StackLayout Padding="0,16">
                 <Label Text="Nearby also provides you with a list of local events and entertainment. Concerts, confrences, stand up performances. Simply supply your location, and we will do the rest." Style="{DynamicResource NearbyListItemDetailTextStyle}"/>
