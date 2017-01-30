@@ -59,8 +59,6 @@ namespace Nearby.iOS
             NSObject[] values = { new NSString("User opened app") };
             var parameters = NSDictionary<NSString, NSObject>.FromObjectsAndKeys(keys, values, keys.Length);
 
-            Analytics.LogEvent("app_start", parameters);
-
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);

@@ -152,7 +152,7 @@ namespace Nearby.viewModel
 
             if (CrossDeviceInfo.Current.Platform == Platform.iOS)
             {
-                reviewUrl = $"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id={GlobalKeys.AppStoreID}&onlyLatestVersion=true&pageNumber=0&sortOrdering=1&type=Purple+Software";
+                reviewUrl = new UriBuilder($"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id={GlobalKeys.AppStoreID}&onlyLatestVersion=true&pageNumber=0&sortOrdering=1&type=Purple+Software").ToString();
             }
 
             if (reviewUrl != string.Empty)

@@ -113,7 +113,9 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Default%402x.png" />
+    <BundleResource Include="Resources\Default-568h%402x.png" />
     <BundleResource Include="Resources\Default.png" />
+    <BundleResource Include="Resources\Icon%402x.png" />
     <BundleResource Include="Resources\Icon-60%402x.png" />
     <BundleResource Include="Resources\Icon-60%403x.png" />
     <BundleResource Include="Resources\Icon-76%402x.png" />
@@ -363,6 +365,7 @@
   <ItemGroup>
     <BundleResource Include="Resources\Icon-Small-40.png" />
     <BundleResource Include="Resources\Icon-Small.png" />
+    <BundleResource Include="Resources\Icon.png" />
     <BundleResource Include="Resources\ic_more_vert_white%402x.png" />
   </ItemGroup>
   <ItemGroup>
@@ -583,12 +586,6 @@
     <BundleResource Include="Resources\pizza_white%403x.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Icon%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
     <BundleResource Include="Resources\nearby_logo.png" />
   </ItemGroup>
   <ItemGroup>
@@ -601,15 +598,11 @@
     <XamarinComponentReference Include="firebaseiosanalytics">
       <Visible>False</Visible>
       <Version>3.6.0.1</Version>
-      <InstallationInProgress>True</InstallationInProgress>
     </XamarinComponentReference>
     <XamarinComponentReference Include="ToastIOS">
       <Visible>False</Visible>
       <Version>1.6</Version>
     </XamarinComponentReference>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Default-568h%402x.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\calendar_menu.png" />
