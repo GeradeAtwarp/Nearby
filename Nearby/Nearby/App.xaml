@@ -129,7 +129,8 @@
       <converters:DateToTimeConverter x:Key="DateToTimeConverter" />
       <converters:EventImageSelector x:Key="EventImageSelector" />
       <converters:ToTitleCaseConverter x:Key="ToTitleCaseConverter" />
-
+      
+      
     </ResourceDictionary>
   </Application.Resources>
 </Application>

@@ -17,7 +17,6 @@ namespace Nearby
 
         //Store App IDs
         public static String AppStoreID = "1191495162";
-
-
+        public static String PlayAppStoreID = "com.whatsapp";
     }
 }

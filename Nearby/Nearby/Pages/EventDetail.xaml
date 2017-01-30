@@ -5,9 +5,28 @@
              xmlns:local="clr-namespace:Nearby.Pages"
              xmlns:control="clr-namespace:Nearby.Controls"
              xmlns:helpers="clr-namespace:Nearby.Helpers"
+             xmlns:triggers="clr-namespace:Nearby.Triggers"
+             xmlns:animations="clr-namespace:Nearby.Animations"
              Title="{Binding EventDetails.Title}"
              BackgroundColor="{DynamicResource WindowBackgroundTable}">
 
+  <ContentPage.Resources>
+    <ResourceDictionary>
+
+      <!-- Animations -->
+      <animations:StoryBoard x:Key="EventDetailPanelInitialAnimation" Target="{x:Reference EventDetailContainer}">
+        <animations:TranslateToAnimation TranslateY="0" Delay="500" Easing="SpringOut" Duration="1500" />
+      </animations:StoryBoard>
+
+
+    </ResourceDictionary>
+  </ContentPage.Resources>
+  <ContentPage.Triggers>
+    <EventTrigger Event="Appearing">
+      <triggers:BeginAnimation Animation="{StaticResource EventDetailPanelInitialAnimation}" />
+    </EventTrigger>
+  </ContentPage.Triggers>
+  
   <ContentPage.ToolbarItems>
     <ToolbarItem Icon="toolbar_share.png" Text="Share" Command="{Binding ShareCommand}" CommandParameter="{Binding EventShareMessage}"/>
   </ContentPage.ToolbarItems>
@@ -21,7 +40,7 @@
         <Label Text="{Binding EventDetails.CityName}" Style="{StaticResource HeaderLabelStyle}"></Label>
       </StackLayout>
 
-      <StackLayout BackgroundColor="{DynamicResource BackgroundGrayColor}" Spacing="{DynamicResource CardSpacing}" Padding="{DynamicResource CardPadding}">
+      <StackLayout x:Name="EventDetailContainer" TranslationY="1000" BackgroundColor="{DynamicResource BackgroundGrayColor}" Spacing="{DynamicResource CardSpacing}" Padding="{DynamicResource CardPadding}">
 
         <!-- Event Deatils -->
         <control:CardView >
@@ -52,7 +71,7 @@
         </control:CardView>
 
         <!-- Ad -->
-        <control:AdView  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+        <control:AdView  HorizontalOptions="FillAndExpand" />
         
         <!-- Event Description -->
         <control:CardView >

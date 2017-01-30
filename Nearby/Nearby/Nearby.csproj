@@ -35,6 +35,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Animatioons\Base\AnimationBase.cs" />
+    <Compile Include="Animatioons\EasingType.cs" />
+    <Compile Include="Animatioons\FadeToAnimation.cs" />
+    <Compile Include="Animatioons\RotateToAnimation.cs" />
+    <Compile Include="Animatioons\ScaleToAnimation.cs" />
+    <Compile Include="Animatioons\StoryBoard.cs" />
+    <Compile Include="Animatioons\TranslateAnimation.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
@@ -72,6 +79,7 @@
     <Compile Include="Helpers\Converters\RatingStarCalculator.cs" />
     <Compile Include="Helpers\Converters\ToDateConverter.cs" />
     <Compile Include="Helpers\Converters\ToTitleCaseConverter.cs" />
+    <Compile Include="Helpers\EasingHelper.cs" />
     <Compile Include="Helpers\NavigationService.cs" />
     <Compile Include="Helpers\OnCustomPlatform.cs" />
     <Compile Include="Helpers\Settings.cs" />
@@ -124,6 +132,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Renderers\NearbyButton.cs" />
     <Compile Include="Services\ReminderService.cs" />
+    <Compile Include="Triggers\BeginAnimation.cs" />
     <Compile Include="Utils\Entities\BaseEntity.cs" />
     <Compile Include="Utils\Entities\Database.cs" />
     <Compile Include="Utils\Entities\FavoritePlaces.cs" />

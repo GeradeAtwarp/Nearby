@@ -8,7 +8,6 @@
              BackgroundColor="White"
              Title="Events Nearby">
 
-
   <Grid>
         <ScrollView x:Name="mainScrollView">
             <StackLayout Orientation="Vertical">
@@ -37,7 +36,7 @@
               </Grid>
 
               <!-- Ad -->
-              <control:AdView  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+              <control:AdView  HorizontalOptions="FillAndExpand"/>
 
               <Grid x:Name="ContentPanel">
                     <control:StackedList 

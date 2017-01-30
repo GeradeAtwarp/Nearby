@@ -28,8 +28,10 @@ namespace Nearby.viewModel
         protected Database NearbyDataContext { get; }
         protected TextInfo CultureTextInfo { get; }
         protected static IToast Toaster { get; set; }
+        protected static IAppLauncher AppLauncher { get; set; }
 
-        public NearbyBaseViewModel()
+
+    public NearbyBaseViewModel()
         {
             NearbyDataContext = new Database();
 
@@ -41,6 +43,7 @@ namespace Nearby.viewModel
         {
             Navigation = navigation;
             Toaster = DependencyService.Get<IToast>();
+            AppLauncher = DependencyService.Get<IAppLauncher>();
         }
 
         public Settings Settings
@@ -148,15 +151,19 @@ namespace Nearby.viewModel
         public ICommand OpenReviewsCommand => new Command(async () => await OpenReviews());
         public async Task OpenReviews()
         {
-            var reviewUrl = string.Empty;
-
-            if (CrossDeviceInfo.Current.Platform == Platform.iOS)
+            try
             {
-                reviewUrl = new UriBuilder($"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id={GlobalKeys.AppStoreID}&onlyLatestVersion=true&pageNumber=0&sortOrdering=1&type=Purple+Software").ToString();
+                if (CrossDeviceInfo.Current.Platform == Platform.iOS)
+                {
+                    AppLauncher.OpenReviewsAppStore($"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id={GlobalKeys.AppStoreID}&onlyLatestVersion=true&pageNumber=0&sortOrdering=1&type=Purple+Software");
+                }
+                else
+                {
+                    ExecuteLaunchBrowserAsync($"https://play.google.com/store/apps/details?id={GlobalKeys.PlayAppStoreID}");
+                }
             }
-
-            if (reviewUrl != string.Empty)
-                ExecuteLaunchBrowserAsync(reviewUrl);
+            catch(Exception ex)
+            { }
         }
 
 

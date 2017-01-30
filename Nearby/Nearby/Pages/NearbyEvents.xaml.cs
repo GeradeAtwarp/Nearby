@@ -19,6 +19,9 @@ namespace Nearby.Pages
             InitializeComponent();
 
             BindingContext = vm = new EventsViewModel();
+
+            if (Device.OS == TargetPlatform.iOS)
+                NavigationPage.SetBackButtonTitle(this, "");
         }
 
         protected override void OnAppearing()
