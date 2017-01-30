@@ -619,10 +619,6 @@
     <BundleResource Include="Resources\nearby_logo%402x.png" />
   </ItemGroup>
   <ItemGroup>
-    <XamarinComponentReference Include="firebaseiosanalytics">
-      <Visible>False</Visible>
-      <Version>3.6.0.1</Version>
-    </XamarinComponentReference>
     <XamarinComponentReference Include="ToastIOS">
       <Visible>False</Visible>
       <Version>1.6</Version>

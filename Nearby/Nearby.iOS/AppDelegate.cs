@@ -10,7 +10,6 @@ using Nearby.Utils.Entities;
 using ImageCircle.Forms.Plugin.iOS;
 using Nearby.iOS.Renderers;
 using Google.MobileAds;
-using Firebase.Analytics;
 using Microsoft.Azure.Mobile;
 
 namespace Nearby.iOS
@@ -52,9 +51,6 @@ namespace Nearby.iOS
 
             MobileAds.Configure("pub-1631454081193991");
             FFImageLoading.Forms.Touch.CachedImageRenderer.Init();
-
-            //Firebase analytics
-            Firebase.Analytics.App.Configure();
 
             //Configure Mobile Center Analytics
             MobileCenter.Configure("6174be7f-3e65-4e82-afd6-f28a4e7fa13b");
