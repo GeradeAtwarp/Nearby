@@ -20,11 +20,6 @@ using Microsoft.Azure.Mobile.Crashes;
 
 namespace Nearby
 {
-    #if RELEASE
-        [Android.App.Application(Debuggable=false)]
-    #else
-        [Android.App.Application(Debuggable = true)]
-    #endif
     public partial class App : Application
     {
         public static App current;
