@@ -15,5 +15,7 @@ namespace Nearby.Interfaces
         bool OpenTwitterProfile(string username);
 
         bool OpenReviewsAppStore(string appURL);
+
+        void OpenSettings();
     }
 }

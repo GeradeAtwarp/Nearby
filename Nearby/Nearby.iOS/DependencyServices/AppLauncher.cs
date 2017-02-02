@@ -87,5 +87,10 @@ namespace Nearby.iOS.DependencyServices
 
             return false;
         }
+
+        public void OpenSettings()
+        {
+            UIApplication.SharedApplication.OpenUrl(new NSUrl(UIApplication.OpenSettingsUrlString));
+        }
     }
 }

@@ -95,7 +95,7 @@ namespace Nearby.viewModel
                 if (Device.OS == TargetPlatform.Android)
                     Device.OpenUri(new Uri("http://maps.google.com/?daddr=" + _eventDetails.Latitude + "," + _eventDetails.Longitude));
                 else
-                    Device.OpenUri(new Uri("http://maps.apple.com/?daddr=" + _eventDetails.Latitude.Replace(",", ".") + "," + _eventDetails.Latitude.Replace(",", ".")));
+                    Device.OpenUri(new Uri("http://maps.apple.com/?daddr=" + _eventDetails.Latitude.Replace(",", ".") + "," + _eventDetails.Longitude.Replace(",", ".")));
 
                 Analytics.TrackEvent("View_Event_Map", new Dictionary<string, string> { { "Action", "User viewed event venue on the maps app." } });
             }

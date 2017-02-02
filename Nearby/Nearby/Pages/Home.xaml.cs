@@ -102,8 +102,7 @@ namespace Nearby.Pages
                 }));
             };
             
-            AddSearchButtons();            
-            MoveToCurrentLocation();
+            AddSearchButtons(); 
         }
 
         protected override void OnAppearing()

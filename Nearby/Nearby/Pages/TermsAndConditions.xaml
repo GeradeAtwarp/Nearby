@@ -8,8 +8,7 @@
   <control:AlwaysScrollView>
     <StackLayout Spacing="0">
       <StackLayout BackgroundColor="{DynamicResource WindowBackgroundTable}"
-                           Spacing="{DynamicResource CardSpacing}"
-                           Padding="{DynamicResource CardPadding}">
+                           Spacing="{DynamicResource CardSpacing}">
         <control:CardView>
           <StackLayout Padding="0" Spacing="0" BackgroundColor="White">
             <control:HeaderDivider/>
@@ -129,7 +128,5 @@
       </StackLayout>
     </StackLayout>
   </control:AlwaysScrollView>
-
-
 
 </ContentPage>

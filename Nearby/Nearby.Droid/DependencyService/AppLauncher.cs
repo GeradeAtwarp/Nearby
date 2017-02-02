@@ -64,5 +64,10 @@ namespace Nearby.Droid.DependencyService
         {
             return true;
         }
+
+        public void OpenSettings()
+        {
+           
+        }
     }
 }

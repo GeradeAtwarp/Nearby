@@ -134,10 +134,10 @@ namespace Nearby.Services
                                     Negative = "Maybe Later",
                                     OnCompleted = (result) =>
                                     {
-                                        //if (result)
-                                        //{
-                                        //    DependencyService.Get<IPushNotifications>().OpenSettings();
-                                        //}
+                                        if (result)
+                                        {
+                                            DependencyService.Get<IAppLauncher>().OpenSettings();
+                                        }
                                     }
                                 });
                         }
