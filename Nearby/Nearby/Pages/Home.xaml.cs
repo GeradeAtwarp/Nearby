@@ -195,6 +195,8 @@ namespace Nearby.Pages
             {
                 placesMap.Pins.Clear();
 
+                MoveToCurrentLocation();
+
                 foreach (var pn in vm.PlacesNearby)
                 {
                     var newposition = new Xamarin.Forms.Maps.Position(pn.geometry.location.lat, pn.geometry.location.lng);
@@ -221,8 +223,6 @@ namespace Nearby.Pages
 
                     placesMap.Pins.Add(pin);
                 }
-
-                MoveToCurrentLocation();
             }
             catch (Exception ex)
             {

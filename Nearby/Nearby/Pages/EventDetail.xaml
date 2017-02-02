@@ -79,11 +79,26 @@
             <control:LabelSection Text="Description"></control:LabelSection>
             <control:HeaderDivider></control:HeaderDivider>
             <StackLayout Padding="{StaticResource StandardPadding}" BackgroundColor="{DynamicResource WhiteColor}">
-              <Label Text="{Binding EventDetails.Description}" Style="{DynamicResource NearbyListItemTextStyle}" />
+              <Label Text="{Binding EventDetails.Description}" Style="{DynamicResource NearbyListItemTextStyle}" HorizontalTextAlignment="Center" />
             </StackLayout>
           </StackLayout>
         </control:CardView>
 
+        <control:CardView>
+          <StackLayout Spacing="0">
+            <control:LabelSection Text="Weather Forecast"></control:LabelSection>
+            <control:HeaderDivider></control:HeaderDivider>
+            <StackLayout Padding="{StaticResource StandardPadding}" BackgroundColor="{DynamicResource WhiteColor}" IsVisible="{Binding IsNotBusy}">
+              <Label Text="{Binding WeatherForecastText, Converter={StaticResource ForecastEmojiAppender}}" Style="{DynamicResource EventForecastTextStyle}"  HorizontalTextAlignment="Center"/>
+            </StackLayout>
+            
+            <StackLayout IsVisible="{Binding IsBusy}" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="White" Padding="{StaticResource StandardPadding}">
+              <ActivityIndicator IsRunning="{Binding IsBusy}">
+              </ActivityIndicator>
+              <Label Text="Loading Weather Forecast..." HorizontalOptions="Center" Style="{DynamicResource NearbyListItemTextStyle}"/>
+            </StackLayout>
+          </StackLayout>
+        </control:CardView>
 
         <!-- Reminder -->
         <control:CardView >

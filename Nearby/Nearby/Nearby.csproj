@@ -73,7 +73,9 @@
     <Compile Include="Helpers\Constants.cs" />
     <Compile Include="Helpers\Converters\DateToTimeConverter.cs" />
     <Compile Include="Helpers\Converters\DistanceConverter.cs" />
+    <Compile Include="Helpers\Converters\ForecastEmojiAppender.cs" />
     <Compile Include="Helpers\Converters\EventImageSelector.cs" />
+    <Compile Include="Helpers\Converters\HtmlToPlainTextConverter.cs" />
     <Compile Include="Helpers\Converters\OpenCloseColorConverter.cs" />
     <Compile Include="Helpers\Converters\OpenCloseTextConverter.cs" />
     <Compile Include="Helpers\Converters\RatingStarCalculator.cs" />
@@ -99,6 +101,7 @@
     <Compile Include="Models\EventNearbyItem.cs" />
     <Compile Include="Models\FavPlaceItem.cs" />
     <Compile Include="Models\WatherResult.cs" />
+    <Compile Include="Models\WeatherForecastItem.cs" />
     <Compile Include="Pages\AboutApp.xaml.cs">
       <DependentUpon>AboutApp.xaml</DependentUpon>
     </Compile>

@@ -1,9 +1,12 @@
 ﻿using Microsoft.Azure.Mobile.Analytics;
 using Nearby.Models;
 using Nearby.Services;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -45,6 +48,23 @@ namespace Nearby.viewModel
             set { SetProperty(ref eventReminderText, value); }
         }
 
+        bool showForecast = false;
+        public bool ShowForecast
+        {
+            get { return showForecast; }
+            set { SetProperty(ref showForecast, value); }
+        }
+
+        string weatherForecastText = "Forecast Not Avalable";
+        public string WeatherForecastText
+        {
+            get { return weatherForecastText; }
+            set { SetProperty(ref weatherForecastText, value); }
+        }
+
+
+        Plugin.Geolocator.Abstractions.Position position;
+
         public EventDetailViewModel(EventNearbyItem currentEvent)
         {
             EventDetails = currentEvent;
@@ -56,6 +76,8 @@ namespace Nearby.viewModel
             });
 
             EventShareMessage = $"Join me for {EventDetails.Title} in {EventDetails.CityName} on {DateTime.Parse(EventDetails.StartTime).ToString("ddd, MMM dd")}";
+
+            SetWeatherForecast();
 
             HasReminderSetAsync();
         }
@@ -83,6 +105,42 @@ namespace Nearby.viewModel
             {
                 IsBusy = false;
             }
+        }
+
+        public async Task SetWeatherForecast()
+        {
+            try
+            {
+                if (IsBusy)
+                    return;
+
+                IsBusy = true;
+
+                //Only display forcast if event occurs within the next week
+                if (DateTime.Parse(_eventDetails.StartTime) < DateTime.Now.AddDays(7))
+                {
+                    //Get the users current location
+                    position = await UpdateCurrentLocation();
+
+                    var httpClient = new HttpClient();
+                    var forecastResponse = "";
+
+                    forecastResponse = await httpClient.GetStringAsync(new UriBuilder("https://api.darksky.net/forecast/" + GlobalKeys.DarkSkyKey + "/" + position.Latitude.ToString().Replace(',', '.') + "," + position.Longitude.ToString().Replace(',', '.') + "?units=auto&exclude=" + GlobalKeys.DarkSkyExclusions).Uri.ToString());
+
+                    var forecast = JsonConvert.DeserializeObject<WeatherForecastItem>(forecastResponse);
+
+                    var dayForcast = forecast.daily.data.Where(x => x.time.Date == DateTime.Parse(_eventDetails.StartTime).Date).FirstOrDefault();
+
+                    if (dayForcast != null)
+                    {
+                        ShowForecast = true;
+                        WeatherForecastText = $"{dayForcast.summary}";
+                    }
+                }
+            }
+            catch (Exception ex) { ShowForecast = false; }
+            finally { IsBusy = false; }
+
         }
 
         #region Commands
