@@ -96,15 +96,15 @@ namespace Nearby.Pages
             }
                        
 
-            btnRemoveFilter.Clicked += async (sender, e) =>
-            {
-                Analytics.TrackEvent("Search_Filter_Removed", new Dictionary<string, string> { { "Action", "User removed search filter." } });
+            //nRemoveFilter.Clicked += async (sender, e) =>
+            //{
+            //    Analytics.TrackEvent("Search_Filter_Removed", new Dictionary<string, string> { { "Action", "User removed search filter." } });
 
-                vm.DeactivateFilter().ContinueWith(task => Device.BeginInvokeOnMainThread(() =>
-                {
-                    SearchForPlacesNearby();
-                }));
-            };
+            //    vm.DeactivateFilter().ContinueWith(task => Device.BeginInvokeOnMainThread(() =>
+            //    {
+            //        SearchForPlacesNearby();
+            //    }));
+            //};
             
             AddSearchButtons(); 
         }
@@ -255,18 +255,20 @@ namespace Nearby.Pages
 
         async Task ToggleRefineOptions()
         {
-            if (RefineSearchMenu.Scale == 0)
-            {
-                //fabrefine.ColorNormal = Color.FromHex("#3F51B5");
-                RefineSearchMenu.IsVisible = true;
-                await RefineSearchMenu.ScaleTo(1, 250, Easing.SinIn);
-            }
-            else
-            {
-                //fabrefine.ColorNormal = Color.FromHex("#7885cb");
-                await RefineSearchMenu.ScaleTo(0, 250, Easing.SinOut);
-                RefineSearchMenu.IsVisible = false;
-            }
+            //if (RefineSearchMenu.Scale == 0)
+            //{
+            //    //fabrefine.ColorNormal = Color.FromHex("#3F51B5");
+            //    RefineSearchMenu.IsVisible = true;
+            //    await RefineSearchMenu.ScaleTo(1, 250, Easing.SinIn);
+            //}
+            //else
+            //{
+            //    //fabrefine.ColorNormal = Color.FromHex("#7885cb");
+            //    await RefineSearchMenu.ScaleTo(0, 250, Easing.SinOut);
+            //    RefineSearchMenu.IsVisible = false;
+            //}
+
+            await Navigation.PushAsync(new SearchFilters());
         }
 
         async Task GetMyCurrentLocation()

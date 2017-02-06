@@ -45,6 +45,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Cells\CategoryCellView.xaml.cs">
+      <DependentUpon>CategoryCellView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Cells\SwitchCellCust1.cs" />
     <Compile Include="Cells\TextViewValue1.cs" />
     <Compile Include="Controls\AdView.cs" />
@@ -100,6 +103,7 @@
     <Compile Include="Models\DynamoDB\Nearby_Favorites.cs" />
     <Compile Include="Models\EventNearbyItem.cs" />
     <Compile Include="Models\FavPlaceItem.cs" />
+    <Compile Include="Models\SearchFilter.cs" />
     <Compile Include="Models\WatherResult.cs" />
     <Compile Include="Models\WeatherForecastItem.cs" />
     <Compile Include="Pages\AboutApp.xaml.cs">
@@ -129,11 +133,15 @@
     <Compile Include="Pages\SearchCustomPlaces.xaml.cs">
       <DependentUpon>SearchCustomPlaces.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\SearchFilters.xaml.cs">
+      <DependentUpon>SearchFilters.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\TermsAndConditions.xaml.cs">
       <DependentUpon>TermsAndConditions.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Renderers\NearbyButton.cs" />
+    <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Services\ReminderService.cs" />
     <Compile Include="Triggers\BeginAnimation.cs" />
     <Compile Include="Utils\Entities\BaseEntity.cs" />
@@ -153,6 +161,7 @@
     <Compile Include="viewModel\NearbyBaseViewModel.cs" />
     <Compile Include="viewModel\PlaceDetailViewModel.cs" />
     <Compile Include="viewModel\SearchCustomPlaceViewModel.cs" />
+    <Compile Include="viewModel\SearchFiltersViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Controls\LabelSection.xaml">
@@ -418,7 +427,12 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\SearchFilters.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Pages\NearbyEvents.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
@@ -427,6 +441,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Pages\EventDetail.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Cells\CategoryCellView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

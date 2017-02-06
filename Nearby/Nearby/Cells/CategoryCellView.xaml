@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="Nearby.Cells.CategoryCellView">
+  <ContentView.Content>
+    <Grid Padding="16,6,16,6" ColumnSpacing="16">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto"/>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="Auto"/>
+      </Grid.ColumnDefinitions>
+      <Label Grid.Column="1"
+             x:Name="LabelName"
+             Text="{Binding Name}"
+             VerticalTextAlignment="Center"
+             HorizontalOptions="StartAndExpand"
+             Style="{DynamicResource EvolveListItemTextStyle}"
+                   />
+      <Switch Grid.Column="2"
+              VerticalOptions="Center"
+              IsToggled="{Binding IsFiltered}"/>
+    </Grid>
+  </ContentView.Content>
+</ContentView>
