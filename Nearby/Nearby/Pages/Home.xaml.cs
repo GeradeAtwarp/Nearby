@@ -32,6 +32,10 @@ namespace Nearby.Pages
         public double longitude;
         public double latitude;
 
+        public List<double> latitudes = new List<double>();
+        public List<double> longitudes = new List<double>();
+        
+
         public Home()
         {
             InitializeComponent();
@@ -134,6 +138,8 @@ namespace Nearby.Pages
                 {
                     Plugin.Geolocator.Abstractions.Position position;
 
+
+
                     if (!Settings.Current.CustomLocationEnabled)
                     {
                         //Get the users current location
@@ -146,9 +152,11 @@ namespace Nearby.Pages
                             Label = "This is you!",
                             Position = new Position(position.Latitude, position.Longitude)
                         };
-                        
+
+                        latitudes.Add(position.Latitude);
+                        longitudes.Add(position.Longitude);
+
                         placesMap.Pins.Add(pin);
-                        placesMap.MoveToRegion(MapSpan.FromCenterAndRadius(pin.Position, Distance.FromMiles(0.5)));
                     }
                     else
                     {
@@ -162,6 +170,9 @@ namespace Nearby.Pages
                                 Longitude = Convert.ToDouble(Settings.Current.CustomLongitude)
                             };
 
+                            latitudes.Add(position.Latitude);
+                            longitudes.Add(position.Longitude);
+
                             var pin = new Pin
                             {
                                 Type = PinType.SavedPin,
@@ -170,9 +181,18 @@ namespace Nearby.Pages
                             };
 
                             placesMap.Pins.Add(pin);
-                            placesMap.MoveToRegion(MapSpan.FromCenterAndRadius(pin.Position, Distance.FromMiles(0.5)));
                         }
                     }
+
+                    double lowestLat = latitudes.Min();
+                    double highestLat = latitudes.Max();
+                    double lowestLong = longitudes.Min();
+                    double highestLong = longitudes.Max();
+                    double finalLat = (lowestLat + highestLat) / 2;
+                    double finalLong = (lowestLong + highestLong) / 2;
+                    double distance = DistanceCalculation.GeoCodeCalc.CalcDistance(lowestLat, lowestLong, highestLat, highestLong, DistanceCalculation.GeoCodeCalcMeasurement.Kilometers);
+
+                    placesMap.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(finalLat, finalLong), Distance.FromKilometers(distance)));
                 }
             }
             catch(Exception ex)
@@ -208,6 +228,9 @@ namespace Nearby.Pages
                         Label = pn.name,
                         Address = pn.vicinity
                     };
+
+                    latitudes.Add(pin.Position.Latitude);
+                    longitudes.Add(pin.Position.Longitude);
 
                     pin.Clicked += async (sender, e) =>
                     {
@@ -400,6 +423,36 @@ namespace Nearby.Pages
             }
         }
 
+        public class DistanceCalculation
+        {
+            public static class GeoCodeCalc
+            {
+                public const double EarthRadiusInMiles = 3956.0;
+                public const double EarthRadiusInKilometers = 6367.0;
+
+                public static double ToRadian(double val) { return val * (Math.PI / 180); }
+                public static double DiffRadian(double val1, double val2) { return ToRadian(val2) - ToRadian(val1); }
+
+                public static double CalcDistance(double lat1, double lng1, double lat2, double lng2)
+                {
+                    return CalcDistance(lat1, lng1, lat2, lng2, GeoCodeCalcMeasurement.Miles);
+                }
+
+                public static double CalcDistance(double lat1, double lng1, double lat2, double lng2, GeoCodeCalcMeasurement m)
+                {
+                    double radius = GeoCodeCalc.EarthRadiusInMiles;
+
+                    if (m == GeoCodeCalcMeasurement.Kilometers) { radius = GeoCodeCalc.EarthRadiusInKilometers; }
+                    return radius * 2 * Math.Asin(Math.Min(1, Math.Sqrt((Math.Pow(Math.Sin((DiffRadian(lat1, lat2)) / 2.0), 2.0) + Math.Cos(ToRadian(lat1)) * Math.Cos(ToRadian(lat2)) * Math.Pow(Math.Sin((DiffRadian(lng1, lng2)) / 2.0), 2.0)))));
+                }
+            }
+
+            public enum GeoCodeCalcMeasurement : int
+            {
+                Miles = 0,
+                Kilometers = 1
+            }
+        }
 
 
         public class Locations
