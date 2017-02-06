@@ -71,7 +71,7 @@
         </control:CardView>
 
         <!-- Ad -->
-        <control:AdView  HorizontalOptions="FillAndExpand" />
+        <control:AdView />
         
         <!-- Event Description -->
         <control:CardView >
@@ -106,7 +106,7 @@
             <control:LabelSection Text="Track Event"></control:LabelSection>
             <control:HeaderDivider></control:HeaderDivider>
             <Grid BackgroundColor="{DynamicResource WhiteColor}">
-              <StackLayout Margin="16,0" Spacing="0" Orientation="Horizontal" BackgroundColor="{DynamicResource WhiteColor}">
+              <StackLayout Padding="{StaticResource StandardPadding}" Spacing="0" Orientation="Horizontal" BackgroundColor="{DynamicResource WhiteColor}">
                 <Button Text="{Binding EventReminderText}"
                        FontAttributes="Bold"
                        HorizontalOptions="FillAndExpand"
