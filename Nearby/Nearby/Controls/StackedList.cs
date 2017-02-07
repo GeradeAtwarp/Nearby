@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Nearby.Animations;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Windows.Input;
@@ -80,10 +81,10 @@ namespace Nearby.Controls
             _itemsStackLayout.Spacing = Spacing;
 
             _innerSelectedCommand = new Command<View>(async view => {
-                //StoryBoard storyBoard = new StoryBoard();
-                //storyBoard.Animations.Add(new ScaleToAnimation { Scale = 1.025, Target = view, Duration = "25" });
-                //storyBoard.Animations.Add(new ScaleToAnimation { Scale = 1, Target = view, Duration = "25" });
-                //await storyBoard.Begin();
+                StoryBoard storyBoard = new StoryBoard();
+                storyBoard.Animations.Add(new ScaleToAnimation { Scale = 1.025, Target = view, Duration = "25" });
+                storyBoard.Animations.Add(new ScaleToAnimation { Scale = 1, Target = view, Duration = "25" });
+                await storyBoard.Begin();
 
                 SelectedItem = view.BindingContext;
                 SelectedItem = null; // Allowing item second time selection

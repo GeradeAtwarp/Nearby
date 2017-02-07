@@ -4,19 +4,12 @@
              x:Class="Nearby.Pages.SearchFilters"
              Title="Search Filters"
              BackgroundColor="{DynamicResource WindowBackgroundTable}">
-
-  <StackLayout Spacing="{DynamicResource CardSpacing}" Padding="{DynamicResource CardPadding}">
-    <StackLayout Padding="{StaticResource StandardPadding}">
-      <Label Text="Going on vacation? Visiting family members accross the country? Want to know what places are awaiting you? No problem, just search for you destination below, then select a place to set as you custom location. :-)"
-             HorizontalOptions="StartAndExpand"
-             Style="{DynamicResource NearbyListItemDetailTextStyle}"/>
-
-    </StackLayout>
-  </StackLayout>
   
-  <TableView Intent="Settings" HasUnevenRows="true">
-    <TableSection Title="Search Filters" x:Name="TableSectionCategories">
-    </TableSection>
-  </TableView>
+  <StackLayout VerticalOptions ="Center" Orientation ="Vertical" HorizontalOptions ="Center">
+    <TableView Intent="Settings" HasUnevenRows="true">
+      <TableSection Title="Search Filters" x:Name="TableSectionCategories">
+      </TableSection>
+    </TableView>
+  </StackLayout>
   
 </ContentPage>

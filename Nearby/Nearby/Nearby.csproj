@@ -81,6 +81,7 @@
     <Compile Include="Helpers\Converters\HtmlToPlainTextConverter.cs" />
     <Compile Include="Helpers\Converters\OpenCloseColorConverter.cs" />
     <Compile Include="Helpers\Converters\OpenCloseTextConverter.cs" />
+    <Compile Include="Helpers\Converters\OpenDayTextConverter.cs" />
     <Compile Include="Helpers\Converters\RatingStarCalculator.cs" />
     <Compile Include="Helpers\Converters\ToDateConverter.cs" />
     <Compile Include="Helpers\Converters\ToTitleCaseConverter.cs" />

@@ -94,18 +94,7 @@ namespace Nearby.Pages
                 ToolbarItems.Add(tbItemNavigateFav);
                 ToolbarItems.Add(tbItemNavigateOptions);
             }
-                       
 
-            //nRemoveFilter.Clicked += async (sender, e) =>
-            //{
-            //    Analytics.TrackEvent("Search_Filter_Removed", new Dictionary<string, string> { { "Action", "User removed search filter." } });
-
-            //    vm.DeactivateFilter().ContinueWith(task => Device.BeginInvokeOnMainThread(() =>
-            //    {
-            //        SearchForPlacesNearby();
-            //    }));
-            //};
-            
             AddSearchButtons(); 
         }
 
@@ -115,31 +104,16 @@ namespace Nearby.Pages
             vm.UpdateItems();
 
             MoveToCurrentLocation();
-
-            //Notify user on statup that a filter is currently enabled
-            if (!Settings.Current.DidNotifyUserOnStart && Settings.Current.IsSearchFilterEnabled)
-            {
-                vm.ShowToast("You currently have a search filter enabled.");
-                Settings.Current.DidNotifyUserOnStart = true;
-            }
         }
 
         async Task MoveToCurrentLocation()
         {
             try
             {
-                if (RefineSearchMenu.Scale > 0)
-                {
-                    await RefineSearchMenu.ScaleTo(0, 250, Easing.SinOut);
-                    RefineSearchMenu.IsVisible = false;
-                }
-
                 if (placesMap.Pins.Count() == 0)
                 {
-                    Plugin.Geolocator.Abstractions.Position position;
-
-
-
+                    Plugin.Geolocator.Abstractions.Position position = new Plugin.Geolocator.Abstractions.Position();
+                    
                     if (!Settings.Current.CustomLocationEnabled)
                     {
                         //Get the users current location
@@ -184,15 +158,20 @@ namespace Nearby.Pages
                         }
                     }
 
-                    double lowestLat = latitudes.Min();
-                    double highestLat = latitudes.Max();
-                    double lowestLong = longitudes.Min();
-                    double highestLong = longitudes.Max();
-                    double finalLat = (lowestLat + highestLat) / 2;
-                    double finalLong = (lowestLong + highestLong) / 2;
-                    double distance = DistanceCalculation.GeoCodeCalc.CalcDistance(lowestLat, lowestLong, highestLat, highestLong, DistanceCalculation.GeoCodeCalcMeasurement.Kilometers);
+                    if (placesMap.Pins.Count == 1)
+                        placesMap.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(position.Latitude, position.Longitude), Distance.FromMiles(0.5)));
+                    else
+                    {
+                        double lowestLat = latitudes.Min();
+                        double highestLat = latitudes.Max();
+                        double lowestLong = longitudes.Min();
+                        double highestLong = longitudes.Max();
+                        double finalLat = (lowestLat + highestLat) / 2;
+                        double finalLong = (lowestLong + highestLong) / 2;
+                        double distance = DistanceCalculation.GeoCodeCalc.CalcDistance(lowestLat, lowestLong, highestLat, highestLong, DistanceCalculation.GeoCodeCalcMeasurement.Kilometers);
 
-                    placesMap.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(finalLat, finalLong), Distance.FromKilometers(distance)));
+                        placesMap.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(finalLat, finalLong), Distance.FromKilometers(distance)));
+                    }
                 }
             }
             catch(Exception ex)
@@ -203,12 +182,6 @@ namespace Nearby.Pages
 
         async Task SearchForPlacesNearby()
         {
-            if (RefineSearchMenu.Scale > 0)
-            {
-                await RefineSearchMenu.ScaleTo(0, 250, Easing.SinOut);
-                RefineSearchMenu.IsVisible = false;
-            }
-
             await vm.SearchNearby("");
 
             try
@@ -255,68 +228,9 @@ namespace Nearby.Pages
 
         async Task ToggleRefineOptions()
         {
-            //if (RefineSearchMenu.Scale == 0)
-            //{
-            //    //fabrefine.ColorNormal = Color.FromHex("#3F51B5");
-            //    RefineSearchMenu.IsVisible = true;
-            //    await RefineSearchMenu.ScaleTo(1, 250, Easing.SinIn);
-            //}
-            //else
-            //{
-            //    //fabrefine.ColorNormal = Color.FromHex("#7885cb");
-            //    await RefineSearchMenu.ScaleTo(0, 250, Easing.SinOut);
-            //    RefineSearchMenu.IsVisible = false;
-            //}
-
             await Navigation.PushAsync(new SearchFilters());
         }
-
-        async Task GetMyCurrentLocation()
-        {
-
-
-            var locator = CrossGeolocator.Current;
-            locator.DesiredAccuracy = 50;
-
-            locator.PositionChanged += (sender, e) => {
-                var newposition = new Xamarin.Forms.Maps.Position(e.Position.Latitude, e.Position.Longitude);
-
-                var pin = new Pin
-                {
-                    Type = PinType.SearchResult,
-                    Position = newposition,
-                    Label = "Me",
-                    Address = "My current updated location"
-                };
-
-                placesMap.Pins.Add(pin);
-                placesMap.MoveToRegion(MapSpan.FromCenterAndRadius(pin.Position, Distance.FromMiles(5.0)));
-
-                Debug.WriteLine("Updated Position Latitude: {0}", newposition.Latitude);
-                Debug.WriteLine("Updated Position Longitude: {0}", newposition.Longitude);
-            };
-
-            var position = await locator.GetPositionAsync(10000);
-            var currposition = new Xamarin.Forms.Maps.Position(position.Latitude, position.Longitude);
-
-            var p = new Pin
-            {
-                Type = PinType.Place,
-                Position = currposition,
-                Label = "Me",
-                Address = "My current location"
-            };
-
-            placesMap.Pins.Add(p);
-            placesMap.MoveToRegion(MapSpan.FromCenterAndRadius(p.Position, Distance.FromMiles(5.0)));
-
-            Debug.WriteLine("Position Status: {0}", position.Timestamp);
-            Debug.WriteLine("Position Latitude: {0}", position.Latitude);
-            Debug.WriteLine("Position Longitude: {0}", position.Longitude);
-
-            DisplayAlert("Location", position.Longitude + "---" + position.Latitude, "Ok");
-        }
-
+        
         async Task AddSearchButtons()
         {
             if(Device.OS == TargetPlatform.Android)
@@ -343,19 +257,6 @@ namespace Nearby.Pages
             }
             else
             {
-                //FloatingActionButton searchFab = new FloatingActionButton();
-                //searchFab.Source = "search_small.png";
-                //searchFab.Size = FabSize.Normal;
-                //searchFab.NormalColor = Color.FromHex("#3F51B5");
-                //searchFab.RippleColor = Color.FromHex("#2C3E50");
-
-                //FloatingActionButton refineFab = new FloatingActionButton();
-                //refineFab.Source = "ic_more_vert_white.png";
-                //refineFab.Size = FabSize.Normal;
-                //refineFab.NormalColor = Color.FromHex("#3F51B5");
-                //refineFab.RippleColor = Color.FromHex("#2C3E50");
-
-
                 Button btnSearch = new Button
                 {
                     BorderRadius = 20,
@@ -391,40 +292,6 @@ namespace Nearby.Pages
             }
         }
 
-        void SetFilter(object sender, EventArgs args)
-        {
-            var image = (Xamarin.Forms.Image)sender;
-            var source = image.Source as FileImageSource;
-
-            if (source != null)
-            {
-                switch (source.File)
-                {
-                    case "pizza":
-                        vm.SetActiveFilter.Execute("restaurant");
-                        break;
-                    case "apartment":
-                        vm.SetActiveFilter.Execute("lodging");
-                        break;
-                    case "car":
-                        vm.SetActiveFilter.Execute("parking");
-                        break;
-                    case "documentary":
-                        vm.SetActiveFilter.Execute("movie_theater");
-                        break;
-                    case "beer_bottle":
-                        vm.SetActiveFilter.Execute("liquor_store");
-                        break;
-                    case "coffee":
-                        vm.SetActiveFilter.Execute("cafe");
-                        break;
-                }
-
-                Analytics.TrackEvent("Search_Filter_Update", new Dictionary<string, string> { { "Action", "User updated filter to narrow search results to " + source.File } });
-                SearchForPlacesNearby();
-            }
-        }
-
         public class DistanceCalculation
         {
             public static class GeoCodeCalc
@@ -455,8 +322,7 @@ namespace Nearby.Pages
                 Kilometers = 1
             }
         }
-
-
+        
         public class Locations
         {
             public double longitude { get; set; }

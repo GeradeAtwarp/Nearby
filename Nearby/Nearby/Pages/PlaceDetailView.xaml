@@ -68,11 +68,10 @@
        
         <control:CardView>
           <StackLayout Spacing="0" x:Name="PlaceReviews"  Scale="0">
-            <control:LabelSection Text="Reviews"/>
+            <control:LabelSection Text="Rating"/>
             <control:HeaderDivider/>
 
-            <StackLayout BackgroundColor="White">
-              <StackLayout.Padding Android="0" iOS="{StaticResource StandardPadding}"></StackLayout.Padding>
+            <StackLayout BackgroundColor="White" Padding="{StaticResource StandardPadding}">
               <Grid ColumnSpacing="{StaticResource StandardSpacing}">
                 <Grid.Padding>
                   <OnPlatform x:TypeArguments="Thickness" iOS="0,12" Android="0,8"/>
@@ -86,25 +85,20 @@
                 </Grid.ColumnDefinitions>
 
                 <StackLayout Orientation="Horizontal" HorizontalOptions="Center" IsVisible="{Binding HasReviews}">
-                  <Image Source="{Binding PlaceRating, Converter={StaticResource RatingImageConverter}, ConverterParameter='1'}" Aspect="AspectFit"></Image>
+                  <Image Source="{Binding PlaceRating, Converter={StaticResource RatingImageConverter}}" Aspect="AspectFit"></Image>
                 </StackLayout>
                 <StackLayout Grid.Column="1" Orientation="Horizontal" HorizontalOptions="Center" IsVisible="{Binding HasReviews}">
-                  <Image Source="{Binding PlaceRating, Converter={StaticResource RatingImageConverter}, ConverterParameter='2'}" Aspect="AspectFit"></Image>
+                  <Image Source="{Binding PlaceRating, Converter={StaticResource RatingImageConverter}}" Aspect="AspectFit"></Image>
                 </StackLayout>
                 <StackLayout Grid.Column="2" Orientation="Horizontal" HorizontalOptions="Center" IsVisible="{Binding HasReviews}">
-                  <Image Source="{Binding PlaceRating, Converter={StaticResource RatingImageConverter}, ConverterParameter='3'}" Aspect="AspectFit"></Image>
+                  <Image Source="{Binding PlaceRating, Converter={StaticResource RatingImageConverter}}" Aspect="AspectFit"></Image>
                 </StackLayout>
                 <StackLayout Grid.Column="3" Orientation="Horizontal" HorizontalOptions="Center" IsVisible="{Binding HasReviews}">
-                  <Image Source="{Binding PlaceRating, Converter={StaticResource RatingImageConverter}, ConverterParameter='4'}" Aspect="AspectFit"></Image>
+                  <Image Source="{Binding PlaceRating, Converter={StaticResource RatingImageConverter}}" Aspect="AspectFit"></Image>
                 </StackLayout>
                 <StackLayout Grid.Column="4" Orientation="Horizontal" HorizontalOptions="Center" IsVisible="{Binding HasReviews}">
-                  <Image Source="{Binding PlaceRating, Converter={StaticResource RatingImageConverter}, ConverterParameter='5'}" Aspect="AspectFit"></Image>
+                  <Image Source="{Binding PlaceRating, Converter={StaticResource RatingImageConverter}}" Aspect="AspectFit"></Image>
                 </StackLayout>
-
-                <StackLayout Grid.Row="1" Grid.ColumnSpan="5" Orientation="Horizontal" HorizontalOptions="Center">
-                  <Label VerticalOptions="Center"  Style="{DynamicResource NearbyReviewDetailTextStyle}" Text="{Binding Reviews}"/>
-                </StackLayout>
-
               </Grid>
 
             </StackLayout>
@@ -139,12 +133,13 @@
                           <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
 
-                        <Label VerticalOptions="Center"  Style="{DynamicResource NearbyListItemTextStyle}" Text="{Binding PlaceDetailLabel}"/>
+                        <Label VerticalOptions="Center"  Style="{DynamicResource NearbyListItemTextStyle}" Text="{Binding PlaceDetailLabel}" TextColor="{Binding DayNumber, Converter={StaticResource OpenDayTextConverter}}"/>
                         <Label Grid.Column="2"
                                VerticalOptions="Center"
                                HorizontalOptions="Center"
                                Style="{DynamicResource NearbyListItemTextStyle}"
-                               Text="{Binding PlaceDetailValue}">
+                               Text="{Binding PlaceDetailValue}"
+                               TextColor="{Binding DayNumber, Converter={StaticResource OpenDayTextConverter}}">
                         </Label>
 
                       </Grid>

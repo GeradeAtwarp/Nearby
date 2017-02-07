@@ -10,6 +10,7 @@
       
       <!-- Colors -->
       <Color x:Key="Primary">#3F51B5</Color>
+      <Color x:Key="Accent">#03A9F4</Color>
       <Color x:Key="WhiteColor">#ffffff</Color>
       <Color x:Key="TransparentWhiteColor">#BFffffff</Color>
       <Color x:Key="BlueColor">#3063f5</Color>
@@ -136,6 +137,7 @@
       <converters:ToTitleCaseConverter x:Key="ToTitleCaseConverter" />
       <converters:HtmlToPlainTextConverter x:Key="HtmlToPlainTextConverter" />
       <converters:ForecastEmojiAppender x:Key="ForecastEmojiAppender" />
+      <converters:OpenDayTextConverter x:Key="OpenDayTextConverter" />
       
       
     </ResourceDictionary>
