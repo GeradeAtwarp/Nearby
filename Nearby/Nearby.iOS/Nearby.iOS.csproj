@@ -103,6 +103,7 @@
     <Compile Include="Renderers\NearbyButton.cs" />
     <Compile Include="Renderers\NoBarsScrollViewerRenderer.cs" />
     <Compile Include="Renderers\NonScrollableListViewRenderer.cs" />
+    <Compile Include="Renderers\TextViewValue1Renderer.cs" />
     <None Include="app.config" />
     <None Include="Entitlements.plist" />
     <None Include="Info.plist">

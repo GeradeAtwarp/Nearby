@@ -22,12 +22,20 @@ namespace Nearby.viewModel
 
             List<SearchFilter> allFilters = new List<SearchFilter>()
             {
-                new SearchFilter { Color = "", Name = "Restaurants", ShortName = "restaurant" },
+                new SearchFilter { Color = "", Name = "Restaurant", ShortName = "restaurant" },
+                new SearchFilter { Color = "", Name = "Restaurant (Delivery Only)", ShortName = "meal_delivery" },
                 new SearchFilter { Color = "", Name = "Accomodation", ShortName = "lodging" },
                 new SearchFilter { Color = "", Name = "Parking", ShortName = "parking" },
                 new SearchFilter { Color = "", Name = "Movie Theater", ShortName = "movie_theater" },
-                new SearchFilter { Color = "", Name = "Cafe", ShortName = "liquor_store" },
-                new SearchFilter { Color = "", Name = "Coffe Shop", ShortName = "cafe" }
+                new SearchFilter { Color = "", Name = "Liquor Store", ShortName = "liquor_store" },
+                new SearchFilter { Color = "", Name = "Coffe Shop", ShortName = "cafe" },
+                new SearchFilter { Color = "", Name = "Night Club", ShortName = "night_club" },
+                new SearchFilter { Color = "", Name = "Mueseum", ShortName = "museum" },
+                new SearchFilter { Color = "", Name = "Library", ShortName = "library" },
+                new SearchFilter { Color = "", Name = "Gym", ShortName = "gym" },
+                new SearchFilter { Color = "", Name = "Police Statiom", ShortName = "police" },
+                new SearchFilter { Color = "", Name = "Doctor", ShortName = "doctor" },
+                new SearchFilter { Color = "", Name = "Hospital", ShortName = "hospital" },
             };
 
             foreach (var filter in allFilters)

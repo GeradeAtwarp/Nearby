@@ -106,7 +106,10 @@
             <control:LabelSection Text="Track Event"></control:LabelSection>
             <control:HeaderDivider></control:HeaderDivider>
             <Grid BackgroundColor="{DynamicResource WhiteColor}">
-              <StackLayout Padding="{StaticResource StandardPadding}" Spacing="0" Orientation="Horizontal" BackgroundColor="{DynamicResource WhiteColor}">
+              <StackLayout Spacing="0" Orientation="Horizontal" BackgroundColor="{DynamicResource WhiteColor}">
+                 <StackLayout.Padding>
+                    <OnPlatform x:TypeArguments="Thickness" Android="{StaticResource StandardPadding}" iOS="0" WinPhone="0"/>
+                 </StackLayout.Padding>
                 <Button Text="{Binding EventReminderText}"
                        FontAttributes="Bold"
                        HorizontalOptions="FillAndExpand"

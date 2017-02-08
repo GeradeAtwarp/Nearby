@@ -11,6 +11,8 @@ using Plugin.Permissions;
 using Android.Gms.Ads;
 using Acr.UserDialogs;
 using Microsoft.Azure.Mobile;
+using Xamarin.Forms;
+using System.Reflection;
 
 namespace Nearby.Droid
 {
@@ -37,6 +39,9 @@ namespace Nearby.Droid
             MobileCenter.Configure("91aa7090-7188-49f2-9506-b0ba75400bd2");
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
+
+            typeof(Color).GetProperty("Accent", BindingFlags.Public | BindingFlags.Static).SetValue(null, Color.FromHex("#757575"));
+
             LoadApplication(new App());
         }
 
