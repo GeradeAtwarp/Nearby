@@ -67,8 +67,8 @@ namespace Nearby.viewModel
             {
                 new AboutMenuItem { Label = "Created by", Value = "Gerade Geldenhuys"},
                 new AboutMenuItem { Label = "Version 1.0", Value = "Copyright " + DateTime.Now.Year},
-                new AboutMenuItem { Label = "Feedback", Value = "Have a say", AboutCommand = OpenReviewsCommand},
-                new AboutMenuItem { Label = "About This App", AboutCommand = NavigateToAbout},
+                new AboutMenuItem { Label = "Feedback", Value = "Have a say", AboutCommand = OpenReviewsCommand, Disclosure = "disclosre"},
+                new AboutMenuItem { Label = "About This App", AboutCommand = NavigateToAbout, Disclosure = "disclosre"},
             });
 
             TermsItems.AddRange(new[]
@@ -247,5 +247,11 @@ namespace Nearby.viewModel
         public String Value { get; set; }
         public ICommand AboutCommand { get; set; }
         public String AboutCommandProperty { get; set; }
+        public string Disclosure { get; set; }
+
+        public AboutMenuItem()
+        {
+            Disclosure = "none";
+        }
     }
 }

@@ -5,7 +5,7 @@
              Title="Search Filters"
              BackgroundColor="{DynamicResource WindowBackgroundTable}">
   
-  <StackLayout Margin="0,16,0,0" VerticalOptions ="StartAndExpand" Orientation ="Vertical" HorizontalOptions ="Center">
+  <StackLayout VerticalOptions="StartAndExpand" Orientation="Vertical" HorizontalOptions="Center">
     <TableView Intent="Settings" HasUnevenRows="true">
       <TableSection Title="Search Filters" x:Name="TableSectionCategories">
       </TableSection>

@@ -330,14 +330,7 @@ namespace Nearby.viewModel
         {
             try
             {
-                var task = Application.Current?.MainPage?.DisplayActionSheet("Share", "Cancel", null, shareOptions);
-                if (task == null)
-                    return;
-
-                var provider = await task;
-
-                string textToShare = "Guess what i am doing at " + Place.name + "? Come join me.";
-
+                string textToShare = "I am currently at " + Place.name + ". #NearbyPlacesEvents";
                 ExecuteShareCommandAsync(textToShare);
             }
             catch

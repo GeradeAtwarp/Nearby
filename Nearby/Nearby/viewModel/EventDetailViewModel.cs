@@ -75,7 +75,7 @@ namespace Nearby.viewModel
                 "View In Browser"
             });
 
-            EventShareMessage = $"Join me for {EventDetails.Title} in {EventDetails.CityName} on {DateTime.Parse(EventDetails.StartTime).ToString("ddd, MMM dd")}";
+            EventShareMessage = $"Join me for {EventDetails.Title} in {EventDetails.CityName} on {DateTime.Parse(EventDetails.StartTime).ToString("ddd, MMM dd")} #NearbyPlacesEvents";
 
             SetWeatherForecast();
 

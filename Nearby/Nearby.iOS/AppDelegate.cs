@@ -37,7 +37,7 @@ namespace Nearby.iOS
                 TextColor = UIColor.White
             });
 
-            UISwitch.Appearance.OnTintColor = UIColor.FromRGB(118, 53, 235);
+            UISwitch.Appearance.OnTintColor = UIColor.FromRGB(3, 169, 244);
 
             var manager = BITHockeyManager.SharedHockeyManager;
             manager.Configure("bc0b686325a74f8fa50134a03ce5efc9");

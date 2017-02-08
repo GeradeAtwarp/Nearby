@@ -73,9 +73,6 @@
 
             <StackLayout BackgroundColor="White" Padding="{StaticResource StandardPadding}">
               <Grid ColumnSpacing="{StaticResource StandardSpacing}">
-                <Grid.Padding>
-                  <OnPlatform x:TypeArguments="Thickness" iOS="0,12" Android="0,8"/>
-                </Grid.Padding>
                 <Grid.ColumnDefinitions>
                   <ColumnDefinition Width="1*"/>
                   <ColumnDefinition Width="1*"/>
@@ -123,7 +120,7 @@
                 </control:NonScrollableListView.SeparatorColor>
                 <control:NonScrollableListView.ItemTemplate>
                   <DataTemplate>
-                    <ViewCell StyleId="disclosure">
+                    <ViewCell StyleId="none">
                       <Grid ColumnSpacing="{StaticResource StandardSpacing}">
                         <Grid.Padding>
                           <OnPlatform x:TypeArguments="Thickness" iOS="16,8" Android="16,8"/>
@@ -134,9 +131,9 @@
                         </Grid.ColumnDefinitions>
 
                         <Label VerticalOptions="Center"  Style="{DynamicResource NearbyListItemTextStyle}" Text="{Binding PlaceDetailLabel}" TextColor="{Binding DayNumber, Converter={StaticResource OpenDayTextConverter}}"/>
-                        <Label Grid.Column="2"
+                        <Label Grid.Column="1"
                                VerticalOptions="Center"
-                               HorizontalOptions="Center"
+                               HorizontalOptions="EndAndExpand"
                                Style="{DynamicResource NearbyListItemTextStyle}"
                                Text="{Binding PlaceDetailValue}"
                                TextColor="{Binding DayNumber, Converter={StaticResource OpenDayTextConverter}}">
@@ -180,7 +177,7 @@
                 </control:NonScrollableListView.SeparatorColor>
                 <control:NonScrollableListView.ItemTemplate>
                   <DataTemplate>
-                     <ViewCell>
+                     <ViewCell StyleId="disclosure">
                      <ViewCell.View>
                         <Grid ColumnSpacing="{StaticResource StandardSpacing}">
                           <Grid.Padding>

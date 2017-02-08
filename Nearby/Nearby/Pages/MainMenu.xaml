@@ -143,7 +143,7 @@
               </control:NonScrollableListView.SeparatorColor>
               <control:NonScrollableListView.ItemTemplate>
                 <DataTemplate>
-                  <TextCell StyleId="disclosure" TextColor="{DynamicResource DetailTextColor}" Text="{Binding Label}" Detail="{Binding Value}" Command="{Binding AboutCommand}" CommandParameter="{Binding AboutCommandProperty}"/>
+                  <TextCell StyleId="{Binding Disclosure}" TextColor="{DynamicResource DetailTextColor}" Text="{Binding Label}" Detail="{Binding Value}" Command="{Binding AboutCommand}" CommandParameter="{Binding AboutCommandProperty}"/>
                 </DataTemplate>
               </control:NonScrollableListView.ItemTemplate>
             </control:NonScrollableListView>
