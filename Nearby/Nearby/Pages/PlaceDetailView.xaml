@@ -60,20 +60,19 @@
         </Grid>
         
       </StackLayout>
-      
+
+      <!-- Ad -->
+      <control:AdView  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+
       <StackLayout BackgroundColor="{DynamicResource WindowBackgroundTable}" Spacing="{DynamicResource CardSpacing}" Padding="{DynamicResource CardPadding}">
        
         <control:CardView>
           <StackLayout Spacing="0" x:Name="PlaceReviews"  Scale="0">
-            <control:LabelSection Text="Reviews"/>
+            <control:LabelSection Text="Rating"/>
             <control:HeaderDivider/>
 
-            <StackLayout BackgroundColor="White">
-              <StackLayout.Padding Android="0" iOS="{StaticResource StandardPadding}"></StackLayout.Padding>
+            <StackLayout BackgroundColor="White" Padding="{StaticResource StandardPadding}">
               <Grid ColumnSpacing="{StaticResource StandardSpacing}">
-                <Grid.Padding>
-                  <OnPlatform x:TypeArguments="Thickness" iOS="0,12" Android="0,8"/>
-                </Grid.Padding>
                 <Grid.ColumnDefinitions>
                   <ColumnDefinition Width="1*"/>
                   <ColumnDefinition Width="1*"/>
@@ -83,25 +82,20 @@
                 </Grid.ColumnDefinitions>
 
                 <StackLayout Orientation="Horizontal" HorizontalOptions="Center" IsVisible="{Binding HasReviews}">
-                  <Image Source="{Binding PlaceRating, Converter={StaticResource RatingImageConverter}, ConverterParameter='1'}" Aspect="AspectFit"></Image>
+                  <Image Source="{Binding PlaceRating, Converter={StaticResource RatingImageConverter}}" Aspect="AspectFit"></Image>
                 </StackLayout>
                 <StackLayout Grid.Column="1" Orientation="Horizontal" HorizontalOptions="Center" IsVisible="{Binding HasReviews}">
-                  <Image Source="{Binding PlaceRating, Converter={StaticResource RatingImageConverter}, ConverterParameter='2'}" Aspect="AspectFit"></Image>
+                  <Image Source="{Binding PlaceRating, Converter={StaticResource RatingImageConverter}}" Aspect="AspectFit"></Image>
                 </StackLayout>
                 <StackLayout Grid.Column="2" Orientation="Horizontal" HorizontalOptions="Center" IsVisible="{Binding HasReviews}">
-                  <Image Source="{Binding PlaceRating, Converter={StaticResource RatingImageConverter}, ConverterParameter='3'}" Aspect="AspectFit"></Image>
+                  <Image Source="{Binding PlaceRating, Converter={StaticResource RatingImageConverter}}" Aspect="AspectFit"></Image>
                 </StackLayout>
                 <StackLayout Grid.Column="3" Orientation="Horizontal" HorizontalOptions="Center" IsVisible="{Binding HasReviews}">
-                  <Image Source="{Binding PlaceRating, Converter={StaticResource RatingImageConverter}, ConverterParameter='4'}" Aspect="AspectFit"></Image>
+                  <Image Source="{Binding PlaceRating, Converter={StaticResource RatingImageConverter}}" Aspect="AspectFit"></Image>
                 </StackLayout>
                 <StackLayout Grid.Column="4" Orientation="Horizontal" HorizontalOptions="Center" IsVisible="{Binding HasReviews}">
-                  <Image Source="{Binding PlaceRating, Converter={StaticResource RatingImageConverter}, ConverterParameter='5'}" Aspect="AspectFit"></Image>
+                  <Image Source="{Binding PlaceRating, Converter={StaticResource RatingImageConverter}}" Aspect="AspectFit"></Image>
                 </StackLayout>
-
-                <StackLayout Grid.Row="1" Grid.ColumnSpan="5" Orientation="Horizontal" HorizontalOptions="Center">
-                  <Label VerticalOptions="Center"  Style="{DynamicResource NearbyReviewDetailTextStyle}" Text="{Binding Reviews}"/>
-                </StackLayout>
-
               </Grid>
 
             </StackLayout>
@@ -121,9 +115,12 @@
                    StyleId="SponsorDetailLinks"
                    RowHeight="44"
                    IsVisible="{Binding HasOperatingHours}">
+                <control:NonScrollableListView.SeparatorColor>
+                  <OnPlatform x:TypeArguments="Color" iOS="{StaticResource ListSeparator}"/>
+                </control:NonScrollableListView.SeparatorColor>
                 <control:NonScrollableListView.ItemTemplate>
                   <DataTemplate>
-                    <ViewCell StyleId="disclosure">
+                    <ViewCell StyleId="none">
                       <Grid ColumnSpacing="{StaticResource StandardSpacing}">
                         <Grid.Padding>
                           <OnPlatform x:TypeArguments="Thickness" iOS="16,8" Android="16,8"/>
@@ -133,12 +130,13 @@
                           <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
 
-                        <Label VerticalOptions="Center"  Style="{DynamicResource NearbyListItemTextStyle}" Text="{Binding PlaceDetailLabel}"/>
-                        <Label Grid.Column="2"
+                        <Label VerticalOptions="Center"  Style="{DynamicResource NearbyListItemTextStyle}" Text="{Binding PlaceDetailLabel}" TextColor="{Binding DayNumber, Converter={StaticResource OpenDayTextConverter}}"/>
+                        <Label Grid.Column="1"
                                VerticalOptions="Center"
-                               HorizontalOptions="Center"
+                               HorizontalOptions="EndAndExpand"
                                Style="{DynamicResource NearbyListItemTextStyle}"
-                               Text="{Binding PlaceDetailValue}">
+                               Text="{Binding PlaceDetailValue}"
+                               TextColor="{Binding DayNumber, Converter={StaticResource OpenDayTextConverter}}">
                         </Label>
 
                       </Grid>
@@ -156,8 +154,7 @@
                      Style="{DynamicResource NearbyListItemTextStyle}"/>
             </StackLayout>
               
-            <StackLayout BackgroundColor="White" IsVisible="{Binding HasNoOperatingHours}" HorizontalOptions="FillAndExpand" HeightRequest="44" Padding="{StaticResource StandardPadding}">
-                <StackLayout.Padding Android="0" iOS="{StaticResource StandardPadding}"></StackLayout.Padding>
+            <StackLayout BackgroundColor="White" IsVisible="{Binding HasNoOperatingHours}" HorizontalOptions="FillAndExpand" Padding="{StaticResource StandardPadding}">
                 <Label Text="Operating hours not available" HorizontalOptions="Center"/>
             </StackLayout>  
         
@@ -175,9 +172,12 @@
                    StyleId="SponsorDetailLinks"
                    RowHeight="44"
                    IsVisible="{Binding HasContacts}">
+                <control:NonScrollableListView.SeparatorColor>
+                  <OnPlatform x:TypeArguments="Color" iOS="{StaticResource ListSeparator}"/>
+                </control:NonScrollableListView.SeparatorColor>
                 <control:NonScrollableListView.ItemTemplate>
                   <DataTemplate>
-                     <ViewCell>
+                     <ViewCell StyleId="disclosure">
                      <ViewCell.View>
                         <Grid ColumnSpacing="{StaticResource StandardSpacing}">
                           <Grid.Padding>
@@ -205,18 +205,13 @@
                        Style="{DynamicResource NearbyListItemTextStyle}"/>
               </StackLayout>
 
-              <StackLayout BackgroundColor="White" IsVisible="{Binding HasNoContacts}" HorizontalOptions="FillAndExpand" HeightRequest="44" Padding="{StaticResource StandardPadding}">
-                  <StackLayout.Padding Android="0" iOS="{StaticResource StandardPadding}"></StackLayout.Padding>
+              <StackLayout BackgroundColor="White" IsVisible="{Binding HasNoContacts}" HorizontalOptions="FillAndExpand" Padding="{StaticResource StandardPadding}">
                   <Label Text="No contact details" HorizontalOptions="Center"/>
               </StackLayout>
             
             </StackLayout>
         </control:CardView>
         
-      </StackLayout>
-
-      <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="{DynamicResource SmallPadding}">
-        <Label VerticalOptions="End" HorizontalOptions="Center" Style="{DynamicResource NearbyListItemDetailTextStyle}" Text="Powered by Google"></Label>
       </StackLayout>
 
     </StackLayout>

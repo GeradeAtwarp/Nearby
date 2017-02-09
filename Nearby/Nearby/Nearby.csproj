@@ -35,13 +35,25 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Animatioons\Base\AnimationBase.cs" />
+    <Compile Include="Animatioons\EasingType.cs" />
+    <Compile Include="Animatioons\FadeToAnimation.cs" />
+    <Compile Include="Animatioons\RotateToAnimation.cs" />
+    <Compile Include="Animatioons\ScaleToAnimation.cs" />
+    <Compile Include="Animatioons\StoryBoard.cs" />
+    <Compile Include="Animatioons\TranslateAnimation.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Cells\CategoryCellView.xaml.cs">
+      <DependentUpon>CategoryCellView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Cells\SwitchCellCust1.cs" />
     <Compile Include="Cells\TextViewValue1.cs" />
+    <Compile Include="Controls\AdView.cs" />
     <Compile Include="Controls\AlwaysScrollView.cs" />
     <Compile Include="Controls\CardView.cs" />
+    <Compile Include="Controls\CustomSearchBar.cs" />
     <Compile Include="Controls\FloatingActionButtonView.cs" />
     <Compile Include="Controls\FooterDivider.xaml.cs">
       <DependentUpon>FooterDivider.xaml</DependentUpon>
@@ -54,19 +66,33 @@
     </Compile>
     <Compile Include="Controls\NearbyButton.cs" />
     <Compile Include="Controls\NearbyNavigationPage.cs" />
+    <Compile Include="Controls\NoBarsScrollViewer.cs" />
     <Compile Include="Controls\NonScrollableListView.cs" />
+    <Compile Include="Controls\StackedList.cs" />
     <Compile Include="Controls\TransparentConatiner.cs" />
     <Compile Include="DependencyServices\ILocationManager.cs" />
+    <Compile Include="GlobalKeys.cs" />
     <Compile Include="Helpers\AWSUtils.cs" />
     <Compile Include="Helpers\Constants.cs" />
+    <Compile Include="Helpers\Converters\DateToTimeConverter.cs" />
     <Compile Include="Helpers\Converters\DistanceConverter.cs" />
+    <Compile Include="Helpers\Converters\ForecastEmojiAppender.cs" />
+    <Compile Include="Helpers\Converters\EventImageSelector.cs" />
+    <Compile Include="Helpers\Converters\HtmlToPlainTextConverter.cs" />
     <Compile Include="Helpers\Converters\OpenCloseColorConverter.cs" />
     <Compile Include="Helpers\Converters\OpenCloseTextConverter.cs" />
+    <Compile Include="Helpers\Converters\OpenDayTextConverter.cs" />
     <Compile Include="Helpers\Converters\RatingStarCalculator.cs" />
+    <Compile Include="Helpers\Converters\ToDateConverter.cs" />
+    <Compile Include="Helpers\Converters\ToTitleCaseConverter.cs" />
+    <Compile Include="Helpers\EasingHelper.cs" />
     <Compile Include="Helpers\NavigationService.cs" />
+    <Compile Include="Helpers\OnCustomPlatform.cs" />
     <Compile Include="Helpers\Settings.cs" />
     <Compile Include="Interfaces\IAppLauncher.cs" />
     <Compile Include="Interfaces\IPhoneDialer.cs" />
+    <Compile Include="Interfaces\IPushNotifications.cs" />
+    <Compile Include="Interfaces\IReminderService.cs" />
     <Compile Include="Interfaces\ISharer.cs" />
     <Compile Include="Interfaces\IToast.cs" />
     <Compile Include="Login.xaml.cs">
@@ -76,12 +102,19 @@
     <Compile Include="Models\DynamoDB\BaseDynamoEntity.cs" />
     <Compile Include="Models\DynamoDB\IBaseDynamo.cs" />
     <Compile Include="Models\DynamoDB\Nearby_Favorites.cs" />
+    <Compile Include="Models\EventNearbyItem.cs" />
     <Compile Include="Models\FavPlaceItem.cs" />
+    <Compile Include="Models\SearchFilter.cs" />
+    <Compile Include="Models\WatherResult.cs" />
+    <Compile Include="Models\WeatherForecastItem.cs" />
     <Compile Include="Pages\AboutApp.xaml.cs">
       <DependentUpon>AboutApp.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Auth\Authenticate.xaml.cs">
       <DependentUpon>Authenticate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\EventDetail.xaml.cs">
+      <DependentUpon>EventDetail.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Favourites.xaml.cs">
       <DependentUpon>Favourites.xaml</DependentUpon>
@@ -92,17 +125,26 @@
     <Compile Include="Pages\MainMenu.xaml.cs">
       <DependentUpon>MainMenu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\NearbyEvents.xaml.cs">
+      <DependentUpon>NearbyEvents.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\PlaceDetailView.xaml.cs">
       <DependentUpon>PlaceDetailView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\SearchCustomPlaces.xaml.cs">
       <DependentUpon>SearchCustomPlaces.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\SearchFilters.xaml.cs">
+      <DependentUpon>SearchFilters.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\TermsAndConditions.xaml.cs">
       <DependentUpon>TermsAndConditions.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Renderers\NearbyButton.cs" />
+    <Compile Include="Services\NavigationService.cs" />
+    <Compile Include="Services\ReminderService.cs" />
+    <Compile Include="Triggers\BeginAnimation.cs" />
     <Compile Include="Utils\Entities\BaseEntity.cs" />
     <Compile Include="Utils\Entities\Database.cs" />
     <Compile Include="Utils\Entities\FavoritePlaces.cs" />
@@ -111,12 +153,16 @@
     <Compile Include="Utils\Services\AWSIntegration.cs" />
     <Compile Include="Utils\User.cs" />
     <Compile Include="viewModel\AboutAppViewModel.cs" />
+    <Compile Include="viewModel\EventDetailViewModel.cs" />
+    <Compile Include="viewModel\EventsViewModel.cs" />
+    <Compile Include="viewModel\ExtendedBindableObject.cs" />
     <Compile Include="viewModel\FavoritesViewModel.cs" />
     <Compile Include="viewModel\HomeViewModel.cs" />
     <Compile Include="viewModel\MainMenuViewModel.cs" />
     <Compile Include="viewModel\NearbyBaseViewModel.cs" />
     <Compile Include="viewModel\PlaceDetailViewModel.cs" />
     <Compile Include="viewModel\SearchCustomPlaceViewModel.cs" />
+    <Compile Include="viewModel\SearchFiltersViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Controls\LabelSection.xaml">
@@ -138,8 +184,28 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Acr.UserDialogs, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Acr.UserDialogs.6.3.6\lib\portable-win+net45+wp8+win8+wpa81\Acr.UserDialogs.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Acr.UserDialogs.Interface, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Acr.UserDialogs.6.3.6\lib\portable-win+net45+wp8+win8+wpa81\Acr.UserDialogs.Interface.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="FAB.Forms, Version=2.1.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\FAB.Forms.2.1.1\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\FAB.Forms.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FFImageLoading, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Xamarin.FFImageLoading.2.2.6\lib\portable-net45+win8+wpa81+wp8\FFImageLoading.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FFImageLoading.Forms, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Xamarin.FFImageLoading.Forms.2.2.6\lib\portable-net45+win8+wpa81+wp8\FFImageLoading.Forms.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FFImageLoading.Platform, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Xamarin.FFImageLoading.2.2.6\lib\portable-net45+win8+wpa81+wp8\FFImageLoading.Platform.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="FormsToolkit, Version=1.1.18.0, Culture=neutral, processorArchitecture=MSIL">
@@ -153,6 +219,21 @@
     <Reference Include="ImageCircle.Forms.Plugin.Abstractions, Version=1.8.0.5, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Xam.Plugins.Forms.ImageCircle.1.8.0.5\lib\portable-net45+wp80+win8+wpa81\ImageCircle.Forms.Plugin.Abstractions.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Azure.Mobile, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Azure.Mobile.0.6.0\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Microsoft.Azure.Mobile.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Azure.Mobile.Analytics, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Azure.Mobile.Analytics.0.6.0\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Microsoft.Azure.Mobile.Analytics.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Azure.Mobile.Crashes, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Azure.Mobile.Crashes.0.6.0\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Microsoft.Azure.Mobile.Crashes.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Mono.Android">
+      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\MonoAndroid\v6.0\Mono.Android.dll</HintPath>
     </Reference>
     <Reference Include="MvvmHelpers, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Refractored.MvvmHelpers.1.0.1\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10+UAP10\MvvmHelpers.dll</HintPath>
@@ -186,12 +267,28 @@
       <HintPath>..\..\packages\PInvoke.Windows.Core.0.3.2\lib\portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10\PInvoke.Windows.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Plugin.Calendars, Version=0.6.10.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CClarke.Plugin.Calendars.0.6.10-beta\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10+UAP10\Plugin.Calendars.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Plugin.Calendars.Abstractions, Version=0.6.10.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CClarke.Plugin.Calendars.0.6.10-beta\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10+UAP10\Plugin.Calendars.Abstractions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Plugin.Connectivity, Version=2.2.12.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Xam.Plugin.Connectivity.2.2.12\lib\portable-net45+wp80+wp81+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10+Xamarin.Mac20+UAP10\Plugin.Connectivity.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Plugin.Connectivity.Abstractions, Version=2.2.12.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Xam.Plugin.Connectivity.2.2.12\lib\portable-net45+wp80+wp81+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10+Xamarin.Mac20+UAP10\Plugin.Connectivity.Abstractions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Plugin.DeviceInfo, Version=2.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Xam.Plugin.DeviceInfo.2.1.2\lib\portable-net45+wp80+win8+wpa81\Plugin.DeviceInfo.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Plugin.DeviceInfo.Abstractions, Version=2.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Xam.Plugin.DeviceInfo.2.1.2\lib\portable-net45+wp80+win8+wpa81\Plugin.DeviceInfo.Abstractions.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Plugin.Geolocator, Version=3.0.4.0, Culture=neutral, processorArchitecture=MSIL">
@@ -224,6 +321,10 @@
     </Reference>
     <Reference Include="Plugin.Share.Abstractions, Version=4.0.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Plugin.Share.4.0.3\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10+UAP10\Plugin.Share.Abstractions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Splat, Version=1.6.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Splat.1.6.2\lib\Portable-net45+win+wpa81+wp80\Splat.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="SQLite-net, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -328,7 +429,28 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Services\" />
+    <EmbeddedResource Include="Pages\SearchFilters.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\NearbyEvents.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\EventDetail.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Cells\CategoryCellView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.3.3.175\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.3.175\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />

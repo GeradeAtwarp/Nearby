@@ -8,10 +8,11 @@
              x:Class="Nearby.Pages.Home"
              Title="Nearby">
 
-  <ContentPage.ToolbarItems>
+  <!--<ContentPage.ToolbarItems>
+    <ToolbarItem x:Name="tbItemNavigateEvents" Icon="today" />
     <ToolbarItem x:Name="tbItemNavigateFav" Icon="favorite" />
     <ToolbarItem x:Name="tbItemNavigateOptions" Icon="settings_cog" />
-  </ContentPage.ToolbarItems>
+  </ContentPage.ToolbarItems>-->
 
   <ContentPage.Content>
     <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
@@ -25,91 +26,7 @@
     <StackLayout x:Name="RefineButton" AbsoluteLayout.LayoutBounds="0.8, 0.9, AutoSize, AutoSize" AbsoluteLayout.LayoutFlags="PositionProportional">
 
     </StackLayout>
-  
-    <!-- Dialog popup with refine search options -->
-    <StackLayout x:Name="RefineSearchMenu" IsVisible="false" Scale="0" BackgroundColor="White" HorizontalOptions="FillAndExpand" AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional" AbsoluteLayout.LayoutBounds="0,0,1,AutoSize">
       
-      <Grid Padding="{DynamicResource StandardPadding}" ColumnSpacing="{StaticResource StandardSpacing}">
-          <Grid.RowDefinitions>
-           <RowDefinition Height="Auto"/>
-           <RowDefinition Height="Auto"/>
-           <RowDefinition Height="Auto"/>
-           <RowDefinition Height="Auto"/>
-          </Grid.RowDefinitions>
-          <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
-          </Grid.ColumnDefinitions>
-          
-          <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-            <Image Source="pizza" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Aspect="AspectFit" HeightRequest="50" WidthRequest="50">
-              <Image.GestureRecognizers>
-                <TapGestureRecognizer  Tapped="SetFilter" />
-              </Image.GestureRecognizers>
-            </Image>
-            <Label Text="Restuarant" HorizontalOptions="Center" Style="{DynamicResource NearbyReviewDetailTextStyle}"/>
-          </StackLayout>
-          
-          <StackLayout Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-            <Image Source="apartment" VerticalOptions="FillAndExpand" Aspect="AspectFit" HeightRequest="50" WidthRequest="50">
-            <Image.GestureRecognizers>
-                 <TapGestureRecognizer  Tapped="SetFilter" />
-              </Image.GestureRecognizers>
-            </Image>
-            <Label Text="Hotel" HorizontalOptions="Center" Style="{DynamicResource NearbyReviewDetailTextStyle}"/>
-          </StackLayout>
-        
-          <StackLayout Grid.Column="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-            <Image Source="car" VerticalOptions="FillAndExpand" Aspect="AspectFit" HeightRequest="50" WidthRequest="50">
-            <Image.GestureRecognizers>
-                 <TapGestureRecognizer  Tapped="SetFilter" />
-              </Image.GestureRecognizers>
-            </Image>
-            <Label Text="Parking" HorizontalOptions="Center" Style="{DynamicResource NearbyReviewDetailTextStyle}"/>
-          </StackLayout>
-        
-          <StackLayout Grid.Row="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-            <Image Source="documentary"  VerticalOptions="FillAndExpand" Aspect="AspectFit" HeightRequest="50" WidthRequest="50">
-             <Image.GestureRecognizers>
-                 <TapGestureRecognizer  Tapped="SetFilter" />
-              </Image.GestureRecognizers>
-            </Image>
-            <Label Text="Theatre" HorizontalOptions="Center" Style="{DynamicResource NearbyReviewDetailTextStyle}"/>
-          </StackLayout>
-            
-          <StackLayout Grid.Row="1" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-            <Image Source="beer_bottle" VerticalOptions="FillAndExpand" Aspect="AspectFit" HeightRequest="50" WidthRequest="50">
-             <Image.GestureRecognizers>
-                <TapGestureRecognizer  Tapped="SetFilter" />
-              </Image.GestureRecognizers>
-            </Image>
-            <Label Text="Liquor" HorizontalOptions="Center" Style="{DynamicResource NearbyReviewDetailTextStyle}"/>
-          </StackLayout>
-            
-          <StackLayout Grid.Row="1"  Grid.Column="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-            <Image Source="coffee" VerticalOptions="FillAndExpand" Aspect="AspectFit" HeightRequest="50" WidthRequest="50">
-             <Image.GestureRecognizers>
-                 <TapGestureRecognizer  Tapped="SetFilter" />
-              </Image.GestureRecognizers>
-            </Image>
-            <Label Text="Cafe" HorizontalOptions="Center" Style="{DynamicResource NearbyReviewDetailTextStyle}"/>
-          </StackLayout>
-
-          <Button Grid.ColumnSpan="3" x:Name="btnRemoveFilter" Grid.Row="2" IsVisible="{Binding IsFilterEnabled}}" BorderWidth="1" BorderColor="#3F51B5" BackgroundColor="Transparent" TextColor="{DynamicResource Primary}" HorizontalOptions="Center" Text="Remove filter" WidthRequest="100">
-            <Button.BorderRadius Android="1" iOS="5"></Button.BorderRadius>
-          </Button>
-
-          <StackLayout Grid.Row="3" Grid.ColumnSpan="3" IsVisible="{Binding IsBusy}" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="White" Padding="{StaticResource StandardPadding}">
-            <ActivityIndicator IsRunning="{Binding IsBusy}">
-            </ActivityIndicator>
-            <Label Text="Updating Places..." HorizontalOptions="Center" Style="{DynamicResource NearbyListItemTextStyle}"/>
-          </StackLayout>
-            
-      </Grid>  
-    
-    </StackLayout>
-    
   </AbsoluteLayout>
   </ContentPage.Content>
       

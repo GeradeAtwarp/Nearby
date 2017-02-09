@@ -9,6 +9,8 @@ using HockeyApp.iOS;
 using Nearby.Utils.Entities;
 using ImageCircle.Forms.Plugin.iOS;
 using Nearby.iOS.Renderers;
+using Google.MobileAds;
+using Microsoft.Azure.Mobile;
 
 namespace Nearby.iOS
 {
@@ -35,6 +37,8 @@ namespace Nearby.iOS
                 TextColor = UIColor.White
             });
 
+            UISwitch.Appearance.OnTintColor = UIColor.FromRGB(3, 169, 244);
+
             var manager = BITHockeyManager.SharedHockeyManager;
             manager.Configure("bc0b686325a74f8fa50134a03ce5efc9");
             manager.StartManager();
@@ -46,6 +50,16 @@ namespace Nearby.iOS
 
             ImageCircleRenderer.Init();
             NonScrollableListViewRenderer.Initialize();
+
+            MobileAds.Configure("pub-1631454081193991");
+            FFImageLoading.Forms.Touch.CachedImageRenderer.Init();
+
+            //Configure Mobile Center Analytics
+            #if !DEBUG
+             MobileCenter.Configure("21ab980e-eadd-4cbc-b60b-0c738016b932");
+            #else
+             MobileCenter.Configure("6174be7f-3e65-4e82-afd6-f28a4e7fa13b");
+            #endif
 
             LoadApplication(new App());
 

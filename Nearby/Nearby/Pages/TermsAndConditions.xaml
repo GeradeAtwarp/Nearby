@@ -3,13 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Nearby.Pages.TermsAndConditions"
              xmlns:control="clr-namespace:Nearby.Controls"
+             BackgroundColor="{DynamicResource WindowBackgroundTable}"
              Title="Terms Of Use">
 
   <control:AlwaysScrollView>
     <StackLayout Spacing="0">
-      <StackLayout BackgroundColor="{DynamicResource WindowBackgroundTable}"
-                           Spacing="{DynamicResource CardSpacing}"
-                           Padding="{DynamicResource CardPadding}">
+      <StackLayout BackgroundColor="{DynamicResource WindowBackgroundTable}" Spacing="{DynamicResource CardSpacing}">
         <control:CardView>
           <StackLayout Padding="0" Spacing="0" BackgroundColor="White">
             <control:HeaderDivider/>
@@ -118,20 +117,16 @@
 
               <Label Grid.Row="32" Text="All communications relating to Nearby must be sent using the contacts stated on the Contact Us page." Style="{DynamicResource NearbyListItemDetailTextStyle}"/>
 
-              <Label Grid.Row="34" Text="Governing law and jurisdiction" Style="{DynamicResource TitleStyle}"/>
+              <Label Grid.Row="33" Text="Governing law and jurisdiction" Style="{DynamicResource TitleStyle}"/>
 
-              <Label Grid.Row="35" Text="These Terms and any dispute concerning the implementation, interpretation and validity of this agreement are subject to Italian law. The parties agree to resolve any dispute, within the limits of the applicable law, under the jurisdiction of the Italian courts with the exclusive jurisdiction of the court of Milan, Italy." Style="{DynamicResource NearbyListItemDetailTextStyle}"/>
+              <Label Grid.Row="34" Text="These Terms and any dispute concerning the implementation, interpretation and validity of this agreement are subject to Italian law. The parties agree to resolve any dispute, within the limits of the applicable law, under the jurisdiction of the Italian courts with the exclusive jurisdiction of the court of Milan, Italy." Style="{DynamicResource NearbyListItemDetailTextStyle}"/>
 
             </Grid>
-
-
 
           </StackLayout>
         </control:CardView>
       </StackLayout>
     </StackLayout>
   </control:AlwaysScrollView>
-
-
 
 </ContentPage>

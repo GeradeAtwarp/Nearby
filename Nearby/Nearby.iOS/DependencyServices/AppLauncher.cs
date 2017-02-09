@@ -72,5 +72,25 @@ namespace Nearby.iOS.DependencyServices
             }
             return false;
         }
+
+        public bool OpenReviewsAppStore(string appURL)
+        {
+            try
+            {
+                if (UIApplication.SharedApplication.OpenUrl(NSUrl.FromString(appURL)))
+                    return true;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Unable to launch review url" + ex);
+            }
+
+            return false;
+        }
+
+        public void OpenSettings()
+        {
+            UIApplication.SharedApplication.OpenUrl(new NSUrl(UIApplication.OpenSettingsUrlString));
+        }
     }
 }

@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Nearby.Pages.EventDetail"
+             xmlns:local="clr-namespace:Nearby.Pages"
+             xmlns:control="clr-namespace:Nearby.Controls"
+             xmlns:helpers="clr-namespace:Nearby.Helpers"
+             xmlns:triggers="clr-namespace:Nearby.Triggers"
+             xmlns:animations="clr-namespace:Nearby.Animations"
+             Title="{Binding EventDetails.Title}"
+             BackgroundColor="{DynamicResource WindowBackgroundTable}">
+
+  <ContentPage.Resources>
+    <ResourceDictionary>
+
+      <!-- Animations -->
+      <animations:StoryBoard x:Key="EventDetailPanelInitialAnimation" Target="{x:Reference EventDetailContainer}">
+        <animations:TranslateToAnimation TranslateY="0" Delay="0" Easing="SpringOut" Duration="1500" />
+      </animations:StoryBoard>
+
+
+    </ResourceDictionary>
+  </ContentPage.Resources>
+  <ContentPage.Triggers>
+    <EventTrigger Event="Appearing">
+      <triggers:BeginAnimation Animation="{StaticResource EventDetailPanelInitialAnimation}" />
+    </EventTrigger>
+  </ContentPage.Triggers>
+  
+  <ContentPage.ToolbarItems>
+    <ToolbarItem Icon="toolbar_share.png" Text="Share" Command="{Binding ShareCommand}" CommandParameter="{Binding EventShareMessage}"/>
+  </ContentPage.ToolbarItems>
+
+  <ScrollView x:Name="mainScrollView">
+    <StackLayout Orientation="Vertical">
+
+      <!-- Event Name and Location -->
+      <StackLayout BackgroundColor="{StaticResource Primary}" Padding="16,32,16,16">
+        <Label Text="{Binding EventDetails.Title}" Style="{StaticResource EventTitleLabelStyle}"></Label>
+        <Label Text="{Binding EventDetails.CityName}" Style="{StaticResource HeaderLabelStyle}"></Label>
+      </StackLayout>
+
+      <StackLayout x:Name="EventDetailContainer" TranslationY="1000" BackgroundColor="{DynamicResource BackgroundGrayColor}" Spacing="{DynamicResource CardSpacing}" Padding="{DynamicResource CardPadding}">
+
+        <!-- Event Deatils -->
+        <control:CardView >
+          <StackLayout Spacing="0">
+            <control:LabelSection Text="Details"></control:LabelSection>
+            <control:HeaderDivider></control:HeaderDivider>
+            <Grid Padding="{StaticResource StandardPadding}" BackgroundColor="{DynamicResource WhiteColor}">
+              <Grid.RowDefinitions>
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+              </Grid.RowDefinitions>
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+              </Grid.ColumnDefinitions>
+
+              <Label Text="Date" Style="{DynamicResource NearbyListItemTextStyle}"></Label>
+              <Label Grid.Row="1" Text="Venue" Style="{DynamicResource NearbyListItemTextStyle}"></Label>
+              <Label Grid.Row="2" Text="Start Time" Style="{DynamicResource NearbyListItemTextStyle}"></Label>
+
+              <Label Grid.Column="1" Text="{Binding EventDetails.StartTime, Converter={StaticResource DateConverter}}" Style="{DynamicResource NearbyListItemTextStyle}" HorizontalOptions="EndAndExpand"></Label>
+              <Label Grid.Row="1" Grid.Column="1" Text="{Binding EventDetails.VenueName}" Style="{DynamicResource NearbyListItemTextStyle}" HorizontalOptions="EndAndExpand"></Label>
+              <Label Grid.Row="2" Grid.Column="1" Text="{Binding EventDetails.StartTime, Converter={StaticResource DateToTimeConverter}}" Style="{DynamicResource NearbyListItemTextStyle}" HorizontalOptions="EndAndExpand"></Label>
+              
+            </Grid>
+          </StackLayout>
+        </control:CardView>
+
+        <!-- Ad -->
+        <control:AdView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+        
+        <!-- Event Description -->
+        <control:CardView >
+          <StackLayout Spacing="0">
+            <control:LabelSection Text="Description"></control:LabelSection>
+            <control:HeaderDivider></control:HeaderDivider>
+            <StackLayout Padding="{StaticResource StandardPadding}" BackgroundColor="{DynamicResource WhiteColor}">
+              <Label Text="{Binding EventDetails.Description}" Style="{DynamicResource NearbyListItemTextStyle}" HorizontalTextAlignment="Center" />
+            </StackLayout>
+          </StackLayout>
+        </control:CardView>
+
+        <control:CardView>
+          <StackLayout Spacing="0">
+            <control:LabelSection Text="Weather Forecast"></control:LabelSection>
+            <control:HeaderDivider></control:HeaderDivider>
+            <StackLayout Padding="{StaticResource StandardPadding}" BackgroundColor="{DynamicResource WhiteColor}" IsVisible="{Binding IsNotBusy}">
+              <Label Text="{Binding WeatherForecastText, Converter={StaticResource ForecastEmojiAppender}}" Style="{DynamicResource EventForecastTextStyle}"  HorizontalTextAlignment="Center"/>
+            </StackLayout>
+            
+            <StackLayout IsVisible="{Binding IsBusy}" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="White" Padding="{StaticResource StandardPadding}">
+              <ActivityIndicator IsRunning="{Binding IsBusy}">
+              </ActivityIndicator>
+              <Label Text="Loading Weather Forecast..." HorizontalOptions="Center" Style="{DynamicResource NearbyListItemTextStyle}"/>
+            </StackLayout>
+          </StackLayout>
+        </control:CardView>
+
+        <!-- Reminder -->
+        <control:CardView >
+          <StackLayout Spacing="0">
+            <control:LabelSection Text="Track Event"></control:LabelSection>
+            <control:HeaderDivider></control:HeaderDivider>
+            <Grid BackgroundColor="{DynamicResource WhiteColor}">
+              <StackLayout Spacing="0" Orientation="Horizontal" BackgroundColor="{DynamicResource WhiteColor}">
+                 <StackLayout.Padding>
+                    <OnPlatform x:TypeArguments="Thickness" Android="{StaticResource StandardPadding}" iOS="0" WinPhone="0"/>
+                 </StackLayout.Padding>
+                <Button Text="{Binding EventReminderText}"
+                       FontAttributes="Bold"
+                       HorizontalOptions="FillAndExpand"
+                       BackgroundColor="{StaticResource Primary}"
+                       TextColor="{DynamicResource WhiteColor}"
+                       Command="{Binding SetReminder}">
+                  <Button.IsVisible>
+                    <helpers:OnCustomPlatform x:TypeArguments="x:Boolean" iOS="False" Android="True"/>
+                  </Button.IsVisible>
+                </Button>
+
+                <Button Text="{Binding EventReminderText}"
+                        FontAttributes="Bold"
+                        HorizontalOptions="FillAndExpand"
+                        TextColor="{DynamicResource Primary}"
+                        Command="{Binding SetReminder}">
+                  <Button.IsVisible>
+                    <helpers:OnCustomPlatform x:TypeArguments="x:Boolean" iOS="True" Android="False"/>
+                  </Button.IsVisible>
+                </Button>
+              </StackLayout>             
+            </Grid>           
+          </StackLayout>
+        </control:CardView>
+
+
+        <!-- Additional Actions -->
+        <control:CardView >
+          <StackLayout Spacing="0">
+            <control:LabelSection Text="Actions"></control:LabelSection>
+            <control:HeaderDivider></control:HeaderDivider>
+            <control:NonScrollableListView
+                   ItemsSource="{Binding EventActionItems}"
+                   x:Name="listEventActions"
+                   RowHeight="44">
+              <control:NonScrollableListView.SeparatorColor>
+                <OnPlatform x:TypeArguments="Color" iOS="{StaticResource ListSeparator}"/>
+              </control:NonScrollableListView.SeparatorColor>
+              <control:NonScrollableListView.ItemTemplate>
+                <DataTemplate>
+                  <TextCell StyleId="disclosure" Text="{Binding .}"/>
+                </DataTemplate>
+              </control:NonScrollableListView.ItemTemplate>
+            </control:NonScrollableListView>
+          </StackLayout>
+        </control:CardView>
+
+
+      </StackLayout>
+    </StackLayout>
+  </ScrollView>
+  
+</ContentPage>

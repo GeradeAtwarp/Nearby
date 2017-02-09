@@ -2,10 +2,29 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Nearby.Pages.MainMenu"
+             xmlns:local="clr-namespace:Nearby.Pages"
              xmlns:control="clr-namespace:Nearby.Controls"
              Title="{Binding Title}"
              BackgroundColor="{DynamicResource WindowBackgroundTable}">
 
+  <ContentPage.Resources>
+    <ResourceDictionary>
+
+      <DataTemplate x:Key="SwitchCellDataTemplate">
+        <control:SwitchCellCust1 Text="{Binding DetailLabel}" On="{Binding DetailValue}" Command="{Binding MenuItemCommand}"></control:SwitchCellCust1>
+      </DataTemplate>
+
+      <DataTemplate x:Key="TextCellDataTemplate">
+        <TextCell Text="{Binding DetailLabel}" StyleId="disclosure" />
+      </DataTemplate>
+
+      <local:MainMenuItemSelector x:Key="MainMenuItemSelector" SwitchCellDataTemplate="{StaticResource SwitchCellDataTemplate}" TextCellDataTemplate="{StaticResource TextCellDataTemplate}" />
+
+    </ResourceDictionary>
+  </ContentPage.Resources>
+  
+  
+  
   <control:AlwaysScrollView >
     <StackLayout Spacing="0">
 
@@ -25,17 +44,11 @@
             <control:NonScrollableListView
                      x:Name="ListViewFeeds"
                      ItemsSource="{Binding ManualItems}"
-                     RowHeight="44">
+                     RowHeight="44"
+                     ItemTemplate="{StaticResource MainMenuItemSelector}">
               <control:NonScrollableListView.SeparatorColor>
                 <OnPlatform x:TypeArguments="Color" iOS="{StaticResource ListSeparator}" />
               </control:NonScrollableListView.SeparatorColor>
-              <control:NonScrollableListView.ItemTemplate>
-                <DataTemplate>
-                  <control:SwitchCellCust1 Text="{Binding DetailLabel}"
-                                           On="{Binding DetailValue}"
-                                           Command="{Binding MenuItemCommand}"/>
-                </DataTemplate>
-              </control:NonScrollableListView.ItemTemplate>
             </control:NonScrollableListView>
 
 
@@ -117,44 +130,46 @@
 
       </StackLayout>
 
+        <control:CardView>
+          <StackLayout Spacing="0">
+            <control:LabelSection Text="About Nearby"/>
+            <control:HeaderDivider/>
+            <control:NonScrollableListView
+                     x:Name="lstAbout"
+                     ItemsSource="{Binding AboutItems}"
+                     RowHeight="44">
+              <control:NonScrollableListView.SeparatorColor>
+                <OnPlatform x:TypeArguments="Color" iOS="{StaticResource ListSeparator}"/>
+              </control:NonScrollableListView.SeparatorColor>
+              <control:NonScrollableListView.ItemTemplate>
+                <DataTemplate>
+                  <TextCell StyleId="disclosure" TextColor="{DynamicResource DetailTextColor}" Text="{Binding Label}" Detail="{Binding Value}" Command="{Binding AboutCommand}" CommandParameter="{Binding AboutCommandProperty}"/>
+                </DataTemplate>
+              </control:NonScrollableListView.ItemTemplate>
+            </control:NonScrollableListView>
+
+          </StackLayout>
+        </control:CardView>
 
         <control:CardView>
           <StackLayout Spacing="0">
-            <control:LabelSection Text="Info"/>
+            <control:LabelSection Text="Terms Of Use"/>
             <control:HeaderDivider/>
             <control:NonScrollableListView
-                x:Name="ListViewAbout"
-                ItemsSource="{Binding AboutItems}"
+                x:Name="lstTerms"
+                ItemsSource="{Binding TermsItems}"
                 RowHeight="44">
               <control:NonScrollableListView.SeparatorColor>
                 <OnPlatform x:TypeArguments="Color" iOS="{StaticResource ListSeparator}"/>
               </control:NonScrollableListView.SeparatorColor>
                 <control:NonScrollableListView.ItemTemplate>
                 <DataTemplate>
-                  <TextCell Text="{Binding Label}"/>
+                  <TextCell StyleId="disclosure" TextColor="{DynamicResource DetailTextColor}" Text="{Binding Label}" Command="{Binding AboutCommand}" CommandParameter="{Binding AboutCommandProperty}"/>
                 </DataTemplate>
               </control:NonScrollableListView.ItemTemplate>
             </control:NonScrollableListView>
           </StackLayout>
         </control:CardView>
-
-        <!--<control:CardView>
-          <StackLayout Spacing="0">
-            <control:LabelSection Text="Accounts"/>
-            <control:HeaderDivider/>
-            <control:NonScrollableListView
-                     x:Name="ListAccountProviderss"
-                     ItemsSource="{Binding AccountItems}"
-                     RowHeight="44">
-              <control:NonScrollableListView.ItemTemplate>
-                <DataTemplate>
-                  <TextCell Text="{Binding ProviderLabel}"/>
-                </DataTemplate>
-              </control:NonScrollableListView.ItemTemplate>
-            </control:NonScrollableListView>
-
-          </StackLayout>
-        </control:CardView>-->
 
       </StackLayout>
 

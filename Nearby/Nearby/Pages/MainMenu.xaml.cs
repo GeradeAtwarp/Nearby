@@ -20,33 +20,36 @@ namespace Nearby.Pages
         {
             InitializeComponent();
 
-            BindingContext = new MainMenuViewModel(Navigation);
+            BindingContext = new MainMenuViewModel();
 
-            ListViewAbout.ItemSelected += async (s, e) =>
+            ListViewFeeds.ItemSelected += async (s, e) =>
             {
                 if (e.SelectedItem == null)
                     return;
 
-                AboutMenuItem item = e.SelectedItem as AboutMenuItem;
-               
-                ListViewAbout.SelectedItem = null;
-                Page page = null;
+                var item = e.SelectedItem as viewModel.MenuItem;
+                Page page = new Favourites();
 
-                switch (item.Value)
+                if (!item.isSwitch)
                 {
-                    case "terms":
-                        page = new TermsAndConditions();
-                        break;
-                    case "about":
-                        page = new AboutApp();
-                        break;
+                    await NavigationService.PushAsync(Navigation, page);
                 }
 
-                if (page == null)
-                    return;
-
-                await NavigationService.PushAsync(Navigation, page);
+                ListViewFeeds.SelectedItem = null;
             };
+
+            lstAbout.ItemSelected += async (s, e) =>
+            {
+                lstAbout.SelectedItem = null;
+            };
+
+            lstTerms.ItemSelected += async (s, e) =>
+            {
+                lstTerms.SelectedItem = null;
+            };
+
+            if (Device.OS == TargetPlatform.iOS)
+                NavigationPage.SetBackButtonTitle(this, "");
         }
 
         protected override void OnAppearing()
@@ -61,7 +64,21 @@ namespace Nearby.Pages
             vm = null;
 
             var adjust = Device.OS != TargetPlatform.Android ? 1 : -ViewModel.AboutItems.Count + 1;
-            ListViewAbout.HeightRequest = (ViewModel.AboutItems.Count * ListViewAbout.RowHeight) - adjust;
+            lstAbout.HeightRequest = (ViewModel.AboutItems.Count * lstAbout.RowHeight) - adjust;
+
+            adjust = Device.OS != TargetPlatform.Android ? 1 : -ViewModel.TermsItems.Count + 1;
+            lstTerms.HeightRequest = (ViewModel.TermsItems.Count * lstTerms.RowHeight) - adjust;
+        }
+    }
+
+    public class MainMenuItemSelector : DataTemplateSelector
+    {
+        public DataTemplate SwitchCellDataTemplate { get; set; }
+        public DataTemplate TextCellDataTemplate { get; set; }
+
+        protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
+        {
+            return ((viewModel.MenuItem)item).isSwitch ? SwitchCellDataTemplate : TextCellDataTemplate;
         }
     }
 }

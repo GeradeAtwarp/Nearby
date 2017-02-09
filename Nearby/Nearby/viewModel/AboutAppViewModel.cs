@@ -21,7 +21,7 @@ namespace Nearby.viewModel
             set { SetProperty(ref madeByText, value); }
         }
         
-        public ImageSource appLogo = ImageSource.FromFile("nearby_logo.png");
+        public ImageSource appLogo = ImageSource.FromFile("about_logo.png");
         public ImageSource AppLogo
         {
             get { return appLogo; }
@@ -50,7 +50,7 @@ namespace Nearby.viewModel
         }
 
 
-        public AboutAppViewModel(INavigation nav) : base(nav)
+        public AboutAppViewModel()
         {
             FollowItems.AddRange(new[]
                {

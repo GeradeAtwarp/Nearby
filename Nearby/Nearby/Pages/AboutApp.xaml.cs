@@ -17,17 +17,13 @@ namespace Nearby.Pages
         public AboutApp()
         {
             InitializeComponent();
-
-            BindingContext = vm = new AboutAppViewModel(Navigation);
+            BindingContext = vm = new AboutAppViewModel();
         }
 
         protected override void OnBindingContextChanged()
         {
             base.OnBindingContextChanged();
             vm = null;
-
-            var adjust = Device.OS != TargetPlatform.Android ? 1 : -ViewModel.FollowItems.Count + 1;
-            ListViewFollow.HeightRequest = (ViewModel.FollowItems.Count * ListViewFollow.RowHeight) - adjust;
         }
     }
 }

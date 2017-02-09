@@ -1,13 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:Nearby.Helpers.Converters"
              x:Class="Nearby.App">
   <Application.Resources>
 
     <ResourceDictionary>
       <!-- Application resource dictionary -->
-
+      
+      <!-- Colors -->
       <Color x:Key="Primary">#3F51B5</Color>
+      <Color x:Key="Accent">#03A9F4</Color>
+      <Color x:Key="WhiteColor">#ffffff</Color>
+      <Color x:Key="TransparentWhiteColor">#BFffffff</Color>
+      <Color x:Key="BlueColor">#3063f5</Color>
+      <Color x:Key="TransparentBlueColor">#BF3063f5</Color>
+      <Color x:Key="BrightYellowColor">#ffed00</Color>
+      <Color x:Key="GrayColor">#484f63</Color>
+      <Color x:Key="ErrorColor">#ff5252</Color>
+      <Color x:Key="BackgroundGrayColor">#f4f6fa</Color>
+      <Color x:Key="ToolbarBlueColor">#3063f5</Color>
+      <Color x:Key="OrangeColor">#ff5e4d</Color>
+      <Color x:Key="ProfileGrayColor">#afb3be</Color>
+      <Color x:Key="BlackColor">#000000</Color>
+      <Color x:Key="GreenColor">#0aca91</Color>
 
       <Thickness x:Key="SmallPadding">4</Thickness>
       <Thickness x:Key="MediumPadding">8</Thickness>
@@ -65,7 +81,65 @@
         <Setter Property="Font" Value="Semibold"/>
       </Style>
 
+      <Style x:Key="EventForecastTextStyle" TargetType="Label" BaseResourceKey="ListItemTextStyle">
+        <Setter Property="FontSize" Value="{DynamicResource NearbyListItemTextStyleSize}" />
+        <Setter Property="TextColor" Value="{DynamicResource Primary}"/>
+      </Style>
 
+      
+      <OnPlatform x:Key="BigSize" x:TypeArguments="x:Double" iOS="20" Android="24" WinPhone="24"/>
+      <OnPlatform x:Key="ExtraBigSize" x:TypeArguments="x:Double" iOS="24" Android="32"  WinPhone="32"/>
+      <OnPlatform x:Key="MediumSize" x:TypeArguments="x:Double" iOS="14" Android="16" WinPhone="16"/>  
+      <OnPlatform x:Key="MidMediumSize" x:TypeArguments="x:Double" iOS="12" Android="14" WinPhone="14"/>
+      <OnPlatform x:Key="LittleSize" x:TypeArguments="x:Double" iOS="11" Android="12" WinPhone="12"/>
+
+      <OnPlatform x:Key="LargeSize"  x:TypeArguments="x:Double" iOS="16" Android="18" WinPhone="18"/>
+
+      <OnPlatform x:Key="LargerSize" x:TypeArguments="x:Double" iOS="18" Android="20" WinPhone="20"/>
+
+      <OnPlatform x:Key="HugeSize" x:TypeArguments="x:Double" iOS="32" Android="48" />
+      
+      
+      
+      
+      
+      
+      
+      <Style x:Key="EventTitleLabelStyle" TargetType="Label">
+        <Setter Property="TextColor" Value="White" />
+        <Setter Property="FontSize" Value="{DynamicResource BigSize}"/>
+      </Style>
+
+      <Style x:Key="EventLabelStyle" TargetType="Label">
+        <Setter Property="TextColor" Value="White" />
+        <Setter Property="FontSize" Value="{DynamicResource MediumSize}"/>
+      </Style>
+
+      <Style x:Key="SectionLabelStyle" TargetType="{x:Type Label}">
+        <Setter Property="TextColor" Value="{StaticResource GrayColor}" />
+        <Setter Property="FontSize" Value="{StaticResource LargerSize}" />
+        <Setter Property="Margin" Value="15, 10, 0, 0" />
+      </Style>
+
+      <Style x:Key="HeaderLabelStyle" TargetType="{x:Type Label}">
+        <Setter Property="TextColor" Value="{StaticResource WhiteColor}" />
+        <Setter Property="FontSize" Value="{StaticResource MidMediumSize}" />
+      </Style>
+
+      <Style x:Key="TempLabelStyle" TargetType="{x:Type Label}">
+        <Setter Property="TextColor" Value="{StaticResource WhiteColor}" />
+        <Setter Property="FontSize" Value="{StaticResource LargeSize}" />
+      </Style>
+
+      <converters:ToDateConverter x:Key="DateConverter" />
+      <converters:DateToTimeConverter x:Key="DateToTimeConverter" />
+      <converters:EventImageSelector x:Key="EventImageSelector" />
+      <converters:ToTitleCaseConverter x:Key="ToTitleCaseConverter" />
+      <converters:HtmlToPlainTextConverter x:Key="HtmlToPlainTextConverter" />
+      <converters:ForecastEmojiAppender x:Key="ForecastEmojiAppender" />
+      <converters:OpenDayTextConverter x:Key="OpenDayTextConverter" />
+      
+      
     </ResourceDictionary>
   </Application.Resources>
 </Application>

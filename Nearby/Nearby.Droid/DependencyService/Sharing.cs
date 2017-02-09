@@ -44,5 +44,18 @@ namespace Nearby.Droid.DependencyService
 
             return false;
         }
+
+        public bool OpenUserName(string profile)
+        {
+            try
+            {
+                var tweetIntent = new Intent(Intent.ActionView, Android.Net.Uri.Parse($"twitter://user?screen_name={profile}"));
+                Forms.Context.StartActivity(tweetIntent);
+                return true;
+            }
+            catch { }
+
+            return false;
+        }
     }
 }

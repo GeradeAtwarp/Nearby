@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 using Nearby.Helpers;
+using Microsoft.Azure.Mobile.Analytics;
 
 namespace Nearby.viewModel
 {
@@ -18,6 +19,7 @@ namespace Nearby.viewModel
         public List<MenuItem> ManualItems { get; } = new List<MenuItem>();
         public ObservableRangeCollection<AboutMenuItem> AboutItems { get; } = new ObservableRangeCollection<AboutMenuItem>();
         public ObservableRangeCollection<AccountMenuItem> AccountItems { get; } = new ObservableRangeCollection<AccountMenuItem>();
+        public ObservableRangeCollection<AboutMenuItem> TermsItems { get; } = new ObservableRangeCollection<AboutMenuItem>();
 
         public string madeByText = $"By Gerade";
         public string MadeByText
@@ -26,18 +28,31 @@ namespace Nearby.viewModel
             set { SetProperty(ref madeByText, value); }
         }
 
-        public MainMenuViewModel(INavigation navigation) : base(navigation)
+        public MainMenuViewModel() 
         {
             Title = "Settings";
 
             ChangeLocationIsEnabled = Settings.Current.CustomLocationEnabled;
 
+            //Add menu item to navigate to favs on IOS only
+            if (Device.OS == TargetPlatform.iOS)
+            {
+                ManualItems.Add(new MenuItem
+                {
+                    DetailLabel = "Favourites",
+                    MenuItemCommand = NavigateToFavourites,
+                    isSwitch = false
+                });
+            }
+
             ManualItems.Add(new MenuItem
             {
                 DetailLabel = "Use custom location?",
                 DetailValue = ChangeLocationIsEnabled,
-                MenuItemCommand = ToggleCustomLocation
+                MenuItemCommand = ToggleCustomLocation,
+                isSwitch = true
             });
+
 
             if (Settings.Current.CustomLocationEnabled)
             {
@@ -49,15 +64,16 @@ namespace Nearby.viewModel
                 CustomLocation = Settings.Current.CustomLocation;
 
             AboutItems.AddRange(new[]
-               {
-                    new AboutMenuItem { Label = "Terms Of Use", Value = "terms" },
-                    new AboutMenuItem { Label = "About This App", Value = "about" },
+            {
+                new AboutMenuItem { Label = "Created by", Value = "Gerade Geldenhuys"},
+                new AboutMenuItem { Label = "Version 1.0", Value = "Copyright " + DateTime.Now.Year},
+                new AboutMenuItem { Label = "Feedback", Value = "Have a say", AboutCommand = OpenReviewsCommand, Disclosure = "disclosre"},
+                new AboutMenuItem { Label = "About This App", AboutCommand = NavigateToAbout, Disclosure = "disclosre"},
             });
 
-            AccountItems.Add(new AccountMenuItem
+            TermsItems.AddRange(new[]
             {
-                ProviderLabel = "Google",
-                ProviderValue = "google",
+                new AboutMenuItem { Label = "Terms Of Use", Value = "terms", AboutCommand = NavigateTerms }
             });
         }
 
@@ -154,6 +170,8 @@ namespace Nearby.viewModel
             {
 
             }
+
+            Analytics.TrackEvent("Custome_Location_Toggle", new Dictionary<string, string> { { "Action", "User toggled custom location setting." } });
         }
 
 
@@ -162,6 +180,16 @@ namespace Nearby.viewModel
             if (ChangeLocationIsEnabled)
                 await Navigation.PushAsync(new SearchCustomPlaces());
             }));
+
+        ICommand navigateToAbout;
+        public ICommand NavigateToAbout => navigateToAbout ?? (navigateToAbout = new Command(async () => {
+                await Navigation.PushAsync(new AboutApp());
+        }));
+
+        ICommand navigateTerms;
+        public ICommand NavigateTerms => navigateTerms ?? (navigateTerms = new Command(async () => {
+            await Navigation.PushAsync(new TermsAndConditions());
+        }));
 
 
         ICommand toggleFiltern;
@@ -185,6 +213,13 @@ namespace Nearby.viewModel
                 Settings.Current.IsSearchFilterEnabled = true;
             }
         }
+
+
+        public ICommand NavigateToFavourites => new Command(NavigateToFavouritesCommand);
+        private async void NavigateToFavouritesCommand()
+        {
+            await Navigation.PushAsync(new SearchCustomPlaces());
+        }
     }
 
     public class MenuItem
@@ -195,6 +230,7 @@ namespace Nearby.viewModel
         public bool DetailValue { get; set; }
         public ICommand MenuItemCommand { get; set; }
         public String MenuItemCommandProperty { get; set; }
+        public Boolean isSwitch { get; set; }
     }
 
     public class AccountMenuItem
@@ -209,5 +245,13 @@ namespace Nearby.viewModel
     {
         public String Label { get; set; }
         public String Value { get; set; }
+        public ICommand AboutCommand { get; set; }
+        public String AboutCommandProperty { get; set; }
+        public string Disclosure { get; set; }
+
+        public AboutMenuItem()
+        {
+            Disclosure = "none";
+        }
     }
 }

@@ -10,15 +10,11 @@
   <control:AlwaysScrollView>
     <StackLayout Spacing="0">
       
-      <StackLayout BackgroundColor="{DynamicResource WindowBackgroundTable}"
-                           Spacing="{DynamicResource CardSpacing}"
-                           Padding="{DynamicResource CardPadding}">
+      <StackLayout Spacing="{DynamicResource CardSpacing}">
         
          <control:CardView>
-          <StackLayout Padding="0" Spacing="0" BackgroundColor="White">
-            <control:HeaderDivider/>
-            <StackLayout Padding="{StaticResource StandardPadding}">
-              <StackLayout Padding="32,16,32,0">
+          <StackLayout BackgroundColor="{DynamicResource WindowBackgroundTable}">
+            <StackLayout Padding="32,16,32,0">
                 <Image
                     Grid.Column="1"
                     Grid.Row="1"
@@ -28,48 +24,31 @@
                     HeightRequest="150"
                     Source="{Binding AppLogo}">
                 </Image>
-              </StackLayout>
+            </StackLayout>
+
+            <StackLayout Margin="0,16,0,0" BackgroundColor="White" Padding="{DynamicResource StandardPadding}">
+
               <StackLayout Spacing="0">
-                <Label Text="Nearby" Style="{DynamicResource EvolveListItemTextStyle}"/>
+                <Label Text="Nearby - Places to visit"  Style="{DynamicResource TitleStyle}"/>
               </StackLayout>
               <StackLayout Padding="0,16">
                 <Label Text="Nearby is an Application that allows Users to search and identify points of interest according to their geographical position." Style="{DynamicResource NearbyListItemDetailTextStyle}"/>
               </StackLayout>
+
+              <StackLayout Spacing="0,16">
+                <Label Text="Nearby - Events to attend"  Style="{DynamicResource TitleStyle}"/>
+              </StackLayout>
+              <StackLayout Padding="0,16">
+                <Label Text="Nearby also provides you with a list of local events and entertainment. Concerts, confrences, stand up performances. Simply supply your location, and we will do the rest." Style="{DynamicResource NearbyListItemDetailTextStyle}"/>
+              </StackLayout>
+              
             </StackLayout>
     
             <control:FooterDivider/>
           </StackLayout>
         </control:CardView>
       
-         <control:CardView>
-            <StackLayout Spacing="0">
-            <control:LabelSection Text="Links"/>
-                <control:HeaderDivider/>
-                <control:NonScrollableListView 
-                    ItemsSource="{Binding FollowItems}" 
-                    VerticalOptions="Start" 
-                    x:Name="ListViewFollow"
-                    SelectedItem="{Binding SelectedFollowItem, Mode=TwoWay}"
-                    RowHeight="44"> 
-                    <control:NonScrollableListView.SeparatorColor>
-                        <OnPlatform x:TypeArguments="Color" iOS="{StaticResource ListSeparator}"/>
-                    </control:NonScrollableListView.SeparatorColor>
-                    <control:NonScrollableListView.ItemTemplate>
-                        <DataTemplate>
-                          <TextCell Text="{Binding ProviderLabel}" />
-                        </DataTemplate>
-                    </control:NonScrollableListView.ItemTemplate>
-                </control:NonScrollableListView>
-                <control:FooterDivider/>
-            </StackLayout>
-            </control:CardView>
-      
       </StackLayout>
-
-      <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="{DynamicResource SmallPadding}">
-        <Label HorizontalOptions="Center" Style="{DynamicResource NearbyListItemDetailTextStyle}" Text="{Binding MadeByText}" />
-      </StackLayout>
-      
     </StackLayout>
     
   </control:AlwaysScrollView>

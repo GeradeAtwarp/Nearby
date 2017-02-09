@@ -12,44 +12,29 @@ namespace Nearby.Helpers.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if ((string)parameter == "1")
+            if ((double)value <= 1.5)
             {
-                if ((int)value >= 1)
-                    return ImageSource.FromFile("star_filled.png");
-                else
-                    return ImageSource.FromFile("star_empty.png");
+                return ImageSource.FromFile("star_filled.png");
             }
 
-            if ((string)parameter == "2")
+            if ((double)value > 1.5 && (double)value <= 2.5)
             {
-                if ((int)value >= 2)
-                    return ImageSource.FromFile("star_filled.png");
-                else
-                    return ImageSource.FromFile("star_empty.png");
+                return ImageSource.FromFile("star_filled.png");
             }
 
-            if ((string)parameter == "3")
+            if ((double)value > 2.5 && (double)value <= 3.5)
             {
-                if ((int)value >= 3)
-                    return ImageSource.FromFile("star_filled.png");
-                else
-                    return ImageSource.FromFile("star_empty.png");
+                return ImageSource.FromFile("star_filled.png");
             }
 
-            if ((string)parameter == "4")
+            if ((double)value > 3.5 && (double)value <= 4.5)
             {
-                if ((int)value >= 4)
-                    return ImageSource.FromFile("star_filled.png");
-                else
-                    return ImageSource.FromFile("star_empty.png");
+                return ImageSource.FromFile("star_filled.png");
             }
 
-            if ((string)parameter == "5")
+            if ((double)value > 4.5 && (double)value <= 5.0)
             {
-                if ((int)value >= 5)
-                    return ImageSource.FromFile("star_filled.png");
-                else
-                    return ImageSource.FromFile("star_empty.png");
+                return ImageSource.FromFile("star_filled.png");
             }
 
             return ImageSource.FromFile("star_empty.png");

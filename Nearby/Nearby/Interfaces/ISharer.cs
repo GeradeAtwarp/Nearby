@@ -11,5 +11,7 @@ namespace Nearby.Interfaces
         bool SendTweet(string tweet);
 
         bool PostToFacebook(string PostText);
+
+        bool OpenUserName(string profile);
     }
 }

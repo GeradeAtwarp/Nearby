@@ -12,6 +12,7 @@ using Xamarin.Forms;
 using static Nearby.viewModel.PlaceDetailViewModel;
 using Nearby.Helpers;
 using FormsToolkit;
+using Microsoft.Azure.Mobile.Analytics;
 
 namespace Nearby.viewModel
 {
@@ -19,7 +20,7 @@ namespace Nearby.viewModel
     {
         public ObservableRangeCollection<CustomPlaceSearch> SearchResults { get; } = new ObservableRangeCollection<CustomPlaceSearch>();
 
-        public SearchCustomPlaceViewModel(INavigation navigation) :base(navigation)
+        public SearchCustomPlaceViewModel()
         {
 
         }
@@ -85,6 +86,8 @@ namespace Nearby.viewModel
 
                     if (SearchResults.Count() == 0)
                         HasNoResults = true;
+
+                    Analytics.TrackEvent("Custome_Location_Search", new Dictionary<string, string> { { "Action", "User searched for a custom location." } });
                 }
                 else
                 {
@@ -110,7 +113,8 @@ namespace Nearby.viewModel
                 Settings.Current.CustomLocation = place.Name;
 
                 await Application.Current?.MainPage?.DisplayAlert("Info", "Custom location was successfully set to " + place.Name, "Ok");
-                await Navigation.PopAsync();
+
+                Analytics.TrackEvent("Custome_Location_Set", new Dictionary<string, string> { { "Action", "User set a custom location." } });
             }
             catch (Exception ex)
             { }

@@ -20,7 +20,7 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>MinimumOSVersion</key>
-	<string>6.0</string>
+	<string>8.0</string>
 	<key>CFBundleDisplayName</key>
 	<string>Nearby</string>
 	<key>CFBundleIdentifier</key>
@@ -29,8 +29,8 @@
 	<string>1.0</string>
 	<key>CFBundleIconFiles</key>
 	<array>
-		<string>Default@2x.png</string>
 		<string>Default.png</string>
+		<string>Default@2x.png</string>
 		<string>Icon@2x.png</string>
 		<string>Icon.png</string>
 		<string>Icon-60@2x.png</string>
@@ -58,5 +58,7 @@
 	<string>UIStatusBarStyleLightContent</string>
   <key>NSPhotoLibraryUsageDescription</key>
   <string>Nearby requires access to the photo library.</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>This app needs access to calendar.</string>
 </dict>
 </plist>

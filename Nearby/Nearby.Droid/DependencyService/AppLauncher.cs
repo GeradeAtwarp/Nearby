@@ -59,5 +59,15 @@ namespace Nearby.Droid.DependencyService
 
             return false;
         }
+
+        public bool OpenReviewsAppStore(string appURL)
+        {
+            return true;
+        }
+
+        public void OpenSettings()
+        {
+           
+        }
     }
 }

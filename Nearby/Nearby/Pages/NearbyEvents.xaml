@@ -1,0 +1,315 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Nearby.Pages.NearbyEvents"
+             xmlns:control="clr-namespace:Nearby.Controls"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:helpers="clr-namespace:Nearby.Helpers"
+             BackgroundColor="White"
+             Title="Events Nearby">
+
+  <Grid>
+        <ScrollView x:Name="mainScrollView">
+            <StackLayout Orientation="Vertical">
+              
+              <Grid BackgroundColor="{StaticResource Primary}" Padding="{StaticResource MediumPadding}">
+                <Grid.HeightRequest>
+                  <OnPlatform x:TypeArguments="x:Double" Android="95" iOS="90" ></OnPlatform>
+                </Grid.HeightRequest>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="1*"/>
+                  <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Row="0" Grid.ColumnSpan="2" Text="{Binding CurrentDate}" Style="{StaticResource HeaderLabelStyle}" HorizontalOptions="StartAndExpand" />
+                
+                <Label Grid.Row="1" Grid.Column="0" Text="{Binding WeatherDesc, Converter={StaticResource ToTitleCaseConverter}}" Style="{StaticResource TempLabelStyle}" HorizontalOptions="StartAndExpand" Margin="0, 10, 0, 0" />                
+                <Label Grid.Row="1" Grid.Column="1" Text="{Binding Temp}" Style="{StaticResource TempLabelStyle}" HorizontalOptions="CenterAndExpand" Margin="0, 10, 0, 0" />
+                <Label Grid.Row="2" Grid.Column="0" Text="{Binding WeatherLocation, Converter={StaticResource ToTitleCaseConverter}}" Style="{StaticResource TempLabelStyle}" HorizontalOptions="StartAndExpand" />
+                <Label Grid.Row="2" Grid.Column="1" Text="{Binding TempHiLow}" Style="{StaticResource TempLabelStyle}" HorizontalOptions="CenterAndExpand" />
+                
+              </Grid>
+
+              <!-- Ad -->
+              <control:AdView  HorizontalOptions="FillAndExpand"/>
+
+              <Grid x:Name="ContentPanel">
+                    <control:StackedList 
+                        x:Name="SuggestionsList" 
+                        Spacing="15"
+                        ItemsSource="{Binding EventsNearby}"
+                        SelectedCommand="{Binding NavigateToDetails}"
+                        Padding="5, 0, 5, 10">
+                        <control:StackedList.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.Margin>
+                                        <OnPlatform x:TypeArguments="Thickness"
+                                                    WinPhone="10,0,0,10"/>
+                                    </Grid.Margin>
+                                    <Grid.WidthRequest>
+                                        <helpers:OnCustomPlatform 
+                                            x:TypeArguments="x:Double"                                      
+                                            WinPhone="280"
+                                            Windows="380"/>
+                                    </Grid.WidthRequest>
+                                    <Grid.HeightRequest>
+                                        <helpers:OnCustomPlatform
+                                            x:TypeArguments="x:Double"
+                                            iOS="180"
+                                            Android="200" 
+                                            WinPhone="150"
+                                            Windows="160"/>
+                                    </Grid.HeightRequest>
+                                    <AbsoluteLayout>
+                                        <Image
+                                              HorizontalOptions="FillAndExpand"
+                                              VerticalOptions="FillAndExpand"
+                                              Aspect="AspectFill"
+                                              AbsoluteLayout.LayoutFlags="All"
+                                              AbsoluteLayout.LayoutBounds="0, 0, 1.0, 1.0"
+                                              Source="{Binding Categories, Converter={StaticResource EventImageSelector}}" ></Image>
+                                    </AbsoluteLayout>
+                                    <Grid
+                                        Padding="15, 10"
+                                        VerticalOptions="EndAndExpand">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <Grid
+                                            Grid.Row="0">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="*" />
+                                            </Grid.RowDefinitions>
+                                            <Label
+                                                Grid.Row="0"
+                                                Text="{Binding Title}"
+                                                Style="{StaticResource EventTitleLabelStyle}" />
+                                            <Label 
+                                                Grid.Row="1"
+                                                Text="{Binding CityName}"
+                                                FontSize="{StaticResource ExtraBigSize}"
+                                                Style="{StaticResource EventTitleLabelStyle}"
+                                                LineBreakMode="TailTruncation"/>
+                                        </Grid>
+                                        <StackLayout Grid.Row="1">
+                                            <BoxView HorizontalOptions="FillAndExpand"
+                                                     HeightRequest="1"
+                                                     Margin="0, 8"
+                                                     BackgroundColor="White" />
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition>
+                                                        <ColumnDefinition.Width>
+                                                            <OnPlatform 
+                                                                x:TypeArguments="GridLength"
+                                                                iOS="20"
+                                                                Android="30" 
+                                                                WinPhone="30"/>
+                                                        </ColumnDefinition.Width>
+                                                    </ColumnDefinition>
+                                                    <ColumnDefinition />
+                                                </Grid.ColumnDefinitions>
+                                                <!--<ffimageloading:CachedImage Grid.Column="0" Source="{Binding AlarmBellStatus}" Aspect="AspectFit">
+                                                  <ffimageloading:CachedImage.GestureRecognizers>
+                                                     <TapGestureRecognizer Command="{Binding SetReminder}" CommandParameter="{Binding .}"></TapGestureRecognizer>
+                                                  </ffimageloading:CachedImage.GestureRecognizers>
+                                                </ffimageloading:CachedImage>-->
+                                                  <Label Grid.Column="1" HorizontalOptions="EndAndExpand" Text="{Binding StartTime, Converter={StaticResource DateConverter}}" Style="{StaticResource EventLabelStyle}" />
+                                            </Grid>
+                                        </StackLayout>
+                                    </Grid>
+                                </Grid>
+                            </DataTemplate>
+                        </control:StackedList.ItemTemplate>
+                    </control:StackedList>
+                </Grid>
+              
+            </StackLayout>
+        </ScrollView>
+    </Grid>
+    
+
+
+  
+  
+  
+    
+
+
+
+
+
+
+
+    
+      
+    
+    
+      
+        
+          
+            
+              
+                
+                  
+
+
+
+
+              
+              
+                
+                  
+
+
+
+
+
+              
+              
+              
+                
+
+                
+                  
+                  
+                
+                
+                  
+                  
+                    
+                    
+                  
+                  
+
+
+
+                  
+
+
+
+
+
+                
+                
+                  
+                  
+                    
+                      
+    <!--<StackLayout Padding="{DynamicResource CardPadding}">
+      <Label Text="Going on vacation? Visiting family members accross the country? Want to know what places are awaiting you? No problem, just search for you destination below, then select a place to set as you custom location. :-)"
+             HorizontalOptions="StartAndExpand"
+             Style="{DynamicResource SectionLabelTextStyle}"/>
+    </StackLayout>
+
+    <ListView
+        x:Name="lstEvents"
+        ItemsSource="{Binding EventsNearby}"
+        HasUnevenRows="True"
+        BackgroundColor="White"
+        CachingStrategy="RecycleElement"
+        IsPullToRefreshEnabled="True"
+        RefreshCommand="{Binding RefreshCommand}"
+        IsRefreshing="{Binding IsBusy, Mode=OneWay}">
+      <ListView.SeparatorColor>
+        <OnPlatform x:TypeArguments="Color" iOS="{StaticResource ListSeparator}"/>
+      </ListView.SeparatorColor>
+      <ListView.ItemTemplate>
+        <DataTemplate>
+          <ViewCell>
+            <ViewCell.View>
+              <Grid Padding="0,0,0,16">
+                <Grid.HeightRequest>
+                  <helpers:OnCustomPlatform
+                      x:TypeArguments="x:Double"
+                      iOS="180"
+                      Android="200"
+                      WinPhone="150"
+                      Windows="160"/>
+                </Grid.HeightRequest>
+                <AbsoluteLayout>
+                  <Image
+                      HorizontalOptions="FillAndExpand"
+                      VerticalOptions="FillAndExpand"
+                      Aspect="AspectFill"
+                      AbsoluteLayout.LayoutFlags="All"
+                      AbsoluteLayout.LayoutBounds="0, 0, 1.0, 1.0"
+                      Source="{Binding Categories, Converter={StaticResource EventImageSelector}}" ></Image>
+                </AbsoluteLayout>
+
+                <Grid
+                    Padding="15, 10"
+                    VerticalOptions="EndAndExpand">
+                  <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                  </Grid.RowDefinitions>
+                  <Grid
+                      Grid.Row="0">
+                    <Grid.RowDefinitions>
+                      <RowDefinition Height="Auto" />
+                      <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Label TextColor="White"
+                        Grid.Row="0"
+                        Text="{Binding Title}"
+                        Style="{StaticResource EventTitleLabelStyle}"/>
+                    <Label TextColor="White"
+                        Grid.Row="1"
+                        Text="{Binding CityName}"
+                        FontSize="{StaticResource ExtraBigSize}"
+                        Style="{StaticResource EventTitleLabelStyle}"
+                        LineBreakMode="TailTruncation"/>
+                  </Grid>
+                  <StackLayout Grid.Row="1">
+                    <BoxView HorizontalOptions="FillAndExpand" HeightRequest="1" Margin="0,8" BackgroundColor="White" />
+                    <Grid>
+                      <Grid.ColumnDefinitions>
+                        <ColumnDefinition>
+                          <ColumnDefinition.Width>
+                            <OnPlatform
+                                x:TypeArguments="GridLength"
+                                iOS="20"
+                                Android="30"
+                                WinPhone="30"/>
+                          </ColumnDefinition.Width>
+                        </ColumnDefinition>
+                        <ColumnDefinition />
+                      </Grid.ColumnDefinitions>
+                      <Image
+                          Grid.Column="0"
+                          Aspect="AspectFit"
+                          Source="{Binding AlarmBellStatus}" >
+                        <Image.GestureRecognizers>
+                          <TapGestureRecognizer Command="{Binding SetReminder}" CommandParameter="{Binding .}"></TapGestureRecognizer>
+                        </Image.GestureRecognizers>
+                      </Image>
+
+                      --><!--<Label Grid.Column="1" HorizontalOptions="FillAndExpand"
+                              Text="{Binding StartTime, Converter={StaticResource DateToTimeConverter}}"
+                              Style="{StaticResource EventLabelStyle}" />--><!--
+
+                      <Label Grid.Column="1" HorizontalOptions="EndAndExpand"
+                              Text="{Binding StartTime, Converter={StaticResource DateConverter}}"
+                              Style="{StaticResource EventLabelStyle}" />
+                    </Grid>
+                  </StackLayout>
+
+                </Grid>
+              </Grid>
+            </ViewCell.View>
+          </ViewCell>
+
+        </DataTemplate>
+      </ListView.ItemTemplate>
+    </ListView>-->
+  
+</ContentPage>

@@ -8,6 +8,11 @@ using Android.Widget;
 using Android.OS;
 using Nearby.Utils.Entities;
 using Plugin.Permissions;
+using Android.Gms.Ads;
+using Acr.UserDialogs;
+using Microsoft.Azure.Mobile;
+using Xamarin.Forms;
+using System.Reflection;
 
 namespace Nearby.Droid
 {
@@ -26,7 +31,21 @@ namespace Nearby.Droid
 
             base.OnCreate(bundle);
 
+            FFImageLoading.Forms.Droid.CachedImageRenderer.Init();
+            MobileAds.Initialize(ApplicationContext, "pub-1631454081193991");
+            UserDialogs.Init(this);
+
+            //Configure Mobile Center Analytics
+            #if !DEBUG
+                MobileCenter.Configure("5c01e086-685c-478e-b8e7-649f948a077f");
+            #else
+                MobileCenter.Configure("91aa7090-7188-49f2-9506-b0ba75400bd2");
+            #endif
+
             global::Xamarin.Forms.Forms.Init(this, bundle);
+
+            typeof(Color).GetProperty("Accent", BindingFlags.Public | BindingFlags.Static).SetValue(null, Color.FromHex("#757575"));
+
             LoadApplication(new App());
         }
 
