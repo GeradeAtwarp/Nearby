@@ -71,7 +71,7 @@
         </control:CardView>
 
         <!-- Ad -->
-        <control:AdView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+        <control:AdView />
         
         <!-- Event Description -->
         <control:CardView >
