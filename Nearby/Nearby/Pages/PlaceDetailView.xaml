@@ -62,7 +62,7 @@
       </StackLayout>
 
       <!-- Ad -->
-      <control:AdView  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+      <control:AdView />
 
       <StackLayout BackgroundColor="{DynamicResource WindowBackgroundTable}" Spacing="{DynamicResource CardSpacing}" Padding="{DynamicResource CardPadding}">
        
