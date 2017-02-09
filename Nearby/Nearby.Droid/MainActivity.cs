@@ -36,7 +36,11 @@ namespace Nearby.Droid
             UserDialogs.Init(this);
 
             //Configure Mobile Center Analytics
-            MobileCenter.Configure("91aa7090-7188-49f2-9506-b0ba75400bd2");
+            #if !DEBUG
+                MobileCenter.Configure("5c01e086-685c-478e-b8e7-649f948a077f");
+            #else
+                MobileCenter.Configure("91aa7090-7188-49f2-9506-b0ba75400bd2");
+            #endif
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
 

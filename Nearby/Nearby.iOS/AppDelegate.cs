@@ -55,7 +55,11 @@ namespace Nearby.iOS
             FFImageLoading.Forms.Touch.CachedImageRenderer.Init();
 
             //Configure Mobile Center Analytics
-            MobileCenter.Configure("6174be7f-3e65-4e82-afd6-f28a4e7fa13b");
+            #if !DEBUG
+             MobileCenter.Configure("21ab980e-eadd-4cbc-b60b-0c738016b932");
+            #else
+             MobileCenter.Configure("6174be7f-3e65-4e82-afd6-f28a4e7fa13b");
+            #endif
 
             LoadApplication(new App());
 
