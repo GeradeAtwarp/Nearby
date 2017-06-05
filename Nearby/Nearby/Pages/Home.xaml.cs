@@ -108,69 +108,85 @@ namespace Nearby.Pages
 
         async Task MoveToCurrentLocation()
         {
+            if (IsBusy)
+                return;
+
+            IsBusy = true;
+
             try
             {
                 if (placesMap.Pins.Count() == 0)
                 {
-                    Plugin.Geolocator.Abstractions.Position position = new Plugin.Geolocator.Abstractions.Position();
-                    
-                    if (!Settings.Current.CustomLocationEnabled)
+                    var status = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Location);
+
+                    if (status != PermissionStatus.Granted)
                     {
-                        //Get the users current location
-                        var locator = CrossGeolocator.Current;
-                        position = await locator.GetPositionAsync(10000);
-
-                        var pin = new Pin
-                        {
-                            Type = PinType.Place,
-                            Label = "This is you!",
-                            Position = new Position(position.Latitude, position.Longitude)
-                        };
-
-                        latitudes.Add(position.Latitude);
-                        longitudes.Add(position.Longitude);
-
-                        placesMap.Pins.Add(pin);
+                        var results = await CrossPermissions.Current.RequestPermissionsAsync(new[] { Permission.Location });
+                        status = results[Permission.Location];
                     }
-                    else
+
+                    if (status == PermissionStatus.Granted)
                     {
-                        if (Settings.Current.CustomLatitude == "" || Settings.Current.CustomLongitude == "")
-                            Application.Current?.MainPage.DisplayAlert("Location", "Please set a custom location, Or turn off the custom location option on the settings page.", "Got it!");
-                        else
+                        Plugin.Geolocator.Abstractions.Position position = new Plugin.Geolocator.Abstractions.Position();
+
+                        if (!Settings.Current.CustomLocationEnabled)
                         {
-                            position = new Plugin.Geolocator.Abstractions.Position
+                            //Get the users current location
+                            var locator = CrossGeolocator.Current;
+                            position = await locator.GetPositionAsync(10000);
+
+                            var pin = new Pin
                             {
-                                Latitude = Convert.ToDouble(Settings.Current.CustomLatitude),
-                                Longitude = Convert.ToDouble(Settings.Current.CustomLongitude)
+                                Type = PinType.Place,
+                                Label = "This is you!",
+                                Position = new Position(position.Latitude, position.Longitude)
                             };
 
                             latitudes.Add(position.Latitude);
                             longitudes.Add(position.Longitude);
 
-                            var pin = new Pin
-                            {
-                                Type = PinType.SavedPin,
-                                Label = "This is you!",
-                                Position = new Position(position.Latitude, position.Longitude)
-                            };
-
                             placesMap.Pins.Add(pin);
                         }
-                    }
+                        else
+                        {
+                            if (Settings.Current.CustomLatitude == "" || Settings.Current.CustomLongitude == "")
+                                Application.Current?.MainPage.DisplayAlert("Location", "Please set a custom location, Or turn off the custom location option on the settings page.", "Got it!");
+                            else
+                            {
+                                position = new Plugin.Geolocator.Abstractions.Position
+                                {
+                                    Latitude = Convert.ToDouble(Settings.Current.CustomLatitude),
+                                    Longitude = Convert.ToDouble(Settings.Current.CustomLongitude)
+                                };
 
-                    if (placesMap.Pins.Count == 1)
-                        placesMap.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(position.Latitude, position.Longitude), Distance.FromMiles(0.5)));
-                    else
-                    {
-                        double lowestLat = latitudes.Min();
-                        double highestLat = latitudes.Max();
-                        double lowestLong = longitudes.Min();
-                        double highestLong = longitudes.Max();
-                        double finalLat = (lowestLat + highestLat) / 2;
-                        double finalLong = (lowestLong + highestLong) / 2;
-                        double distance = DistanceCalculation.GeoCodeCalc.CalcDistance(lowestLat, lowestLong, highestLat, highestLong, DistanceCalculation.GeoCodeCalcMeasurement.Kilometers);
+                                latitudes.Add(position.Latitude);
+                                longitudes.Add(position.Longitude);
 
-                        placesMap.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(finalLat, finalLong), Distance.FromKilometers(distance)));
+                                var pin = new Pin
+                                {
+                                    Type = PinType.SavedPin,
+                                    Label = "This is you!",
+                                    Position = new Position(position.Latitude, position.Longitude)
+                                };
+
+                                placesMap.Pins.Add(pin);
+                            }
+                        }
+
+                        if (placesMap.Pins.Count == 1)
+                            placesMap.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(position.Latitude, position.Longitude), Distance.FromMiles(0.5)));
+                        else
+                        {
+                            double lowestLat = latitudes.Min();
+                            double highestLat = latitudes.Max();
+                            double lowestLong = longitudes.Min();
+                            double highestLong = longitudes.Max();
+                            double finalLat = (lowestLat + highestLat) / 2;
+                            double finalLong = (lowestLong + highestLong) / 2;
+                            double distance = DistanceCalculation.GeoCodeCalc.CalcDistance(lowestLat, lowestLong, highestLat, highestLong, DistanceCalculation.GeoCodeCalcMeasurement.Kilometers);
+
+                            placesMap.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(finalLat, finalLong), Distance.FromKilometers(distance)));
+                        }
                     }
                 }
             }
@@ -178,6 +194,8 @@ namespace Nearby.Pages
             {
                 Debug.WriteLine(ex.Message);
             }
+
+            IsBusy = false;
         }
 
         async Task SearchForPlacesNearby()
